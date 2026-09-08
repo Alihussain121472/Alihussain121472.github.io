@@ -1,7 +1,7 @@
 # ARAKNET.TECH — Futuristic Personal Portfolio
 
 > **The Personal Command Center & Production AI Showcase of Syed Ali**  
-> AI Developer · Indie Builder · Student @ SZABIST (BSAI) · Multan, Pakistan
+> AI Developer · AI Systems Builder · Student @ SZABIST (BSAI) · Multan, Pakistan
 
 [![Website](https://img.shields.io/badge/Domain-araknet.tech-00C2FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://araknet.tech)
 [![NovaBrief](https://img.shields.io/badge/Flagship%20Product-NovaBrief.tech-00F5D4?style=for-the-badge&logo=safari&logoColor=050A14)](https://www.novabrief.tech)

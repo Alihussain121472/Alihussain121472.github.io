@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typewriterElement) {
     const titles = [
       'AI Developer',
-      'Indie Builder',
-      'Automation Engineer',
+      'AI Systems Builder',
+      'Autonomous Agent Architect',
       'BSAI Student · SZABIST',
       'Founder @ NovaBrief'
     ];
@@ -1796,6 +1796,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (qaCharCounter) qaCharCounter.textContent = '0 / 400';
 
         renderQAQuestions();
+
+        setTimeout(() => {
+          const newCard = qaQuestionsList.querySelector(`[data-id="${newId}"]`);
+          if (newCard) {
+            newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            newCard.style.boxShadow = '0 0 25px rgba(0, 245, 212, 0.5)';
+            newCard.style.borderColor = 'var(--accent-cyan)';
+            setTimeout(() => { 
+              newCard.style.boxShadow = '';
+              newCard.style.borderColor = '';
+            }, 3000);
+          }
+        }, 120);
 
         setTimeout(() => {
           if (qaFormFeedback) qaFormFeedback.style.display = 'none';
