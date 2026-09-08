@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="khidGrad" x1="0%" y1="0%" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07171E"/>
+      <stop offset="100%" stop-color="#0E2D3B"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" rx="12" fill="url(#khidGrad)" stroke="#00C2FF" stroke-width="1.5" stroke-opacity="0.3"/>
+  <rect width="600" height="38" rx="12" fill="#040D12"/>
+  <circle cx="24" cy="19" r="5" fill="#EF4444"/>
+  <circle cx="42" cy="19" r="5" fill="#F59E0B"/>
+  <circle cx="60" cy="19" r="5" fill="#10B981"/>
+  <text x="80" y="24" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="bold" fill="#00C2FF">Khidmat AI · Public Assistance & Utility Routing</text>
+  <rect x="480" y="9" width="100" height="20" rx="4" fill="#00F5D4" fill-opacity="0.2"/>
+  <text x="530" y="23" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#00F5D4">DJANGO + AI</text>
+
+  <!-- Service Cards -->
+  <g transform="translate(30, 60)">
+    <rect width="250" height="120" rx="8" fill="#09202A" stroke="rgba(0,194,255,0.2)"/>
+    <text x="20" y="32" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Citizen Dispute & Inquiry Solver</text>
+    <text x="20" y="56" font-family="'Inter', sans-serif" font-size="11" fill="#8899AA">Automated multilingual triage for public services, legal guidelines, and utility complaints.</text>
+    <rect x="20" y="85" width="80" height="18" rx="4" fill="#00C2FF" fill-opacity="0.2"/>
+    <text x="60" y="98" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#00C2FF">NLP ROUTING</text>
+  </g>
+
+  <g transform="translate(310, 60)">
+    <rect width="250" height="120" rx="8" fill="#09202A" stroke="rgba(0,245,212,0.2)"/>
+    <text x="20" y="32" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Document Assistance</text>
+    <text x="20" y="56" font-family="'Inter', sans-serif" font-size="11" fill="#8899AA">Instant translation and structuring of public affidavits, applications, and procedural checklists.</text>
+    <rect x="20" y="85" width="80" height="18" rx="4" fill="#00F5D4" fill-opacity="0.2"/>
+    <text x="60" y="98" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#00F5D4">ZERO COST</text>
+  </g>
+
+  <!-- Live Stats Strip -->
+  <g transform="translate(30, 210)">
+    <rect width="530" height="110" rx="8" fill="#06131A" stroke="rgba(255,255,255,0.08)"/>
+    <text x="25" y="35" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#38BDF8">System Telemetry & Impact</text>
+    
+    <text x="35" y="70" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="bold" fill="#00F5D4">1,200+</text>
+    <text x="35" y="90" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Inquiries Solved</text>
+
+    <text x="210" y="70" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="bold" fill="#38BDF8">&lt; 1.4s</text>
+    <text x="210" y="90" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Mean Response Latency</text>
+
+    <text x="400" y="70" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="bold" fill="#F43F5E">99.8%</text>
+    <text x="400" y="90" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Pipeline Uptime</text>
+  </g>
+</svg>

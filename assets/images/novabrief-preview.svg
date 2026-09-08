@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="nbGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B132B"/>
+      <stop offset="100%" stop-color="#1C2541"/>
+    </linearGradient>
+    <linearGradient id="cyanLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00C2FF"/>
+      <stop offset="100%" stop-color="#00F5D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" rx="12" fill="url(#nbGrad)" stroke="#00C2FF" stroke-width="1.5" stroke-opacity="0.4"/>
+  <!-- Top browser bar -->
+  <rect width="600" height="38" rx="12" fill="#070c18"/>
+  <circle cx="24" cy="19" r="5" fill="#EF4444"/>
+  <circle cx="42" cy="19" r="5" fill="#F59E0B"/>
+  <circle cx="60" cy="19" r="5" fill="#10B981"/>
+  <rect x="90" y="10" width="280" height="18" rx="9" fill="#111c30"/>
+  <text x="105" y="23" font-family="'JetBrains Mono', monospace" font-size="10" fill="#00F5D4">https://novabrief.tech</text>
+  <rect x="500" y="10" width="76" height="18" rx="4" fill="#10B981" fill-opacity="0.2"/>
+  <text x="538" y="23" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" font-weight="600" fill="#10B981">LIVE SAAS</text>
+
+  <!-- Sidebar -->
+  <rect x="18" y="52" width="130" height="290" rx="8" fill="#0e172a"/>
+  <rect x="30" y="68" width="80" height="12" rx="4" fill="#00C2FF" fill-opacity="0.4"/>
+  <rect x="30" y="94" width="106" height="22" rx="4" fill="#00C2FF" fill-opacity="0.15"/>
+  <text x="40" y="109" font-family="'Inter', sans-serif" font-size="10" fill="#00C2FF">⚡ Daily Digest</text>
+  <text x="40" y="140" font-family="'Inter', sans-serif" font-size="10" fill="#8899AA">🎯 Opportunities</text>
+  <text x="40" y="170" font-family="'Inter', sans-serif" font-size="10" fill="#8899AA">📊 AI Research</text>
+  <text x="40" y="200" font-family="'Inter', sans-serif" font-size="10" fill="#8899AA">⚙️ Preferences</text>
+
+  <!-- Main Feed Area -->
+  <!-- Header Card -->
+  <rect x="162" y="52" width="420" height="65" rx="8" fill="#111E36" stroke="rgba(0,194,255,0.2)"/>
+  <text x="180" y="76" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">NovaBrief AI · Student Intelligence Digest</text>
+  <text x="180" y="98" font-family="'Inter', sans-serif" font-size="11" fill="#8899AA">Summarized with Llama 3.3 · Groq API · Supabase PostgreSQL Engine</text>
+
+  <!-- Feed Card 1 -->
+  <rect x="162" y="128" width="420" height="100" rx="8" fill="#0D1629" stroke="rgba(0,194,255,0.15)"/>
+  <rect x="178" y="142" width="60" height="16" rx="4" fill="#00F5D4" fill-opacity="0.15"/>
+  <text x="208" y="154" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#00F5D4">AI / TECH</text>
+  <text x="250" y="154" font-family="'Inter', sans-serif" font-size="10" fill="#64748B">32m ago · 98% Relevance Score</text>
+  <text x="178" y="180" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" fill="#F0F4F8">State of Open Weights: Breakthroughs in Fast Local Inference</text>
+  <text x="178" y="202" font-family="'Inter', sans-serif" font-size="11" fill="#8899AA">Key Takeaway: Distillation pipelines now enable sub-50ms latency for student developers...</text>
+
+  <!-- Feed Card 2 -->
+  <rect x="162" y="238" width="420" height="100" rx="8" fill="#0D1629" stroke="rgba(0,194,255,0.15)"/>
+  <rect x="178" y="252" width="80" height="16" rx="4" fill="#3B82F6" fill-opacity="0.15"/>
+  <text x="218" y="264" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#60A5FA">SCHOLARSHIP</text>
+  <text x="270" y="264" font-family="'Inter', sans-serif" font-size="10" fill="#64748B">2h ago · Global Deadline</text>
+  <text x="178" y="290" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" fill="#F0F4F8">Google Summer of Code & AI Student Grants 2026</text>
+  <text x="178" y="312" font-family="'Inter', sans-serif" font-size="11" fill="#8899AA">Curated applications now open for undergraduate students in AI/ML track...</text>
+</svg>

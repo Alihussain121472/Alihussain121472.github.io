@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="seoGrad" x1="0%" y1="0%" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" rx="12" fill="url(#seoGrad)" stroke="#6366F1" stroke-width="1.5" stroke-opacity="0.3"/>
+  <rect width="600" height="38" rx="12" fill="#0A0F1D"/>
+  <circle cx="24" cy="19" r="5" fill="#EF4444"/>
+  <circle cx="42" cy="19" r="5" fill="#F59E0B"/>
+  <circle cx="60" cy="19" r="5" fill="#10B981"/>
+  <text x="80" y="24" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="bold" fill="#818CF8">Autonomous SEO & Content Agent · Pipeline v1.8</text>
+  <rect x="490" y="9" width="90" height="20" rx="4" fill="#6366F1" fill-opacity="0.2"/>
+  <text x="535" y="23" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#A5B4FC">PIPELINE ON</text>
+
+  <!-- Step 1: SERP Crawling -->
+  <g transform="translate(30, 60)">
+    <rect width="150" height="210" rx="8" fill="#171F30" stroke="rgba(99,102,241,0.2)"/>
+    <circle cx="30" cy="30" r="14" fill="#6366F1" fill-opacity="0.2"/>
+    <text x="30" y="35" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#818CF8">01</text>
+    <text x="20" y="70" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">SERP Clustering</text>
+    <text x="20" y="94" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Automated scrapers extract top-20 search results, search intent, and semantic gap analysis.</text>
+    <line x1="20" y1="140" x2="130" y2="140" stroke="#334155"/>
+    <text x="20" y="165" font-family="'JetBrains Mono', monospace" font-size="9" fill="#38BDF8">Keywords: 4,500+</text>
+    <text x="20" y="185" font-family="'JetBrains Mono', monospace" font-size="9" fill="#34D399">Intent: High-Value</text>
+  </g>
+
+  <!-- Step 2: Outline & Knowledge Graph -->
+  <g transform="translate(225, 60)">
+    <rect width="150" height="210" rx="8" fill="#171F30" stroke="rgba(0,245,212,0.2)"/>
+    <circle cx="30" cy="30" r="14" fill="#00F5D4" fill-opacity="0.2"/>
+    <text x="30" y="35" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#00F5D4">02</text>
+    <text x="20" y="70" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">Entity Blueprint</text>
+    <text x="20" y="94" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Structures H1-H4 headings and semantic entities against Google E-E-A-T signals.</text>
+    <line x1="20" y1="140" x2="130" y2="140" stroke="#334155"/>
+    <text x="20" y="165" font-family="'JetBrains Mono', monospace" font-size="9" fill="#00F5D4">Schema: FAQ & Article</text>
+    <text x="20" y="185" font-family="'JetBrains Mono', monospace" font-size="9" fill="#38BDF8">Readability: Grade 8</text>
+  </g>
+
+  <!-- Step 3: LLM Optimization & Deploy -->
+  <g transform="translate(420, 60)">
+    <rect width="150" height="210" rx="8" fill="#171F30" stroke="rgba(0,194,255,0.2)"/>
+    <circle cx="30" cy="30" r="14" fill="#00C2FF" fill-opacity="0.2"/>
+    <text x="30" y="35" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#00C2FF">03</text>
+    <text x="20" y="70" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">AI Optimization</text>
+    <text x="20" y="94" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Generates human-toned content, meta tags, and internal link graph automatically.</text>
+    <line x1="20" y1="140" x2="130" y2="140" stroke="#334155"/>
+    <text x="20" y="165" font-family="'JetBrains Mono', monospace" font-size="9" fill="#38BDF8">Rank: Page 1 Target</text>
+    <text x="20" y="185" font-family="'JetBrains Mono', monospace" font-size="9" fill="#34D399">Manual Effort: -85%</text>
+  </g>
+
+  <!-- Flow Arrows -->
+  <path d="M 185 165 L 220 165" stroke="#818CF8" stroke-width="2" stroke-dasharray="3,3"/>
+  <path d="M 380 165 L 415 165" stroke="#00F5D4" stroke-width="2" stroke-dasharray="3,3"/>
+
+  <!-- Footer Stats -->
+  <rect x="30" y="290" width="540" height="42" rx="6" fill="#0D131F" stroke="#1E293B"/>
+  <text x="45" y="316" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94A3B8">🚀 Python + LLM Prompt Engine · Built by Syed Ali</text>
+</svg>
