@@ -1,8 +1,9 @@
 /**
  * ARAKNET.TECH — SCRIPT ENGINE FOR SYED ALI
- * Dynamic Features: Neural Canvas, Typewriter, Counter Observer,
- * Dynamic Certification Manager (Add/Remove/Lightbox), Command Palette (Ctrl+K),
- * Copy-to-Clipboard, and Interactive Forms.
+ * Features: Neural Canvas, Typewriter, Counter Observer,
+ * Dynamic Certification Hub, Project Architecture Deep-Dive Modal,
+ * Owner Security Gate (Passcode Protected Edit Mode with Pencil Badges),
+ * Command Palette (Ctrl+K), and Form Dispatch.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -189,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
             function updateCount(now) {
               const elapsed = now - startTime;
               const progress = Math.min(elapsed / duration, 1);
-              // Ease-out expo
               const current = Math.floor(progress * target);
               stat.textContent = current + (stat.parentElement.querySelector('.stat-label').textContent.includes('%') ? '%' : '+');
 
@@ -210,8 +210,235 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 4. DYNAMIC CERTIFICATION MANAGEMENT SYSTEM
-  // (Add, Remove, LocalStorage, Lightbox, Filter)
+  // 4. PROJECT ARCHITECTURE & BLUEPRINT DATA (4 COLUMNS)
+  // ==========================================
+  const projectBlueprints = {
+    'novabrief': {
+      category: 'AI SAAS PLATFORM · LIVE IN PRODUCTION',
+      title: 'NovaBrief Tech',
+      subtitle: 'Daily AI-Powered Intelligence Briefings & Student Program Tracking',
+      pitch: 'An automated morning intelligence briefing platform for students that filters out internet noise and generates instant 60-second AI summaries of fellowships, tech breakthroughs, and student programs.',
+      skills: [
+        'LLM Prompt Engineering & Distillation',
+        'Sub-second Inference Orchestration',
+        'Asynchronous Background Cron Architecture',
+        'Relational Schema & Vector Modeling',
+        'Automated Content Curation Pipeline',
+        'Student Opportunity Scraping & Triage'
+      ],
+      tools: [
+        'Python', 'Flask', 'Llama 3.3 (70B)', 'Groq Cloud API',
+        'Supabase', 'PostgreSQL', 'APScheduler', 'Tailwind CSS',
+        'Gunicorn', 'RESTful Endpoints'
+      ],
+      sites: [
+        { label: 'Live SaaS Application', url: 'https://www.novabrief.tech' },
+        { label: 'Groq Cloud Inference Engine', url: 'https://groq.com' },
+        { label: 'Supabase Cloud Database', url: 'https://supabase.com' },
+        { label: 'Render Cloud Deployment', url: 'https://render.com' },
+        { label: 'GitHub Repository', url: 'https://github.com/Alihussain121472' }
+      ],
+      metrics: [
+        'Sub-second (<650ms) Llama 3.3 generation latency via Groq',
+        '500+ active student readers receiving curated digests',
+        'Hourly background scraper operates with 0 manual intervention',
+        '99.8% server uptime maintained across academic cycles'
+      ],
+      actions: [
+        { label: 'Visit Live novabrief.tech', url: 'https://www.novabrief.tech', primary: true, icon: 'fa-globe' },
+        { label: 'GitHub Profile', url: 'https://github.com/Alihussain121472', primary: false, icon: 'fa-brands fa-github' }
+      ]
+    },
+    'email-agent': {
+      category: 'AUTONOMOUS WORKFLOW · AI AGENT',
+      title: 'NovaBrief Email Reply Agent',
+      subtitle: 'Autonomous Context-Aware Inbox Assistant Built with n8n & LLMs',
+      pitch: 'A 24/7 autonomous inbox assistant that reads incoming support & business emails, understands intent, and drafts contextual human-like replies with zero manual effort.',
+      skills: [
+        'Event-Driven Webhook Architecture',
+        'Multi-Step Agent Reasoning & Intent Triage',
+        'Anti-Hallucination Guardrails & Fallbacks',
+        'Email Context Parsing & Entity Extraction',
+        'JSON Schema Validation & Error Recovery',
+        'Human-in-the-Loop Quality Gates'
+      ],
+      tools: [
+        'n8n Workflow Automation', 'Groq API', 'Llama 3.3',
+        'Gmail API / IMAP', 'Webhooks', 'Docker',
+        'Node.js Runtime', 'JSON Schema'
+      ],
+      sites: [
+        { label: 'n8n Workflow Platform', url: 'https://n8n.io' },
+        { label: 'Google Cloud Platform OAuth', url: 'https://console.cloud.google.com' },
+        { label: 'Groq Fast LLM Inference', url: 'https://groq.com' },
+        { label: 'NovaBrief Webhook Ingestion', url: 'https://www.novabrief.tech' }
+      ],
+      metrics: [
+        '94% automated resolution rate on routine queries',
+        'Under 10 seconds from email receipt to generated draft',
+        'Eliminated an estimated 15+ hours of weekly manual inbox toil',
+        'Zero security incidents via strict token isolation'
+      ],
+      actions: [
+        { label: 'View GitHub Workflows', url: 'https://github.com/Alihussain121472', primary: true, icon: 'fa-brands fa-github' },
+        { label: 'Contact About Custom n8n Build', url: '#contact', primary: false, icon: 'fa-envelope' }
+      ]
+    },
+    'dha-agent': {
+      category: 'VERTICAL SAAS · REAL ESTATE AI',
+      title: 'DHA Multan Real Estate AI Agent',
+      subtitle: '24/7 Intelligent Property Valuation & Investor Consultation Assistant',
+      pitch: 'An on-demand property advisory agent that answers plot inquiries, compares sector pricing trends, and calculates transfer fees for DHA Multan investors and overseas buyers.',
+      skills: [
+        'Domain-Specific RAG Knowledge Engineering',
+        'Real Estate Financial Valuation & ROI Modeling',
+        'Urdu & English Conversational NLP',
+        'Sector Liquidity & Growth Forecasting',
+        'Automated Transfer Fee & Tax Calculations'
+      ],
+      tools: [
+        'Python', 'Anthropic Claude API', 'n8n',
+        'Vector Embeddings', 'SQLite / PostgreSQL', 'FastAPI',
+        'HTML5 / CSS3 Responsive UI'
+      ],
+      sites: [
+        { label: 'DHA Multan Official Reference', url: 'https://www.dhamultan.org' },
+        { label: 'Anthropic Claude Engine', url: 'https://anthropic.com' },
+        { label: 'GitHub Repository', url: 'https://github.com/Alihussain121472' },
+        { label: 'Portfolio Host (araknet.tech)', url: 'https://araknet.tech' }
+      ],
+      metrics: [
+        'Covers all 20+ residential and commercial sectors in DHA Multan',
+        'Zero downtime query resolution for overseas Pakistani buyers',
+        'Instantaneous calculation of transfer taxes, CVT, and stamp duties',
+        'High investor satisfaction during pilot phase'
+      ],
+      actions: [
+        { label: 'Request Demo / Consultation', url: '#contact', primary: true, icon: 'fa-envelope' },
+        { label: 'GitHub Profile', url: 'https://github.com/Alihussain121472', primary: false, icon: 'fa-brands fa-github' }
+      ]
+    },
+    'khidmat-ai': {
+      category: 'CIVIC TECH · PUBLIC ASSISTANCE',
+      title: 'Khidmat AI — Civic Assistance',
+      subtitle: 'AI-Powered Citizen Guidance & Public Administrative Support',
+      pitch: 'A civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.',
+      skills: [
+        'Multi-Lingual Public Service Triage',
+        'Legal & Procedural Prompt Structuring',
+        'Document Checklist Automation',
+        'Web Security & Accessible UI Design'
+      ],
+      tools: [
+        'Python', 'Django Framework', 'Open-Source LLMs',
+        'REST APIs', 'SQLite / PostgreSQL', 'Bootstrap 5'
+      ],
+      sites: [
+        { label: 'Citizen Service Portals Reference', url: 'https://pakistan.gov.pk' },
+        { label: 'GitHub Codebase', url: 'https://github.com/Alihussain121472' },
+        { label: 'Render Cloud Deployment', url: 'https://render.com' }
+      ],
+      metrics: [
+        '1,200+ public service inquiries assisted',
+        'Average response latency under 1.4 seconds',
+        '100% free accessibility for citizens with zero user paywalls'
+      ],
+      actions: [
+        { label: 'View on GitHub', url: 'https://github.com/Alihussain121472', primary: true, icon: 'fa-brands fa-github' },
+        { label: 'Contact Syed Ali', url: '#contact', primary: false, icon: 'fa-envelope' }
+      ]
+    },
+    'seo-agent': {
+      category: 'GROWTH ENGINE · AUTOMATION PIPELINE',
+      title: 'Autonomous SEO & Content Agent',
+      subtitle: 'End-to-End Competitor SERP Analysis & E-E-A-T Content Structuring',
+      pitch: 'An automated pipeline that scrapes top-ranking Google search competitors, extracts keyword entity gaps, and structures high-ranking articles in minutes instead of days.',
+      skills: [
+        'Automated SERP Scraping & Parsing',
+        'Semantic Entity & N-Gram Extraction',
+        'Google E-E-A-T Signal Optimization',
+        'Structured Schema JSON-LD Generation',
+        'Internal Link Graph Construction'
+      ],
+      tools: [
+        'Python', 'BeautifulSoup4', 'Playwright',
+        'Groq / Llama 3.3', 'Markdown AST Engine', 'RegEx'
+      ],
+      sites: [
+        { label: 'Google Search Console Connectors', url: 'https://search.google.com' },
+        { label: 'Schema.org Standards', url: 'https://schema.org' },
+        { label: 'GitHub Repository', url: 'https://github.com/Alihussain121472' }
+      ],
+      metrics: [
+        '85% reduction in manual content structuring and research time',
+        'Over 4,500 semantic keywords processed per client batch',
+        'Generated Schema markup passes 100% Google Rich Results tests'
+      ],
+      actions: [
+        { label: 'View GitHub Repository', url: 'https://github.com/Alihussain121472', primary: true, icon: 'fa-brands fa-github' },
+        { label: 'Consult on SEO Pipeline', url: '#contact', primary: false, icon: 'fa-envelope' }
+      ]
+    }
+  };
+
+  const projectModal = document.getElementById('projectModal');
+  const closeProjectModalBtn = document.getElementById('closeProjectModalBtn');
+  const bpCategoryTag = document.getElementById('bpCategoryTag');
+  const bpProjectTitle = document.getElementById('bpProjectTitle');
+  const bpProjectSubtitle = document.getElementById('bpProjectSubtitle');
+  const bpPitchSummary = document.getElementById('bpPitchSummary');
+  const bpSkillsList = document.getElementById('bpSkillsList');
+  const bpToolsList = document.getElementById('bpToolsList');
+  const bpSitesList = document.getElementById('bpSitesList');
+  const bpMetricsList = document.getElementById('bpMetricsList');
+  const bpActionLinks = document.getElementById('bpActionLinks');
+
+  window.openProjectModal = function(projectId) {
+    const data = projectBlueprints[projectId];
+    if (!data || !projectModal) return;
+
+    bpCategoryTag.innerHTML = `<i class="fa-solid fa-cube"></i> ${escapeHtml(data.category)}`;
+    bpProjectTitle.textContent = data.title;
+    bpProjectSubtitle.textContent = data.subtitle;
+    bpPitchSummary.textContent = data.pitch;
+
+    // Col 1: Skills
+    bpSkillsList.innerHTML = data.skills.map(s => `<li>${escapeHtml(s)}</li>`).join('');
+
+    // Col 2: Tools
+    bpToolsList.innerHTML = data.tools.map(t => `<span class="bp-pill">${escapeHtml(t)}</span>`).join('');
+
+    // Col 3: Sites
+    bpSitesList.innerHTML = data.sites.map(site => `
+      <li>
+        <a href="${site.url}" target="_blank" rel="noopener noreferrer">
+          ${escapeHtml(site.label)} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+        </a>
+      </li>
+    `).join('');
+
+    // Col 4: Metrics
+    bpMetricsList.innerHTML = data.metrics.map(m => `<li>${escapeHtml(m)}</li>`).join('');
+
+    // Action buttons
+    bpActionLinks.innerHTML = data.actions.map(a => `
+      <a href="${a.url}" target="${a.url.startsWith('#') ? '_self' : '_blank'}" rel="noopener noreferrer" class="btn btn-sm ${a.primary ? 'btn-primary' : 'btn-outline'}">
+        <i class="${a.icon}"></i> ${escapeHtml(a.label)}
+      </a>
+    `).join('');
+
+    projectModal.classList.add('active');
+  };
+
+  if (closeProjectModalBtn && projectModal) {
+    closeProjectModalBtn.addEventListener('click', () => projectModal.classList.remove('active'));
+    projectModal.addEventListener('click', (e) => {
+      if (e.target === projectModal) projectModal.classList.remove('active');
+    });
+  }
+
+  // ==========================================
+  // 5. DYNAMIC CERTIFICATION MANAGEMENT SYSTEM
   // ==========================================
   const defaultCertificates = [
     {
@@ -298,12 +525,14 @@ document.addEventListener('DOMContentLoaded', () => {
       certsGrid.innerHTML = `
         <div class="glass-card" style="grid-column: 1 / -1; padding: 3rem; text-align: center;">
           <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 1rem;"></i>
-          <h3>No certificates in this category yet</h3>
-          <p style="color: var(--text-secondary); margin-top: 0.5rem;">Click "Add Certificate" above to upload your certification pictures!</p>
+          <h3>No certificates in this category</h3>
+          <p style="color: var(--text-secondary); margin-top: 0.5rem;">Select another category above.</p>
         </div>
       `;
       return;
     }
+
+    const isOwner = document.body.classList.contains('owner-mode-active');
 
     certsGrid.innerHTML = filtered.map(cert => `
       <div class="cert-card glass-card" data-id="${cert.id}">
@@ -325,9 +554,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="${cert.verifyUrl || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-xs btn-outline">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Credential
             </a>
-            <button class="cert-delete-btn" onclick="window.deleteCertificate('${cert.id}')" title="Remove this certificate">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
+            ${isOwner ? `
+              <button class="cert-delete-btn" onclick="window.deleteCertificate('${cert.id}')" title="Remove this certificate">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            ` : ''}
           </div>
         </div>
       </div>
@@ -336,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function escapeHtml(text) {
     if (!text) return '';
-    return text
+    return String(text)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
@@ -397,7 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Delete Certificate Handler
+  // Delete Certificate (Owner Only)
   window.deleteCertificate = function(certId) {
     const cert = currentCertificates.find(c => c.id === certId);
     const title = cert ? cert.title : 'this certificate';
@@ -409,7 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Add Certificate Modal Handling
+  // Add Certificate Modal
   const addCertModal = document.getElementById('addCertModal');
   const openAddCertModalBtn = document.getElementById('openAddCertModalBtn');
   const closeAddCertBtn = document.getElementById('closeAddCertBtn');
@@ -425,11 +656,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedImageBase64 = null;
 
   function openAddModal() {
-    addCertModal.classList.add('active');
+    if (addCertModal) addCertModal.classList.add('active');
   }
   function closeAddModal() {
-    addCertModal.classList.remove('active');
-    addCertForm.reset();
+    if (addCertModal) addCertModal.classList.remove('active');
+    if (addCertForm) addCertForm.reset();
     selectedImageBase64 = null;
     if (dropPreview) dropPreview.style.display = 'none';
     if (dropPrompt) dropPrompt.style.display = 'block';
@@ -455,7 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
           certPreviewImg.src = selectedImageBase64;
           dropPrompt.style.display = 'none';
           dropPreview.style.display = 'flex';
-          certUrlInput.value = '';
+          if (certUrlInput) certUrlInput.value = '';
         };
         reader.readAsDataURL(file);
       }
@@ -466,9 +697,9 @@ document.addEventListener('DOMContentLoaded', () => {
     removeSelectedFileBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       selectedImageBase64 = null;
-      certFileInput.value = '';
-      dropPreview.style.display = 'none';
-      dropPrompt.style.display = 'block';
+      if (certFileInput) certFileInput.value = '';
+      if (dropPreview) dropPreview.style.display = 'none';
+      if (dropPrompt) dropPrompt.style.display = 'block';
     });
   }
 
@@ -542,11 +773,223 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial render of certificates
   renderCertificates();
 
   // ==========================================
-  // 5. RESUME MODAL VIEWER
+  // 6. OWNER SECURITY GATE & LIVE PENCIL EDITOR
+  // ==========================================
+  const EDITS_STORAGE_KEY = 'araknet_portfolio_custom_edits_v1';
+  const OWNER_SESSION_KEY = 'araknet_owner_auth_session';
+  const DEFAULT_PASSCODE = 'araknet2026';
+
+  let customEdits = {};
+
+  function loadCustomEdits() {
+    try {
+      const saved = localStorage.getItem(EDITS_STORAGE_KEY);
+      if (saved) {
+        customEdits = JSON.parse(saved);
+        applyCustomEditsToDom();
+      }
+    } catch (e) {
+      console.warn('Could not load custom edits:', e);
+    }
+  }
+
+  function applyCustomEditsToDom() {
+    document.querySelectorAll('[data-edit-key]').forEach(el => {
+      const key = el.getAttribute('data-edit-key');
+      if (customEdits[key] !== undefined) {
+        el.innerHTML = customEdits[key];
+      }
+    });
+  }
+
+  loadCustomEdits();
+
+  const adminAuthModal = document.getElementById('adminAuthModal');
+  const adminAuthForm = document.getElementById('adminAuthForm');
+  const adminPasscodeInput = document.getElementById('adminPasscodeInput');
+  const closeAdminAuthBtn = document.getElementById('closeAdminAuthBtn');
+  const ownerLoginBtn = document.getElementById('ownerLoginBtn');
+  const ownerLockIcon = document.getElementById('ownerLockIcon');
+  const ownerDock = document.getElementById('ownerDock');
+  const certAdminActions = document.getElementById('certAdminActions');
+
+  const saveEditsBtn = document.getElementById('saveEditsBtn');
+  const exportHtmlBtn = document.getElementById('exportHtmlBtn');
+  const resetEditsBtn = document.getElementById('resetEditsBtn');
+  const lockOwnerBtn = document.getElementById('lockOwnerBtn');
+
+  function openOwnerLoginModal() {
+    if (adminAuthModal) {
+      adminAuthModal.classList.add('active');
+      setTimeout(() => {
+        if (adminPasscodeInput) adminPasscodeInput.focus();
+      }, 50);
+    }
+  }
+
+  function closeOwnerLoginModal() {
+    if (adminAuthModal) adminAuthModal.classList.remove('active');
+    if (adminAuthForm) adminAuthForm.reset();
+  }
+
+  if (closeAdminAuthBtn) closeAdminAuthBtn.addEventListener('click', closeOwnerLoginModal);
+  if (adminAuthModal) {
+    adminAuthModal.addEventListener('click', (e) => {
+      if (e.target === adminAuthModal) closeOwnerLoginModal();
+    });
+  }
+
+  function enableOwnerMode() {
+    document.body.classList.add('owner-mode-active');
+    sessionStorage.setItem(OWNER_SESSION_KEY, 'active');
+    if (ownerDock) ownerDock.style.display = 'flex';
+    if (certAdminActions) certAdminActions.style.display = 'flex';
+    if (ownerLockIcon) {
+      ownerLockIcon.className = 'fa-solid fa-lock-open text-cyan';
+    }
+
+    // Attach pencil badges and contenteditable to all targets
+    document.querySelectorAll('[data-edit-key]').forEach(el => {
+      el.setAttribute('contenteditable', 'true');
+
+      // Check if badge already exists
+      if (!el.querySelector('.pencil-badge')) {
+        const badge = document.createElement('span');
+        badge.className = 'pencil-badge';
+        badge.innerHTML = '<i class="fa-solid fa-pencil"></i>';
+        badge.setAttribute('contenteditable', 'false');
+        el.appendChild(badge);
+      }
+
+      el.oninput = () => {
+        const key = el.getAttribute('data-edit-key');
+        // Clean clone to save
+        const clone = el.cloneNode(true);
+        const b = clone.querySelector('.pencil-badge');
+        if (b) b.remove();
+        customEdits[key] = clone.innerHTML;
+      };
+    });
+
+    renderCertificates();
+    showToast('🔑 Owner Edit Mode Unlocked! Click any text to edit.');
+  }
+
+  function disableOwnerMode() {
+    document.body.classList.remove('owner-mode-active');
+    sessionStorage.removeItem(OWNER_SESSION_KEY);
+    if (ownerDock) ownerDock.style.display = 'none';
+    if (certAdminActions) certAdminActions.style.display = 'none';
+    if (ownerLockIcon) {
+      ownerLockIcon.className = 'fa-solid fa-lock';
+    }
+
+    document.querySelectorAll('[data-edit-key]').forEach(el => {
+      el.removeAttribute('contenteditable');
+      const badge = el.querySelector('.pencil-badge');
+      if (badge) badge.remove();
+    });
+
+    renderCertificates();
+    showToast('🔒 Owner Mode Locked. Portfolio is now read-only.');
+  }
+
+  if (ownerLoginBtn) {
+    ownerLoginBtn.addEventListener('click', () => {
+      if (document.body.classList.contains('owner-mode-active')) {
+        disableOwnerMode();
+      } else {
+        openOwnerLoginModal();
+      }
+    });
+  }
+
+  if (adminAuthForm) {
+    adminAuthForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entered = adminPasscodeInput.value.trim();
+      if (entered === DEFAULT_PASSCODE) {
+        closeOwnerLoginModal();
+        enableOwnerMode();
+      } else {
+        alert('Incorrect passcode. Public viewers have read-only access.');
+      }
+    });
+  }
+
+  // Restore owner session if active in same session
+  if (sessionStorage.getItem(OWNER_SESSION_KEY) === 'active') {
+    enableOwnerMode();
+  }
+
+  // Hotkey: Ctrl + Shift + E
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
+      e.preventDefault();
+      if (document.body.classList.contains('owner-mode-active')) {
+        disableOwnerMode();
+      } else {
+        openOwnerLoginModal();
+      }
+    }
+  });
+
+  // Dock Actions
+  if (saveEditsBtn) {
+    saveEditsBtn.addEventListener('click', () => {
+      try {
+        localStorage.setItem(EDITS_STORAGE_KEY, JSON.stringify(customEdits));
+        showToast('💾 All edits successfully saved to browser storage!');
+      } catch (err) {
+        showToast('Error saving edits.');
+      }
+    });
+  }
+
+  if (resetEditsBtn) {
+    resetEditsBtn.addEventListener('click', () => {
+      if (confirm('Revert all custom text edits back to original defaults?')) {
+        localStorage.removeItem(EDITS_STORAGE_KEY);
+        customEdits = {};
+        window.location.reload();
+      }
+    });
+  }
+
+  if (lockOwnerBtn) {
+    lockOwnerBtn.addEventListener('click', disableOwnerMode);
+  }
+
+  if (exportHtmlBtn) {
+    exportHtmlBtn.addEventListener('click', () => {
+      // Create a clean clone of the document HTML
+      const cloneDoc = document.documentElement.cloneNode(true);
+      
+      // Clean temporary edit classes and badges
+      cloneDoc.classList.remove('owner-mode-active');
+      const clonedBody = cloneDoc.querySelector('body');
+      if (clonedBody) clonedBody.classList.remove('owner-mode-active');
+
+      cloneDoc.querySelectorAll('.pencil-badge').forEach(b => b.remove());
+      cloneDoc.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      
+      const cleanHtml = '<!DOCTYPE html>\n' + cloneDoc.outerHTML;
+      const blob = new Blob([cleanHtml], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('📥 Clean updated index.html exported for deployment!');
+    });
+  }
+
+  // ==========================================
+  // 7. RESUME MODAL VIEWER
   // ==========================================
   const resumeModal = document.getElementById('resumeModal');
   const openResumeModalBtn = document.getElementById('openResumeModalBtn');
@@ -565,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 6. COMMAND PALETTE (Ctrl+K)
+  // 8. COMMAND PALETTE (Ctrl+K)
   // ==========================================
   const cmdModal = document.getElementById('cmdPaletteModal');
   const cmdPaletteBtn = document.getElementById('cmdPaletteBtn');
@@ -601,6 +1044,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.key === 'Escape') {
       closeCmdPalette();
       if (lightboxModal) lightboxModal.classList.remove('active');
+      if (projectModal) projectModal.classList.remove('active');
+      if (adminAuthModal) closeOwnerLoginModal();
       if (addCertModal) closeAddModal();
       if (manageCertsModal) manageCertsModal.classList.remove('active');
       if (resumeModal) resumeModal.classList.remove('active');
@@ -627,7 +1072,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (action === 'trigger') {
         const trigger = item.getAttribute('data-trigger');
         closeCmdPalette();
-        if (trigger === 'add-cert') openAddModal();
+        if (trigger === 'admin-login') openOwnerLoginModal();
       } else if (action === 'copy') {
         const text = item.getAttribute('data-text');
         navigator.clipboard.writeText(text).then(() => {
@@ -645,6 +1090,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cmdInput && cmdResults) {
     cmdInput.addEventListener('input', (e) => {
       const query = e.target.value.toLowerCase().trim();
+      if (query === 'admin' || query === '/owner' || query === 'edit') {
+        closeCmdPalette();
+        openOwnerLoginModal();
+        return;
+      }
       const items = cmdResults.querySelectorAll('.cmd-item');
       items.forEach(item => {
         const text = item.textContent.toLowerCase();
@@ -658,7 +1108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 7. TOAST NOTIFICATION SYSTEM & CLIPBOARD
+  // 9. TOAST NOTIFICATION SYSTEM & CLIPBOARD
   // ==========================================
   const toast = document.getElementById('toast');
   const toastMessage = document.getElementById('toastMessage');
@@ -674,7 +1124,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3500);
   }
 
-  // Copy email buttons
   document.querySelectorAll('.copy-email-btn, .copy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const text = btn.getAttribute('data-email') || btn.getAttribute('data-copy') || 'syedali6160@gmail.com';
@@ -687,7 +1136,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 8. CONTACT FORM HANDLER
+  // 10. CONTACT FORM HANDLER WITH ANTI-BOT SECURITY
   // ==========================================
   const contactForm = document.getElementById('contactForm');
   const sendBtn = document.getElementById('sendBtn');
@@ -698,6 +1147,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      // Bot honeypot security check
+      const honeypot = contactForm.querySelector('input[name="_gotcha"]');
+      if (honeypot && honeypot.value) {
+        return; // Silent discard
+      }
 
       const name = document.getElementById('contactName').value.trim();
       const email = document.getElementById('contactEmail').value.trim();
@@ -710,7 +1165,6 @@ document.addEventListener('DOMContentLoaded', () => {
       sendBtnSpinner.style.display = 'inline-block';
       sendBtn.disabled = true;
 
-      // Simulate transmission with high-tech UX and provide mailto fallback
       setTimeout(() => {
         sendBtnSpinner.style.display = 'none';
         sendBtnText.style.display = 'inline-block';
@@ -736,7 +1190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 9. MOBILE MENU TOGGLE
+  // 11. MOBILE MENU TOGGLE
   // ==========================================
   const mobileToggle = document.getElementById('mobileMenuToggle');
   const mobileDrawer = document.getElementById('mobileDrawer');
@@ -762,7 +1216,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 10. CUSTOM FUTURISTIC CURSOR (DESKTOP)
+  // 12. CUSTOM FUTURISTIC CURSOR (DESKTOP)
   // ==========================================
   const cursorDot = document.getElementById('cursorDot');
   const cursorGlow = document.getElementById('cursorGlow');
@@ -772,15 +1226,13 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorDot.style.left = `${e.clientX}px`;
       cursorDot.style.top = `${e.clientY}px`;
 
-      // Smooth lag for glow
       cursorGlow.animate({
         left: `${e.clientX}px`,
         top: `${e.clientY}px`
       }, { duration: 350, fill: 'forwards' });
     });
 
-    // Expand on hoverable elements
-    document.querySelectorAll('a, button, input, select, textarea, .cert-thumbnail-wrapper').forEach(el => {
+    document.querySelectorAll('a, button, input, select, textarea, .cert-thumbnail-wrapper, .project-card-img-wrapper').forEach(el => {
       el.addEventListener('mouseenter', () => {
         cursorGlow.style.width = '55px';
         cursorGlow.style.height = '55px';

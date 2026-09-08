@@ -2,6 +2,7 @@
    ARAKNET.TECH — FUTURISTIC DESIGN SYSTEM FOR SYED ALI
    Palette: Deep Space Black (#050A14), Electric Blue (#00C2FF), Cyan Glow (#00F5D4)
    Fonts: Space Grotesk (Headings), Inter (Body), JetBrains Mono (Code/Badges)
+   Security: Tamper-proof Public Mode + Passcode-Gated Owner Edit Mode
    ========================================================= */
 
 :root {
@@ -56,6 +57,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: text;
 }
 
 /* Custom Scrollbar */
@@ -221,8 +223,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-xs {
-  padding: 0.3rem 0.6rem;
-  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
   border-radius: 6px;
 }
 
@@ -331,6 +333,22 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.owner-toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.owner-toggle-btn:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
 }
 
 .mobile-toggle {
@@ -976,6 +994,52 @@ h1, h2, h3, h4, h5, h6 {
   gap: 2.5rem;
 }
 
+/* 10-Second Pitch Banners */
+.project-quick-pitch {
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid rgba(0, 245, 212, 0.35);
+  border-left: 4px solid var(--accent-cyan);
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.pitch-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.pitch-text {
+  color: #f1f5f9;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.project-quick-pitch-mini {
+  background: rgba(0, 194, 255, 0.08);
+  border-left: 3px solid var(--accent-blue);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  line-height: 1.45;
+  margin-bottom: 1rem;
+}
+
+.project-quick-pitch-mini strong {
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
 /* Featured Card */
 .project-featured-card {
   padding: 2.5rem;
@@ -1112,13 +1176,14 @@ h1, h2, h3, h4, h5, h6 {
 .project-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
 }
 
 /* Projects Subgrid (Cards 2, 3, 4, 5) */
 .projects-subgrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.8rem;
 }
 
@@ -1137,12 +1202,38 @@ h1, h2, h3, h4, h5, h6 {
   height: 180px;
   overflow: hidden;
   border-bottom: 1px solid var(--border-glass);
+  cursor: pointer;
 }
 
 .project-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card-img-wrapper:hover .project-card-img {
+  transform: scale(1.05);
+}
+
+.card-inspect-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: var(--accent-cyan);
+  border: 1px solid var(--border-glass);
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.project-card-img-wrapper:hover .card-inspect-hint {
+  opacity: 1;
 }
 
 .card-type-tag {
@@ -1205,7 +1296,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
 }
 
-/* ================= 5. CERTIFICATIONS HUB (USER REQUESTED FEATURE) ================= */
+/* ================= 5. CERTIFICATIONS HUB ================= */
 .certs-toolbar {
   padding: 1rem 1.5rem;
   border-radius: 14px;
@@ -1657,7 +1748,8 @@ h1, h2, h3, h4, h5, h6 {
 .input-wrapper select,
 .input-wrapper textarea,
 .add-cert-form input,
-.add-cert-form select {
+.add-cert-form select,
+.auth-form input {
   width: 100%;
   padding: 0.8rem 1rem 0.8rem 2.6rem;
   background: rgba(5, 10, 20, 0.7);
@@ -1683,7 +1775,8 @@ h1, h2, h3, h4, h5, h6 {
 .input-wrapper select:focus,
 .input-wrapper textarea:focus,
 .add-cert-form input:focus,
-.add-cert-form select:focus {
+.add-cert-form select:focus,
+.auth-form input:focus {
   border-color: var(--accent-cyan);
   box-shadow: 0 0 15px rgba(0, 245, 212, 0.25);
 }
@@ -1794,8 +1887,8 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   background: rgba(5, 10, 20, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   z-index: 2000;
   display: none;
   align-items: center;
@@ -1844,6 +1937,304 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(244, 63, 94, 0.2);
   color: #fb7185;
   border-color: #fb7185;
+}
+
+/* ================= PROJECT BLUEPRINT MODAL ================= */
+.project-blueprint-modal {
+  max-width: 960px;
+  padding: 2.2rem;
+  border: 1px solid rgba(0, 194, 255, 0.4);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+}
+
+.blueprint-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.blueprint-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  background: rgba(0, 194, 255, 0.12);
+  border: 1px solid var(--border-glass);
+  color: var(--accent-cyan);
+  margin-bottom: 0.6rem;
+}
+
+.blueprint-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+  color: #fff;
+}
+
+.blueprint-subtitle {
+  color: var(--accent-cyan);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.blueprint-pitch-box {
+  background: rgba(0, 194, 255, 0.08);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.8rem;
+}
+
+.pitch-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+
+.pitch-lead {
+  font-size: 1.05rem;
+  color: #f8fafc;
+  line-height: 1.6;
+}
+
+/* 4 Distinct Columns */
+.blueprint-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.blueprint-col {
+  background: rgba(5, 10, 20, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.col-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.col-head h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.col-icon {
+  font-size: 1rem;
+}
+.ai-col { color: var(--accent-blue); }
+.tool-col { color: var(--accent-cyan); }
+.site-col { color: var(--accent-purple); }
+.metric-col { color: var(--accent-green); }
+
+.blueprint-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.blueprint-list li {
+  position: relative;
+  padding-left: 1rem;
+  line-height: 1.45;
+}
+
+.blueprint-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent-cyan);
+}
+
+.sites-list li a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.sites-list li a:hover {
+  text-decoration: underline;
+  color: var(--accent-cyan);
+}
+
+.metrics-list li {
+  color: #e2e8f0;
+}
+
+.blueprint-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.bp-pill {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--accent-cyan);
+}
+
+.blueprint-footer {
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.blueprint-links {
+  display: flex;
+  gap: 0.8rem;
+}
+
+/* ================= OWNER SECURITY AUTH MODAL ================= */
+.auth-modal-card {
+  max-width: 440px;
+  text-align: center;
+  padding: 2.5rem 2rem;
+}
+
+.auth-lock-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 194, 255, 0.15);
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin: 0 auto 1rem auto;
+}
+
+.auth-header h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.auth-sub {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+/* ================= FLOATING OWNER DOCK ================= */
+.owner-dock {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2500;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border: 1px solid var(--accent-cyan);
+  box-shadow: var(--shadow-cyan-glow);
+  animation: slideUpDock 0.3s ease-out;
+}
+
+@keyframes slideUpDock {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.owner-dock-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.owner-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: var(--accent-cyan);
+  color: #050a14;
+}
+
+.owner-hint {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.owner-dock-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Active Edit Mode Stylings */
+body.owner-mode-active .editable-target {
+  position: relative;
+  cursor: pointer;
+  outline: 1px dashed rgba(0, 245, 212, 0.4);
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+body.owner-mode-active .editable-target:hover {
+  outline-color: var(--accent-cyan);
+  background: rgba(0, 245, 212, 0.08);
+}
+
+body.owner-mode-active .editable-target:focus {
+  outline: 2px solid var(--accent-cyan);
+  background: rgba(5, 10, 20, 0.9);
+  color: #fff;
+}
+
+/* Pencil Badges */
+.pencil-badge {
+  display: none;
+}
+
+body.owner-mode-active .pencil-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  color: #050a14;
+  font-size: 0.65rem;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+  pointer-events: none;
 }
 
 /* Lightbox Modal */
@@ -2218,6 +2609,7 @@ h1, h2, h3, h4, h5, h6 {
   .featured-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .stats-counter-grid { grid-template-columns: repeat(2, 1fr); }
+  .blueprint-columns-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -2231,6 +2623,8 @@ h1, h2, h3, h4, h5, h6 {
   .cert-admin-actions { justify-content: flex-end; }
   .cursor-dot, .cursor-glow { display: none; }
   .resume-contacts { flex-direction: column; gap: 0.5rem; }
+  .blueprint-columns-grid { grid-template-columns: 1fr; }
+  .owner-dock { flex-direction: column; border-radius: 16px; bottom: 0.8rem; width: 92%; }
 }
 
 @media (max-width: 480px) {

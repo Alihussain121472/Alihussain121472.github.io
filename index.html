@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Syed Ali | AI Developer · Indie Builder · araknet.tech</title>
   
+  <!-- Security & Privacy Meta Tags -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  
   <!-- SEO & Social Meta Tags -->
   <meta name="description" content="Official portfolio of Syed Ali — AI Developer, Indie Builder, and BSAI student building autonomous AI agents, SaaS products, and intelligent automations at araknet.tech." />
   <meta name="keywords" content="Syed Ali, araknet, araknet.tech, NovaBrief, AI Developer, Indie Builder, n8n, Python, Llama 3.3, Multan, SZABIST, Agentic AI" />
@@ -28,12 +32,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 
-  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- FontAwesome Icons for clean UI elements -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Custom Stylesheet -->
@@ -50,12 +54,26 @@
     <span id="toastMessage">Action completed successfully!</span>
   </div>
 
+  <!-- FLOATING OWNER EDIT DOCK (VISIBLE ONLY WHEN OWNER AUTHENTICATES) -->
+  <div id="ownerDock" class="owner-dock glass-panel" style="display: none;">
+    <div class="owner-dock-info">
+      <span class="owner-badge"><i class="fa-solid fa-key"></i> OWNER EDIT MODE</span>
+      <span class="owner-hint">Click pencil icons or text to edit</span>
+    </div>
+    <div class="owner-dock-actions">
+      <button id="saveEditsBtn" class="btn btn-xs btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+      <button id="exportHtmlBtn" class="btn btn-xs btn-outline" title="Download updated index.html with your edits"><i class="fa-solid fa-download"></i> Export HTML</button>
+      <button id="resetEditsBtn" class="btn btn-xs btn-ghost" title="Revert to defaults"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+      <button id="lockOwnerBtn" class="btn btn-xs btn-danger" title="Lock and exit owner mode"><i class="fa-solid fa-lock"></i> Lock</button>
+    </div>
+  </div>
+
   <!-- Navigation Bar -->
   <header class="header">
     <nav class="navbar glass-panel">
       <a href="#hero" class="brand-logo">
         <span class="logo-symbol">&lt;araknet/&gt;</span>
-        <span class="brand-name">SYED ALI</span>
+        <span class="brand-name" data-edit-key="brand_name">SYED ALI</span>
       </a>
 
       <!-- Desktop Nav Menu -->
@@ -73,6 +91,9 @@
         <button id="cmdPaletteBtn" class="cmd-btn" title="Open Command Palette (Ctrl+K)">
           <i class="fa-solid fa-terminal"></i>
           <span class="cmd-hint">Ctrl K</span>
+        </button>
+        <button id="ownerLoginBtn" class="owner-toggle-btn" title="Owner Access (Passcode Protected)">
+          <i class="fa-solid fa-lock" id="ownerLockIcon"></i>
         </button>
         <a href="#contact" class="btn btn-sm btn-primary">Let's Talk</a>
         <button id="mobileMenuToggle" class="mobile-toggle" aria-label="Toggle navigation menu">
@@ -104,7 +125,7 @@
         
         <!-- Live Mission Status Badge -->
         <div class="status-badge-wrapper">
-          <div class="status-badge">
+          <div class="status-badge editable-target" data-edit-key="hero_status_text">
             <span class="status-pulse"></span>
             <span class="status-text">Available for High-Impact AI & SaaS Builds · Multan, PK</span>
           </div>
@@ -118,14 +139,14 @@
           <div class="avatar-frame">
             <img src="assets/images/syed-ali.jpg" alt="Syed Ali - AI Developer & Indie Builder" class="hero-avatar-img" />
           </div>
-          <div class="avatar-tag">
+          <div class="avatar-tag editable-target" data-edit-key="hero_avatar_tag">
             <i class="fa-solid fa-bolt"></i> Shipping Products
           </div>
         </div>
 
         <!-- Hero Typography -->
         <h1 class="hero-title">
-          Hi, I'm <span class="gradient-text">Syed Ali</span>
+          Hi, I'm <span class="gradient-text editable-target" data-edit-key="hero_title_name">Syed Ali</span>
         </h1>
 
         <!-- Typewriter Subheading -->
@@ -135,7 +156,7 @@
           <span class="cursor">&nbsp;</span>
         </div>
 
-        <p class="hero-bio">
+        <p class="hero-bio editable-target" data-edit-key="hero_bio_paragraph">
           Student and indie AI engineer turning high-level LLM capabilities into reliable production software. Creator of <strong>NovaBrief Tech</strong>, n8n automation pipelines, and custom AI agents.
         </p>
 
@@ -192,8 +213,8 @@
       <div class="container">
         <div class="section-header">
           <div class="section-pill"><i class="fa-solid fa-user-astronaut"></i> Telemetry</div>
-          <h2 class="section-title">About <span class="gradient-text">Syed Ali</span></h2>
-          <p class="section-subtitle">Bridging theoretical computer science with pragmatic, revenue-focused AI products.</p>
+          <h2 class="section-title">About <span class="gradient-text editable-target" data-edit-key="about_title_name">Syed Ali</span></h2>
+          <p class="section-subtitle editable-target" data-edit-key="about_subtitle">Bridging theoretical computer science with pragmatic, revenue-focused AI products.</p>
         </div>
 
         <div class="about-grid">
@@ -203,7 +224,7 @@
               <img src="assets/images/syed-ali.jpg" alt="Syed Ali Portrait" class="about-photo" />
               <div class="about-badge-floating">
                 <span class="pulse-dot"></span>
-                <span>BSAI Undergrad · SZABIST</span>
+                <span class="editable-target" data-edit-key="about_photo_badge">BSAI Undergrad · SZABIST</span>
               </div>
             </div>
 
@@ -211,13 +232,13 @@
             <div class="education-card">
               <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
               <div class="edu-info">
-                <h4>Bachelor of Science in AI (BSAI)</h4>
-                <p class="edu-school">SZABIST University, Islamabad</p>
-                <p class="edu-meta"><i class="fa-regular fa-calendar"></i> Expected Class of 2029</p>
+                <h4 class="editable-target" data-edit-key="edu_degree_title">Bachelor of Science in AI (BSAI)</h4>
+                <p class="edu-school editable-target" data-edit-key="edu_school_name">SZABIST University, Islamabad</p>
+                <p class="edu-meta"><i class="fa-regular fa-calendar"></i> <span class="editable-target" data-edit-key="edu_grad_year">Expected Class of 2029</span></p>
                 <div class="edu-tags">
-                  <span>Data Structures</span>
-                  <span>Machine Learning</span>
-                  <span>System Design</span>
+                  <span class="editable-target" data-edit-key="edu_tag_1">Data Structures</span>
+                  <span class="editable-target" data-edit-key="edu_tag_2">Machine Learning</span>
+                  <span class="editable-target" data-edit-key="edu_tag_3">System Design</span>
                 </div>
               </div>
             </div>
@@ -233,13 +254,13 @@
             </div>
 
             <div class="about-content">
-              <p class="lead-text">
+              <p class="lead-text editable-target" data-edit-key="about_lead_text">
                 I'm an indie hacker and software engineer based in Multan, Pakistan. I specialize in building full-stack web applications and autonomous AI tools that automate manual toil.
               </p>
-              <p>
+              <p class="editable-target" data-edit-key="about_para_1">
                 Currently, I'm pursuing a Bachelor of Science in Artificial Intelligence at <strong>SZABIST University</strong> while actively shipping live products under <strong>NovaBrief Tech</strong>. I believe that true mastery comes from deploying software that real people use every single day.
               </p>
-              <p>
+              <p class="editable-target" data-edit-key="about_para_2">
                 From integrating <strong>Llama 3.3 via Groq</strong> into personalized student feeds, to creating multi-step <strong>n8n email automation workflows</strong> and <strong>DHA Multan real estate intelligence agents</strong>, my focus is always on high utility, resilience, and clean architecture.
               </p>
             </div>
@@ -248,23 +269,23 @@
             <div class="stats-counter-grid">
               <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-rocket"></i></div>
-                <div class="stat-number" data-target="15">0</div>
-                <div class="stat-label">Projects Built</div>
+                <div class="stat-number editable-target" data-edit-key="stat_projects_count" data-target="15">0</div>
+                <div class="stat-label editable-target" data-edit-key="stat_projects_label">Projects Built</div>
               </div>
               <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-code-commit"></i></div>
-                <div class="stat-number" data-target="350">0</div>
-                <div class="stat-label">GitHub Commits</div>
+                <div class="stat-number editable-target" data-edit-key="stat_commits_count" data-target="350">0</div>
+                <div class="stat-label editable-target" data-edit-key="stat_commits_label">GitHub Commits</div>
               </div>
               <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
-                <div class="stat-number" data-target="500">0</div>
-                <div class="stat-label">NovaBrief Readers</div>
+                <div class="stat-number editable-target" data-edit-key="stat_users_count" data-target="500">0</div>
+                <div class="stat-label editable-target" data-edit-key="stat_users_label">NovaBrief Readers</div>
               </div>
               <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
-                <div class="stat-number" data-target="99">0</div>
-                <div class="stat-label">Pipeline Uptime %</div>
+                <div class="stat-number editable-target" data-edit-key="stat_uptime_count" data-target="99">0</div>
+                <div class="stat-label editable-target" data-edit-key="stat_uptime_label">Pipeline Uptime %</div>
               </div>
             </div>
 
@@ -272,7 +293,7 @@
             <div class="quick-connect-bar">
               <div class="quick-email-info">
                 <i class="fa-regular fa-envelope"></i>
-                <span>syedali6160@gmail.com</span>
+                <span class="editable-target" data-edit-key="quick_email_val">syedali6160@gmail.com</span>
               </div>
               <button class="btn btn-sm btn-outline copy-email-btn" data-email="syedali6160@gmail.com">
                 <i class="fa-regular fa-copy"></i> Copy Email
@@ -297,9 +318,9 @@
           <div class="skill-category-card glass-card">
             <div class="skill-cat-header">
               <div class="skill-cat-icon ai-icon"><i class="fa-solid fa-brain"></i></div>
-              <h3>AI &amp; Large Language Models</h3>
+              <h3 class="editable-target" data-edit-key="skill_cat1_title">AI &amp; Large Language Models</h3>
             </div>
-            <p class="skill-cat-desc">Context management, prompt engineering, fine-tuning workflows, and low-latency inference.</p>
+            <p class="skill-cat-desc editable-target" data-edit-key="skill_cat1_desc">Context management, prompt engineering, fine-tuning workflows, and low-latency inference.</p>
             <div class="skill-pills">
               <span class="skill-pill"><i class="fa-solid fa-bolt"></i> Llama 3.3</span>
               <span class="skill-pill"><i class="fa-solid fa-gauge-simple-high"></i> Groq API</span>
@@ -315,9 +336,9 @@
           <div class="skill-category-card glass-card">
             <div class="skill-cat-header">
               <div class="skill-cat-icon auto-icon"><i class="fa-solid fa-diagram-project"></i></div>
-              <h3>Automation &amp; Agents</h3>
+              <h3 class="editable-target" data-edit-key="skill_cat2_title">Automation &amp; Agents</h3>
             </div>
-            <p class="skill-cat-desc">Self-healing pipelines, webhook architectures, asynchronous scheduled jobs, and event triggers.</p>
+            <p class="skill-cat-desc editable-target" data-edit-key="skill_cat2_desc">Self-healing pipelines, webhook architectures, asynchronous scheduled jobs, and event triggers.</p>
             <div class="skill-pills">
               <span class="skill-pill"><i class="fa-solid fa-gear"></i> n8n Automation</span>
               <span class="skill-pill"><i class="fa-solid fa-clock"></i> APScheduler</span>
@@ -332,9 +353,9 @@
           <div class="skill-category-card glass-card">
             <div class="skill-cat-header">
               <div class="skill-cat-icon dev-icon"><i class="fa-solid fa-code"></i></div>
-              <h3>Full Stack &amp; Backend</h3>
+              <h3 class="editable-target" data-edit-key="skill_cat3_title">Full Stack &amp; Backend</h3>
             </div>
-            <p class="skill-cat-desc">High-speed web servers, structured APIs, database normalization, and reactive UI architecture.</p>
+            <p class="skill-cat-desc editable-target" data-edit-key="skill_cat3_desc">High-speed web servers, structured APIs, database normalization, and reactive UI architecture.</p>
             <div class="skill-pills">
               <span class="skill-pill"><i class="fa-brands fa-python"></i> Python</span>
               <span class="skill-pill"><i class="fa-solid fa-cube"></i> Django</span>
@@ -350,9 +371,9 @@
           <div class="skill-category-card glass-card">
             <div class="skill-cat-header">
               <div class="skill-cat-icon cloud-icon"><i class="fa-solid fa-server"></i></div>
-              <h3>Databases, Cloud &amp; DevOps</h3>
+              <h3 class="editable-target" data-edit-key="skill_cat4_title">Databases, Cloud &amp; DevOps</h3>
             </div>
-            <p class="skill-cat-desc">Production hosting, serverless storage, automated continuous deployment, and Linux operations.</p>
+            <p class="skill-cat-desc editable-target" data-edit-key="skill_cat4_desc">Production hosting, serverless storage, automated continuous deployment, and Linux operations.</p>
             <div class="skill-pills">
               <span class="skill-pill"><i class="fa-solid fa-database"></i> PostgreSQL</span>
               <span class="skill-pill"><i class="fa-solid fa-bolt-lightning"></i> Supabase</span>
@@ -368,9 +389,9 @@
           <div class="skill-category-card glass-card">
             <div class="skill-cat-header">
               <div class="skill-cat-icon prod-icon"><i class="fa-solid fa-lightbulb"></i></div>
-              <h3>Product &amp; Indie Building</h3>
+              <h3 class="editable-target" data-edit-key="skill_cat5_title">Product &amp; Indie Building</h3>
             </div>
-            <p class="skill-cat-desc">Turning prototypes into viral distribution, user onboarding, and practical domain positioning.</p>
+            <p class="skill-cat-desc editable-target" data-edit-key="skill_cat5_desc">Turning prototypes into viral distribution, user onboarding, and practical domain positioning.</p>
             <div class="skill-pills">
               <span class="skill-pill"><i class="fa-solid fa-cubes"></i> Product Architecture</span>
               <span class="skill-pill"><i class="fa-solid fa-hammer"></i> Rapid Prototyping</span>
@@ -389,7 +410,7 @@
         <div class="section-header">
           <div class="section-pill"><i class="fa-solid fa-rocket"></i> Portfolio</div>
           <h2 class="section-title">Shipped <span class="gradient-text">Products &amp; Agents</span></h2>
-          <p class="section-subtitle">Real software solving practical problems — live in production, not just mockups.</p>
+          <p class="section-subtitle">Real software solving practical problems — click any project to inspect its architecture, tools, and connected sites.</p>
         </div>
 
         <div class="projects-list">
@@ -404,9 +425,9 @@
               <div class="project-preview-box">
                 <img src="assets/images/novabrief-preview.svg" alt="NovaBrief Tech Live AI Digest Platform" class="project-img" />
                 <div class="preview-overlay">
-                  <a href="https://www.novabrief.tech" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit novabrief.tech
-                  </a>
+                  <button class="btn btn-sm btn-primary" onclick="window.openProjectModal('novabrief')">
+                    <i class="fa-solid fa-layer-group"></i> Inspect Architecture &amp; Tools
+                  </button>
                 </div>
               </div>
 
@@ -414,10 +435,19 @@
                 <div class="project-status-tag status-live">
                   <span class="pulse-indicator"></span> 🟢 Live SaaS in Production
                 </div>
-                <h3 class="project-title">NovaBrief Tech</h3>
-                <p class="project-tagline">AI-Powered Daily Intelligence &amp; Student Program Tracking Platform</p>
-                <p class="project-description">
-                  NovaBrief tracks global student opportunities, fellowships, tech breakthroughs, and competitions, automatically curating and summarizing high-signal updates using Llama 3.3 via Groq API. Features scheduled background scrapers, automated email delivery with APScheduler, and a blazing-fast dashboard.
+                <h3 class="project-title editable-target" data-edit-key="proj_nb_title">NovaBrief Tech</h3>
+                <p class="project-tagline editable-target" data-edit-key="proj_nb_tagline">AI-Powered Daily Intelligence &amp; Student Program Tracking Platform</p>
+
+                <!-- CRYSTAL CLEAR 10-SECOND SUMMARY BADGE -->
+                <div class="project-quick-pitch">
+                  <span class="pitch-tag"><i class="fa-solid fa-bolt"></i> 10-SECOND SUMMARY:</span>
+                  <p class="pitch-text editable-target" data-edit-key="proj_nb_pitch">
+                    An automated daily intelligence briefing app for students that filters out internet noise and generates instant 60-second AI summaries of fellowships, tech breakthroughs, and student programs.
+                  </p>
+                </div>
+
+                <p class="project-description editable-target" data-edit-key="proj_nb_desc">
+                  NovaBrief tracks global opportunities, research papers, and competitions, automatically curating and summarizing high-signal updates using Llama 3.3 via Groq API. Features scheduled background scrapers, automated email delivery with APScheduler, and a blazing-fast dashboard.
                 </p>
 
                 <div class="project-highlights">
@@ -434,15 +464,17 @@
                   <span class="tech-tag">Supabase</span>
                   <span class="tech-tag">PostgreSQL</span>
                   <span class="tech-tag">APScheduler</span>
-                  <span class="tech-tag">Tailwind CSS</span>
                 </div>
 
                 <div class="project-actions">
-                  <a href="https://www.novabrief.tech" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                    <i class="fa-solid fa-globe"></i> Live Platform
+                  <button class="btn btn-primary" onclick="window.openProjectModal('novabrief')">
+                    <i class="fa-solid fa-diagram-project"></i> View Architecture &amp; Tools
+                  </button>
+                  <a href="https://www.novabrief.tech" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                    <i class="fa-solid fa-globe"></i> Visit Live Site
                   </a>
-                  <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                    <i class="fa-brands fa-github"></i> GitHub Profile
+                  <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                    <i class="fa-brands fa-github"></i> Code Repo
                   </a>
                 </div>
               </div>
@@ -455,17 +487,27 @@
             <!-- PROJECT 2: NovaBrief Email Reply Agent -->
             <div class="project-card glass-card">
               <div class="project-card-header">
-                <div class="project-card-img-wrapper">
+                <div class="project-card-img-wrapper" onclick="window.openProjectModal('email-agent')">
                   <img src="assets/images/email-agent-preview.svg" alt="NovaBrief Email Reply Agent" class="project-card-img" />
                   <span class="card-type-tag"><i class="fa-solid fa-robot"></i> AI Automation</span>
+                  <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Specs</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
                   <span class="pulse-indicator"></span> 🟢 Active Workflow
                 </div>
-                <h4 class="card-title">NovaBrief Email Reply Agent</h4>
-                <p class="card-desc">
+                <h4 class="card-title editable-target" data-edit-key="proj_email_title">NovaBrief Email Reply Agent</h4>
+                
+                <!-- 10-SECOND SUMMARY -->
+                <div class="project-quick-pitch-mini">
+                  <strong><i class="fa-solid fa-bolt"></i> 10-SEC SUMMARY:</strong>
+                  <span class="editable-target" data-edit-key="proj_email_pitch">
+                    A 24/7 autonomous inbox assistant that reads incoming support & business emails, understands intent, and drafts contextual human-like replies with zero manual effort.
+                  </span>
+                </div>
+
+                <p class="card-desc editable-target" data-edit-key="proj_email_desc">
                   An autonomous n8n automation agent that hooks into incoming mailboxes, conducts intent classification, queries context, and generates ready-to-dispatch human-like email responses.
                 </p>
                 <div class="tech-stack-tags">
@@ -476,24 +518,36 @@
                 </div>
               </div>
               <div class="project-card-footer">
-                <a href="https://github.com/Alihussain121472" target="_blank" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github"></i> View Workflows</a>
+                <button class="btn btn-xs btn-outline" onclick="window.openProjectModal('email-agent')">
+                  <i class="fa-solid fa-diagram-project"></i> Architecture &amp; Tools
+                </button>
               </div>
             </div>
 
             <!-- PROJECT 3: DHA Multan Real Estate AI Agent -->
             <div class="project-card glass-card">
               <div class="project-card-header">
-                <div class="project-card-img-wrapper">
+                <div class="project-card-img-wrapper" onclick="window.openProjectModal('dha-agent')">
                   <img src="assets/images/dha-agent-preview.svg" alt="DHA Multan Real Estate AI Agent" class="project-card-img" />
                   <span class="card-type-tag"><i class="fa-solid fa-building"></i> Vertical SaaS</span>
+                  <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Specs</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
                   <span class="pulse-indicator"></span> 🟢 Live Prototype
                 </div>
-                <h4 class="card-title">DHA Multan Real Estate AI Agent</h4>
-                <p class="card-desc">
+                <h4 class="card-title editable-target" data-edit-key="proj_dha_title">DHA Multan Real Estate AI Agent</h4>
+                
+                <!-- 10-SECOND SUMMARY -->
+                <div class="project-quick-pitch-mini">
+                  <strong><i class="fa-solid fa-bolt"></i> 10-SEC SUMMARY:</strong>
+                  <span class="editable-target" data-edit-key="proj_dha_pitch">
+                    An on-demand property advisory agent that answers plot inquiries, compares sector pricing trends, and calculates transfer fees for DHA Multan investors and overseas buyers.
+                  </span>
+                </div>
+
+                <p class="card-desc editable-target" data-edit-key="proj_dha_desc">
                   Vertical AI advisor built specifically for DHA Multan real estate dealers and overseas Pakistani investors. Delivers instant sector valuation, plot comparison, and transfer calculation 24/7.
                 </p>
                 <div class="tech-stack-tags">
@@ -504,24 +558,36 @@
                 </div>
               </div>
               <div class="project-card-footer">
-                <a href="#contact" class="btn btn-sm btn-ghost"><i class="fa-solid fa-envelope"></i> Request Demo</a>
+                <button class="btn btn-xs btn-outline" onclick="window.openProjectModal('dha-agent')">
+                  <i class="fa-solid fa-diagram-project"></i> Architecture &amp; Tools
+                </button>
               </div>
             </div>
 
             <!-- PROJECT 4: Khidmat AI -->
             <div class="project-card glass-card">
               <div class="project-card-header">
-                <div class="project-card-img-wrapper">
+                <div class="project-card-img-wrapper" onclick="window.openProjectModal('khidmat-ai')">
                   <img src="assets/images/khidmat-ai-preview.svg" alt="Khidmat AI Public Assistance" class="project-card-img" />
                   <span class="card-type-tag"><i class="fa-solid fa-hand-holding-heart"></i> Civic Tech</span>
+                  <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Specs</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
                   <span class="pulse-indicator"></span> 🟢 Deployed
                 </div>
-                <h4 class="card-title">Khidmat AI · Public Assistance</h4>
-                <p class="card-desc">
+                <h4 class="card-title editable-target" data-edit-key="proj_khidmat_title">Khidmat AI · Public Assistance</h4>
+                
+                <!-- 10-SECOND SUMMARY -->
+                <div class="project-quick-pitch-mini">
+                  <strong><i class="fa-solid fa-bolt"></i> 10-SEC SUMMARY:</strong>
+                  <span class="editable-target" data-edit-key="proj_khidmat_pitch">
+                    A civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.
+                  </span>
+                </div>
+
+                <p class="card-desc editable-target" data-edit-key="proj_khidmat_desc">
                   An AI application built with Django that helps citizens resolve common administrative, legal, and public utility questions with streamlined multi-lingual guidance and document checklists.
                 </p>
                 <div class="tech-stack-tags">
@@ -532,24 +598,36 @@
                 </div>
               </div>
               <div class="project-card-footer">
-                <a href="https://github.com/Alihussain121472" target="_blank" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github"></i> Repository</a>
+                <button class="btn btn-xs btn-outline" onclick="window.openProjectModal('khidmat-ai')">
+                  <i class="fa-solid fa-diagram-project"></i> Architecture &amp; Tools
+                </button>
               </div>
             </div>
 
             <!-- PROJECT 5: Autonomous SEO Agent -->
             <div class="project-card glass-card">
               <div class="project-card-header">
-                <div class="project-card-img-wrapper">
+                <div class="project-card-img-wrapper" onclick="window.openProjectModal('seo-agent')">
                   <img src="assets/images/seo-agent-preview.svg" alt="Autonomous SEO Agent" class="project-card-img" />
                   <span class="card-type-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> Growth AI</span>
+                  <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Specs</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
                   <span class="pulse-indicator"></span> 🟢 Internal Tool
                 </div>
-                <h4 class="card-title">Autonomous SEO &amp; Content Agent</h4>
-                <p class="card-desc">
+                <h4 class="card-title editable-target" data-edit-key="proj_seo_title">Autonomous SEO &amp; Content Agent</h4>
+                
+                <!-- 10-SECOND SUMMARY -->
+                <div class="project-quick-pitch-mini">
+                  <strong><i class="fa-solid fa-bolt"></i> 10-SEC SUMMARY:</strong>
+                  <span class="editable-target" data-edit-key="proj_seo_pitch">
+                    An automated pipeline that scrapes top-ranking Google search competitors, extracts keyword entity gaps, and structures high-ranking articles in minutes instead of days.
+                  </span>
+                </div>
+
+                <p class="card-desc editable-target" data-edit-key="proj_seo_desc">
                   Automates end-to-end SEO pipeline: scrapes top SERP competitors, analyzes semantic entity frequency, produces E-E-A-T optimized article outlines, and formats rich JSON-LD schema.
                 </p>
                 <div class="tech-stack-tags">
@@ -560,7 +638,9 @@
                 </div>
               </div>
               <div class="project-card-footer">
-                <a href="https://github.com/Alihussain121472" target="_blank" class="btn btn-sm btn-ghost"><i class="fa-brands fa-github"></i> View Details</a>
+                <button class="btn btn-xs btn-outline" onclick="window.openProjectModal('seo-agent')">
+                  <i class="fa-solid fa-diagram-project"></i> Architecture &amp; Tools
+                </button>
               </div>
             </div>
 
@@ -581,14 +661,14 @@
       </div>
     </section>
 
-    <!-- 5. DYNAMIC CERTIFICATION & CREDENTIALS HUB (USER REQUESTED FEATURE) -->
+    <!-- 5. DYNAMIC CERTIFICATION & CREDENTIALS HUB -->
     <section id="certifications" class="section certs-section">
       <div class="container">
         <div class="section-header">
           <div class="section-pill"><i class="fa-solid fa-award"></i> Verified Credentials</div>
           <h2 class="section-title">Certifications &amp; <span class="gradient-text">Honors</span></h2>
           <p class="section-subtitle">
-            Accredited qualifications from top institutions. You can filter, click to enlarge in full-res lightbox, or use the <strong>Certification Manager</strong> to add or delete certificate pictures anytime!
+            Accredited qualifications from top institutions. You can filter or click to enlarge in full-res lightbox.
           </p>
         </div>
 
@@ -602,13 +682,13 @@
             <button class="filter-btn" data-filter="education">Education (<span id="countEdu">0</span>)</button>
           </div>
 
-          <!-- Dynamic Add / Manage Button -->
-          <div class="cert-admin-actions">
+          <!-- Owner-Only Action Controls (visible when authenticated) -->
+          <div class="cert-admin-actions" id="certAdminActions" style="display: none;">
             <button id="openAddCertModalBtn" class="btn btn-sm btn-primary">
               <i class="fa-solid fa-plus"></i> Add Certificate
             </button>
             <button id="openManageCertsBtn" class="btn btn-sm btn-outline" title="Export or Reset Certifications">
-              <i class="fa-solid fa-sliders"></i> Manage
+              <i class="fa-solid fa-sliders"></i> Manage Data
             </button>
           </div>
         </div>
@@ -650,11 +730,11 @@
           <div class="resume-sheet">
             <div class="resume-sheet-header">
               <div class="resume-headline">
-                <h3>SYED ALI HUSSAIN</h3>
-                <p class="resume-sub">Full Stack Developer &amp; AI Engineer</p>
+                <h3 class="editable-target" data-edit-key="cv_name">SYED ALI HUSSAIN</h3>
+                <p class="resume-sub editable-target" data-edit-key="cv_role">Full Stack Developer &amp; AI Engineer</p>
                 <p class="resume-contacts">
-                  <span><i class="fa-solid fa-location-dot"></i> Multan / Islamabad, Pakistan</span>
-                  <span><i class="fa-solid fa-envelope"></i> syedali6160@gmail.com</span>
+                  <span><i class="fa-solid fa-location-dot"></i> <span class="editable-target" data-edit-key="cv_loc">Multan / Islamabad, Pakistan</span></span>
+                  <span><i class="fa-solid fa-envelope"></i> <span class="editable-target" data-edit-key="cv_email">syedali6160@gmail.com</span></span>
                   <span><i class="fa-brands fa-linkedin"></i> linkedin.com/in/ali-hussain-93a24430a</span>
                   <span><i class="fa-brands fa-github"></i> github.com/Alihussain121472</span>
                 </p>
@@ -665,7 +745,7 @@
               <!-- Summary -->
               <div class="resume-block">
                 <h4 class="resume-block-title">Professional Summary</h4>
-                <p>
+                <p class="editable-target" data-edit-key="cv_summary">
                   Full Stack Developer and AI Engineer who turns ideas into practical web applications and AI tools. Specializing in Python, Django, Flask, APIs, databases, and LLM orchestration (Llama 3.3, Groq, OpenAI). Passionate about building products that automate repetitive workflows.
                 </p>
               </div>
@@ -675,11 +755,11 @@
                 <h4 class="resume-block-title">Education</h4>
                 <div class="resume-entry">
                   <div class="entry-header">
-                    <span class="entry-title">Bachelor of Science in Artificial Intelligence (BSAI)</span>
-                    <span class="entry-date">Expected 2029</span>
+                    <span class="entry-title editable-target" data-edit-key="cv_edu_title">Bachelor of Science in Artificial Intelligence (BSAI)</span>
+                    <span class="entry-date editable-target" data-edit-key="cv_edu_date">Expected 2029</span>
                   </div>
-                  <div class="entry-sub">SZABIST University, Islamabad</div>
-                  <p class="entry-desc">Focus: Artificial Intelligence, Machine Learning, Data Structures, Software Engineering.</p>
+                  <div class="entry-sub editable-target" data-edit-key="cv_edu_school">SZABIST University, Islamabad</div>
+                  <p class="entry-desc editable-target" data-edit-key="cv_edu_desc">Focus: Artificial Intelligence, Machine Learning, Data Structures, Software Engineering.</p>
                 </div>
               </div>
 
@@ -688,15 +768,15 @@
                 <h4 class="resume-block-title">Work Experience &amp; Product Development</h4>
                 <div class="resume-entry">
                   <div class="entry-header">
-                    <span class="entry-title">AI &amp; Full Stack Developer · Indie Builder</span>
-                    <span class="entry-date">2024 — Present</span>
+                    <span class="entry-title editable-target" data-edit-key="cv_exp_title">AI &amp; Full Stack Developer · Indie Builder</span>
+                    <span class="entry-date editable-target" data-edit-key="cv_exp_date">2024 — Present</span>
                   </div>
-                  <div class="entry-sub">NovaBrief Tech &amp; Independent Projects · Islamabad / Multan</div>
+                  <div class="entry-sub editable-target" data-edit-key="cv_exp_sub">NovaBrief Tech &amp; Independent Projects · Islamabad / Multan</div>
                   <ul class="entry-bullets">
-                    <li>Architected and launched <strong>NovaBrief Tech</strong> (novabrief.tech), integrating Groq API and Llama 3.3 for sub-second student intelligence digest delivery.</li>
-                    <li>Built automated context-aware email response agent using n8n and LLM webhooks to reduce customer inquiry response time to near zero.</li>
-                    <li>Designed DHA Multan Real Estate AI Advisor for real estate investors and overseas buyers.</li>
-                    <li>Implemented REST APIs, scheduled crons with APScheduler, and Supabase relational schema.</li>
+                    <li class="editable-target" data-edit-key="cv_exp_bullet1">Architected and launched <strong>NovaBrief Tech</strong> (novabrief.tech), integrating Groq API and Llama 3.3 for sub-second student intelligence digest delivery.</li>
+                    <li class="editable-target" data-edit-key="cv_exp_bullet2">Built automated context-aware email response agent using n8n and LLM webhooks to reduce customer inquiry response time to near zero.</li>
+                    <li class="editable-target" data-edit-key="cv_exp_bullet3">Designed DHA Multan Real Estate AI Advisor for real estate investors and overseas buyers.</li>
+                    <li class="editable-target" data-edit-key="cv_exp_bullet4">Implemented REST APIs, scheduled crons with APScheduler, and Supabase relational schema.</li>
                   </ul>
                 </div>
               </div>
@@ -747,7 +827,7 @@
                 <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
                 <div class="method-details">
                   <span class="method-label">Direct Email</span>
-                  <a href="mailto:syedali6160@gmail.com" class="method-value">syedali6160@gmail.com</a>
+                  <a href="mailto:syedali6160@gmail.com" class="method-value editable-target" data-edit-key="contact_email">syedali6160@gmail.com</a>
                 </div>
                 <button class="btn btn-sm btn-ghost copy-btn" data-copy="syedali6160@gmail.com" title="Copy to clipboard">
                   <i class="fa-regular fa-copy"></i>
@@ -761,7 +841,7 @@
                   <span class="method-label">Professional Network</span>
                   <a href="https://www.linkedin.com/in/ali-hussain-93a24430a/" target="_blank" rel="noopener noreferrer" class="method-value">linkedin.com/in/ali-hussain-93a24430a</a>
                 </div>
-                <a href="https://www.linkedin.com/in/ali-hussain-93a24430a/" target="_blank" class="btn btn-sm btn-ghost">
+                <a href="https://www.linkedin.com/in/ali-hussain-93a24430a/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost">
                   <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
               </div>
@@ -773,7 +853,7 @@
                   <span class="method-label">Code Repositories</span>
                   <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="method-value">github.com/Alihussain121472</a>
                 </div>
-                <a href="https://github.com/Alihussain121472" target="_blank" class="btn btn-sm btn-ghost">
+                <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost">
                   <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
               </div>
@@ -785,7 +865,7 @@
                   <span class="method-label">Tech &amp; AI Updates</span>
                   <a href="https://x.com/Syedali6160" target="_blank" rel="noopener noreferrer" class="method-value">@Syedali6160</a>
                 </div>
-                <a href="https://x.com/Syedali6160" target="_blank" class="btn btn-sm btn-ghost">
+                <a href="https://x.com/Syedali6160" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost">
                   <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
               </div>
@@ -795,7 +875,7 @@
                 <div class="method-icon"><i class="fa-solid fa-location-dot"></i></div>
                 <div class="method-details">
                   <span class="method-label">Current Location</span>
-                  <span class="method-value">Multan / Islamabad, Pakistan (PKT · UTC+5)</span>
+                  <span class="method-value editable-target" data-edit-key="contact_location">Multan / Islamabad, Pakistan (PKT · UTC+5)</span>
                 </div>
               </div>
             </div>
@@ -811,11 +891,14 @@
             </div>
 
             <form id="contactForm" class="contact-form">
+              <!-- Bot honeypot for security -->
+              <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off" />
+
               <div class="form-group">
                 <label for="contactName">Your Name</label>
                 <div class="input-wrapper">
                   <i class="fa-regular fa-user input-icon"></i>
-                  <input type="text" id="contactName" name="name" placeholder="e.g. Sarah Jenkins" required />
+                  <input type="text" id="contactName" name="name" placeholder="e.g. Sarah Jenkins" required maxlength="100" />
                 </div>
               </div>
 
@@ -823,7 +906,7 @@
                 <label for="contactEmail">Your Email</label>
                 <div class="input-wrapper">
                   <i class="fa-regular fa-envelope input-icon"></i>
-                  <input type="email" id="contactEmail" name="email" placeholder="sarah@company.com" required />
+                  <input type="email" id="contactEmail" name="email" placeholder="sarah@company.com" required maxlength="120" />
                 </div>
               </div>
 
@@ -844,7 +927,7 @@
               <div class="form-group">
                 <label for="contactMessage">Project Brief / Message</label>
                 <div class="input-wrapper">
-                  <textarea id="contactMessage" name="message" rows="4" placeholder="Tell me about your goals, stack, or timeline..." required></textarea>
+                  <textarea id="contactMessage" name="message" rows="4" placeholder="Tell me about your goals, stack, or timeline..." required maxlength="3000"></textarea>
                 </div>
               </div>
 
@@ -866,7 +949,7 @@
     <div class="container footer-container">
       <div class="footer-left">
         <span class="footer-logo">&lt;araknet.tech/&gt;</span>
-        <p class="footer-text">
+        <p class="footer-text editable-target" data-edit-key="footer_copy">
           © 2026 Syed Ali · AI Developer &amp; Indie Builder. Built with modern web standards, neural canvas, and AI.
         </p>
       </div>
@@ -904,7 +987,7 @@
         <p id="lightboxIssuer" class="lightbox-issuer">Issuing Organization</p>
         <p id="lightboxDate" class="lightbox-date">Issued Date</p>
         <div class="lightbox-actions">
-          <a id="lightboxVerifyBtn" href="#" target="_blank" class="btn btn-sm btn-primary">
+          <a id="lightboxVerifyBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
             <i class="fa-solid fa-check-double"></i> Verify Credential
           </a>
           <button id="lightboxDownloadBtn" class="btn btn-sm btn-outline">
@@ -915,7 +998,114 @@
     </div>
   </div>
 
-  <!-- MODAL 2: DYNAMIC ADD CERTIFICATION (USER REQUESTED) -->
+  <!-- MODAL 2: PROJECT ARCHITECTURE & DEEP-DIVE BLUEPRINT BOX -->
+  <div id="projectModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container glass-card project-blueprint-modal">
+      <button class="modal-close-btn" id="closeProjectModalBtn" aria-label="Close Project Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="blueprint-header">
+        <div class="blueprint-tag" id="bpCategoryTag"><i class="fa-solid fa-cube"></i> ARCHITECTURE BLUEPRINT</div>
+        <h2 id="bpProjectTitle" class="blueprint-title">Project Title</h2>
+        <p id="bpProjectSubtitle" class="blueprint-subtitle">Executive Tagline &amp; Core Purpose</p>
+      </div>
+
+      <!-- 10-Second Elevator Pitch Box -->
+      <div class="blueprint-pitch-box">
+        <div class="pitch-badge"><i class="fa-solid fa-bolt"></i> CORE PROBLEM &amp; VALUE DELIVERED</div>
+        <p id="bpPitchSummary" class="pitch-lead">Instant description of what this project solves.</p>
+      </div>
+
+      <!-- 4 DISTINCT COLUMNS -->
+      <div class="blueprint-columns-grid">
+        <!-- Col 1: Applied Skills & AI Concepts -->
+        <div class="blueprint-col">
+          <div class="col-head">
+            <i class="fa-solid fa-brain col-icon ai-col"></i>
+            <h4>Applied Skills &amp; Concepts</h4>
+          </div>
+          <ul id="bpSkillsList" class="blueprint-list">
+            <!-- Dynamically injected -->
+          </ul>
+        </div>
+
+        <!-- Col 2: Tools, Frameworks & Libraries -->
+        <div class="blueprint-col">
+          <div class="col-head">
+            <i class="fa-solid fa-toolbox col-icon tool-col"></i>
+            <h4>Tools &amp; Frameworks</h4>
+          </div>
+          <div id="bpToolsList" class="blueprint-pill-group">
+            <!-- Dynamically injected -->
+          </div>
+        </div>
+
+        <!-- Col 3: Integrated Sites & APIs -->
+        <div class="blueprint-col">
+          <div class="col-head">
+            <i class="fa-solid fa-globe col-icon site-col"></i>
+            <h4>Connected Sites &amp; APIs</h4>
+          </div>
+          <ul id="bpSitesList" class="blueprint-list sites-list">
+            <!-- Dynamically injected -->
+          </ul>
+        </div>
+
+        <!-- Col 4: Deliverables & Telemetry -->
+        <div class="blueprint-col">
+          <div class="col-head">
+            <i class="fa-solid fa-chart-line col-icon metric-col"></i>
+            <h4>Impact &amp; Metrics</h4>
+          </div>
+          <ul id="bpMetricsList" class="blueprint-list metrics-list">
+            <!-- Dynamically injected -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="blueprint-footer">
+        <div class="blueprint-links" id="bpActionLinks">
+          <!-- Live Link & GitHub Link buttons dynamically inserted -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: OWNER SECURITY AUTHENTICATION (PASSCODE GATE) -->
+  <div id="adminAuthModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container glass-card auth-modal-card">
+      <button class="modal-close-btn" id="closeAdminAuthBtn" aria-label="Close Security Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="auth-header">
+        <div class="auth-lock-circle"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Owner Access Portal</h3>
+        <p class="auth-sub">
+          Public visitors have secure read-only access. Enter your owner passcode to unlock the live visual editor and pencil tools.
+        </p>
+      </div>
+
+      <form id="adminAuthForm" class="auth-form">
+        <div class="form-group">
+          <label for="adminPasscodeInput">Owner Passcode</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-key input-icon"></i>
+            <input type="password" id="adminPasscodeInput" placeholder="Enter owner passcode..." autocomplete="current-password" required />
+          </div>
+          <span class="file-hint" style="margin-top: 0.3rem;">Default passcode: <code>araknet2026</code> (changeable in settings)</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">
+          <i class="fa-solid fa-lock-open"></i> Unlock Edit Mode
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 4: DYNAMIC ADD CERTIFICATION (OWNER ONLY) -->
   <div id="addCertModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card add-cert-card">
       <button class="modal-close-btn" id="closeAddCertBtn" aria-label="Close Add Certificate Dialog">
@@ -929,7 +1119,6 @@
       </div>
 
       <form id="addCertForm" class="add-cert-form">
-        <!-- File / Image Upload -->
         <div class="form-group">
           <label>Certificate Picture / Graphic</label>
           <div class="file-drop-zone" id="certFileDropZone">
@@ -993,7 +1182,7 @@
     </div>
   </div>
 
-  <!-- MODAL 3: MANAGE CERTIFICATIONS (EXPORT / IMPORT / RESET) -->
+  <!-- MODAL 5: MANAGE CERTIFICATIONS DATA -->
   <div id="manageCertsModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card manage-certs-card">
       <button class="modal-close-btn" id="closeManageCertsBtn" aria-label="Close Management Dialog">
@@ -1004,14 +1193,14 @@
         <div class="section-pill"><i class="fa-solid fa-database"></i> Portfolio Data</div>
         <h3>Manage Certifications Data</h3>
         <p class="modal-subtitle">
-          Your certificates are stored in your browser's persistent storage. You can export the JSON to commit it to GitHub or restore the official defaults anytime.
+          Stored in your browser's persistent storage. You can export JSON to commit to GitHub or restore defaults.
         </p>
       </div>
 
       <div class="manage-body">
         <div class="manage-action-box">
           <h4>Export Certificates Data</h4>
-          <p>Copy the full JSON of all your current certificates to keep a permanent backup or save into your repository.</p>
+          <p>Copy the full JSON array of your current certificates to keep a permanent backup in code.</p>
           <button id="copyCertsJsonBtn" class="btn btn-sm btn-outline">
             <i class="fa-regular fa-copy"></i> Copy Certifications JSON
           </button>
@@ -1028,7 +1217,7 @@
     </div>
   </div>
 
-  <!-- MODAL 4: FULLSCREEN RESUME MODAL -->
+  <!-- MODAL 6: FULLSCREEN RESUME MODAL -->
   <div id="resumeModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card resume-modal-card">
       <div class="modal-topbar">
@@ -1048,12 +1237,12 @@
     </div>
   </div>
 
-  <!-- MODAL 5: COMMAND PALETTE (Ctrl+K) -->
+  <!-- MODAL 7: COMMAND PALETTE (Ctrl+K) -->
   <div id="cmdPaletteModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card cmd-palette-card">
       <div class="cmd-input-wrapper">
         <i class="fa-solid fa-terminal cmd-icon"></i>
-        <input type="text" id="cmdInput" placeholder="Type a command or jump to section (e.g., 'projects', 'certs', 'add-cert', 'contact')..." autofocus />
+        <input type="text" id="cmdInput" placeholder="Type a command (e.g. 'projects', 'certs', 'admin', 'contact')..." autofocus />
         <span class="cmd-esc-tag">ESC</span>
       </div>
       <div class="cmd-results" id="cmdResults">
@@ -1067,10 +1256,10 @@
           <span class="cmd-title">Go to Certifications Hub</span>
           <span class="cmd-badge">Jump</span>
         </div>
-        <div class="cmd-item" data-action="trigger" data-trigger="add-cert">
-          <i class="fa-solid fa-plus-circle"></i>
-          <span class="cmd-title">Add / Upload New Certificate</span>
-          <span class="cmd-badge">Action</span>
+        <div class="cmd-item" data-action="trigger" data-trigger="admin-login">
+          <i class="fa-solid fa-key"></i>
+          <span class="cmd-title">Owner Edit Mode Login (Passcode)</span>
+          <span class="cmd-badge">Owner</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#resume">
           <i class="fa-solid fa-file-pdf"></i>
