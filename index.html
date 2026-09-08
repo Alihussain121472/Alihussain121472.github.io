@@ -63,6 +63,7 @@
     <div class="owner-dock-actions">
       <button id="saveEditsBtn" class="btn btn-xs btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
       <button id="exportHtmlBtn" class="btn btn-xs btn-outline" title="Download updated index.html"><i class="fa-solid fa-download"></i> Export HTML</button>
+      <button id="qaOwnerDockBtn" class="btn btn-xs btn-outline" title="Jump to Q&A Inbox"><i class="fa-solid fa-comments"></i> Questions (<span id="qaPendingCount">0</span>)</button>
       <button id="viewVisitorsBtn" class="btn btn-xs btn-outline" title="See viewer emails who entered"><i class="fa-solid fa-users-viewfinder"></i> Visitors (<span id="visitorCount">0</span>)</button>
       <button id="resetEditsBtn" class="btn btn-xs btn-ghost" title="Revert to defaults"><i class="fa-solid fa-rotate-left"></i> Reset</button>
       <button id="lockOwnerBtn" class="btn btn-xs btn-danger" title="Exit owner mode"><i class="fa-solid fa-lock"></i> Lock</button>
@@ -84,6 +85,7 @@
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#certifications" class="nav-link highlight-link"><i class="fa-solid fa-award"></i> Certifications</a></li>
         <li><a href="#resume" class="nav-link">Resume</a></li>
+        <li><a href="#qa" class="nav-link"><i class="fa-solid fa-comments"></i> Q&A</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
@@ -114,6 +116,7 @@
         <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
         <li><a href="#certifications" class="mobile-nav-link"><i class="fa-solid fa-award"></i> Certifications</a></li>
         <li><a href="#resume" class="mobile-nav-link">Resume</a></li>
+        <li><a href="#qa" class="mobile-nav-link"><i class="fa-solid fa-comments"></i> Q&A Box</a></li>
         <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       </ul>
       <div class="mobile-drawer-footer">
@@ -811,7 +814,119 @@
       </div>
     </section>
 
-    <!-- 7. CONTACT SECTION -->
+    <!-- 7. ASK SYED ALI / INTERACTIVE Q&A HUB -->
+    <section id="qa" class="section qa-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-pill"><i class="fa-solid fa-comments"></i> Developer AMA</div>
+          <h2 class="section-title">Ask Syed Ali <span class="gradient-text">Anything</span></h2>
+          <p class="section-subtitle">Have a question regarding AI agent architectures, NovaBrief, freelance collaboration, or engineering stacks? Drop your question below or browse verified answers.</p>
+        </div>
+
+        <!-- OWNER Q&A CONTROL BAR (Visible in Owner Mode) -->
+        <div id="qaOwnerBar" class="qa-owner-bar glass-card" style="display: none;">
+          <div class="qa-owner-bar-info">
+            <span class="qa-owner-badge"><i class="fa-solid fa-shield-halved"></i> Owner Q&A Control</span>
+            <span class="qa-owner-counts">Total: <strong id="qaStatTotal">0</strong> | Pending Review: <strong id="qaStatPending" class="text-cyan">0</strong> | Answered: <strong id="qaStatAnswered">0</strong></span>
+          </div>
+          <div class="qa-owner-bar-actions">
+            <button id="qaFilterPendingBtn" class="btn btn-xs btn-primary"><i class="fa-solid fa-clock"></i> View Pending First</button>
+            <button id="qaAddCustomBtn" class="btn btn-xs btn-outline"><i class="fa-solid fa-plus"></i> Post Question &amp; Answer</button>
+          </div>
+        </div>
+
+        <div class="qa-grid">
+          <!-- Left Column: The Interactive Question Box -->
+          <div class="ask-question-card glass-card">
+            <div class="ask-card-header">
+              <div class="ask-avatar-wrap">
+                <img src="assets/images/syed-ali.jpg" alt="Syed Ali" class="ask-author-img" />
+                <span class="ask-online-dot" title="Active & Ready"></span>
+              </div>
+              <div class="ask-header-text">
+                <h3 class="ask-title">Drop Your Question</h3>
+                <p class="ask-status"><i class="fa-solid fa-bolt text-cyan"></i> Syed Ali is active · Typically replies within 24h</p>
+              </div>
+            </div>
+
+            <form id="qaAskForm" class="qa-ask-form">
+              <div class="form-group">
+                <label for="qaAskerName">Your Name</label>
+                <div class="input-wrapper">
+                  <i class="fa-regular fa-user input-icon"></i>
+                  <input type="text" id="qaAskerName" placeholder="e.g. Alex Vance or Recruiter @ Company" required maxlength="80" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="qaAskerEmail">Your Email <span class="label-hint">(to receive your answer)</span></label>
+                <div class="input-wrapper">
+                  <i class="fa-regular fa-envelope input-icon"></i>
+                  <input type="email" id="qaAskerEmail" placeholder="e.g. alex@example.com" required maxlength="120" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="qaCategorySelect">Topic Category</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-layer-group input-icon"></i>
+                  <select id="qaCategorySelect" required>
+                    <option value="AI Agents & LLMs">🤖 AI Agents &amp; LLMs</option>
+                    <option value="NovaBrief & Projects">🚀 NovaBrief &amp; Projects</option>
+                    <option value="Hiring & Collaboration">💼 Hiring &amp; Collaboration</option>
+                    <option value="Career & BSAI">🎓 Career &amp; BSAI</option>
+                    <option value="General Tech">💡 General Tech Inquiry</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="label-between">
+                  <label for="qaQuestionInput">Your Question</label>
+                  <span id="qaCharCounter" class="char-counter">0 / 400</span>
+                </div>
+                <div class="input-wrapper">
+                  <i class="fa-regular fa-comment-dots input-icon input-icon-textarea"></i>
+                  <textarea id="qaQuestionInput" rows="3" placeholder="What would you like to ask Syed Ali about AI, agents, or collaboration?..." required maxlength="400"></textarea>
+                </div>
+              </div>
+
+              <button type="submit" id="qaSubmitBtn" class="btn btn-primary btn-full">
+                <span id="qaSubmitText"><i class="fa-solid fa-paper-plane"></i> Transmit Question</span>
+                <span id="qaSubmitSpinner" class="spinner" style="display: none;"></span>
+              </button>
+
+              <div id="qaFormFeedback" class="qa-feedback" style="display: none;"></div>
+            </form>
+          </div>
+
+          <!-- Right Column: Live Knowledge & Answered Questions Stream -->
+          <div class="qa-stream-card glass-card">
+            <!-- Stream Controls / Filtering -->
+            <div class="qa-stream-header">
+              <div class="qa-search-wrapper">
+                <i class="fa-solid fa-magnifying-glass qa-search-icon"></i>
+                <input type="text" id="qaSearchInput" placeholder="Search questions or keywords..." />
+              </div>
+              <div class="qa-filter-tabs" id="qaFilterTabs">
+                <button class="qa-filter-btn active" data-filter="all">All (<span id="qaCountAll">0</span>)</button>
+                <button class="qa-filter-btn" data-filter="AI Agents & LLMs">AI &amp; LLMs</button>
+                <button class="qa-filter-btn" data-filter="NovaBrief & Projects">Projects</button>
+                <button class="qa-filter-btn" data-filter="Hiring & Collaboration">Hiring</button>
+                <button class="qa-filter-btn" data-filter="my-questions" id="qaMyQuestionsTab" style="display: none;">My Submissions (<span id="qaMyCount">0</span>)</button>
+              </div>
+            </div>
+
+            <!-- Dynamic Question List Container -->
+            <div id="qaQuestionsList" class="qa-questions-list">
+              <!-- Rendered dynamically by script.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CONTACT SECTION -->
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="section-header">
@@ -1292,12 +1407,104 @@
     </div>
   </div>
 
-  <!-- MODAL 9: COMMAND PALETTE (Ctrl+K) -->
+  <!-- MODAL 9: OWNER ANSWERING MODAL (SYED ALI VERIFIED ANSWER) -->
+  <div id="qaAnswerModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container glass-card qa-answer-modal-card">
+      <button class="modal-close-btn" id="closeQaAnswerBtn" aria-label="Close Answer Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-header">
+        <div class="section-pill"><i class="fa-solid fa-pen-nib"></i> Verified Answer Portal</div>
+        <h3>Answer Question</h3>
+        <p class="modal-subtitle">Publish a verified answer to this question on your public portfolio.</p>
+      </div>
+
+      <div class="qa-target-question-card">
+        <div class="qa-target-meta">
+          <span id="qaModalAsker" class="qa-target-asker">Alex Vance</span>
+          <span id="qaModalCategory" class="qa-cat-badge">AI Agents &amp; LLMs</span>
+          <span id="qaModalTime" class="qa-target-time">Just now</span>
+        </div>
+        <p id="qaModalQuestionText" class="qa-target-text">"Question text here..."</p>
+        <div id="qaModalEmailRow" class="qa-target-email-row">
+          <i class="fa-regular fa-envelope"></i> Asker Email: <strong id="qaModalEmail">email@example.com</strong>
+        </div>
+      </div>
+
+      <form id="qaAnswerForm" class="qa-answer-form">
+        <input type="hidden" id="qaAnswerTargetId" value="" />
+
+        <div class="form-group">
+          <label for="qaAnswerTextarea">Your Verified Response</label>
+          <textarea id="qaAnswerTextarea" rows="5" placeholder="Type your insightful response as Syed Ali..." required></textarea>
+        </div>
+
+        <div class="qa-answer-modal-actions">
+          <button type="button" id="qaEmailAskerBtn" class="btn btn-outline">
+            <i class="fa-solid fa-envelope"></i> Email Asker Directly
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-circle-check"></i> Publish to Portfolio
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 10: OWNER CREATE CUSTOM Q&A PAIR -->
+  <div id="qaCreateModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container glass-card qa-answer-modal-card">
+      <button class="modal-close-btn" id="closeQaCreateBtn" aria-label="Close Create Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-header">
+        <div class="section-pill"><i class="fa-solid fa-plus"></i> Knowledge Base</div>
+        <h3>Post New Q&amp;A</h3>
+        <p class="modal-subtitle">Add a frequent question and your verified answer to the community feed.</p>
+      </div>
+
+      <form id="qaCreateForm" class="qa-answer-form">
+        <div class="form-group">
+          <label for="qaNewAsker">Asker Name / Title</label>
+          <input type="text" id="qaNewAsker" placeholder="e.g. AI Founder / Community" required />
+        </div>
+
+        <div class="form-group">
+          <label for="qaNewCategory">Category</label>
+          <select id="qaNewCategory" required>
+            <option value="AI Agents & LLMs">🤖 AI Agents &amp; LLMs</option>
+            <option value="NovaBrief & Projects">🚀 NovaBrief &amp; Projects</option>
+            <option value="Hiring & Collaboration">💼 Hiring &amp; Collaboration</option>
+            <option value="Career & BSAI">🎓 Career &amp; BSAI</option>
+            <option value="General Tech">💡 General Tech Inquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="qaNewQuestion">Question</label>
+          <textarea id="qaNewQuestion" rows="2" placeholder="e.g. Can we integrate your AI agents into our existing workflow?" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="qaNewAnswer">Your Verified Answer</label>
+          <textarea id="qaNewAnswer" rows="4" placeholder="Your answer..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Publish Q&amp;A
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 11: COMMAND PALETTE (Ctrl+K) -->
   <div id="cmdPaletteModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card cmd-palette-card">
       <div class="cmd-input-wrapper">
         <i class="fa-solid fa-terminal cmd-icon"></i>
-        <input type="text" id="cmdInput" placeholder="Type a command (e.g. 'projects', 'certs', 'contact')..." autofocus />
+        <input type="text" id="cmdInput" placeholder="Type a command (e.g. 'projects', 'certs', 'qa', 'contact')..." autofocus />
         <span class="cmd-esc-tag">ESC</span>
       </div>
       <div class="cmd-results" id="cmdResults">
@@ -1314,6 +1521,11 @@
         <div class="cmd-item" data-action="navigate" data-target="#resume">
           <i class="fa-solid fa-file-pdf"></i>
           <span class="cmd-title">View / Download Resume</span>
+          <span class="cmd-badge">Jump</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#qa">
+          <i class="fa-solid fa-comments"></i>
+          <span class="cmd-title">Go to Q&A Hub (Ask Syed Ali)</span>
           <span class="cmd-badge">Jump</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#contact">

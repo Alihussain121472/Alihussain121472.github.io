@@ -931,6 +931,9 @@ document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.setItem(OWNER_SESSION_KEY, 'active');
     if (ownerDock) ownerDock.style.display = 'flex';
     if (certAdminActions) certAdminActions.style.display = 'flex';
+    
+    const qaOwnerBar = document.getElementById('qaOwnerBar');
+    if (qaOwnerBar) qaOwnerBar.style.display = 'flex';
 
     document.querySelectorAll('[data-edit-key]').forEach(el => {
       el.setAttribute('contenteditable', 'true');
@@ -954,6 +957,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderCertificates();
     updateVisitorCountBadge();
+    renderQAQuestions();
+    updateQACounters();
     showToast('🔑 Owner Mode Unlocked! Click any text to edit.');
   }
 
@@ -963,6 +968,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ownerDock) ownerDock.style.display = 'none';
     if (certAdminActions) certAdminActions.style.display = 'none';
 
+    const qaOwnerBar = document.getElementById('qaOwnerBar');
+    if (qaOwnerBar) qaOwnerBar.style.display = 'none';
+
     document.querySelectorAll('[data-edit-key]').forEach(el => {
       el.removeAttribute('contenteditable');
       const badge = el.querySelector('.pencil-badge');
@@ -970,6 +978,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderCertificates();
+    renderQAQuestions();
+    updateQACounters();
     showToast('🔒 Owner Mode Locked. Portfolio is in View-Only mode.');
   }
 
@@ -1285,7 +1295,621 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 12. MOBILE MENU TOGGLE
+  // 12. INTERACTIVE Q&A / DEVELOPER AMA ENGINE
+  // ==========================================
+  const QA_STORAGE_KEY = 'araknet_qa_questions_v1';
+  const QA_UPVOTES_KEY = 'araknet_qa_upvotes_v1';
+  const QA_SUBMISSIONS_KEY = 'araknet_qa_submissions_v1';
+
+  const DEFAULT_QA_ITEMS = [
+    {
+      id: 'qa-seed-1',
+      asker: 'Marcus Vance',
+      email: 'marcus.vance@systemscale.io',
+      category: 'AI Agents & LLMs',
+      question: 'What inference architecture and optimizations do you use to keep NovaBrief latency consistently under 650ms?',
+      timestamp: new Date(Date.now() - 3600 * 1000 * 5).toISOString(),
+      status: 'answered',
+      upvotes: 18,
+      answer: {
+        text: 'We combine Groq LPU inference using Llama 3.3 70B with token streaming distillation and prompt caching. Background jobs run via asynchronous APScheduler workers and Supabase/Redis caching, eliminating cold starts so readers receive instant 60-second summaries.',
+        author: 'Syed Ali',
+        role: 'AI Developer · Author',
+        answeredAt: new Date(Date.now() - 3600 * 1000 * 3).toISOString()
+      }
+    },
+    {
+      id: 'qa-seed-2',
+      asker: 'Fatima Zahra',
+      email: 'fatima.zahra@cloudtech.co',
+      category: 'NovaBrief & Projects',
+      question: 'How does your 24/7 autonomous email reply agent prevent hallucinations when handling critical customer inquiries?',
+      timestamp: new Date(Date.now() - 3600 * 1000 * 12).toISOString(),
+      status: 'answered',
+      upvotes: 14,
+      answer: {
+        text: 'The agent enforces a deterministic RAG verification gate before any email is dispatched. Incoming inquiries are vectorized against a verified knowledge store; if cosine similarity is below 0.88 or sentiment is high-risk, the agent drafts the reply in staging and routes it to human review instead of auto-sending.',
+        author: 'Syed Ali',
+        role: 'AI Developer · Author',
+        answeredAt: new Date(Date.now() - 3600 * 1000 * 8).toISOString()
+      }
+    },
+    {
+      id: 'qa-seed-3',
+      asker: 'David Miller',
+      email: 'david@stealthlaunch.com',
+      category: 'Hiring & Collaboration',
+      question: 'Are you available for international contract roles or freelance agentic AI engineering?',
+      timestamp: new Date(Date.now() - 3600 * 1000 * 26).toISOString(),
+      status: 'answered',
+      upvotes: 22,
+      answer: {
+        text: 'Yes! I actively collaborate with global founders, startups, and engineering teams on custom LLM agent pipelines, n8n orchestrations, and full-stack AI SaaS development. Feel free to use the transmission form below or email me directly at syedali6160@gmail.com.',
+        author: 'Syed Ali',
+        role: 'AI Developer · Author',
+        answeredAt: new Date(Date.now() - 3600 * 1000 * 20).toISOString()
+      }
+    }
+  ];
+
+  function getQAQuestions() {
+    try {
+      const stored = localStorage.getItem(QA_STORAGE_KEY);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.warn('Error reading QA storage:', e);
+    }
+    localStorage.setItem(QA_STORAGE_KEY, JSON.stringify(DEFAULT_QA_ITEMS));
+    return DEFAULT_QA_ITEMS;
+  }
+
+  function saveQAQuestions(questions) {
+    try {
+      localStorage.setItem(QA_STORAGE_KEY, JSON.stringify(questions));
+    } catch (e) {
+      console.warn('Error saving QA storage:', e);
+    }
+    updateQACounters();
+  }
+
+  function getUpvotedIds() {
+    try {
+      const stored = localStorage.getItem(QA_UPVOTES_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveUpvotedIds(ids) {
+    localStorage.setItem(QA_UPVOTES_KEY, JSON.stringify(ids));
+  }
+
+  function getMySubmissions() {
+    try {
+      const stored = localStorage.getItem(QA_SUBMISSIONS_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function addMySubmission(id) {
+    const subs = getMySubmissions();
+    subs.push(id);
+    localStorage.setItem(QA_SUBMISSIONS_KEY, JSON.stringify(subs));
+  }
+
+  let currentQAFilter = 'all';
+  let currentQASearch = '';
+
+  const qaQuestionsList = document.getElementById('qaQuestionsList');
+  const qaSearchInput = document.getElementById('qaSearchInput');
+  const qaFilterTabs = document.getElementById('qaFilterTabs');
+  const qaAskForm = document.getElementById('qaAskForm');
+  const qaCharCounter = document.getElementById('qaCharCounter');
+  const qaQuestionInput = document.getElementById('qaQuestionInput');
+  const qaFormFeedback = document.getElementById('qaFormFeedback');
+  const qaSubmitBtn = document.getElementById('qaSubmitBtn');
+  const qaSubmitText = document.getElementById('qaSubmitText');
+  const qaSubmitSpinner = document.getElementById('qaSubmitSpinner');
+  const qaAnswerModal = document.getElementById('qaAnswerModal');
+  const closeQaAnswerBtn = document.getElementById('closeQaAnswerBtn');
+  const qaAnswerForm = document.getElementById('qaAnswerForm');
+  const qaAnswerTextarea = document.getElementById('qaAnswerTextarea');
+  const qaAnswerTargetId = document.getElementById('qaAnswerTargetId');
+  const qaEmailAskerBtn = document.getElementById('qaEmailAskerBtn');
+  const qaCreateModal = document.getElementById('qaCreateModal');
+  const closeQaCreateBtn = document.getElementById('closeQaCreateBtn');
+  const qaCreateForm = document.getElementById('qaCreateForm');
+  const qaAddCustomBtn = document.getElementById('qaAddCustomBtn');
+  const qaFilterPendingBtn = document.getElementById('qaFilterPendingBtn');
+  const qaOwnerDockBtn = document.getElementById('qaOwnerDockBtn');
+
+  function timeAgo(isoString) {
+    const date = new Date(isoString);
+    const now = new Date();
+    const diffSec = Math.floor((now - date) / 1000);
+    if (diffSec < 60) return 'Just now';
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return `${diffMin}m ago`;
+    const diffHours = Math.floor(diffMin / 60);
+    if (diffHours < 24) return `${diffHours}h ago`;
+    const diffDays = Math.floor(diffHours / 24);
+    if (diffDays < 30) return `${diffDays}d ago`;
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function updateQACounters() {
+    const questions = getQAQuestions();
+    const mySubs = getMySubmissions();
+
+    const total = questions.length;
+    const pending = questions.filter(q => q.status === 'pending').length;
+    const answered = questions.filter(q => q.status === 'answered').length;
+
+    const countAllEl = document.getElementById('qaCountAll');
+    if (countAllEl) countAllEl.textContent = total;
+
+    const statTotal = document.getElementById('qaStatTotal');
+    const statPending = document.getElementById('qaStatPending');
+    const statAnswered = document.getElementById('qaStatAnswered');
+    const qaPendingCountDock = document.getElementById('qaPendingCount');
+
+    if (statTotal) statTotal.textContent = total;
+    if (statPending) statPending.textContent = pending;
+    if (statAnswered) statAnswered.textContent = answered;
+    if (qaPendingCountDock) qaPendingCountDock.textContent = pending;
+
+    const myTab = document.getElementById('qaMyQuestionsTab');
+    const myCount = document.getElementById('qaMyCount');
+    if (myTab && myCount) {
+      if (mySubs.length > 0) {
+        myTab.style.display = 'inline-block';
+        myCount.textContent = mySubs.length;
+      } else {
+        myTab.style.display = 'none';
+      }
+    }
+  }
+
+  function renderQAQuestions() {
+    if (!qaQuestionsList) return;
+
+    const questions = getQAQuestions();
+    const isOwner = document.body.classList.contains('owner-mode-active');
+    const upvotedIds = getUpvotedIds();
+    const mySubs = getMySubmissions();
+
+    let filtered = questions.slice();
+
+    // Owner vs Public visibility:
+    // If not owner, only show answered questions OR questions submitted by this specific browser
+    if (!isOwner && currentQAFilter !== 'my-questions') {
+      filtered = filtered.filter(q => q.status === 'answered' || mySubs.includes(q.id));
+    }
+
+    // Apply Tab Filter
+    if (currentQAFilter === 'pending') {
+      filtered = filtered.filter(q => q.status === 'pending');
+    } else if (currentQAFilter === 'my-questions') {
+      filtered = filtered.filter(q => mySubs.includes(q.id));
+    } else if (currentQAFilter !== 'all') {
+      filtered = filtered.filter(q => q.category === currentQAFilter);
+    }
+
+    // Apply Search Query
+    if (currentQASearch) {
+      const q = currentQASearch.toLowerCase();
+      filtered = filtered.filter(item => {
+        const inQuestion = item.question.toLowerCase().includes(q);
+        const inAsker = item.asker.toLowerCase().includes(q);
+        const inCat = item.category.toLowerCase().includes(q);
+        const inAnswer = item.answer && item.answer.text.toLowerCase().includes(q);
+        return inQuestion || inAsker || inCat || inAnswer;
+      });
+    }
+
+    // Sort: Pending first if owner, otherwise newest first
+    filtered.sort((a, b) => {
+      if (isOwner) {
+        if (a.status === 'pending' && b.status !== 'pending') return -1;
+        if (a.status !== 'pending' && b.status === 'pending') return 1;
+      }
+      return new Date(b.timestamp) - new Date(a.timestamp);
+    });
+
+    if (filtered.length === 0) {
+      qaQuestionsList.innerHTML = `
+        <div style="text-align: center; padding: 2.5rem 1rem; color: var(--text-secondary);">
+          <i class="fa-regular fa-comment-dots" style="font-size: 2.4rem; color: var(--accent-cyan); margin-bottom: 0.8rem; display: block;"></i>
+          <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">No questions found</h4>
+          <p style="font-size: 0.85rem;">Be the first to ask! Use the transmission box on the left to drop your question to Syed Ali.</p>
+        </div>
+      `;
+      return;
+    }
+
+    qaQuestionsList.innerHTML = filtered.map(item => {
+      const isUpvoted = upvotedIds.includes(item.id);
+      const isPending = item.status === 'pending';
+      const initials = item.asker.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'Q';
+
+      let answerHtml = '';
+      if (isPending) {
+        answerHtml = `
+          <div class="qa-pending-block">
+            <i class="fa-solid fa-hourglass-half"></i>
+            <span>In Syed Ali's Review Queue · Typically answered within 24h</span>
+          </div>
+        `;
+      } else if (item.answer) {
+        answerHtml = `
+          <div class="qa-answer-block">
+            <div class="qa-answer-author-row">
+              <div class="qa-author-identity">
+                <img src="assets/images/syed-ali.jpg" alt="Syed Ali" class="qa-author-thumbnail" />
+                <span class="qa-author-name">Syed Ali</span>
+                <i class="fa-solid fa-circle-check qa-verified-chip" title="Verified AI Developer"></i>
+                <span class="qa-author-role">${escapeHtml(item.answer.role || 'Author')}</span>
+              </div>
+              <span class="qa-time-tag">${timeAgo(item.answer.answeredAt || item.timestamp)}</span>
+            </div>
+            <div class="qa-answer-body">
+              ${escapeHtml(item.answer.text)}
+            </div>
+          </div>
+        `;
+      }
+
+      const adminControlsHtml = `
+        <div class="qa-admin-actions">
+          <button class="btn btn-xs ${isPending ? 'btn-primary' : 'btn-outline'} qa-answer-trigger-btn" data-id="${item.id}" title="${isPending ? 'Answer this question' : 'Edit your answer'}">
+            <i class="fa-solid ${isPending ? 'fa-pen-nib' : 'fa-pencil'}"></i> ${isPending ? 'Answer' : 'Edit'}
+          </button>
+          ${item.email ? `
+            <a href="mailto:${encodeURIComponent(item.email)}?subject=${encodeURIComponent('[araknet.tech] Reply to your question: ' + item.question.substring(0, 50))}" class="btn btn-xs btn-outline" title="Email asker directly">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+          ` : ''}
+          <button class="btn btn-xs btn-danger qa-delete-trigger-btn" data-id="${item.id}" title="Delete question">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      `;
+
+      return `
+        <div class="qa-item-card ${isPending ? 'is-pending' : ''}" data-id="${item.id}">
+          <div class="qa-item-top">
+            <div class="qa-asker-badge">
+              <div class="qa-asker-avatar">${escapeHtml(initials)}</div>
+              <span class="qa-asker-name">${escapeHtml(item.asker)}</span>
+            </div>
+            <span class="qa-category-tag">${escapeHtml(item.category)}</span>
+            <span class="qa-time-tag">${timeAgo(item.timestamp)}</span>
+          </div>
+
+          <div class="qa-question-content">
+            "${escapeHtml(item.question)}"
+          </div>
+
+          ${answerHtml}
+
+          <div class="qa-item-bottom">
+            <button class="qa-upvote-btn ${isUpvoted ? 'upvoted' : ''}" data-id="${item.id}">
+              <i class="fa-solid fa-thumbs-up"></i>
+              <span>Helpful</span>
+              <span class="qa-upvote-count">${item.upvotes || 0}</span>
+            </button>
+
+            ${adminControlsHtml}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Attach click listeners to upvote buttons
+    qaQuestionsList.querySelectorAll('.qa-upvote-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        toggleUpvote(id);
+      });
+    });
+
+    // Attach click listeners to owner action buttons
+    qaQuestionsList.querySelectorAll('.qa-answer-trigger-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        openAnswerModal(id);
+      });
+    });
+
+    qaQuestionsList.querySelectorAll('.qa-delete-trigger-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        deleteQuestion(id);
+      });
+    });
+  }
+
+  function toggleUpvote(id) {
+    const questions = getQAQuestions();
+    const upvotedIds = getUpvotedIds();
+    const q = questions.find(item => item.id === id);
+    if (!q) return;
+
+    if (upvotedIds.includes(id)) {
+      q.upvotes = Math.max(0, (q.upvotes || 1) - 1);
+      const index = upvotedIds.indexOf(id);
+      if (index > -1) upvotedIds.splice(index, 1);
+    } else {
+      q.upvotes = (q.upvotes || 0) + 1;
+      upvotedIds.push(id);
+      showToast('👍 Marked as helpful!');
+    }
+
+    saveQAQuestions(questions);
+    saveUpvotedIds(upvotedIds);
+    renderQAQuestions();
+  }
+
+  function openAnswerModal(id) {
+    const questions = getQAQuestions();
+    const q = questions.find(item => item.id === id);
+    if (!q) return;
+
+    qaAnswerTargetId.value = q.id;
+    document.getElementById('qaModalAsker').textContent = q.asker;
+    document.getElementById('qaModalCategory').textContent = q.category;
+    document.getElementById('qaModalQuestionText').textContent = `"${q.question}"`;
+    document.getElementById('qaModalTime').textContent = timeAgo(q.timestamp);
+
+    const emailRow = document.getElementById('qaModalEmailRow');
+    const emailEl = document.getElementById('qaModalEmail');
+    if (q.email) {
+      emailRow.style.display = 'block';
+      emailEl.textContent = q.email;
+      if (qaEmailAskerBtn) {
+        qaEmailAskerBtn.style.display = 'inline-flex';
+        qaEmailAskerBtn.onclick = () => {
+          const mailto = `mailto:${encodeURIComponent(q.email)}?subject=${encodeURIComponent('[araknet.tech] Syed Ali Answer: ' + q.question.substring(0, 40))}&body=${encodeURIComponent('Hi ' + q.asker + ',\n\nRegarding your question: "' + q.question + '"\n\n' + (qaAnswerTextarea.value || ''))}`;
+          window.location.href = mailto;
+        };
+      }
+    } else {
+      emailRow.style.display = 'none';
+      if (qaEmailAskerBtn) qaEmailAskerBtn.style.display = 'none';
+    }
+
+    qaAnswerTextarea.value = (q.answer && q.answer.text) ? q.answer.text : '';
+    qaAnswerModal.classList.add('active');
+    setTimeout(() => qaAnswerTextarea.focus(), 80);
+  }
+
+  function closeAnswerModal() {
+    if (qaAnswerModal) qaAnswerModal.classList.remove('active');
+    if (qaAnswerForm) qaAnswerForm.reset();
+  }
+
+  if (closeQaAnswerBtn) closeQaAnswerBtn.addEventListener('click', closeAnswerModal);
+  if (qaAnswerModal) {
+    qaAnswerModal.addEventListener('click', (e) => {
+      if (e.target === qaAnswerModal) closeAnswerModal();
+    });
+  }
+
+  if (qaAnswerForm) {
+    qaAnswerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = qaAnswerTargetId.value;
+      const answerText = qaAnswerTextarea.value.trim();
+      if (!id || !answerText) return;
+
+      const questions = getQAQuestions();
+      const q = questions.find(item => item.id === id);
+      if (q) {
+        q.status = 'answered';
+        q.answer = {
+          text: answerText,
+          author: 'Syed Ali',
+          role: 'AI Developer · Author',
+          answeredAt: new Date().toISOString()
+        };
+        saveQAQuestions(questions);
+        renderQAQuestions();
+        closeAnswerModal();
+        showToast('🚀 Answer published to live portfolio!');
+      }
+    });
+  }
+
+  function deleteQuestion(id) {
+    if (!confirm('Are you sure you want to delete this question?')) return;
+    let questions = getQAQuestions();
+    questions = questions.filter(item => item.id !== id);
+    saveQAQuestions(questions);
+    renderQAQuestions();
+    showToast('🗑️ Question deleted.');
+  }
+
+  // Question Character Counter
+  if (qaQuestionInput && qaCharCounter) {
+    qaQuestionInput.addEventListener('input', () => {
+      const len = qaQuestionInput.value.length;
+      qaCharCounter.textContent = `${len} / 400`;
+      if (len > 350) {
+        qaCharCounter.classList.add('near-limit');
+      } else {
+        qaCharCounter.classList.remove('near-limit');
+      }
+    });
+  }
+
+  // Question Form Submission (Public Visitor)
+  if (qaAskForm) {
+    qaAskForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('qaAskerName').value.trim();
+      const email = document.getElementById('qaAskerEmail').value.trim();
+      const category = document.getElementById('qaCategorySelect').value;
+      const question = qaQuestionInput.value.trim();
+
+      if (!name || !email || !question) return;
+
+      qaSubmitText.style.display = 'none';
+      qaSubmitSpinner.style.display = 'inline-block';
+      qaSubmitBtn.disabled = true;
+
+      setTimeout(() => {
+        qaSubmitSpinner.style.display = 'none';
+        qaSubmitText.style.display = 'inline-block';
+        qaSubmitBtn.disabled = false;
+
+        const newId = 'qa_' + Date.now();
+        const newQuestion = {
+          id: newId,
+          asker: name,
+          email: email,
+          category: category,
+          question: question,
+          timestamp: new Date().toISOString(),
+          status: 'pending',
+          upvotes: 1,
+          answer: null
+        };
+
+        const questions = getQAQuestions();
+        questions.unshift(newQuestion);
+        saveQAQuestions(questions);
+        addMySubmission(newId);
+
+        qaFormFeedback.className = 'qa-feedback success';
+        qaFormFeedback.innerHTML = `
+          <strong><i class="fa-solid fa-circle-check"></i> Question Transmitted!</strong><br />
+          Thank you ${escapeHtml(name)}. Your question is in Syed Ali's queue and will appear with an answer shortly.
+        `;
+        qaFormFeedback.style.display = 'block';
+
+        showToast('🚀 Question sent to Syed Ali! In queue for review.');
+        qaAskForm.reset();
+        if (qaCharCounter) qaCharCounter.textContent = '0 / 400';
+
+        renderQAQuestions();
+
+        setTimeout(() => {
+          if (qaFormFeedback) qaFormFeedback.style.display = 'none';
+        }, 8000);
+      }, 700);
+    });
+  }
+
+  // Filter Tabs
+  if (qaFilterTabs) {
+    qaFilterTabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('.qa-filter-btn');
+      if (!btn) return;
+
+      qaFilterTabs.querySelectorAll('.qa-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      currentQAFilter = btn.getAttribute('data-filter');
+      renderQAQuestions();
+    });
+  }
+
+  // Search Input
+  if (qaSearchInput) {
+    qaSearchInput.addEventListener('input', (e) => {
+      currentQASearch = e.target.value.trim();
+      renderQAQuestions();
+    });
+  }
+
+  // Owner Filter Pending Button
+  if (qaFilterPendingBtn) {
+    qaFilterPendingBtn.addEventListener('click', () => {
+      currentQAFilter = 'pending';
+      if (qaFilterTabs) {
+        qaFilterTabs.querySelectorAll('.qa-filter-btn').forEach(b => b.classList.remove('active'));
+      }
+      renderQAQuestions();
+      showToast('⏳ Displaying pending questions awaiting your answer');
+    });
+  }
+
+  // Owner Dock Q&A Button
+  if (qaOwnerDockBtn) {
+    qaOwnerDockBtn.addEventListener('click', () => {
+      const qaSection = document.getElementById('qa');
+      if (qaSection) qaSection.scrollIntoView({ behavior: 'smooth' });
+      currentQAFilter = 'pending';
+      renderQAQuestions();
+    });
+  }
+
+  // Owner Custom Q&A Creation Modal
+  if (qaAddCustomBtn && qaCreateModal) {
+    qaAddCustomBtn.addEventListener('click', () => {
+      qaCreateModal.classList.add('active');
+    });
+  }
+
+  if (closeQaCreateBtn) {
+    closeQaCreateBtn.addEventListener('click', () => {
+      if (qaCreateModal) qaCreateModal.classList.remove('active');
+    });
+  }
+
+  if (qaCreateModal) {
+    qaCreateModal.addEventListener('click', (e) => {
+      if (e.target === qaCreateModal) qaCreateModal.classList.remove('active');
+    });
+  }
+
+  if (qaCreateForm) {
+    qaCreateForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const asker = document.getElementById('qaNewAsker').value.trim();
+      const category = document.getElementById('qaNewCategory').value;
+      const question = document.getElementById('qaNewQuestion').value.trim();
+      const answer = document.getElementById('qaNewAnswer').value.trim();
+
+      if (!asker || !question || !answer) return;
+
+      const newQ = {
+        id: 'qa_faq_' + Date.now(),
+        asker: asker,
+        email: 'syedali6160@gmail.com',
+        category: category,
+        question: question,
+        timestamp: new Date().toISOString(),
+        status: 'answered',
+        upvotes: 5,
+        answer: {
+          text: answer,
+          author: 'Syed Ali',
+          role: 'AI Developer · Author',
+          answeredAt: new Date().toISOString()
+        }
+      };
+
+      const questions = getQAQuestions();
+      questions.unshift(newQ);
+      saveQAQuestions(questions);
+      renderQAQuestions();
+      if (qaCreateModal) qaCreateModal.classList.remove('active');
+      qaCreateForm.reset();
+      showToast('✅ New Q&A published to live feed!');
+    });
+  }
+
+  // Initial Q&A Render & Counters
+  renderQAQuestions();
+  updateQACounters();
+
+  // ==========================================
+  // 13. MOBILE MENU TOGGLE
   // ==========================================
   const mobileToggle = document.getElementById('mobileMenuToggle');
   const mobileDrawer = document.getElementById('mobileDrawer');
