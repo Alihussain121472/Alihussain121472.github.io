@@ -2,7 +2,7 @@
    ARAKNET.TECH — FUTURISTIC DESIGN SYSTEM FOR SYED ALI
    Palette: Deep Space Black (#050A14), Electric Blue (#00C2FF), Cyan Glow (#00F5D4)
    Fonts: Space Grotesk (Headings), Inter (Body), JetBrains Mono (Code/Badges)
-   Security: Tamper-proof Public Mode + Passcode-Gated Owner Edit Mode
+   Access: View-Only Viewer Pass for Public Users + Hidden Secret Passcode for Owner
    ========================================================= */
 
 :root {
@@ -303,7 +303,28 @@ h1, h2, h3, h4, h5, h6 {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.7rem;
+}
+
+/* Viewer Button in Navbar */
+.viewer-btn {
+  background: rgba(0, 245, 212, 0.1);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  color: var(--accent-cyan);
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  transition: var(--transition-smooth);
+}
+
+.viewer-btn:hover {
+  background: rgba(0, 245, 212, 0.2);
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.3);
 }
 
 .cmd-btn {
@@ -333,22 +354,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.owner-toggle-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glass);
-  color: var(--text-muted);
-  padding: 0.5rem 0.7rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: var(--transition-smooth);
-}
-
-.owner-toggle-btn:hover {
-  color: var(--accent-cyan);
-  border-color: var(--accent-cyan);
 }
 
 .mobile-toggle {
@@ -1749,7 +1754,8 @@ h1, h2, h3, h4, h5, h6 {
 .input-wrapper textarea,
 .add-cert-form input,
 .add-cert-form select,
-.auth-form input {
+.auth-form input,
+.viewer-form input {
   width: 100%;
   padding: 0.8rem 1rem 0.8rem 2.6rem;
   background: rgba(5, 10, 20, 0.7);
@@ -1776,7 +1782,8 @@ h1, h2, h3, h4, h5, h6 {
 .input-wrapper textarea:focus,
 .add-cert-form input:focus,
 .add-cert-form select:focus,
-.auth-form input:focus {
+.auth-form input:focus,
+.viewer-form input:focus {
   border-color: var(--accent-cyan);
   box-shadow: 0 0 15px rgba(0, 245, 212, 0.25);
 }
@@ -2107,6 +2114,46 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.8rem;
 }
 
+/* ================= VIEWER SIGN-IN MODAL ================= */
+.viewer-modal-card {
+  max-width: 460px;
+  text-align: center;
+  padding: 2.5rem 2rem;
+}
+
+.viewer-badge-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 245, 212, 0.15);
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin: 0 auto 1rem auto;
+}
+
+.viewer-modal-header h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.viewer-modal-sub {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.viewer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
 /* ================= OWNER SECURITY AUTH MODAL ================= */
 .auth-modal-card {
   max-width: 440px;
@@ -2147,6 +2194,42 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
+/* ================= VISITORS LOG MODAL ================= */
+.visitors-modal-card {
+  max-width: 500px;
+}
+
+.visitors-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.visitor-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.9rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.visitor-email {
+  color: var(--accent-cyan);
+}
+
+.visitor-time {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
 /* ================= FLOATING OWNER DOCK ================= */
 .owner-dock {
   position: fixed;
@@ -2158,7 +2241,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50px;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
   border: 1px solid var(--accent-cyan);
   box-shadow: var(--shadow-cyan-glow);
   animation: slideUpDock 0.3s ease-out;
@@ -2193,7 +2276,7 @@ h1, h2, h3, h4, h5, h6 {
 .owner-dock-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 /* Active Edit Mode Stylings */

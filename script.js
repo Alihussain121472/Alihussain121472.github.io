@@ -2,7 +2,7 @@
  * ARAKNET.TECH — SCRIPT ENGINE FOR SYED ALI
  * Features: Neural Canvas, Typewriter, Counter Observer,
  * Dynamic Certification Hub, Project Architecture Deep-Dive Modal,
- * Owner Security Gate (Passcode Protected Edit Mode with Pencil Badges),
+ * Viewer Email Pass (Public Read-Only), Secret Owner Mode (Ctrl+Shift+E, Passcode: araknet2026),
  * Command Palette (Ctrl+K), and Form Dispatch.
  */
 
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
 
-        // Mouse interaction
         if (mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - this.x;
           const dy = mouse.y - this.y;
@@ -105,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // Connect with mouse
         if (mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - particles[i].x;
           const dy = mouse.y - particles[i].y;
@@ -402,13 +400,8 @@ document.addEventListener('DOMContentLoaded', () => {
     bpProjectSubtitle.textContent = data.subtitle;
     bpPitchSummary.textContent = data.pitch;
 
-    // Col 1: Skills
     bpSkillsList.innerHTML = data.skills.map(s => `<li>${escapeHtml(s)}</li>`).join('');
-
-    // Col 2: Tools
     bpToolsList.innerHTML = data.tools.map(t => `<span class="bp-pill">${escapeHtml(t)}</span>`).join('');
-
-    // Col 3: Sites
     bpSitesList.innerHTML = data.sites.map(site => `
       <li>
         <a href="${site.url}" target="_blank" rel="noopener noreferrer">
@@ -416,11 +409,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </a>
       </li>
     `).join('');
-
-    // Col 4: Metrics
     bpMetricsList.innerHTML = data.metrics.map(m => `<li>${escapeHtml(m)}</li>`).join('');
 
-    // Action buttons
     bpActionLinks.innerHTML = data.actions.map(a => `
       <a href="${a.url}" target="${a.url.startsWith('#') ? '_self' : '_blank'}" rel="noopener noreferrer" class="btn btn-sm ${a.primary ? 'btn-primary' : 'btn-outline'}">
         <i class="${a.icon}"></i> ${escapeHtml(a.label)}
@@ -438,7 +428,100 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 5. DYNAMIC CERTIFICATION MANAGEMENT SYSTEM
+  // 5. VIEWER ACCESS (PUBLIC USERS LOGIN WITH EMAIL)
+  // ==========================================
+  const VIEWER_STORAGE_KEY = 'araknet_viewer_email_v1';
+  const VISITORS_LOG_KEY = 'araknet_visitors_log_v1';
+
+  const viewerModal = document.getElementById('viewerModal');
+  const viewerAccessBtn = document.getElementById('viewerAccessBtn');
+  const mobileViewerBtn = document.getElementById('mobileViewerBtn');
+  const closeViewerModalBtn = document.getElementById('closeViewerModalBtn');
+  const viewerForm = document.getElementById('viewerForm');
+  const viewerEmailInput = document.getElementById('viewerEmailInput');
+  const viewerStatusText = document.getElementById('viewerStatusText');
+
+  function getVisitorsLog() {
+    try {
+      const stored = localStorage.getItem(VISITORS_LOG_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function recordVisitorEmail(email) {
+    try {
+      const list = getVisitorsLog();
+      const existing = list.find(v => v.email.toLowerCase() === email.toLowerCase());
+      if (!existing) {
+        list.unshift({ email, timestamp: new Date().toLocaleString() });
+        localStorage.setItem(VISITORS_LOG_KEY, JSON.stringify(list));
+      }
+      updateVisitorCountBadge();
+    } catch (e) {
+      console.warn('Could not record visitor email:', e);
+    }
+  }
+
+  function updateVisitorCountBadge() {
+    const countEl = document.getElementById('visitorCount');
+    if (countEl) {
+      const list = getVisitorsLog();
+      countEl.textContent = list.length;
+    }
+  }
+
+  function updateViewerDisplay() {
+    const currentViewer = localStorage.getItem(VIEWER_STORAGE_KEY);
+    if (currentViewer && viewerStatusText) {
+      const shortName = currentViewer.split('@')[0];
+      viewerStatusText.textContent = `Viewer: ${shortName}`;
+      viewerAccessBtn.classList.add('active');
+    }
+  }
+
+  function openViewerModal() {
+    if (viewerModal) {
+      viewerModal.classList.add('active');
+      setTimeout(() => {
+        if (viewerEmailInput) viewerEmailInput.focus();
+      }, 50);
+    }
+  }
+
+  function closeViewerModal() {
+    if (viewerModal) viewerModal.classList.remove('active');
+  }
+
+  if (viewerAccessBtn) viewerAccessBtn.addEventListener('click', openViewerModal);
+  if (mobileViewerBtn) mobileViewerBtn.addEventListener('click', openViewerModal);
+  if (closeViewerModalBtn) closeViewerModalBtn.addEventListener('click', closeViewerModal);
+  if (viewerModal) {
+    viewerModal.addEventListener('click', (e) => {
+      if (e.target === viewerModal) closeViewerModal();
+    });
+  }
+
+  if (viewerForm) {
+    viewerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = viewerEmailInput.value.trim();
+      if (email && email.includes('@')) {
+        localStorage.setItem(VIEWER_STORAGE_KEY, email);
+        recordVisitorEmail(email);
+        updateViewerDisplay();
+        closeViewerModal();
+        showToast(`Welcome ${email}! Viewer Pass activated.`);
+      }
+    });
+  }
+
+  updateViewerDisplay();
+  updateVisitorCountBadge();
+
+  // ==========================================
+  // 6. DYNAMIC CERTIFICATION MANAGEMENT SYSTEM
   // ==========================================
   const defaultCertificates = [
     {
@@ -470,16 +553,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  const STORAGE_KEY = 'araknet_portfolio_certificates_v1';
+  const CERTS_STORAGE_KEY = 'araknet_portfolio_certificates_v1';
 
   function getStoredCertificates() {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(CERTS_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
-        }
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
       }
     } catch (e) {
       console.warn('Could not read localStorage certificates:', e);
@@ -489,10 +570,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function saveStoredCertificates(certs) {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(certs));
+      localStorage.setItem(CERTS_STORAGE_KEY, JSON.stringify(certs));
     } catch (e) {
       console.warn('Could not save certificates to localStorage:', e);
-      showToast('Notice: Storage limit reached for local images');
     }
   }
 
@@ -640,7 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Add Certificate Modal
+  // Add Certificate Modal (Owner Only)
   const addCertModal = document.getElementById('addCertModal');
   const openAddCertModalBtn = document.getElementById('openAddCertModalBtn');
   const closeAddCertBtn = document.getElementById('closeAddCertBtn');
@@ -675,7 +755,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // File reader for uploaded images
   if (certFileInput) {
     certFileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -764,7 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (resetCertsBtn) {
     resetCertsBtn.addEventListener('click', () => {
       if (confirm('Reset to default verified credentials (Cisco, Harvard, AIEYS)? Any custom added items will be restored.')) {
-        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(CERTS_STORAGE_KEY);
         currentCertificates = [...defaultCertificates];
         renderCertificates();
         manageCertsModal.classList.remove('active');
@@ -776,7 +855,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCertificates();
 
   // ==========================================
-  // 6. OWNER SECURITY GATE & LIVE PENCIL EDITOR
+  // 7. OWNER SECURITY GATE & LIVE PENCIL EDITOR (SECRET: Ctrl+Shift+E, PASSCODE: araknet2026)
   // ==========================================
   const EDITS_STORAGE_KEY = 'araknet_portfolio_custom_edits_v1';
   const OWNER_SESSION_KEY = 'araknet_owner_auth_session';
@@ -811,8 +890,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const adminAuthForm = document.getElementById('adminAuthForm');
   const adminPasscodeInput = document.getElementById('adminPasscodeInput');
   const closeAdminAuthBtn = document.getElementById('closeAdminAuthBtn');
-  const ownerLoginBtn = document.getElementById('ownerLoginBtn');
-  const ownerLockIcon = document.getElementById('ownerLockIcon');
   const ownerDock = document.getElementById('ownerDock');
   const certAdminActions = document.getElementById('certAdminActions');
 
@@ -820,6 +897,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const exportHtmlBtn = document.getElementById('exportHtmlBtn');
   const resetEditsBtn = document.getElementById('resetEditsBtn');
   const lockOwnerBtn = document.getElementById('lockOwnerBtn');
+  const viewVisitorsBtn = document.getElementById('viewVisitorsBtn');
+
+  // Visitors Log Modal
+  const visitorsLogModal = document.getElementById('visitorsLogModal');
+  const closeVisitorsLogBtn = document.getElementById('closeVisitorsLogBtn');
+  const visitorsList = document.getElementById('visitorsList');
+  const clearVisitorsBtn = document.getElementById('clearVisitorsBtn');
 
   function openOwnerLoginModal() {
     if (adminAuthModal) {
@@ -847,15 +931,10 @@ document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.setItem(OWNER_SESSION_KEY, 'active');
     if (ownerDock) ownerDock.style.display = 'flex';
     if (certAdminActions) certAdminActions.style.display = 'flex';
-    if (ownerLockIcon) {
-      ownerLockIcon.className = 'fa-solid fa-lock-open text-cyan';
-    }
 
-    // Attach pencil badges and contenteditable to all targets
     document.querySelectorAll('[data-edit-key]').forEach(el => {
       el.setAttribute('contenteditable', 'true');
 
-      // Check if badge already exists
       if (!el.querySelector('.pencil-badge')) {
         const badge = document.createElement('span');
         badge.className = 'pencil-badge';
@@ -866,7 +945,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       el.oninput = () => {
         const key = el.getAttribute('data-edit-key');
-        // Clean clone to save
         const clone = el.cloneNode(true);
         const b = clone.querySelector('.pencil-badge');
         if (b) b.remove();
@@ -875,7 +953,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderCertificates();
-    showToast('🔑 Owner Edit Mode Unlocked! Click any text to edit.');
+    updateVisitorCountBadge();
+    showToast('🔑 Owner Mode Unlocked! Click any text to edit.');
   }
 
   function disableOwnerMode() {
@@ -883,9 +962,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.removeItem(OWNER_SESSION_KEY);
     if (ownerDock) ownerDock.style.display = 'none';
     if (certAdminActions) certAdminActions.style.display = 'none';
-    if (ownerLockIcon) {
-      ownerLockIcon.className = 'fa-solid fa-lock';
-    }
 
     document.querySelectorAll('[data-edit-key]').forEach(el => {
       el.removeAttribute('contenteditable');
@@ -894,17 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderCertificates();
-    showToast('🔒 Owner Mode Locked. Portfolio is now read-only.');
-  }
-
-  if (ownerLoginBtn) {
-    ownerLoginBtn.addEventListener('click', () => {
-      if (document.body.classList.contains('owner-mode-active')) {
-        disableOwnerMode();
-      } else {
-        openOwnerLoginModal();
-      }
-    });
+    showToast('🔒 Owner Mode Locked. Portfolio is in View-Only mode.');
   }
 
   if (adminAuthForm) {
@@ -915,17 +981,17 @@ document.addEventListener('DOMContentLoaded', () => {
         closeOwnerLoginModal();
         enableOwnerMode();
       } else {
-        alert('Incorrect passcode. Public viewers have read-only access.');
+        alert('Incorrect owner passcode.');
       }
     });
   }
 
-  // Restore owner session if active in same session
+  // Restore owner session if active in same browser session
   if (sessionStorage.getItem(OWNER_SESSION_KEY) === 'active') {
     enableOwnerMode();
   }
 
-  // Hotkey: Ctrl + Shift + E
+  // Secret Hotkey: Ctrl + Shift + E
   window.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
       e.preventDefault();
@@ -942,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveEditsBtn.addEventListener('click', () => {
       try {
         localStorage.setItem(EDITS_STORAGE_KEY, JSON.stringify(customEdits));
-        showToast('💾 All edits successfully saved to browser storage!');
+        showToast('💾 All edits saved to browser storage!');
       } catch (err) {
         showToast('Error saving edits.');
       }
@@ -965,10 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (exportHtmlBtn) {
     exportHtmlBtn.addEventListener('click', () => {
-      // Create a clean clone of the document HTML
       const cloneDoc = document.documentElement.cloneNode(true);
-      
-      // Clean temporary edit classes and badges
       cloneDoc.classList.remove('owner-mode-active');
       const clonedBody = cloneDoc.querySelector('body');
       if (clonedBody) clonedBody.classList.remove('owner-mode-active');
@@ -988,8 +1051,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // View Visitors Modal (Owner Only)
+  if (viewVisitorsBtn && visitorsLogModal) {
+    viewVisitorsBtn.addEventListener('click', () => {
+      const list = getVisitorsLog();
+      if (visitorsList) {
+        if (list.length === 0) {
+          visitorsList.innerHTML = '<li style="color: var(--text-muted); text-align: center; padding: 1rem;">No registered viewer emails yet.</li>';
+        } else {
+          visitorsList.innerHTML = list.map(v => `
+            <li class="visitor-item">
+              <span class="visitor-email"><i class="fa-regular fa-envelope"></i> ${escapeHtml(v.email)}</span>
+              <span class="visitor-time">${escapeHtml(v.timestamp)}</span>
+            </li>
+          `).join('');
+        }
+      }
+      visitorsLogModal.classList.add('active');
+    });
+  }
+
+  if (closeVisitorsLogBtn && visitorsLogModal) {
+    closeVisitorsLogBtn.addEventListener('click', () => visitorsLogModal.classList.remove('active'));
+    visitorsLogModal.addEventListener('click', (e) => {
+      if (e.target === visitorsLogModal) visitorsLogModal.classList.remove('active');
+    });
+  }
+
+  if (clearVisitorsBtn) {
+    clearVisitorsBtn.addEventListener('click', () => {
+      if (confirm('Clear registered visitors list?')) {
+        localStorage.removeItem(VISITORS_LOG_KEY);
+        updateVisitorCountBadge();
+        if (visitorsList) visitorsList.innerHTML = '<li style="color: var(--text-muted); text-align: center; padding: 1rem;">No registered viewer emails yet.</li>';
+        showToast('Visitor history cleared.');
+      }
+    });
+  }
+
   // ==========================================
-  // 7. RESUME MODAL VIEWER
+  // 8. RESUME MODAL VIEWER
   // ==========================================
   const resumeModal = document.getElementById('resumeModal');
   const openResumeModalBtn = document.getElementById('openResumeModalBtn');
@@ -1008,7 +1109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 8. COMMAND PALETTE (Ctrl+K)
+  // 9. COMMAND PALETTE (Ctrl+K)
   // ==========================================
   const cmdModal = document.getElementById('cmdPaletteModal');
   const cmdPaletteBtn = document.getElementById('cmdPaletteBtn');
@@ -1046,6 +1147,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (lightboxModal) lightboxModal.classList.remove('active');
       if (projectModal) projectModal.classList.remove('active');
       if (adminAuthModal) closeOwnerLoginModal();
+      if (viewerModal) closeViewerModal();
+      if (visitorsLogModal) visitorsLogModal.classList.remove('active');
       if (addCertModal) closeAddModal();
       if (manageCertsModal) manageCertsModal.classList.remove('active');
       if (resumeModal) resumeModal.classList.remove('active');
@@ -1069,10 +1172,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closeCmdPalette();
         const element = document.querySelector(target);
         if (element) element.scrollIntoView({ behavior: 'smooth' });
-      } else if (action === 'trigger') {
-        const trigger = item.getAttribute('data-trigger');
-        closeCmdPalette();
-        if (trigger === 'admin-login') openOwnerLoginModal();
       } else if (action === 'copy') {
         const text = item.getAttribute('data-text');
         navigator.clipboard.writeText(text).then(() => {
@@ -1090,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cmdInput && cmdResults) {
     cmdInput.addEventListener('input', (e) => {
       const query = e.target.value.toLowerCase().trim();
-      if (query === 'admin' || query === '/owner' || query === 'edit') {
+      if (query === 'admin' || query === '/owner' || query === 'owner') {
         closeCmdPalette();
         openOwnerLoginModal();
         return;
@@ -1108,7 +1207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 9. TOAST NOTIFICATION SYSTEM & CLIPBOARD
+  // 10. TOAST NOTIFICATION SYSTEM & CLIPBOARD
   // ==========================================
   const toast = document.getElementById('toast');
   const toastMessage = document.getElementById('toastMessage');
@@ -1136,7 +1235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 10. CONTACT FORM HANDLER WITH ANTI-BOT SECURITY
+  // 11. CONTACT FORM HANDLER WITH ANTI-BOT SECURITY
   // ==========================================
   const contactForm = document.getElementById('contactForm');
   const sendBtn = document.getElementById('sendBtn');
@@ -1148,11 +1247,8 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Bot honeypot security check
       const honeypot = contactForm.querySelector('input[name="_gotcha"]');
-      if (honeypot && honeypot.value) {
-        return; // Silent discard
-      }
+      if (honeypot && honeypot.value) return;
 
       const name = document.getElementById('contactName').value.trim();
       const email = document.getElementById('contactEmail').value.trim();
@@ -1180,7 +1276,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showToast('Message ready! Opening mail dispatch...');
         
-        // Mailto fallback
         const mailtoUrl = `mailto:syedali6160@gmail.com?subject=${encodeURIComponent('[araknet.tech] ' + subject + ' - ' + name)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
         window.location.href = mailtoUrl;
 
@@ -1190,7 +1285,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 11. MOBILE MENU TOGGLE
+  // 12. MOBILE MENU TOGGLE
   // ==========================================
   const mobileToggle = document.getElementById('mobileMenuToggle');
   const mobileDrawer = document.getElementById('mobileDrawer');
@@ -1216,7 +1311,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 12. CUSTOM FUTURISTIC CURSOR (DESKTOP)
+  // 13. CUSTOM FUTURISTIC CURSOR (DESKTOP)
   // ==========================================
   const cursorDot = document.getElementById('cursorDot');
   const cursorGlow = document.getElementById('cursorGlow');

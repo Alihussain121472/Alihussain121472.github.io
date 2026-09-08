@@ -54,17 +54,18 @@
     <span id="toastMessage">Action completed successfully!</span>
   </div>
 
-  <!-- FLOATING OWNER EDIT DOCK (VISIBLE ONLY WHEN OWNER AUTHENTICATES) -->
+  <!-- FLOATING OWNER EDIT DOCK (VISIBLE ONLY TO SYED ALI AFTER PASSCODE UNLOCK) -->
   <div id="ownerDock" class="owner-dock glass-panel" style="display: none;">
     <div class="owner-dock-info">
-      <span class="owner-badge"><i class="fa-solid fa-key"></i> OWNER EDIT MODE</span>
-      <span class="owner-hint">Click pencil icons or text to edit</span>
+      <span class="owner-badge"><i class="fa-solid fa-key"></i> OWNER MODE</span>
+      <span class="owner-hint">Pencil icons active · Click text to edit</span>
     </div>
     <div class="owner-dock-actions">
-      <button id="saveEditsBtn" class="btn btn-xs btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
-      <button id="exportHtmlBtn" class="btn btn-xs btn-outline" title="Download updated index.html with your edits"><i class="fa-solid fa-download"></i> Export HTML</button>
+      <button id="saveEditsBtn" class="btn btn-xs btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+      <button id="exportHtmlBtn" class="btn btn-xs btn-outline" title="Download updated index.html"><i class="fa-solid fa-download"></i> Export HTML</button>
+      <button id="viewVisitorsBtn" class="btn btn-xs btn-outline" title="See viewer emails who entered"><i class="fa-solid fa-users-viewfinder"></i> Visitors (<span id="visitorCount">0</span>)</button>
       <button id="resetEditsBtn" class="btn btn-xs btn-ghost" title="Revert to defaults"><i class="fa-solid fa-rotate-left"></i> Reset</button>
-      <button id="lockOwnerBtn" class="btn btn-xs btn-danger" title="Lock and exit owner mode"><i class="fa-solid fa-lock"></i> Lock</button>
+      <button id="lockOwnerBtn" class="btn btn-xs btn-danger" title="Exit owner mode"><i class="fa-solid fa-lock"></i> Lock</button>
     </div>
   </div>
 
@@ -88,12 +89,15 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
+        <!-- Viewer Status Badge / Login Trigger -->
+        <button id="viewerAccessBtn" class="viewer-btn" title="Viewer Access Pass">
+          <i class="fa-regular fa-id-badge"></i>
+          <span id="viewerStatusText">Viewer Pass</span>
+        </button>
+
         <button id="cmdPaletteBtn" class="cmd-btn" title="Open Command Palette (Ctrl+K)">
           <i class="fa-solid fa-terminal"></i>
           <span class="cmd-hint">Ctrl K</span>
-        </button>
-        <button id="ownerLoginBtn" class="owner-toggle-btn" title="Owner Access (Passcode Protected)">
-          <i class="fa-solid fa-lock" id="ownerLockIcon"></i>
         </button>
         <a href="#contact" class="btn btn-sm btn-primary">Let's Talk</a>
         <button id="mobileMenuToggle" class="mobile-toggle" aria-label="Toggle navigation menu">
@@ -113,7 +117,8 @@
         <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       </ul>
       <div class="mobile-drawer-footer">
-        <a href="assets/cv/Syed_Ali_Hussain_Resume.pdf" download class="btn btn-outline btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
+        <button id="mobileViewerBtn" class="btn btn-outline btn-full" style="margin-bottom: 0.6rem;"><i class="fa-regular fa-envelope"></i> Sign In as Viewer</button>
+        <a href="assets/cv/Syed_Ali_Hussain_Resume.pdf" download class="btn btn-primary btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
       </div>
     </div>
   </header>
@@ -438,7 +443,7 @@
                 <h3 class="project-title editable-target" data-edit-key="proj_nb_title">NovaBrief Tech</h3>
                 <p class="project-tagline editable-target" data-edit-key="proj_nb_tagline">AI-Powered Daily Intelligence &amp; Student Program Tracking Platform</p>
 
-                <!-- CRYSTAL CLEAR 10-SECOND SUMMARY BADGE -->
+                <!-- 10-SECOND SUMMARY BADGE -->
                 <div class="project-quick-pitch">
                   <span class="pitch-tag"><i class="fa-solid fa-bolt"></i> 10-SECOND SUMMARY:</span>
                   <p class="pitch-text editable-target" data-edit-key="proj_nb_pitch">
@@ -682,7 +687,7 @@
             <button class="filter-btn" data-filter="education">Education (<span id="countEdu">0</span>)</button>
           </div>
 
-          <!-- Owner-Only Action Controls (visible when authenticated) -->
+          <!-- Owner-Only Action Controls (visible only when owner is authenticated) -->
           <div class="cert-admin-actions" id="certAdminActions" style="display: none;">
             <button id="openAddCertModalBtn" class="btn btn-sm btn-primary">
               <i class="fa-solid fa-plus"></i> Add Certificate
@@ -1067,13 +1072,44 @@
       <!-- Footer Actions -->
       <div class="blueprint-footer">
         <div class="blueprint-links" id="bpActionLinks">
-          <!-- Live Link & GitHub Link buttons dynamically inserted -->
+          <!-- Dynamically inserted -->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: OWNER SECURITY AUTHENTICATION (PASSCODE GATE) -->
+  <!-- MODAL 3: VIEWER SIGN-IN / EMAIL PASS MODAL (PUBLIC USERS) -->
+  <div id="viewerModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container glass-card viewer-modal-card">
+      <button class="modal-close-btn" id="closeViewerModalBtn" aria-label="Close Viewer Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="viewer-modal-header">
+        <div class="viewer-badge-icon"><i class="fa-regular fa-envelope-open"></i></div>
+        <h3>Welcome to Syed Ali's Portfolio</h3>
+        <p class="viewer-modal-sub">
+          Enter your email to activate your <strong>Viewer Pass</strong>. Explore live SaaS architectures, AI blueprints, and download the official CV.
+        </p>
+      </div>
+
+      <form id="viewerForm" class="viewer-form">
+        <div class="form-group">
+          <label for="viewerEmailInput">Your Email Address</label>
+          <div class="input-wrapper">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="viewerEmailInput" placeholder="e.g. recruiter@company.com or visitor@gmail.com" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter Portfolio (Viewer Mode)
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 4: OWNER PASSCODE GATE (ACCESSIBLE ONLY VIA SECRET SHORTCUT Ctrl+Shift+E) -->
   <div id="adminAuthModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card auth-modal-card">
       <button class="modal-close-btn" id="closeAdminAuthBtn" aria-label="Close Security Modal">
@@ -1082,9 +1118,9 @@
 
       <div class="auth-header">
         <div class="auth-lock-circle"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3>Owner Access Portal</h3>
+        <h3>Owner Authorization Gate</h3>
         <p class="auth-sub">
-          Public visitors have secure read-only access. Enter your owner passcode to unlock the live visual editor and pencil tools.
+          This portal is reserved strictly for Syed Ali. Enter your owner passcode to unlock editing and site customization.
         </p>
       </div>
 
@@ -1095,17 +1131,36 @@
             <i class="fa-solid fa-key input-icon"></i>
             <input type="password" id="adminPasscodeInput" placeholder="Enter owner passcode..." autocomplete="current-password" required />
           </div>
-          <span class="file-hint" style="margin-top: 0.3rem;">Default passcode: <code>araknet2026</code> (changeable in settings)</span>
         </div>
 
         <button type="submit" class="btn btn-primary btn-full">
-          <i class="fa-solid fa-lock-open"></i> Unlock Edit Mode
+          <i class="fa-solid fa-lock-open"></i> Unlock Owner Mode
         </button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL 4: DYNAMIC ADD CERTIFICATION (OWNER ONLY) -->
+  <!-- MODAL 5: RECENT VISITORS LOG (OWNER ONLY) -->
+  <div id="visitorsLogModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container glass-card visitors-modal-card">
+      <button class="modal-close-btn" id="closeVisitorsLogBtn" aria-label="Close Visitors Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="modal-header">
+        <div class="section-pill"><i class="fa-solid fa-users"></i> Analytics</div>
+        <h3>Registered Viewer Log</h3>
+        <p class="modal-subtitle">Emails of viewers and recruiters who logged in to view your portfolio.</p>
+      </div>
+      <ul id="visitorsList" class="visitors-list">
+        <!-- Injected dynamically -->
+      </ul>
+      <button id="clearVisitorsBtn" class="btn btn-xs btn-danger" style="margin-top: 1rem;">
+        <i class="fa-solid fa-trash"></i> Clear Visitor History
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL 6: DYNAMIC ADD CERTIFICATION (OWNER ONLY) -->
   <div id="addCertModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card add-cert-card">
       <button class="modal-close-btn" id="closeAddCertBtn" aria-label="Close Add Certificate Dialog">
@@ -1182,7 +1237,7 @@
     </div>
   </div>
 
-  <!-- MODAL 5: MANAGE CERTIFICATIONS DATA -->
+  <!-- MODAL 7: MANAGE CERTIFICATIONS DATA -->
   <div id="manageCertsModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card manage-certs-card">
       <button class="modal-close-btn" id="closeManageCertsBtn" aria-label="Close Management Dialog">
@@ -1217,7 +1272,7 @@
     </div>
   </div>
 
-  <!-- MODAL 6: FULLSCREEN RESUME MODAL -->
+  <!-- MODAL 8: FULLSCREEN RESUME MODAL -->
   <div id="resumeModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card resume-modal-card">
       <div class="modal-topbar">
@@ -1237,12 +1292,12 @@
     </div>
   </div>
 
-  <!-- MODAL 7: COMMAND PALETTE (Ctrl+K) -->
+  <!-- MODAL 9: COMMAND PALETTE (Ctrl+K) -->
   <div id="cmdPaletteModal" class="modal-overlay" aria-hidden="true">
     <div class="modal-container glass-card cmd-palette-card">
       <div class="cmd-input-wrapper">
         <i class="fa-solid fa-terminal cmd-icon"></i>
-        <input type="text" id="cmdInput" placeholder="Type a command (e.g. 'projects', 'certs', 'admin', 'contact')..." autofocus />
+        <input type="text" id="cmdInput" placeholder="Type a command (e.g. 'projects', 'certs', 'contact')..." autofocus />
         <span class="cmd-esc-tag">ESC</span>
       </div>
       <div class="cmd-results" id="cmdResults">
@@ -1255,11 +1310,6 @@
           <i class="fa-solid fa-award"></i>
           <span class="cmd-title">Go to Certifications Hub</span>
           <span class="cmd-badge">Jump</span>
-        </div>
-        <div class="cmd-item" data-action="trigger" data-trigger="admin-login">
-          <i class="fa-solid fa-key"></i>
-          <span class="cmd-title">Owner Edit Mode Login (Passcode)</span>
-          <span class="cmd-badge">Owner</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#resume">
           <i class="fa-solid fa-file-pdf"></i>
