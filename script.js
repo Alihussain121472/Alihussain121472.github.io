@@ -217,17 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
       subtitle: 'Daily AI-Powered Intelligence Briefings & Student Program Tracking',
       pitch: 'An automated morning intelligence briefing platform for students that filters out internet noise and generates instant 60-second AI summaries of fellowships, tech breakthroughs, and student programs.',
       skills: [
-        'LLM Prompt Engineering & Distillation',
-        'Sub-second Inference Orchestration',
-        'Asynchronous Background Cron Architecture',
-        'Relational Schema & Vector Modeling',
-        'Automated Content Curation Pipeline',
-        'Student Opportunity Scraping & Triage'
+        'AI Prompt Engineering & Optimization',
+        'Ultra-Fast AI Response Time (<1 sec)',
+        'Automated Background Scheduling',
+        'Database Design & Data Management',
+        'Automated News & Program Curation',
+        'Smart Filtering of Student Programs'
       ],
       tools: [
         'Python', 'Flask', 'Llama 3.3 (70B)', 'Groq Cloud API',
         'Supabase', 'PostgreSQL', 'APScheduler', 'Tailwind CSS',
-        'Gunicorn', 'RESTful Endpoints'
+        'Gunicorn', 'REST APIs'
       ],
       sites: [
         { label: 'Live SaaS Application', url: 'https://www.novabrief.tech' },
@@ -251,14 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'AUTONOMOUS WORKFLOW · AI AGENT',
       title: 'NovaBrief Email Reply Agent',
       subtitle: 'Autonomous Context-Aware Inbox Assistant Built with n8n & LLMs',
-      pitch: 'A 24/7 autonomous inbox assistant that reads incoming support & business emails, understands intent, and drafts contextual human-like replies with zero manual effort.',
+      pitch: 'A 24/7 automated inbox assistant that reads incoming support & business emails, understands what the sender needs, and drafts ready-to-send replies automatically.',
       skills: [
-        'Event-Driven Webhook Architecture',
-        'Multi-Step Agent Reasoning & Intent Triage',
-        'Anti-Hallucination Guardrails & Fallbacks',
-        'Email Context Parsing & Entity Extraction',
-        'JSON Schema Validation & Error Recovery',
-        'Human-in-the-Loop Quality Gates'
+        'Instant Webhook Event Triggers',
+        'Customer Question & Intent Understanding',
+        'Accurate AI Responses & Safety Checks',
+        'Extracting Details from Emails',
+        'Data Validation & Error Handling',
+        'Human Review Before Sending'
       ],
       tools: [
         'n8n Workflow Automation', 'Groq API', 'Llama 3.3',
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
       metrics: [
         '94% automated resolution rate on routine queries',
         'Under 10 seconds from email receipt to generated draft',
-        'Eliminated an estimated 15+ hours of weekly manual inbox toil',
+        'Saves 15+ hours of manual email work every week',
         'Zero security incidents via strict token isolation'
       ],
       actions: [
@@ -288,11 +288,11 @@ document.addEventListener('DOMContentLoaded', () => {
       subtitle: '24/7 Intelligent Property Valuation & Investor Consultation Assistant',
       pitch: 'An on-demand property advisory agent that answers plot inquiries, compares sector pricing trends, and calculates transfer fees for DHA Multan investors and overseas buyers.',
       skills: [
-        'Domain-Specific RAG Knowledge Engineering',
-        'Real Estate Financial Valuation & ROI Modeling',
-        'Urdu & English Conversational NLP',
-        'Sector Liquidity & Growth Forecasting',
-        'Automated Transfer Fee & Tax Calculations'
+        'Real Estate Valuation & Property Analysis',
+        'Urdu & English Conversational AI',
+        'Sector Price Trends & Forecasting',
+        'Automated Transfer Fee & Tax Calculations',
+        'Fast Property Database Search'
       ],
       tools: [
         'Python', 'Anthropic Claude API', 'n8n',
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
       metrics: [
         'Covers all 20+ residential and commercial sectors in DHA Multan',
         'Zero downtime query resolution for overseas Pakistani buyers',
-        'Instantaneous calculation of transfer taxes, CVT, and stamp duties',
+        'Instant calculation of transfer taxes, CVT, and stamp duties',
         'High investor satisfaction during pilot phase'
       ],
       actions: [
@@ -322,10 +322,10 @@ document.addEventListener('DOMContentLoaded', () => {
       subtitle: 'AI-Powered Citizen Guidance & Public Administrative Support',
       pitch: 'A civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.',
       skills: [
-        'Multi-Lingual Public Service Triage',
-        'Legal & Procedural Prompt Structuring',
-        'Document Checklist Automation',
-        'Web Security & Accessible UI Design'
+        'Multi-Lingual Citizen Assistance (Urdu & English)',
+        'Plain-Language Procedure Guidance',
+        'Automated Document Checklists',
+        'User-Friendly Web Interface'
       ],
       tools: [
         'Python', 'Django Framework', 'Open-Source LLMs',
@@ -349,14 +349,14 @@ document.addEventListener('DOMContentLoaded', () => {
     'seo-agent': {
       category: 'GROWTH ENGINE · AUTOMATION PIPELINE',
       title: 'Autonomous SEO & Content Agent',
-      subtitle: 'End-to-End Competitor SERP Analysis & E-E-A-T Content Structuring',
-      pitch: 'An automated pipeline that scrapes top-ranking Google search competitors, extracts keyword entity gaps, and structures high-ranking articles in minutes instead of days.',
+      subtitle: 'End-to-End Competitor Analysis & Search-Optimized Content Structuring',
+      pitch: 'An automated tool that analyzes top-ranking Google search results, finds the best keywords, and creates well-structured article outlines in minutes.',
       skills: [
-        'Automated SERP Scraping & Parsing',
-        'Semantic Entity & N-Gram Extraction',
-        'Google E-E-A-T Signal Optimization',
-        'Structured Schema JSON-LD Generation',
-        'Internal Link Graph Construction'
+        'Google Search Competitor Analysis',
+        'Keyword & Topic Research',
+        'SEO Content Optimization',
+        'Structured Web Metadata',
+        'Article Outline Generation'
       ],
       tools: [
         'Python', 'BeautifulSoup4', 'Playwright',
@@ -368,9 +368,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { label: 'GitHub Repository', url: 'https://github.com/Alihussain121472' }
       ],
       metrics: [
-        '85% reduction in manual content structuring and research time',
-        'Over 4,500 semantic keywords processed per client batch',
-        'Generated Schema markup passes 100% Google Rich Results tests'
+        '85% reduction in manual content research time',
+        'Over 4,500 keywords analyzed per project batch',
+        'Structured metadata passes 100% Google Rich Results tests'
       ],
       actions: [
         { label: 'View GitHub Repository', url: 'https://github.com/Alihussain121472', primary: true, icon: 'fa-brands fa-github' },
