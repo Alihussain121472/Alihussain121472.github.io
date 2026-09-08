@@ -214,23 +214,23 @@ document.addEventListener('DOMContentLoaded', () => {
     'novabrief': {
       category: 'AI SAAS PLATFORM · LIVE IN PRODUCTION',
       title: 'NovaBrief Tech',
-      subtitle: 'Daily AI-Powered Intelligence Briefings & Student Program Tracking',
-      pitch: 'An automated morning intelligence briefing platform for students that filters out internet noise and generates instant 60-second AI summaries of fellowships, tech breakthroughs, and student programs.',
+      subtitle: 'AI Student Intelligence, Opportunity Hunter & Daily Tech Digests',
+      pitch: 'An automated platform that hunts elite student programs (Google Student Facilitator, Google Arcade, Microsoft Fabric, NASA Open Science, fellowships) and generates instant 60-second AI summaries of global breakthroughs.',
       skills: [
-        'AI Prompt Engineering & Optimization',
-        'Ultra-Fast AI Response Time (<1 sec)',
-        'Automated Background Scheduling',
-        'Database Design & Data Management',
-        'Automated News & Program Curation',
-        'Smart Filtering of Student Programs'
+        'Autonomous Program Hunter Agent (Scrapes Scholarships & Grants)',
+        'Ultra-Fast AI Summaries (<1 sec response via Groq)',
+        'Automated Background Scheduling (APScheduler)',
+        'Supabase & PostgreSQL Relational Database Architecture',
+        'Student Opportunity Tracking & Instant Alert System',
+        'Nova Admin OS Portal & System Health Diagnostics'
       ],
       tools: [
         'Python', 'Flask', 'Llama 3.3 (70B)', 'Groq Cloud API',
         'Supabase', 'PostgreSQL', 'APScheduler', 'Tailwind CSS',
-        'Gunicorn', 'REST APIs'
+        'Gunicorn', 'NewsAPI'
       ],
       sites: [
-        { label: 'Live SaaS Application', url: 'https://www.novabrief.tech' },
+        { label: 'Live SaaS Platform (novabrief.tech)', url: 'https://www.novabrief.tech' },
         { label: 'Groq Cloud Inference Engine', url: 'https://groq.com' },
         { label: 'Supabase Cloud Database', url: 'https://supabase.com' },
         { label: 'Render Cloud Deployment', url: 'https://render.com' },
@@ -238,98 +238,98 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
       metrics: [
         'Sub-second (<650ms) Llama 3.3 generation latency via Groq',
-        '500+ active student readers receiving curated digests',
-        'Hourly background scraper operates with 0 manual intervention',
-        '99.8% server uptime maintained across academic cycles'
+        'Automated Program Hunter continuously tracks Google, NASA & Microsoft programs',
+        'Hourly background jobs run with zero manual intervention',
+        'Live in production with active student subscribers'
       ],
       actions: [
         { label: 'Visit Live novabrief.tech', url: 'https://www.novabrief.tech', primary: true, icon: 'fa-globe' },
         { label: 'GitHub Profile', url: 'https://github.com/Alihussain121472', primary: false, icon: 'fa-brands fa-github' }
       ]
     },
-    'email-agent': {
-      category: 'AUTONOMOUS WORKFLOW · AI AGENT',
-      title: 'NovaBrief Email Reply Agent',
-      subtitle: 'Autonomous Context-Aware Inbox Assistant Built with n8n & LLMs',
-      pitch: 'A 24/7 automated inbox assistant that reads incoming support & business emails, understands what the sender needs, and drafts ready-to-send replies automatically.',
+    'leads-agent': {
+      category: 'AUTONOMOUS SCOUT · B2B SAAS',
+      title: 'Araknet Business Discovery Agent',
+      subtitle: 'Autonomous Business Scouting, Digital Presence Audit & Lead Generation',
+      pitch: 'An autonomous AI scout that scans local and international businesses across any city, audits their websites and mobile presence, and scores high-value client opportunities.',
       skills: [
-        'Instant Webhook Event Triggers',
-        'Customer Question & Intent Understanding',
-        'Accurate AI Responses & Safety Checks',
-        'Extracting Details from Emails',
-        'Data Validation & Error Handling',
-        'Human Review Before Sending'
+        'Autonomous Business Directory Scouting',
+        'Website & Mobile App Presence Auditing',
+        'AI Automation Potential Scoring (0–100)',
+        'SerpAPI & Google Places Integration',
+        'Next.js 16 SaaS Dashboard & Real-Time Filters',
+        'Automated Lead Management & Proposal Preparation'
       ],
       tools: [
-        'n8n Workflow Automation', 'Groq API', 'Llama 3.3',
-        'Gmail API / IMAP', 'Webhooks', 'Docker',
-        'Node.js Runtime', 'JSON Schema'
+        'Next.js 16 (App Router)', 'React 19', 'TypeScript', 'MongoDB Atlas',
+        'SerpAPI', 'Google Places API', 'Tailwind CSS', 'REST APIs'
       ],
       sites: [
-        { label: 'n8n Workflow Platform', url: 'https://n8n.io' },
-        { label: 'Google Cloud Platform OAuth', url: 'https://console.cloud.google.com' },
-        { label: 'Groq Fast LLM Inference', url: 'https://groq.com' },
-        { label: 'NovaBrief Webhook Ingestion', url: 'https://www.novabrief.tech' }
+        { label: 'Live Platform (araknet.tech)', url: 'https://araknet.tech' },
+        { label: 'Google Places API Documentation', url: 'https://developers.google.com/maps' },
+        { label: 'SerpAPI Search Engine', url: 'https://serpapi.com' },
+        { label: 'GitHub Repository', url: 'https://github.com/Alihussain121472' }
       ],
       metrics: [
-        '94% automated resolution rate on routine queries',
-        'Under 10 seconds from email receipt to generated draft',
-        'Saves 15+ hours of manual email work every week',
-        'Zero security incidents via strict token isolation'
+        'Scouts hundreds of business listings per city run',
+        'Identifies businesses missing websites, SSL security, or mobile UX',
+        'Automated scoring saves 15+ hours of manual prospecting weekly',
+        'Full modern SaaS stack with React 19, Next.js 16 & MongoDB'
       ],
       actions: [
-        { label: 'View GitHub Workflows', url: 'https://github.com/Alihussain121472', primary: true, icon: 'fa-brands fa-github' },
-        { label: 'Contact About Custom n8n Build', url: '#contact', primary: false, icon: 'fa-envelope' }
+        { label: 'Visit araknet.tech', url: 'https://araknet.tech', primary: true, icon: 'fa-globe' },
+        { label: 'GitHub Profile', url: 'https://github.com/Alihussain121472', primary: false, icon: 'fa-brands fa-github' }
       ]
     },
     'dha-agent': {
       category: 'VERTICAL SAAS · REAL ESTATE AI',
-      title: 'DHA Multan Real Estate AI Agent',
-      subtitle: '24/7 Intelligent Property Valuation & Investor Consultation Assistant',
-      pitch: 'An on-demand property advisory agent that answers plot inquiries, compares sector pricing trends, and calculates transfer fees for DHA Multan investors and overseas buyers.',
+      title: 'DHA Multan Real Estate AI Advisory Agent',
+      subtitle: '24/7 Property Valuation, Sector Trends & Investor Consultation Assistant',
+      pitch: 'An on-demand property advisor that answers plot inquiries, compares sector pricing trends, and calculates transfer fees for DHA Multan investors and overseas buyers.',
       skills: [
-        'Real Estate Valuation & Property Analysis',
-        'Urdu & English Conversational AI',
-        'Sector Price Trends & Forecasting',
-        'Automated Transfer Fee & Tax Calculations',
-        'Fast Property Database Search'
+        'Real Estate Valuation & Property Price Trends',
+        'Bilingual Conversational AI (Urdu & English)',
+        'Sector Price Forecasting Across 20+ Sectors',
+        'Automated Transfer Fee, CVT & Stamp Duty Calculation',
+        'Property Knowledge Engine & Fast Inquiry Search'
       ],
       tools: [
-        'Python', 'Anthropic Claude API', 'n8n',
-        'Vector Embeddings', 'SQLite / PostgreSQL', 'FastAPI',
-        'HTML5 / CSS3 Responsive UI'
+        'Python', 'Anthropic Claude API', 'FastAPI',
+        'Vector Embeddings', 'SQLite / PostgreSQL',
+        'Responsive Web UI'
       ],
       sites: [
         { label: 'DHA Multan Official Reference', url: 'https://www.dhamultan.org' },
         { label: 'Anthropic Claude Engine', url: 'https://anthropic.com' },
-        { label: 'GitHub Repository', url: 'https://github.com/Alihussain121472' },
-        { label: 'Portfolio Host (araknet.tech)', url: 'https://araknet.tech' }
+        { label: 'Portfolio Host (araknet.tech)', url: 'https://araknet.tech' },
+        { label: 'GitHub Profile', url: 'https://github.com/Alihussain121472' }
       ],
       metrics: [
         'Covers all 20+ residential and commercial sectors in DHA Multan',
         'Zero downtime query resolution for overseas Pakistani buyers',
         'Instant calculation of transfer taxes, CVT, and stamp duties',
-        'High investor satisfaction during pilot phase'
+        'High investor satisfaction during pilot testing'
       ],
       actions: [
-        { label: 'Request Demo / Consultation', url: '#contact', primary: true, icon: 'fa-envelope' },
+        { label: 'Contact Syed Ali Hussain', url: '#contact', primary: true, icon: 'fa-envelope' },
         { label: 'GitHub Profile', url: 'https://github.com/Alihussain121472', primary: false, icon: 'fa-brands fa-github' }
       ]
     },
     'khidmat-ai': {
-      category: 'CIVIC TECH · PUBLIC ASSISTANCE',
-      title: 'Khidmat AI — Civic Assistance',
-      subtitle: 'AI-Powered Citizen Guidance & Public Administrative Support',
-      pitch: 'A civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.',
+      category: 'CIVIC TECH · PUBLIC ASSISTANCE APP',
+      title: 'Khidmat AI — Civic & Daily Life Assistance',
+      subtitle: 'AI-Powered Public Service Guidance & Everyday Problem Solving (Android & Web)',
+      pitch: 'A bilingual civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.',
       skills: [
-        'Multi-Lingual Citizen Assistance (Urdu & English)',
-        'Plain-Language Procedure Guidance',
-        'Automated Document Checklists',
-        'User-Friendly Web Interface'
+        'Bilingual Citizen Assistance (Urdu & English)',
+        'Plain-Language Government Procedure Guidance',
+        'Automated Document Preparation Checklists',
+        'Native Android App with Jetpack Compose',
+        'Python Django Backend & RESTful APIs'
       ],
       tools: [
-        'Python', 'Django Framework', 'Open-Source LLMs',
-        'REST APIs', 'SQLite / PostgreSQL', 'Bootstrap 5'
+        'Android / Kotlin', 'Jetpack Compose', 'Python',
+        'Django Framework', 'Room Database', 'REST APIs', 'Open-Source LLMs'
       ],
       sites: [
         { label: 'Citizen Service Portals Reference', url: 'https://pakistan.gov.pk' },
@@ -339,7 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
       metrics: [
         '1,200+ public service inquiries assisted',
         'Average response latency under 1.4 seconds',
-        '100% free accessibility for citizens with zero user paywalls'
+        'Bilingual assistance in both Urdu and English',
+        '100% free accessibility for citizens with zero paywalls'
       ],
       actions: [
         { label: 'View on GitHub', url: 'https://github.com/Alihussain121472', primary: true, icon: 'fa-brands fa-github' },
@@ -347,20 +348,20 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     'seo-agent': {
-      category: 'GROWTH ENGINE · AUTOMATION PIPELINE',
-      title: 'Autonomous SEO & Content Agent',
-      subtitle: 'End-to-End Competitor Analysis & Search-Optimized Content Structuring',
-      pitch: 'An automated tool that analyzes top-ranking Google search results, finds the best keywords, and creates well-structured article outlines in minutes.',
+      category: 'SEARCH INTELLIGENCE · SEO SPECIALIST AGENT',
+      title: 'Autonomous SEO & Content Specialist Agent',
+      subtitle: 'Competitor Analysis, Keyword Entity Extraction & Rank-Ready Outlines',
+      pitch: 'An automated agent pipeline that scrapes top-ranking Google search competitors, extracts keyword entity gaps, and structures high-ranking articles in minutes instead of days.',
       skills: [
-        'Google Search Competitor Analysis',
-        'Keyword & Topic Research',
-        'SEO Content Optimization',
-        'Structured Web Metadata',
-        'Article Outline Generation'
+        'Google Search Competitor Intelligence',
+        'Semantic Keyword & Entity Gap Analysis',
+        'On-Page & Technical SEO Auditing',
+        'Structured Schema & Metadata Generation',
+        'Content Outline & Article Blueprint Generation'
       ],
       tools: [
-        'Python', 'BeautifulSoup4', 'Playwright',
-        'Groq / Llama 3.3', 'Markdown AST Engine', 'RegEx'
+        'Python', 'Groq / Llama 3.3', 'BeautifulSoup4',
+        'Playwright', 'RegEx', 'Markdown Engine'
       ],
       sites: [
         { label: 'Google Search Console Connectors', url: 'https://search.google.com' },
@@ -379,6 +380,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Backwards compatibility alias
+  projectBlueprints['email-agent'] = projectBlueprints['leads-agent'];
+
   const projectModal = document.getElementById('projectModal');
   const closeProjectModalBtn = document.getElementById('closeProjectModalBtn');
   const bpCategoryTag = document.getElementById('bpCategoryTag');
@@ -392,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bpActionLinks = document.getElementById('bpActionLinks');
 
   window.openProjectModal = function(projectId) {
+    if (projectId === 'email-agent') projectId = 'leads-agent';
     const data = projectBlueprints[projectId];
     if (!data || !projectModal) return;
 
@@ -1015,7 +1020,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 7. OWNER SECURITY GATE & LIVE PENCIL EDITOR (SECRET: Ctrl+Shift+E, PASSCODE: araknet2026)
   // ==========================================
-  const EDITS_STORAGE_KEY = 'araknet_portfolio_custom_edits_v1';
+  const EDITS_STORAGE_KEY = 'araknet_portfolio_custom_edits_v2';
   const OWNER_SESSION_KEY = 'araknet_owner_auth_session';
   const DEFAULT_PASSCODE = 'araknet2026';
 

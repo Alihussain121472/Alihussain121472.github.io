@@ -441,18 +441,18 @@
                 <div class="project-quick-pitch">
                   <span class="pitch-tag"><i class="fa-solid fa-bolt"></i> 10-SECOND SUMMARY:</span>
                   <p class="pitch-text editable-target" data-edit-key="proj_nb_pitch">
-                    An automated daily intelligence briefing app for students that filters out internet noise and generates instant 60-second AI summaries of fellowships, tech breakthroughs, and student programs.
+                    An automated daily intelligence briefing and opportunity hunter for students that filters out internet noise and generates instant 60-second AI summaries of fellowships, tech breakthroughs, and student programs.
                   </p>
                 </div>
 
                 <p class="project-description editable-target" data-edit-key="proj_nb_desc">
-                  NovaBrief tracks global opportunities, research papers, and competitions, automatically curating and summarizing high-signal updates using Llama 3.3 via Groq API. Features scheduled background scrapers, automated email delivery with APScheduler, and a blazing-fast dashboard.
+                  NovaBrief tracks global opportunities, research programs, and student fellowships before they close. It curates high-signal updates using Llama 3.3 via Groq Cloud API, runs an automated Program Hunter agent with scheduled scrapers, and delivers morning digests with APScheduler.
                 </p>
 
                 <div class="project-highlights">
-                  <div class="highlight-item"><i class="fa-solid fa-check"></i> Sub-second Groq Llama 3.3 inference pipeline</div>
-                  <div class="highlight-item"><i class="fa-solid fa-check"></i> Automated hourly cron &amp; daily email digests</div>
-                  <div class="highlight-item"><i class="fa-solid fa-check"></i> Supabase PostgreSQL relational data architecture</div>
+                  <div class="highlight-item"><i class="fa-solid fa-check"></i> Sub-second Groq Llama 3.3 inference pipeline (&lt;650ms)</div>
+                  <div class="highlight-item"><i class="fa-solid fa-check"></i> Program Hunter Agent tracks Google, NASA &amp; Microsoft programs</div>
+                  <div class="highlight-item"><i class="fa-solid fa-check"></i> Automated APScheduler background crons &amp; email digests</div>
                 </div>
 
                 <div class="tech-stack-tags">
@@ -483,41 +483,43 @@
           <!-- SUB-GRID FOR PROJECTS 2, 3, 4, 5 -->
           <div class="projects-subgrid">
 
-            <!-- PROJECT 2: NovaBrief Email Reply Agent -->
+            <!-- PROJECT 2: Araknet Business Lead Discovery Agent -->
             <div class="project-card glass-card">
               <div class="project-card-header">
-                <div class="project-card-img-wrapper" onclick="window.openProjectModal('email-agent')">
-                  <img src="assets/images/email-agent-preview.svg" alt="NovaBrief Email Reply Agent" class="project-card-img" />
-                  <span class="card-type-tag"><i class="fa-solid fa-robot"></i> AI Automation</span>
+                <div class="project-card-img-wrapper" onclick="window.openProjectModal('leads-agent')">
+                  <img src="assets/images/leads-agent-preview.svg" alt="Araknet Business Lead Discovery Agent" class="project-card-img" />
+                  <span class="card-type-tag"><i class="fa-solid fa-crosshairs"></i> B2B AI Scout</span>
                   <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Details</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
-                  <span class="pulse-indicator"></span> 🟢 Active Workflow
+                  <span class="pulse-indicator"></span> 🟢 Live Platform
                 </div>
-                <h4 class="card-title editable-target" data-edit-key="proj_email_title">NovaBrief Email Reply Agent</h4>
+                <h4 class="card-title editable-target" data-edit-key="proj_leads_title">Araknet Business Discovery Agent</h4>
                 
                 <!-- 10-SECOND SUMMARY -->
                 <div class="project-quick-pitch-mini">
                   <strong><i class="fa-solid fa-bolt"></i> 10-SEC SUMMARY:</strong>
-                  <span class="editable-target" data-edit-key="proj_email_pitch">
-                    A 24/7 autonomous inbox assistant that reads incoming support &amp; business emails, understands intent, and drafts contextual human-like replies with zero manual effort.
+                  <span class="editable-target" data-edit-key="proj_leads_pitch">
+                    An autonomous AI scout that scans local and international businesses across any city, audits their websites and mobile presence, and scores high-value client opportunities.
                   </span>
                 </div>
 
-                <p class="card-desc editable-target" data-edit-key="proj_email_desc">
-                  An intelligent automation agent that reads customer emails, understands their questions, and writes ready-to-send replies automatically.
+                <p class="card-desc editable-target" data-edit-key="proj_leads_desc">
+                  Scouts business directories using Google Places API and SerpAPI. Automatically audits websites for SSL and mobile responsiveness, checks for mobile apps, calculates AI automation potential scores, and organizes leads into an interactive Next.js SaaS dashboard.
                 </p>
                 <div class="tech-stack-tags">
-                  <span class="tech-tag">n8n</span>
-                  <span class="tech-tag">Groq LLM</span>
-                  <span class="tech-tag">Webhooks</span>
-                  <span class="tech-tag">Gmail API</span>
+                  <span class="tech-tag">Next.js 16</span>
+                  <span class="tech-tag">React 19</span>
+                  <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">MongoDB Atlas</span>
+                  <span class="tech-tag">SerpAPI</span>
+                  <span class="tech-tag">Google Places</span>
                 </div>
               </div>
               <div class="project-card-footer">
-                <button class="btn btn-xs btn-outline" onclick="window.openProjectModal('email-agent')">
+                <button class="btn btn-xs btn-outline" onclick="window.openProjectModal('leads-agent')">
                   <i class="fa-solid fa-diagram-project"></i> Architecture &amp; Tools
                 </button>
               </div>
@@ -528,13 +530,13 @@
               <div class="project-card-header">
                 <div class="project-card-img-wrapper" onclick="window.openProjectModal('dha-agent')">
                   <img src="assets/images/dha-agent-preview.svg" alt="DHA Multan Real Estate AI Agent" class="project-card-img" />
-                  <span class="card-type-tag"><i class="fa-solid fa-building"></i> Vertical SaaS</span>
+                  <span class="card-type-tag"><i class="fa-solid fa-building"></i> Real Estate AI</span>
                   <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Details</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
-                  <span class="pulse-indicator"></span> 🟢 Live Prototype
+                  <span class="pulse-indicator"></span> 🟢 Active Prototype
                 </div>
                 <h4 class="card-title editable-target" data-edit-key="proj_dha_title">DHA Multan Real Estate AI Agent</h4>
                 
@@ -542,18 +544,18 @@
                 <div class="project-quick-pitch-mini">
                   <strong><i class="fa-solid fa-bolt"></i> 10-SEC SUMMARY:</strong>
                   <span class="editable-target" data-edit-key="proj_dha_pitch">
-                    An on-demand property advisory agent that answers plot inquiries, compares sector pricing trends, and calculates transfer fees for DHA Multan investors and overseas buyers.
+                    An on-demand property advisor that answers plot inquiries, compares sector pricing trends, and calculates transfer fees for DHA Multan investors and overseas buyers.
                   </span>
                 </div>
 
                 <p class="card-desc editable-target" data-edit-key="proj_dha_desc">
-                  An AI assistant built for DHA Multan real estate buyers. Gives instant property prices, plot comparisons, and fee calculations 24/7.
+                  An intelligent property advisory agent covering all 20+ sectors in DHA Multan. Provides instant plot valuations, sector price trends, and calculates transfer taxes (CVT, stamp duty) in plain Urdu and English.
                 </p>
                 <div class="tech-stack-tags">
                   <span class="tech-tag">Python</span>
                   <span class="tech-tag">Claude API</span>
-                  <span class="tech-tag">n8n</span>
-                  <span class="tech-tag">Knowledge Engine</span>
+                  <span class="tech-tag">FastAPI</span>
+                  <span class="tech-tag">Vector Search</span>
                 </div>
               </div>
               <div class="project-card-footer">
@@ -568,31 +570,32 @@
               <div class="project-card-header">
                 <div class="project-card-img-wrapper" onclick="window.openProjectModal('khidmat-ai')">
                   <img src="assets/images/khidmat-ai-preview.svg" alt="Khidmat AI Public Assistance" class="project-card-img" />
-                  <span class="card-type-tag"><i class="fa-solid fa-hand-holding-heart"></i> Civic Tech</span>
+                  <span class="card-type-tag"><i class="fa-solid fa-hand-holding-heart"></i> Civic Tech App</span>
                   <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Details</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
-                  <span class="pulse-indicator"></span> 🟢 Deployed
+                  <span class="pulse-indicator"></span> 🟢 Deployed App
                 </div>
-                <h4 class="card-title editable-target" data-edit-key="proj_khidmat_title">Khidmat AI · Public Assistance</h4>
+                <h4 class="card-title editable-target" data-edit-key="proj_khidmat_title">Khidmat AI · Civic &amp; Public Assistance</h4>
                 
                 <!-- 10-SECOND SUMMARY -->
                 <div class="project-quick-pitch-mini">
                   <strong><i class="fa-solid fa-bolt"></i> 10-SEC SUMMARY:</strong>
                   <span class="editable-target" data-edit-key="proj_khidmat_pitch">
-                    A civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.
+                    A bilingual civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.
                   </span>
                 </div>
 
                 <p class="card-desc editable-target" data-edit-key="proj_khidmat_desc">
-                  A helpful web app that answers questions about government procedures, utility bills, and required documents in plain language.
+                  Combines an Android mobile app with a Python Django backend to provide accessible guidance for government documentation, daily public services, and civic problem-solving in plain Urdu and English.
                 </p>
                 <div class="tech-stack-tags">
+                  <span class="tech-tag">Android / Kotlin</span>
                   <span class="tech-tag">Python</span>
                   <span class="tech-tag">Django</span>
-                  <span class="tech-tag">LLM Integration</span>
+                  <span class="tech-tag">Room DB</span>
                   <span class="tech-tag">REST APIs</span>
                 </div>
               </div>
@@ -608,15 +611,15 @@
               <div class="project-card-header">
                 <div class="project-card-img-wrapper" onclick="window.openProjectModal('seo-agent')">
                   <img src="assets/images/seo-agent-preview.svg" alt="Autonomous SEO Agent" class="project-card-img" />
-                  <span class="card-type-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> Growth AI</span>
+                  <span class="card-type-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> Search Intelligence</span>
                   <div class="card-inspect-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click for Details</div>
                 </div>
               </div>
               <div class="project-card-body">
                 <div class="project-status-tag status-live">
-                  <span class="pulse-indicator"></span> 🟢 Internal Tool
+                  <span class="pulse-indicator"></span> 🟢 Autonomous Engine
                 </div>
-                <h4 class="card-title editable-target" data-edit-key="proj_seo_title">Autonomous SEO &amp; Content Agent</h4>
+                <h4 class="card-title editable-target" data-edit-key="proj_seo_title">Autonomous SEO &amp; Content Specialist Agent</h4>
                 
                 <!-- 10-SECOND SUMMARY -->
                 <div class="project-quick-pitch-mini">
@@ -627,13 +630,14 @@
                 </div>
 
                 <p class="card-desc editable-target" data-edit-key="proj_seo_desc">
-                  Automates Google search research: finds top competitor articles, extracts high-ranking keywords, and creates SEO-optimized article outlines.
+                  Automates search engine research: crawls top-ranking Google competitor articles, extracts semantic keyword gaps, and structures SEO-optimized content outlines with valid schema metadata.
                 </p>
                 <div class="tech-stack-tags">
                   <span class="tech-tag">Python</span>
-                  <span class="tech-tag">Prompt Pipelines</span>
-                  <span class="tech-tag">Web Scraping</span>
-                  <span class="tech-tag">Markdown Engine</span>
+                  <span class="tech-tag">Groq / Llama 3.3</span>
+                  <span class="tech-tag">Web Crawling</span>
+                  <span class="tech-tag">Keyword Research</span>
+                  <span class="tech-tag">Playwright</span>
                 </div>
               </div>
               <div class="project-card-footer">
@@ -649,7 +653,7 @@
           <div class="more-projects-bar glass-panel">
             <div class="more-text">
               <h4>Want to explore more experimental agent workflows?</h4>
-              <p>Check out my open-source repositories, n8n JSON templates, and AI experiments on GitHub.</p>
+              <p>Check out my open-source repositories, full-stack agent architectures, and AI experiments on GitHub.</p>
             </div>
             <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
               <i class="fa-brands fa-github"></i> Browse 15+ Repos on GitHub

@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="leadBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090E17"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00C2FF"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <filter id="glowCyan">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="360" rx="12" fill="url(#leadBgGrad)" stroke="#00C2FF" stroke-width="1.5" stroke-opacity="0.3"/>
+  
+  <!-- Subtle Grid Pattern -->
+  <pattern id="dotGridLead" width="20" height="20" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1" fill="#334155" fill-opacity="0.3"/>
+  </pattern>
+  <rect width="600" height="360" rx="12" fill="url(#dotGridLead)"/>
+
+  <!-- Top bar -->
+  <rect width="600" height="38" rx="12" fill="#050B14"/>
+  <circle cx="24" cy="19" r="5" fill="#EF4444"/>
+  <circle cx="42" cy="19" r="5" fill="#F59E0B"/>
+  <circle cx="60" cy="19" r="5" fill="#10B981"/>
+  <text x="80" y="24" font-family="'JetBrains Mono', monospace" font-size="11" fill="#00C2FF">araknet.tech · Business Lead Discovery Agent v2.1</text>
+  <rect x="475" y="9" width="105" height="20" rx="4" fill="#10B981" fill-opacity="0.15"/>
+  <text x="527" y="23" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981">🟢 ACTIVE AGENT</text>
+
+  <!-- Left Column: Search & Target Selector -->
+  <g transform="translate(25, 55)">
+    <rect width="165" height="225" rx="8" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    <text x="14" y="24" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" fill="#F8FAFC">TARGET AUDIENCE</text>
+    
+    <!-- Target Country -->
+    <rect x="14" y="38" width="137" height="28" rx="5" fill="#090E17" stroke="rgba(0,194,255,0.3)"/>
+    <text x="24" y="56" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Country: Pakistan / Global</text>
+    
+    <!-- Target City -->
+    <rect x="14" y="74" width="137" height="28" rx="5" fill="#090E17" stroke="rgba(0,194,255,0.3)"/>
+    <text x="24" y="92" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">City: Islamabad / All</text>
+
+    <!-- Industry Filter -->
+    <rect x="14" y="110" width="137" height="28" rx="5" fill="#090E17" stroke="rgba(0,194,255,0.3)"/>
+    <text x="24" y="128" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Industry: Clinics / Retail</text>
+
+    <!-- Run Agent Button -->
+    <rect x="14" y="152" width="137" height="34" rx="6" fill="url(#cyanGrad)" filter="url(#glowCyan)"/>
+    <text x="82" y="173" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">RUN SCOUT AGENT</text>
+    
+    <text x="82" y="208" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">SerpAPI + Google Places</text>
+  </g>
+
+  <!-- Center & Right: Live Scanned Leads & Audit Pipeline -->
+  <g transform="translate(205, 55)">
+    <rect width="370" height="225" rx="8" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    
+    <!-- Table Header -->
+    <rect x="10" y="10" width="350" height="26" rx="4" fill="#090E17"/>
+    <text x="20" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">BUSINESS</text>
+    <text x="135" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">WEBSITE AUDIT</text>
+    <text x="240" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">APP</text>
+    <text x="290" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">OPPORTUNITY</text>
+
+    <!-- Row 1 -->
+    <g transform="translate(10, 44)">
+      <rect width="350" height="48" rx="5" fill="#0F172A" stroke="rgba(239,68,68,0.2)"/>
+      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Horizon Healthcare</text>
+      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Medical Clinic · Islamabad</text>
+      <rect x="125" y="14" width="85" height="20" rx="3" fill="#EF4444" fill-opacity="0.15"/>
+      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#EF4444">NO WEBSITE</text>
+      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#EF4444">None</text>
+      <rect x="280" y="14" width="60" height="20" rx="3" fill="#10B981" fill-opacity="0.15"/>
+      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#10B981">94% HIGH</text>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(10, 100)">
+      <rect width="350" height="48" rx="5" fill="#0F172A" stroke="rgba(245,158,11,0.2)"/>
+      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Apex Logistics Ltd</text>
+      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Supply Chain · Karachi</text>
+      <rect x="125" y="14" width="85" height="20" rx="3" fill="#F59E0B" fill-opacity="0.15"/>
+      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F59E0B">OUTDATED / HTTP</text>
+      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#EF4444">None</text>
+      <rect x="280" y="14" width="60" height="20" rx="3" fill="#00C2FF" fill-opacity="0.15"/>
+      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#00C2FF">88% MED</text>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(10, 156)">
+      <rect width="350" height="48" rx="5" fill="#0F172A" stroke="rgba(16,185,129,0.2)"/>
+      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Greenleaf Retailers</text>
+      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Consumer Goods · Rawalpindi</text>
+      <rect x="125" y="14" width="85" height="20" rx="3" fill="#10B981" fill-opacity="0.15"/>
+      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#10B981">LIVE SSL</text>
+      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F59E0B">No App</text>
+      <rect x="280" y="14" width="60" height="20" rx="3" fill="#3B82F6" fill-opacity="0.15"/>
+      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#60A5FA">76% AI APP</text>
+    </g>
+  </g>
+
+  <!-- Bottom Metric Bar -->
+  <rect x="25" y="295" width="550" height="45" rx="8" fill="#050B14" stroke="rgba(255,255,255,0.06)"/>
+  <text x="45" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38BDF8">🎯 100+ Opportunities Scanned</text>
+  <text x="240" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981">⚡ Automated Website &amp; App Audit</text>
+  <text x="460" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F59E0B">🚀 Deployed on Vercel</text>
+</svg>
