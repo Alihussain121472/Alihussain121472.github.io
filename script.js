@@ -1020,7 +1020,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 7. OWNER SECURITY GATE & LIVE PENCIL EDITOR (SECRET: Ctrl+Shift+E, PASSCODE: araknet2026)
   // ==========================================
-  const EDITS_STORAGE_KEY = 'araknet_portfolio_custom_edits_v2';
+  const EDITS_STORAGE_KEY = 'araknet_portfolio_custom_edits_v3';
   const OWNER_SESSION_KEY = 'araknet_owner_auth_session';
   const DEFAULT_PASSCODE = 'araknet2026';
 
@@ -1471,56 +1471,56 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 12. INTERACTIVE Q&A / DEVELOPER AMA ENGINE
   // ==========================================
-  const QA_STORAGE_KEY = 'araknet_qa_questions_v1';
+  const QA_STORAGE_KEY = 'araknet_qa_questions_v2';
   const QA_UPVOTES_KEY = 'araknet_qa_upvotes_v1';
   const QA_SUBMISSIONS_KEY = 'araknet_qa_submissions_v1';
 
   const DEFAULT_QA_ITEMS = [
     {
       id: 'qa-seed-1',
-      asker: 'Marcus Vance',
-      email: 'marcus.vance@systemscale.io',
+      asker: 'Tech Lead @ AI Startup',
+      email: '',
       category: 'AI Agents & LLMs',
-      question: 'What inference architecture and optimizations do you use to keep NovaBrief latency consistently under 650ms?',
+      question: 'How do you keep NovaBrief responses consistently fast under high reader load?',
       timestamp: new Date(Date.now() - 3600 * 1000 * 5).toISOString(),
       status: 'answered',
       upvotes: 18,
       answer: {
-        text: 'We combine Groq LPU inference using Llama 3.3 70B with token streaming distillation and prompt caching. Background jobs run via asynchronous APScheduler workers and Supabase/Redis caching, eliminating cold starts so readers receive instant 60-second summaries.',
+        text: 'NovaBrief uses Groq Cloud API running Llama 3.3 70B for fast inference (<650ms). We run background scrapers and daily email digests via APScheduler workers and cache student program digests in Supabase PostgreSQL, ensuring users get immediate access with no loading delays.',
         author: 'Syed Ali Hussain',
-        role: 'AI Developer · Author',
+        role: 'AI Developer & Author',
         answeredAt: new Date(Date.now() - 3600 * 1000 * 3).toISOString()
       }
     },
     {
       id: 'qa-seed-2',
-      asker: 'Fatima Zahra',
-      email: 'fatima.zahra@cloudtech.co',
+      asker: 'Product Manager',
+      email: '',
       category: 'NovaBrief & Projects',
-      question: 'How does your 24/7 autonomous email reply agent prevent hallucinations when handling critical customer inquiries?',
+      question: 'How does your Araknet Business Discovery Agent scout local businesses and evaluate digital potential?',
       timestamp: new Date(Date.now() - 3600 * 1000 * 12).toISOString(),
       status: 'answered',
-      upvotes: 14,
+      upvotes: 15,
       answer: {
-        text: 'The agent enforces a deterministic RAG verification gate before any email is dispatched. Incoming inquiries are vectorized against a verified knowledge store; if cosine similarity is below 0.88 or sentiment is high-risk, the agent drafts the reply in staging and routes it to human review instead of auto-sending.',
+        text: 'The agent queries business directories using SerpAPI and Google Places, automatically inspects their website status (SSL, mobile responsiveness, or missing site), checks for mobile apps, and generates an opportunity score to identify businesses that need web development or AI automation.',
         author: 'Syed Ali Hussain',
-        role: 'AI Developer · Author',
+        role: 'AI Developer & Author',
         answeredAt: new Date(Date.now() - 3600 * 1000 * 8).toISOString()
       }
     },
     {
       id: 'qa-seed-3',
-      asker: 'David Miller',
-      email: 'david@stealthlaunch.com',
+      asker: 'Engineering Recruiter',
+      email: '',
       category: 'Hiring & Collaboration',
-      question: 'Are you available for international contract roles or freelance agentic AI engineering?',
+      question: 'Are you open to software engineering roles, internships, or remote freelance projects?',
       timestamp: new Date(Date.now() - 3600 * 1000 * 26).toISOString(),
       status: 'answered',
-      upvotes: 22,
+      upvotes: 24,
       answer: {
-        text: 'Yes! I actively collaborate with global founders, startups, and engineering teams on custom LLM agent pipelines, n8n orchestrations, and full-stack AI SaaS development. Feel free to use the transmission form below or email me directly at syedali6160@gmail.com.',
+        text: 'Yes, absolutely. I am available for software engineering roles, AI developer contracts, and full-stack web builds. You can reach out directly via the contact form below or email me at syedali6160@gmail.com.',
         author: 'Syed Ali Hussain',
-        role: 'AI Developer · Author',
+        role: 'AI Developer & Author',
         answeredAt: new Date(Date.now() - 3600 * 1000 * 20).toISOString()
       }
     }
