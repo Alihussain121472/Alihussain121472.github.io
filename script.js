@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
       actions: [
         { label: 'View on GitHub', url: 'https://github.com/Alihussain121472', primary: true, icon: 'fa-brands fa-github' },
-        { label: 'Contact Syed Ali', url: '#contact', primary: false, icon: 'fa-envelope' }
+        { label: 'Contact Syed Ali Hussain', url: '#contact', primary: false, icon: 'fa-envelope' }
       ]
     },
     'seo-agent': {
@@ -1313,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', () => {
       upvotes: 18,
       answer: {
         text: 'We combine Groq LPU inference using Llama 3.3 70B with token streaming distillation and prompt caching. Background jobs run via asynchronous APScheduler workers and Supabase/Redis caching, eliminating cold starts so readers receive instant 60-second summaries.',
-        author: 'Syed Ali',
+        author: 'Syed Ali Hussain',
         role: 'AI Developer · Author',
         answeredAt: new Date(Date.now() - 3600 * 1000 * 3).toISOString()
       }
@@ -1329,7 +1329,7 @@ document.addEventListener('DOMContentLoaded', () => {
       upvotes: 14,
       answer: {
         text: 'The agent enforces a deterministic RAG verification gate before any email is dispatched. Incoming inquiries are vectorized against a verified knowledge store; if cosine similarity is below 0.88 or sentiment is high-risk, the agent drafts the reply in staging and routes it to human review instead of auto-sending.',
-        author: 'Syed Ali',
+        author: 'Syed Ali Hussain',
         role: 'AI Developer · Author',
         answeredAt: new Date(Date.now() - 3600 * 1000 * 8).toISOString()
       }
@@ -1345,7 +1345,7 @@ document.addEventListener('DOMContentLoaded', () => {
       upvotes: 22,
       answer: {
         text: 'Yes! I actively collaborate with global founders, startups, and engineering teams on custom LLM agent pipelines, n8n orchestrations, and full-stack AI SaaS development. Feel free to use the transmission form below or email me directly at syedali6160@gmail.com.',
-        author: 'Syed Ali',
+        author: 'Syed Ali Hussain',
         role: 'AI Developer · Author',
         answeredAt: new Date(Date.now() - 3600 * 1000 * 20).toISOString()
       }
@@ -1355,7 +1355,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function getQAQuestions() {
     try {
       const stored = localStorage.getItem(QA_STORAGE_KEY);
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        let items = JSON.parse(stored);
+        let updated = false;
+        items.forEach(item => {
+          if (item.answer && item.answer.author === 'Syed Ali') {
+            item.answer.author = 'Syed Ali Hussain';
+            updated = true;
+          }
+        });
+        if (updated) saveQAQuestions(items);
+        return items;
+      }
     } catch (e) {
       console.warn('Error reading QA storage:', e);
     }
@@ -1524,7 +1535,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div style="text-align: center; padding: 2.5rem 1rem; color: var(--text-secondary);">
           <i class="fa-regular fa-comment-dots" style="font-size: 2.4rem; color: var(--accent-cyan); margin-bottom: 0.8rem; display: block;"></i>
           <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">No questions found</h4>
-          <p style="font-size: 0.85rem;">Be the first to ask! Use the transmission box on the left to drop your question to Syed Ali.</p>
+          <p style="font-size: 0.85rem;">Be the first to ask! Use the transmission box on the left to drop your question to Syed Ali Hussain.</p>
         </div>
       `;
       return;
@@ -1540,7 +1551,7 @@ document.addEventListener('DOMContentLoaded', () => {
         answerHtml = `
           <div class="qa-pending-block">
             <i class="fa-solid fa-hourglass-half"></i>
-            <span>In Syed Ali's Review Queue · Typically answered within 24h</span>
+            <span>In Syed Ali Hussain's Review Queue · Typically answered within 24h</span>
           </div>
         `;
       } else if (item.answer) {
@@ -1548,8 +1559,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="qa-answer-block">
             <div class="qa-answer-author-row">
               <div class="qa-author-identity">
-                <img src="assets/images/syed-ali.jpg" alt="Syed Ali" class="qa-author-thumbnail" />
-                <span class="qa-author-name">Syed Ali</span>
+                <img src="assets/images/syed-ali.jpg" alt="Syed Ali Hussain" class="qa-author-thumbnail" />
+                <span class="qa-author-name">Syed Ali Hussain</span>
                 <i class="fa-solid fa-circle-check qa-verified-chip" title="Verified AI Developer"></i>
                 <span class="qa-author-role">${escapeHtml(item.answer.role || 'Author')}</span>
               </div>
@@ -1672,7 +1683,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (qaEmailAskerBtn) {
         qaEmailAskerBtn.style.display = 'inline-flex';
         qaEmailAskerBtn.onclick = () => {
-          const mailto = `mailto:${encodeURIComponent(q.email)}?subject=${encodeURIComponent('[araknet.tech] Syed Ali Answer: ' + q.question.substring(0, 40))}&body=${encodeURIComponent('Hi ' + q.asker + ',\n\nRegarding your question: "' + q.question + '"\n\n' + (qaAnswerTextarea.value || ''))}`;
+          const mailto = `mailto:${encodeURIComponent(q.email)}?subject=${encodeURIComponent('[araknet.tech] Syed Ali Hussain Answer: ' + q.question.substring(0, 40))}&body=${encodeURIComponent('Hi ' + q.asker + ',\n\nRegarding your question: "' + q.question + '"\n\n' + (qaAnswerTextarea.value || ''))}`;
           window.location.href = mailto;
         };
       }
@@ -1711,7 +1722,7 @@ document.addEventListener('DOMContentLoaded', () => {
         q.status = 'answered';
         q.answer = {
           text: answerText,
-          author: 'Syed Ali',
+          author: 'Syed Ali Hussain',
           role: 'AI Developer · Author',
           answeredAt: new Date().toISOString()
         };
@@ -1787,11 +1798,11 @@ document.addEventListener('DOMContentLoaded', () => {
         qaFormFeedback.className = 'qa-feedback success';
         qaFormFeedback.innerHTML = `
           <strong><i class="fa-solid fa-circle-check"></i> Question Transmitted!</strong><br />
-          Thank you ${escapeHtml(name)}. Your question is in Syed Ali's queue and will appear with an answer shortly.
+          Thank you ${escapeHtml(name)}. Your question is in Syed Ali Hussain's queue and will appear with an answer shortly.
         `;
         qaFormFeedback.style.display = 'block';
 
-        showToast('🚀 Question sent to Syed Ali! In queue for review.');
+        showToast('🚀 Question sent to Syed Ali Hussain! In queue for review.');
         qaAskForm.reset();
         if (qaCharCounter) qaCharCounter.textContent = '0 / 400';
 
@@ -1901,7 +1912,7 @@ document.addEventListener('DOMContentLoaded', () => {
         upvotes: 5,
         answer: {
           text: answer,
-          author: 'Syed Ali',
+          author: 'Syed Ali Hussain',
           role: 'AI Developer · Author',
           answeredAt: new Date().toISOString()
         }

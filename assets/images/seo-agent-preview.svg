@@ -56,5 +56,5 @@
 
   <!-- Footer Stats -->
   <rect x="30" y="290" width="540" height="42" rx="6" fill="#0D131F" stroke="#1E293B"/>
-  <text x="45" y="316" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94A3B8">🚀 Python + LLM Prompt Engine · Built by Syed Ali</text>
+  <text x="45" y="316" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94A3B8">🚀 Python + LLM Prompt Engine · Built by Syed Ali Hussain</text>
 </svg>
