@@ -73,9 +73,8 @@
   <!-- Navigation Bar -->
   <header class="header">
     <nav class="navbar glass-panel">
-      <a href="#hero" class="brand-logo">
-        <span class="logo-symbol">&lt;araknet/&gt;</span>
-        <span class="brand-name" data-edit-key="brand_name">SYED ALI HUSSAIN</span>
+      <a href="#hero" class="brand-logo" aria-label="araknet.tech">
+        <span class="brand-name">araknet<span class="text-cyan">.tech</span></span>
       </a>
 
       <!-- Desktop Nav Menu -->
@@ -121,7 +120,7 @@
       </ul>
       <div class="mobile-drawer-footer">
         <button id="mobileViewerBtn" class="btn btn-outline btn-full" style="margin-bottom: 0.6rem;"><i class="fa-regular fa-envelope"></i> Sign In as Viewer</button>
-        <a href="assets/cv/Syed_Ali_Hussain_Resume.pdf" download class="btn btn-primary btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
+        <a href="#resume" class="btn btn-primary btn-full"><i class="fa-regular fa-file-lines"></i> View CV</a>
       </div>
     </div>
   </header>
@@ -151,7 +150,7 @@
 
         <!-- Hero Typography -->
         <h1 class="hero-title">
-          Hi, I'm <span class="gradient-text editable-target" data-edit-key="hero_title_name">Syed Ali Hussain</span>
+          <span class="gradient-text editable-target" data-edit-key="hero_title_name">Syed Ali Hussain</span>
         </h1>
 
         <!-- Typewriter Subheading -->
@@ -175,9 +174,9 @@
             <i class="fa-solid fa-award"></i>
             <span>Certifications Hub</span>
           </a>
-          <a href="assets/cv/Syed_Ali_Hussain_Resume.pdf" download="Syed_Ali_Hussain_Resume.pdf" class="btn btn-outline">
-            <i class="fa-solid fa-file-arrow-down"></i>
-            <span>Download CV</span>
+          <a href="#resume" class="btn btn-outline">
+            <i class="fa-regular fa-file-lines"></i>
+            <span>View CV</span>
           </a>
           <a href="#contact" class="btn btn-ghost">
             <span>Let's Connect</span>
@@ -717,10 +716,7 @@
               <span class="file-size">Updated 2026 · Verified Document</span>
             </div>
             <div class="resume-btn-group">
-              <a href="assets/cv/Syed_Ali_Hussain_Resume.pdf" download="Syed_Ali_Hussain_Resume.pdf" class="btn btn-primary">
-                <i class="fa-solid fa-download"></i> Download PDF
-              </a>
-              <button id="openResumeModalBtn" class="btn btn-outline">
+              <button id="openResumeModalBtn" class="btn btn-primary">
                 <i class="fa-solid fa-maximize"></i> Fullscreen Preview
               </button>
             </div>
@@ -1196,7 +1192,7 @@
         <div class="viewer-badge-icon"><i class="fa-regular fa-envelope-open"></i></div>
         <h3>Welcome to Syed Ali Hussain's Portfolio</h3>
         <p class="viewer-modal-sub">
-          Enter your email to activate your <strong>Viewer Pass</strong>. Explore live SaaS architectures, AI blueprints, and download the official CV.
+          Enter your email to activate your <strong>Viewer Pass</strong>. Explore live SaaS architectures, AI blueprints, and view the verified CV.
         </p>
       </div>
 
@@ -1385,16 +1381,13 @@
       <div class="modal-topbar">
         <h3>Syed Ali Hussain — Verified Curriculum Vitae</h3>
         <div class="modal-topbar-actions">
-          <a href="assets/cv/Syed_Ali_Hussain_Resume.pdf" download class="btn btn-sm btn-primary">
-            <i class="fa-solid fa-download"></i> Download PDF
-          </a>
           <button class="modal-close-btn" id="closeResumeModalBtn" aria-label="Close Resume Modal">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
       </div>
       <div class="resume-embed-container">
-        <iframe src="assets/cv/Syed_Ali_Hussain_Resume.pdf" title="Syed Ali Hussain Resume" class="resume-iframe"></iframe>
+        <iframe src="assets/cv/Syed_Ali_Hussain_Resume.pdf#toolbar=0" title="Syed Ali Hussain Resume" class="resume-iframe"></iframe>
       </div>
     </div>
   </div>
@@ -1512,7 +1505,7 @@
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#resume">
           <i class="fa-solid fa-file-pdf"></i>
-          <span class="cmd-title">View / Download Resume</span>
+          <span class="cmd-title">View Curriculum Vitae (CV)</span>
           <span class="cmd-badge">Jump</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#qa">

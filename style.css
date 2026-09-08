@@ -271,10 +271,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-name {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: -0.02em;
   color: #fff;
+  transition: var(--transition-smooth);
+}
+
+.brand-logo:hover .brand-name {
+  text-shadow: 0 0 16px rgba(0, 245, 212, 0.4);
 }
 
 .nav-links {

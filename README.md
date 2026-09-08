@@ -28,7 +28,7 @@
    - **DHA Multan Real Estate AI Agent**: Vertical SaaS property advisor.
    - **Khidmat AI**: Civic assistance platform built with Django.
    - **Autonomous SEO Agent**: Automated keyword and E-E-A-T entity pipeline.
-4. **Interactive Curriculum Vitae (CV)**: Clean visual qualification breakdown with one-click direct PDF download (`Syed_Ali_Hussain_Resume.pdf`) and fullscreen preview modal.
+4. **Interactive Curriculum Vitae (CV)**: Clean visual qualification breakdown and verified fullscreen document preview modal.
 5. **Command Palette (`Ctrl + K`)**: Futuristic terminal navigation tool for developers and recruiters.
 6. **One-Click Email Copy & Toast Feedback**: Direct clipboard action with instant visual confirmation.
 7. **Production SEO & OpenGraph**: Ready for sharing on LinkedIn, Twitter/X, and WhatsApp with custom meta tags and rich snippets.
