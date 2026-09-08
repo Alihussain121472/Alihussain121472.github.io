@@ -690,7 +690,7 @@ document.addEventListener('DOMContentLoaded', () => {
       issuer: 'Cisco Networking Academy',
       date: '28 Jan 2026',
       category: 'ai',
-      image: 'assets/images/certificates/cisco-modern-ai.svg'
+      image: 'assets/images/certificates/cisco-modern-ai.jpg'
     },
     {
       id: 'cert_harvard_cs50_python',
@@ -706,11 +706,11 @@ document.addEventListener('DOMContentLoaded', () => {
       issuer: 'AI-Explain You Science (AIEYS)',
       date: '11 Apr 2026',
       category: 'education',
-      image: 'assets/images/certificates/aieys-ai-teaching.svg'
+      image: 'assets/images/certificates/aieys-ai-teaching.jpg'
     }
   ];
 
-  const CERTS_STORAGE_KEY = 'araknet_portfolio_certificates_v2';
+  const CERTS_STORAGE_KEY = 'araknet_portfolio_certificates_v3';
 
   function getStoredCertificates() {
     try {
