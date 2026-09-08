@@ -608,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.removeItem(VIEWER_STORAGE_KEY);
       closeUserProfileModal();
       updateViewerDisplay();
-      showToast('🔒 Signed out. Portfolio access locked.');
+      showToast('Signed out successfully.');
     });
   }
 
@@ -623,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const selectedRole = authGateForm.querySelector('input[name="visitorPurpose"]:checked');
-      const purpose = selectedRole ? selectedRole.value : 'Recruiter / Talent Partner';
+      const purpose = selectedRole ? selectedRole.value : 'Portfolio Visitor';
 
       const userObj = {
         name: name,
@@ -638,7 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       unlockAccessGate(true);
       updateViewerDisplay();
-      showToast(`🚀 Welcome to araknet.tech, ${name}! Access Authorized.`);
+      showToast(`Welcome, ${name}! Enjoy exploring my portfolio.`);
     });
   }
 

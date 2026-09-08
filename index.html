@@ -119,7 +119,7 @@
         <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       </ul>
       <div class="mobile-drawer-footer">
-        <button id="mobileViewerBtn" class="btn btn-outline btn-full" style="margin-bottom: 0.6rem;"><i class="fa-regular fa-envelope"></i> Sign In as Viewer</button>
+        <button id="mobileViewerBtn" class="btn btn-outline btn-full" style="margin-bottom: 0.6rem;"><i class="fa-regular fa-circle-user"></i> Sign In</button>
         <a href="#resume" class="btn btn-primary btn-full"><i class="fa-regular fa-file-lines"></i> View CV</a>
       </div>
     </div>
@@ -1208,16 +1208,18 @@
   <!-- ========================================== -->
   <!-- MANDATORY PORTFOLIO ACCESS GATEWAY -->
   <!-- ========================================== -->
+  <!-- MODAL 2: PORTFOLIO LOGIN MODAL -->
+  <!-- ========================================== -->
   <div id="authGateOverlay" class="auth-gate-overlay" aria-modal="true" role="dialog" style="display: none;">
     <div class="auth-gate-card glass-card">
       <div class="auth-gate-header">
         <div class="auth-gate-brand">
           <span class="brand-name">araknet<span class="text-cyan">.tech</span></span>
         </div>
-        <div class="section-pill auth-gate-pill"><i class="fa-solid fa-lock"></i> Welcome</div>
-        <h2 class="auth-gate-title">Welcome to Syed Ali Hussain's Portfolio</h2>
+        <div class="section-pill auth-gate-pill"><i class="fa-regular fa-circle-user"></i> Guest Login</div>
+        <h2 class="auth-gate-title">Welcome to Syed Ali's Portfolio</h2>
         <p class="auth-gate-desc">
-          Please enter your name and email to explore my projects, skills, and resume.
+          Please enter your name and email to view my projects, skills, and resume.
         </p>
       </div>
 
@@ -1226,7 +1228,7 @@
           <label for="gateVisitorName">Your Name <span class="text-cyan">*</span></label>
           <div class="input-wrapper">
             <i class="fa-regular fa-user input-icon"></i>
-            <input type="text" id="gateVisitorName" placeholder="Your name or organization" required maxlength="60" />
+            <input type="text" id="gateVisitorName" placeholder="Enter your name" required maxlength="60" />
           </div>
         </div>
 
@@ -1234,47 +1236,21 @@
           <label for="gateVisitorEmail">Your Email Address <span class="text-cyan">*</span></label>
           <div class="input-wrapper">
             <i class="fa-regular fa-envelope input-icon"></i>
-            <input type="email" id="gateVisitorEmail" placeholder="name@company.com" required maxlength="80" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Visiting Role / Purpose</label>
-          <div class="gate-roles-grid">
-            <label class="gate-role-pill active">
-              <input type="radio" name="visitorPurpose" value="Recruiter / Talent Partner" checked />
-              <i class="fa-solid fa-briefcase"></i>
-              <span>Recruiter</span>
-            </label>
-            <label class="gate-role-pill">
-              <input type="radio" name="visitorPurpose" value="Startup Founder / Client" />
-              <i class="fa-solid fa-rocket"></i>
-              <span>Founder</span>
-            </label>
-            <label class="gate-role-pill">
-              <input type="radio" name="visitorPurpose" value="AI Engineer / Developer" />
-              <i class="fa-solid fa-robot"></i>
-              <span>Engineer</span>
-            </label>
-            <label class="gate-role-pill">
-              <input type="radio" name="visitorPurpose" value="Academic / Student" />
-              <i class="fa-solid fa-graduation-cap"></i>
-              <span>Student</span>
-            </label>
+            <input type="email" id="gateVisitorEmail" placeholder="name@example.com" required maxlength="80" />
           </div>
         </div>
 
         <button type="submit" id="authGateSubmitBtn" class="btn btn-primary btn-full gate-submit-btn">
-          <i class="fa-solid fa-lock-open"></i> Unlock Portfolio Access
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Login to See Portfolio
         </button>
 
         <div class="auth-gate-footer">
           <div class="gate-security-note">
-            <i class="fa-solid fa-shield-check text-cyan"></i>
-            <span>Verified Secure Access · Your session will be remembered</span>
+            <i class="fa-regular fa-circle-check text-cyan"></i>
+            <span>Your session will stay signed in on this device</span>
           </div>
           <button type="button" id="gateOwnerBypassBtn" class="gate-owner-link">
-            <i class="fa-solid fa-key"></i> Are you Syed Ali Hussain? Enter Owner Passcode
+            <i class="fa-solid fa-key"></i> Syed Ali Hussain? Enter Owner Passcode
           </button>
         </div>
       </form>

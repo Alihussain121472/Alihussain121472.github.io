@@ -3385,8 +3385,8 @@ body.auth-locked #ownerDock {
 
 .auth-gate-card {
   width: 100%;
-  max-width: 520px;
-  background: rgba(13, 20, 36, 0.9);
+  max-width: 480px;
+  background: rgba(13, 20, 36, 0.92);
   border: 1px solid rgba(0, 245, 212, 0.35);
   border-radius: 18px;
   padding: 2.2rem 2.4rem;
@@ -3427,7 +3427,7 @@ body.auth-locked #ownerDock {
 }
 
 .auth-gate-title {
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   font-weight: 700;
   color: #fff;
   margin-bottom: 0.5rem;
