@@ -428,18 +428,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 5. VIEWER ACCESS (PUBLIC USERS LOGIN WITH EMAIL)
+  // 5. MANDATORY ACCESS GATEWAY & VISITOR AUTHENTICATION
   // ==========================================
+  const AUTH_USER_KEY = 'araknet_auth_user_v1';
   const VIEWER_STORAGE_KEY = 'araknet_viewer_email_v1';
   const VISITORS_LOG_KEY = 'araknet_visitors_log_v1';
 
-  const viewerModal = document.getElementById('viewerModal');
+  const authGateOverlay = document.getElementById('authGateOverlay');
+  const authGateForm = document.getElementById('authGateForm');
+  const gateVisitorName = document.getElementById('gateVisitorName');
+  const gateVisitorEmail = document.getElementById('gateVisitorEmail');
+  const gateOwnerBypassBtn = document.getElementById('gateOwnerBypassBtn');
+
+  const userProfileModal = document.getElementById('userProfileModal');
+  const closeUserProfileBtn = document.getElementById('closeUserProfileBtn');
+  const logoutVisitorBtn = document.getElementById('logoutVisitorBtn');
+  const sessionUserName = document.getElementById('sessionUserName');
+  const sessionUserEmail = document.getElementById('sessionUserEmail');
+  const sessionUserRole = document.getElementById('sessionUserRole');
+  const sessionUserTime = document.getElementById('sessionUserTime');
+
   const viewerAccessBtn = document.getElementById('viewerAccessBtn');
   const mobileViewerBtn = document.getElementById('mobileViewerBtn');
-  const closeViewerModalBtn = document.getElementById('closeViewerModalBtn');
-  const viewerForm = document.getElementById('viewerForm');
-  const viewerEmailInput = document.getElementById('viewerEmailInput');
   const viewerStatusText = document.getElementById('viewerStatusText');
+
+  // Role Pill Selection
+  document.querySelectorAll('.gate-role-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.gate-role-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const radio = pill.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+    });
+  });
 
   function getVisitorsLog() {
     try {
@@ -450,12 +471,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function recordVisitorEmail(email) {
+  function recordVisitorEmail(email, name = 'Visitor', purpose = 'General Inquiry') {
     try {
       const list = getVisitorsLog();
       const existing = list.find(v => v.email.toLowerCase() === email.toLowerCase());
       if (!existing) {
-        list.unshift({ email, timestamp: new Date().toLocaleString() });
+        list.unshift({ email, name, purpose, timestamp: new Date().toLocaleString() });
         localStorage.setItem(VISITORS_LOG_KEY, JSON.stringify(list));
       }
       updateVisitorCountBadge();
@@ -472,48 +493,147 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function getAuthenticatedUser() {
+    try {
+      const stored = localStorage.getItem(AUTH_USER_KEY);
+      if (stored) return JSON.parse(stored);
+      const email = localStorage.getItem(VIEWER_STORAGE_KEY);
+      if (email) {
+        return {
+          name: email.split('@')[0],
+          email: email,
+          purpose: 'Recruiter / Talent Partner',
+          timestamp: new Date().toLocaleDateString()
+        };
+      }
+    } catch (e) {
+      console.warn('Could not read auth user:', e);
+    }
+    return null;
+  }
+
   function updateViewerDisplay() {
-    const currentViewer = localStorage.getItem(VIEWER_STORAGE_KEY);
-    if (currentViewer && viewerStatusText) {
-      const shortName = currentViewer.split('@')[0];
-      viewerStatusText.textContent = `Viewer: ${shortName}`;
-      viewerAccessBtn.classList.add('active');
+    const user = getAuthenticatedUser();
+    if (user && user.email) {
+      if (viewerStatusText) {
+        // Display ONLY the clean email without the word "Viewer:"
+        viewerStatusText.textContent = user.email;
+        viewerStatusText.title = `Logged in: ${user.email}`;
+      }
+      if (viewerAccessBtn) {
+        viewerAccessBtn.classList.add('active');
+      }
+      unlockAccessGate(false);
+    } else {
+      if (viewerStatusText) {
+        viewerStatusText.textContent = 'Sign In';
+      }
+      if (viewerAccessBtn) {
+        viewerAccessBtn.classList.remove('active');
+      }
+      lockAccessGate();
     }
   }
 
-  function openViewerModal() {
-    if (viewerModal) {
-      viewerModal.classList.add('active');
+  function lockAccessGate() {
+    document.body.classList.add('auth-locked');
+    if (authGateOverlay) {
+      authGateOverlay.style.display = 'flex';
+      authGateOverlay.classList.remove('unlocking');
       setTimeout(() => {
-        if (viewerEmailInput) viewerEmailInput.focus();
-      }, 50);
+        if (gateVisitorName) gateVisitorName.focus();
+      }, 80);
     }
   }
 
-  function closeViewerModal() {
-    if (viewerModal) viewerModal.classList.remove('active');
+  function unlockAccessGate(animate = true) {
+    if (!authGateOverlay) {
+      document.body.classList.remove('auth-locked');
+      return;
+    }
+    if (animate) {
+      authGateOverlay.classList.add('unlocking');
+      setTimeout(() => {
+        authGateOverlay.style.display = 'none';
+        authGateOverlay.classList.remove('unlocking');
+        document.body.classList.remove('auth-locked');
+      }, 500);
+    } else {
+      authGateOverlay.style.display = 'none';
+      document.body.classList.remove('auth-locked');
+    }
   }
 
-  if (viewerAccessBtn) viewerAccessBtn.addEventListener('click', openViewerModal);
-  if (mobileViewerBtn) mobileViewerBtn.addEventListener('click', openViewerModal);
-  if (closeViewerModalBtn) closeViewerModalBtn.addEventListener('click', closeViewerModal);
-  if (viewerModal) {
-    viewerModal.addEventListener('click', (e) => {
-      if (e.target === viewerModal) closeViewerModal();
+  function openUserProfileModal() {
+    const user = getAuthenticatedUser();
+    if (!user) {
+      lockAccessGate();
+      return;
+    }
+    if (sessionUserName) sessionUserName.textContent = user.name || 'Visitor';
+    if (sessionUserEmail) sessionUserEmail.textContent = user.email || 'visitor@example.com';
+    if (sessionUserRole) sessionUserRole.textContent = user.purpose || 'Recruiter';
+    if (sessionUserTime) sessionUserTime.textContent = user.timestamp || 'Active';
+
+    if (userProfileModal) userProfileModal.classList.add('active');
+  }
+
+  function closeUserProfileModal() {
+    if (userProfileModal) userProfileModal.classList.remove('active');
+  }
+
+  if (viewerAccessBtn) viewerAccessBtn.addEventListener('click', openUserProfileModal);
+  if (mobileViewerBtn) mobileViewerBtn.addEventListener('click', openUserProfileModal);
+  if (closeUserProfileBtn) closeUserProfileBtn.addEventListener('click', closeUserProfileModal);
+  if (userProfileModal) {
+    userProfileModal.addEventListener('click', (e) => {
+      if (e.target === userProfileModal) closeUserProfileModal();
     });
   }
 
-  if (viewerForm) {
-    viewerForm.addEventListener('submit', (e) => {
+  if (logoutVisitorBtn) {
+    logoutVisitorBtn.addEventListener('click', () => {
+      localStorage.removeItem(AUTH_USER_KEY);
+      localStorage.removeItem(VIEWER_STORAGE_KEY);
+      closeUserProfileModal();
+      updateViewerDisplay();
+      showToast('🔒 Signed out. Portfolio access locked.');
+    });
+  }
+
+  if (authGateForm) {
+    authGateForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = viewerEmailInput.value.trim();
-      if (email && email.includes('@')) {
-        localStorage.setItem(VIEWER_STORAGE_KEY, email);
-        recordVisitorEmail(email);
-        updateViewerDisplay();
-        closeViewerModal();
-        showToast(`Welcome ${email}! Viewer Pass activated.`);
+      const name = gateVisitorName ? gateVisitorName.value.trim() : 'Visitor';
+      const email = gateVisitorEmail ? gateVisitorEmail.value.trim() : '';
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
       }
+
+      const selectedRole = authGateForm.querySelector('input[name="visitorPurpose"]:checked');
+      const purpose = selectedRole ? selectedRole.value : 'Recruiter / Talent Partner';
+
+      const userObj = {
+        name: name,
+        email: email,
+        purpose: purpose,
+        timestamp: new Date().toLocaleString()
+      };
+
+      localStorage.setItem(AUTH_USER_KEY, JSON.stringify(userObj));
+      localStorage.setItem(VIEWER_STORAGE_KEY, email);
+      recordVisitorEmail(email, name, purpose);
+
+      unlockAccessGate(true);
+      updateViewerDisplay();
+      showToast(`🚀 Welcome to araknet.tech, ${name}! Access Authorized.`);
+    });
+  }
+
+  if (gateOwnerBypassBtn) {
+    gateOwnerBypassBtn.addEventListener('click', () => {
+      openOwnerLoginModal();
     });
   }
 
@@ -990,6 +1110,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entered === DEFAULT_PASSCODE) {
         closeOwnerLoginModal();
         enableOwnerMode();
+        // Also unlock visitor access gate for owner
+        const ownerUser = {
+          name: 'Syed Ali Hussain',
+          email: 'syedali6160@gmail.com',
+          purpose: 'Portfolio Owner / AI Systems Builder',
+          timestamp: new Date().toLocaleString()
+        };
+        localStorage.setItem(AUTH_USER_KEY, JSON.stringify(ownerUser));
+        localStorage.setItem(VIEWER_STORAGE_KEY, ownerUser.email);
+        updateViewerDisplay();
+        unlockAccessGate(true);
       } else {
         alert('Incorrect owner passcode.');
       }

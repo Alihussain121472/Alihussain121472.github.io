@@ -90,15 +90,15 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <!-- Viewer Status Badge / Login Trigger -->
-        <button id="viewerAccessBtn" class="viewer-btn" title="Viewer Access Pass">
-          <i class="fa-regular fa-id-badge"></i>
-          <span id="viewerStatusText">Viewer Pass</span>
+        <!-- User Email / Session Badge -->
+        <button id="viewerAccessBtn" class="viewer-btn" title="Logged in session · Click to view profile or switch account">
+          <i class="fa-regular fa-circle-user text-cyan"></i>
+          <span id="viewerStatusText">Sign In</span>
         </button>
 
         <button id="cmdPaletteBtn" class="cmd-btn" title="Open Command Palette (Ctrl+K)">
-          <i class="fa-solid fa-terminal"></i>
-          <span class="cmd-hint">Ctrl K</span>
+          <i class="fa-solid fa-terminal text-cyan"></i>
+          <span class="cmd-hint">Ctrl + K</span>
         </button>
         <a href="#contact" class="btn btn-sm btn-primary">Let's Talk</a>
         <button id="mobileMenuToggle" class="mobile-toggle" aria-label="Toggle navigation menu">
@@ -1181,34 +1181,119 @@
     </div>
   </div>
 
-  <!-- MODAL 3: VIEWER SIGN-IN / EMAIL PASS MODAL (PUBLIC USERS) -->
-  <div id="viewerModal" class="modal-overlay" aria-hidden="true">
-    <div class="modal-container glass-card viewer-modal-card">
-      <button class="modal-close-btn" id="closeViewerModalBtn" aria-label="Close Viewer Modal">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="viewer-modal-header">
-        <div class="viewer-badge-icon"><i class="fa-regular fa-envelope-open"></i></div>
-        <h3>Welcome to Syed Ali Hussain's Portfolio</h3>
-        <p class="viewer-modal-sub">
-          Enter your email to activate your <strong>Viewer Pass</strong>. Explore live SaaS architectures, AI blueprints, and view the verified CV.
+  <!-- ========================================== -->
+  <!-- MANDATORY PORTFOLIO ACCESS GATEWAY -->
+  <!-- ========================================== -->
+  <div id="authGateOverlay" class="auth-gate-overlay" aria-modal="true" role="dialog" style="display: none;">
+    <div class="auth-gate-card glass-card">
+      <div class="auth-gate-header">
+        <div class="auth-gate-brand">
+          <span class="brand-name">araknet<span class="text-cyan">.tech</span></span>
+        </div>
+        <div class="section-pill auth-gate-pill"><i class="fa-solid fa-shield-halved"></i> Access Verification Required</div>
+        <h2 class="auth-gate-title">Portfolio Access Gateway</h2>
+        <p class="auth-gate-desc">
+          Welcome to <strong>Syed Ali Hussain's</strong> AI Engineering &amp; Systems Showcase. Please identify yourself to verify access and explore production agents, architectures, and credentials.
         </p>
       </div>
 
-      <form id="viewerForm" class="viewer-form">
+      <form id="authGateForm" class="auth-gate-form">
         <div class="form-group">
-          <label for="viewerEmailInput">Your Email Address</label>
+          <label for="gateVisitorName">Your Name <span class="text-cyan">*</span></label>
           <div class="input-wrapper">
-            <i class="fa-regular fa-envelope input-icon"></i>
-            <input type="email" id="viewerEmailInput" placeholder="e.g. recruiter@company.com or visitor@gmail.com" required />
+            <i class="fa-regular fa-user input-icon"></i>
+            <input type="text" id="gateVisitorName" placeholder="e.g. Alex Vance / Recruiter" required maxlength="60" />
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-full">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter Portfolio (Viewer Mode)
+        <div class="form-group">
+          <label for="gateVisitorEmail">Your Email Address <span class="text-cyan">*</span></label>
+          <div class="input-wrapper">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="gateVisitorEmail" placeholder="e.g. alex.vance@company.com" required maxlength="80" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Visiting Role / Purpose</label>
+          <div class="gate-roles-grid">
+            <label class="gate-role-pill active">
+              <input type="radio" name="visitorPurpose" value="Recruiter / Talent Partner" checked />
+              <i class="fa-solid fa-briefcase"></i>
+              <span>Recruiter</span>
+            </label>
+            <label class="gate-role-pill">
+              <input type="radio" name="visitorPurpose" value="Startup Founder / Client" />
+              <i class="fa-solid fa-rocket"></i>
+              <span>Founder</span>
+            </label>
+            <label class="gate-role-pill">
+              <input type="radio" name="visitorPurpose" value="AI Engineer / Developer" />
+              <i class="fa-solid fa-robot"></i>
+              <span>Engineer</span>
+            </label>
+            <label class="gate-role-pill">
+              <input type="radio" name="visitorPurpose" value="Academic / Student" />
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Student</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" id="authGateSubmitBtn" class="btn btn-primary btn-full gate-submit-btn">
+          <i class="fa-solid fa-lock-open"></i> Unlock Portfolio Access
         </button>
+
+        <div class="auth-gate-footer">
+          <div class="gate-security-note">
+            <i class="fa-solid fa-shield-check text-cyan"></i>
+            <span>Verified Secure Access · Your session will be remembered</span>
+          </div>
+          <button type="button" id="gateOwnerBypassBtn" class="gate-owner-link">
+            <i class="fa-solid fa-key"></i> Are you Syed Ali Hussain? Enter Owner Passcode
+          </button>
+        </div>
       </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: VISITOR PROFILE & SESSION MODAL -->
+  <div id="userProfileModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container glass-card user-profile-card">
+      <button class="modal-close-btn" id="closeUserProfileBtn" aria-label="Close Profile Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="user-profile-header">
+        <div class="user-profile-badge-icon"><i class="fa-solid fa-id-badge"></i></div>
+        <h3>Visitor Pass Session</h3>
+        <p class="user-profile-subtitle">Currently authenticated on araknet.tech</p>
+      </div>
+
+      <div class="user-profile-card-content">
+        <div class="user-profile-row">
+          <span class="profile-label"><i class="fa-regular fa-user"></i> Name:</span>
+          <strong id="sessionUserName" class="profile-val text-white">Visitor</strong>
+        </div>
+        <div class="user-profile-row">
+          <span class="profile-label"><i class="fa-regular fa-envelope"></i> Email:</span>
+          <strong id="sessionUserEmail" class="profile-val text-cyan">visitor@example.com</strong>
+        </div>
+        <div class="user-profile-row">
+          <span class="profile-label"><i class="fa-solid fa-briefcase"></i> Role:</span>
+          <span id="sessionUserRole" class="profile-val role-badge">Recruiter</span>
+        </div>
+        <div class="user-profile-row">
+          <span class="profile-label"><i class="fa-regular fa-clock"></i> Logged In:</span>
+          <span id="sessionUserTime" class="profile-val text-muted">Just now</span>
+        </div>
+      </div>
+
+      <div class="user-profile-actions">
+        <button type="button" id="logoutVisitorBtn" class="btn btn-outline btn-full logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out / Switch Account
+        </button>
+      </div>
     </div>
   </div>
 
