@@ -528,6 +528,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (viewerAccessBtn) {
         viewerAccessBtn.classList.add('active');
       }
+      if (mobileViewerBtn) {
+        mobileViewerBtn.innerHTML = `<i class="fa-regular fa-circle-user"></i> ${user.email}`;
+      }
       unlockAccessGate(false);
     } else {
       if (viewerStatusText) {
@@ -535,6 +538,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (viewerAccessBtn) {
         viewerAccessBtn.classList.remove('active');
+      }
+      if (mobileViewerBtn) {
+        mobileViewerBtn.innerHTML = `<i class="fa-regular fa-envelope"></i> Sign In as Viewer`;
       }
       lockAccessGate();
     }
@@ -2112,8 +2118,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.getElementById('mobileMenuToggle');
   const mobileDrawer = document.getElementById('mobileDrawer');
 
+  function closeMobileDrawer() {
+    if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+      mobileDrawer.classList.remove('open');
+      const icon = mobileToggle ? mobileToggle.querySelector('i') : null;
+      if (icon) icon.className = 'fa-solid fa-bars';
+    }
+  }
+
   if (mobileToggle && mobileDrawer) {
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       mobileDrawer.classList.toggle('open');
       const icon = mobileToggle.querySelector('i');
       if (mobileDrawer.classList.contains('open')) {
@@ -2123,12 +2138,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileDrawer.classList.remove('open');
-        const icon = mobileToggle.querySelector('i');
-        if (icon) icon.className = 'fa-solid fa-bars';
+    // Close on any link or button click inside drawer
+    mobileDrawer.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('click', () => {
+        closeMobileDrawer();
       });
+    });
+
+    // Close when tapping outside the drawer
+    document.addEventListener('click', (e) => {
+      if (mobileDrawer.classList.contains('open') && !mobileDrawer.contains(e.target) && !mobileToggle.contains(e.target)) {
+        closeMobileDrawer();
+      }
+    });
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMobileDrawer();
+      }
     });
   }
 
