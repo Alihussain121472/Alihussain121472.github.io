@@ -664,7 +664,7 @@
     <section id="certifications" class="section certs-section">
       <div class="container">
         <div class="section-header">
-          <div class="section-pill"><i class="fa-solid fa-award"></i> Verified Credentials</div>
+          <div class="section-pill"><i class="fa-solid fa-award"></i> Honors &amp; Certifications</div>
           <h2 class="section-title">Certifications &amp; <span class="gradient-text">Honors</span></h2>
           <p class="section-subtitle">
             Accredited qualifications from top institutions. You can filter or click to enlarge in full-res lightbox.
@@ -781,6 +781,26 @@
               <div class="resume-block">
                 <h4 class="resume-block-title">Accredited Certifications</h4>
                 <div class="resume-cert-list">
+                  <div class="resume-cert-item">
+                    <i class="fa-solid fa-award text-cyan"></i>
+                    <strong>ML Research Publication: Brute-Force Login Detection</strong> — SZABIST Islamabad · IJICT Journal (Apr 2026)
+                  </div>
+                  <div class="resume-cert-item">
+                    <i class="fa-solid fa-award text-cyan"></i>
+                    <strong>Crash Course on Python</strong> — Google (Coursera, Nov 2025)
+                  </div>
+                  <div class="resume-cert-item">
+                    <i class="fa-solid fa-award text-cyan"></i>
+                    <strong>Technical Support Fundamentals</strong> — Google (Coursera, Nov 2025)
+                  </div>
+                  <div class="resume-cert-item">
+                    <i class="fa-solid fa-award text-cyan"></i>
+                    <strong>Web Developer Internship</strong> — AI-Explain You Science (AIEYS, Apr 2026)
+                  </div>
+                  <div class="resume-cert-item">
+                    <i class="fa-solid fa-award text-cyan"></i>
+                    <strong>Certificate of Academic Achievement</strong> — City Science School &amp; College (May 2022)
+                  </div>
                   <div class="resume-cert-item">
                     <i class="fa-solid fa-award text-cyan"></i>
                     <strong>Introduction to Modern AI</strong> — Cisco Networking Academy (Jan 2026)
@@ -1095,11 +1115,11 @@
         <p id="lightboxIssuer" class="lightbox-issuer">Issuing Organization</p>
         <p id="lightboxDate" class="lightbox-date">Issued Date</p>
         <div class="lightbox-actions">
-          <a id="lightboxVerifyBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
-            <i class="fa-solid fa-check-double"></i> Verify Credential
-          </a>
-          <button id="lightboxDownloadBtn" class="btn btn-sm btn-outline">
-            <i class="fa-solid fa-download"></i> Save Image
+          <button id="lightboxDownloadBtn" class="btn btn-sm btn-primary">
+            <i class="fa-solid fa-download"></i> Save High-Res Image
+          </button>
+          <button type="button" onclick="document.getElementById('certLightboxModal').classList.remove('active')" class="btn btn-sm btn-outline">
+            <i class="fa-solid fa-xmark"></i> Close
           </button>
         </div>
       </div>
@@ -1410,10 +1430,6 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="newCertVerifyUrl">Verification URL / Credential Link (Optional)</label>
-          <input type="url" id="newCertVerifyUrl" placeholder="https://coursera.org/verify/... or https://cisco.com" />
-        </div>
 
         <div class="modal-actions">
           <button type="button" id="cancelAddCertBtn" class="btn btn-ghost">Cancel</button>

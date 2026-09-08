@@ -645,13 +645,52 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const defaultCertificates = [
     {
+      id: 'cert_szabist_ml_publication_2026',
+      title: 'Machine Learning Research: Detection of Brute-Force Login Attempts',
+      issuer: 'SZABIST Islamabad · IJICT Research Journal (Vol. 9)',
+      date: 'Apr 2026',
+      category: 'ai',
+      image: 'assets/images/certificates/szabist-ijict-ml-research-publication.jpg'
+    },
+    {
+      id: 'cert_google_python_crash_course',
+      title: 'Crash Course on Python',
+      issuer: 'Google (Coursera Accredited)',
+      date: '29 Nov 2025',
+      category: 'programming',
+      image: 'assets/images/certificates/google-python-crash-course.jpg'
+    },
+    {
+      id: 'cert_google_tech_support',
+      title: 'Technical Support Fundamentals',
+      issuer: 'Google (Coursera Accredited)',
+      date: '24 Nov 2025',
+      category: 'education',
+      image: 'assets/images/certificates/google-technical-support-fundamentals.jpg'
+    },
+    {
+      id: 'cert_aieys_web_dev_internship',
+      title: 'Web Developer Internship Certification',
+      issuer: 'AI-Explain You Science (AIEYS)',
+      date: '11 Apr 2026',
+      category: 'programming',
+      image: 'assets/images/certificates/aieys-web-developer-internship.jpg'
+    },
+    {
+      id: 'cert_city_science_college',
+      title: 'Certificate of Academic Achievement',
+      issuer: 'City Science School & College Multan',
+      date: '08 May 2022',
+      category: 'education',
+      image: 'assets/images/certificates/city-science-college-achievement.jpg'
+    },
+    {
       id: 'cert_cisco_ai_2026',
       title: 'Introduction to Modern AI',
       issuer: 'Cisco Networking Academy',
       date: '28 Jan 2026',
       category: 'ai',
-      image: 'assets/images/certificates/cisco-modern-ai.svg',
-      verifyUrl: 'https://www.netacad.com'
+      image: 'assets/images/certificates/cisco-modern-ai.svg'
     },
     {
       id: 'cert_harvard_cs50_python',
@@ -659,8 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
       issuer: 'Harvard University · David J. Malan',
       date: '2026',
       category: 'programming',
-      image: 'assets/images/certificates/harvard-cs50-python.svg',
-      verifyUrl: 'https://cs50.harvard.edu/python/'
+      image: 'assets/images/certificates/harvard-cs50-python.svg'
     },
     {
       id: 'cert_aieys_teaching_2026',
@@ -668,12 +706,11 @@ document.addEventListener('DOMContentLoaded', () => {
       issuer: 'AI-Explain You Science (AIEYS)',
       date: '11 Apr 2026',
       category: 'education',
-      image: 'assets/images/certificates/aieys-ai-teaching.svg',
-      verifyUrl: 'https://aieys.org'
+      image: 'assets/images/certificates/aieys-ai-teaching.svg'
     }
   ];
 
-  const CERTS_STORAGE_KEY = 'araknet_portfolio_certificates_v1';
+  const CERTS_STORAGE_KEY = 'araknet_portfolio_certificates_v2';
 
   function getStoredCertificates() {
     try {
@@ -751,9 +788,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="cert-date"><i class="fa-regular fa-calendar"></i> ${escapeHtml(cert.date)}</p>
           
           <div class="cert-card-footer">
-            <a href="${cert.verifyUrl || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-xs btn-outline">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Credential
-            </a>
+            <button type="button" class="btn btn-xs btn-outline" onclick="window.openCertLightbox('${cert.id}')">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> View Certificate
+            </button>
             ${isOwner ? `
               <button class="cert-delete-btn" onclick="window.deleteCertificate('${cert.id}')" title="Remove this certificate">
                 <i class="fa-solid fa-trash-can"></i>
@@ -792,7 +829,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxTitle = document.getElementById('lightboxTitle');
   const lightboxIssuer = document.getElementById('lightboxIssuer');
   const lightboxDate = document.getElementById('lightboxDate');
-  const lightboxVerifyBtn = document.getElementById('lightboxVerifyBtn');
   const lightboxDownloadBtn = document.getElementById('lightboxDownloadBtn');
   const closeLightboxBtn = document.getElementById('closeLightboxBtn');
 
@@ -804,17 +840,18 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxTitle.textContent = cert.title;
     lightboxIssuer.textContent = cert.issuer;
     lightboxDate.textContent = `Issued: ${cert.date}`;
-    lightboxVerifyBtn.href = cert.verifyUrl || '#';
-    lightboxVerifyBtn.style.display = cert.verifyUrl ? 'inline-flex' : 'none';
 
-    lightboxDownloadBtn.onclick = () => {
-      const a = document.createElement('a');
-      a.href = cert.image;
-      a.download = `${cert.title.replace(/\s+/g, '_')}_Certificate.png`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    };
+    if (lightboxDownloadBtn) {
+      lightboxDownloadBtn.onclick = () => {
+        const a = document.createElement('a');
+        a.href = cert.image;
+        const ext = cert.image.endsWith('.svg') ? 'svg' : (cert.image.endsWith('.png') ? 'png' : 'jpg');
+        a.download = `${cert.title.replace(/[^a-zA-Z0-9_-]/g, '_')}_Certificate.${ext}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+    }
 
     lightboxModal.classList.add('active');
   };
@@ -910,7 +947,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const issuer = document.getElementById('newCertIssuer').value.trim();
       const date = document.getElementById('newCertDate').value.trim();
       const category = document.getElementById('newCertCategory').value;
-      const verifyUrl = document.getElementById('newCertVerifyUrl').value.trim();
+      const verifyUrlInput = document.getElementById('newCertVerifyUrl');
+      const verifyUrl = verifyUrlInput ? verifyUrlInput.value.trim() : '';
       const urlInput = certUrlInput ? certUrlInput.value.trim() : '';
 
       const finalImage = selectedImageBase64 || urlInput || 'assets/images/certificates/cisco-modern-ai.svg';
