@@ -1564,9 +1564,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="qa-answer-block">
             <div class="qa-answer-author-row">
               <div class="qa-author-identity">
-                <img src="assets/images/syed-ali.jpg" alt="Syed Ali Hussain" class="qa-author-thumbnail" />
-                <span class="qa-author-name">Syed Ali Hussain</span>
-                <i class="fa-solid fa-circle-check qa-verified-chip" title="Verified AI Developer"></i>
+                <div class="qa-author-profile">
+                  <img src="assets/images/syed-ali.jpg" alt="Syed Ali Hussain" class="qa-author-thumbnail" />
+                  <span class="qa-author-name">Syed Ali Hussain</span>
+                  <i class="fa-solid fa-circle-check qa-verified-chip" title="Verified AI Developer"></i>
+                </div>
                 <span class="qa-author-role">${escapeHtml(item.answer.role || 'Author')}</span>
               </div>
               <span class="qa-time-tag">${timeAgo(item.answer.answeredAt || item.timestamp)}</span>

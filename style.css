@@ -3265,44 +3265,66 @@ body.owner-mode-active .pencil-badge {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.6rem;
+  gap: 0.5rem 0.75rem;
   flex-wrap: wrap;
 }
 
 .qa-author-identity {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem 0.65rem;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.qa-author-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .qa-author-thumbnail {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid var(--accent-cyan);
+  border: 1.5px solid var(--accent-cyan);
   flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.25);
 }
 
 .qa-author-name {
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.01em;
 }
 
 .qa-verified-chip {
   color: var(--accent-cyan);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+  margin-left: -0.1rem;
 }
 
 .qa-author-role {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.72rem;
+  font-weight: 500;
   color: var(--accent-cyan);
   font-family: var(--font-mono);
   background: rgba(0, 245, 212, 0.1);
-  padding: 0.1rem 0.45rem;
-  border-radius: 3px;
+  border: 1px solid rgba(0, 245, 212, 0.25);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
   white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
 }
 
 .qa-answer-body {
@@ -3905,6 +3927,16 @@ body.owner-mode-active .qa-admin-actions {
   .qa-item-card {
     padding: 1rem 0.85rem;
   }
+  .qa-answer-block {
+    padding: 0.85rem 0.95rem;
+  }
+  .qa-author-name {
+    font-size: 0.84rem;
+  }
+  .qa-author-role {
+    font-size: 0.68rem;
+    padding: 0.12rem 0.42rem;
+  }
   .contact-info-card,
   .contact-form-card {
     padding: 1.25rem 0.95rem;
@@ -4043,6 +4075,20 @@ body.owner-mode-active .qa-admin-actions {
   .btn {
     padding: 0.75rem 1rem;
     font-size: 0.88rem;
+  }
+  .qa-answer-block {
+    padding: 0.75rem 0.8rem;
+  }
+  .qa-author-thumbnail {
+    width: 24px;
+    height: 24px;
+  }
+  .qa-author-name {
+    font-size: 0.8rem;
+  }
+  .qa-author-role {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.38rem;
   }
 }
 
