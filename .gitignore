@@ -18,4 +18,7 @@ yarn-debug.log*
 node_modules/
 dist/
 build/
-.cache/
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
