@@ -926,6 +926,25 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-cyan);
 }
 
+.quick-email-info a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.quick-email-info a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.send-email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 /* ================= 3. SKILLS SECTION ================= */
 .skills-grid {
   display: grid;
@@ -3281,8 +3300,8 @@ body.owner-mode-active .pencil-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .qa-author-thumbnail {
@@ -3299,8 +3318,11 @@ body.owner-mode-active .pencil-badge {
   font-weight: 700;
   font-size: 0.88rem;
   color: #fff;
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  flex-shrink: 0 !important;
+  display: inline-block;
   letter-spacing: 0.01em;
 }
 

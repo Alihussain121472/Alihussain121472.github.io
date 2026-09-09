@@ -92,7 +92,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2.2" />
 </head>
 <body class="dark-theme">
 
@@ -332,15 +332,15 @@
               </div>
             </div>
 
-            <!-- Quick copy email row -->
+            <!-- Quick send email bar -->
             <div class="quick-connect-bar">
               <div class="quick-email-info">
-                <i class="fa-regular fa-envelope"></i>
-                <span class="editable-target" data-edit-key="quick_email_val">syedali6160@gmail.com</span>
+                <i class="fa-solid fa-envelope"></i>
+                <a href="mailto:syedali6160@gmail.com" class="editable-target" data-edit-key="quick_email_val">syedali6160@gmail.com</a>
               </div>
-              <button class="btn btn-sm btn-outline copy-email-btn" data-email="syedali6160@gmail.com">
-                <i class="fa-regular fa-copy"></i> Copy Email
-              </button>
+              <a href="mailto:syedali6160@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20araknet.tech" class="btn btn-sm btn-primary send-email-btn">
+                <i class="fa-solid fa-paper-plane"></i> Send Mail
+              </a>
             </div>
           </div>
         </div>
@@ -1055,9 +1055,9 @@
                   <span class="method-label">Direct Email</span>
                   <a href="mailto:syedali6160@gmail.com" class="method-value editable-target" data-edit-key="contact_email">syedali6160@gmail.com</a>
                 </div>
-                <button class="btn btn-sm btn-ghost copy-btn" data-copy="syedali6160@gmail.com" title="Copy to clipboard">
-                  <i class="fa-regular fa-copy"></i>
-                </button>
+                <a href="mailto:syedali6160@gmail.com?subject=Inquiry%20%E2%80%94%20araknet.tech" class="btn btn-sm btn-ghost" title="Send Mail">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </a>
               </div>
 
               <!-- Method 2: LinkedIn -->
@@ -1593,10 +1593,10 @@
           <span class="cmd-title">Contact Syed Ali Hussain</span>
           <span class="cmd-badge">Jump</span>
         </div>
-        <div class="cmd-item" data-action="copy" data-text="syedali6160@gmail.com">
-          <i class="fa-regular fa-copy"></i>
-          <span class="cmd-title">Copy Email: syedali6160@gmail.com</span>
-          <span class="cmd-badge">Clipboard</span>
+        <div class="cmd-item" data-action="link" data-url="mailto:syedali6160@gmail.com?subject=Inquiry%20%E2%80%94%20araknet.tech">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span class="cmd-title">Send Mail to Syed Ali Hussain (syedali6160@gmail.com)</span>
+          <span class="cmd-badge">Mail</span>
         </div>
         <div class="cmd-item" data-action="link" data-url="https://www.novabrief.tech">
           <i class="fa-solid fa-globe"></i>
@@ -1622,6 +1622,6 @@
   <div id="cursorDot" class="cursor-dot"></div>
 
   <!-- Main JavaScript File -->
-  <script src="script.js"></script>
+  <script src="script.js?v=2.2"></script>
 </body>
 </html>
