@@ -1181,7 +1181,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const formFeedback = document.getElementById('formFeedback');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const honeypot = contactForm.querySelector('input[name="_gotcha"]');
@@ -1198,31 +1198,109 @@ document.addEventListener('DOMContentLoaded', () => {
       sendBtnSpinner.style.display = 'inline-block';
       sendBtn.disabled = true;
 
-      setTimeout(() => {
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/syedali6160@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            subject: `[araknet.tech] ${subject} - ${name}`,
+            message: message,
+            _template: 'box'
+          })
+        });
+
         sendBtnSpinner.style.display = 'none';
         sendBtnText.style.display = 'inline-block';
         sendBtn.disabled = false;
 
-        formFeedback.className = 'form-feedback success';
+        if (response.ok) {
+          formFeedback.className = 'form-feedback success';
+          formFeedback.innerHTML = `
+            <strong><i class="fa-solid fa-circle-check"></i> Message Dispatched Successfully!</strong><br />
+            Thank you, <strong>${escapeHtml(name)}</strong>. Your transmission has been delivered directly to Syed Ali Hussain's inbox. Expect a response at <strong>${escapeHtml(email)}</strong> within 24 hours.
+          `;
+          formFeedback.style.display = 'block';
+          showToast('🚀 Message sent directly to Syed Ali Hussain!');
+          contactForm.reset();
+        } else {
+          throw new Error('Server response was not ok');
+        }
+      } catch (err) {
+        sendBtnSpinner.style.display = 'none';
+        sendBtnText.style.display = 'inline-block';
+        sendBtn.disabled = false;
+
+        const mailtoFallback = `mailto:syedali6160@gmail.com?subject=${encodeURIComponent('[araknet.tech] ' + subject + ' - ' + name)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+
+        formFeedback.className = 'form-feedback info';
         formFeedback.innerHTML = `
-          <strong><i class="fa-solid fa-circle-check"></i> Transmission Prepared!</strong><br />
-          Thank you ${escapeHtml(name)}. I will respond to <strong>${escapeHtml(email)}</strong> shortly.<br />
-          <small>A direct mail client link has also been initialized for backup.</small>
+          <strong><i class="fa-solid fa-circle-info"></i> Direct Dispatch Link Ready</strong><br />
+          Click below to dispatch via your preferred mail client or send directly to <strong>syedali6160@gmail.com</strong>:<br />
+          <a href="${mailtoFallback}" class="btn btn-xs btn-outline" style="margin-top: 0.5rem; display: inline-flex;"><i class="fa-solid fa-envelope"></i> Open Mail Client</a>
         `;
         formFeedback.style.display = 'block';
-
-        showToast('Message ready! Opening mail dispatch...');
-        
-        const mailtoUrl = `mailto:syedali6160@gmail.com?subject=${encodeURIComponent('[araknet.tech] ' + subject + ' - ' + name)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
-        window.location.href = mailtoUrl;
-
-        contactForm.reset();
-      }, 1000);
+        showToast('Direct email dispatch link ready.');
+      }
     });
   }
 
   // ==========================================
-  // 12. INTERACTIVE Q&A / DEVELOPER AMA ENGINE
+  // 12. INTERACTIVE AGENT QUERY PLAYGROUND
+  // ==========================================
+  const agentPlaygroundQueries = {
+    'stack': {
+      title: "Core Architecture & Engineering Stack",
+      model: "Llama 3.3 (70B) · Groq",
+      text: "Syed's primary architecture centers on <strong>Python, Next.js 16 (React 19), and TypeScript</strong>. For AI inference, he leverages <strong>Llama 3.3 on Groq Cloud</strong> (<650ms latency) alongside Claude 3.5 and Gemini Pro for multi-agent reasoning. Backends utilize <strong>FastAPI, Django, Supabase (PostgreSQL), and MongoDB Atlas</strong> with background scheduling handled autonomously by APScheduler workers."
+    },
+    'novabrief': {
+      title: "How NovaBrief Tech Achieves Sub-650ms Generation",
+      model: "Llama 3.3 (70B) · Groq LPU",
+      text: "NovaBrief decouples web scraping from user request cycles. An autonomous <strong>Program Hunter Agent</strong> continuously scrapes student fellowships and breakthrough opportunities from Google, NASA, and Microsoft. Inference runs on Groq Cloud LPUs delivering 300+ tokens/second. Digests are pre-cached in Supabase and dispatched in automated morning digests with zero manual intervention."
+    },
+    'araknet': {
+      title: "Araknet Business Lead Discovery Agent",
+      model: "SerpAPI · Places · Next.js 16",
+      text: "The Araknet Agent autonomously scouts local and international business directories. It automatically audits every discovered website for SSL encryption, mobile responsiveness, and mobile app availability, then computes an <strong>AI Automation Potential Score (0–100)</strong> to immediately highlight high-value prospect businesses."
+    },
+    'hiring': {
+      title: "Availability for Engineering Roles & Collaboration",
+      model: "Islamabad, PK · Worldwide Remote",
+      text: "Syed Ali Hussain is <strong>actively open to software engineering roles, AI developer internships, and contract client projects</strong>. BSAI student at SZABIST Islamabad with shipped production applications. You can connect directly via email at <strong>syedali6160@gmail.com</strong> or through the contact terminal below."
+    }
+  };
+
+  const agentChips = document.querySelectorAll('.agent-chip');
+  const agentTerminalOutput = document.getElementById('agentTerminalOutput');
+  const agentOutputText = document.getElementById('agentOutputText');
+
+  if (agentChips.length > 0 && agentTerminalOutput && agentOutputText) {
+    agentChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const queryKey = chip.getAttribute('data-agent-query');
+        const data = agentPlaygroundQueries[queryKey];
+        if (!data) return;
+
+        agentChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        agentTerminalOutput.style.display = 'block';
+        agentOutputText.innerHTML = `<span class="text-cyan"><i class="fa-solid fa-spinner fa-spin"></i> Retrieving agent knowledge base...</span>`;
+
+        setTimeout(() => {
+          agentOutputText.innerHTML = `<strong>${escapeHtml(data.title)}:</strong><br /><br />${data.text}`;
+        }, 120);
+      });
+    });
+  }
+
+  // ==========================================
+  // 13. INTERACTIVE Q&A / DEVELOPER AMA ENGINE
   // ==========================================
   const QA_STORAGE_KEY = 'araknet_qa_questions_v2';
   const QA_UPVOTES_KEY = 'araknet_qa_upvotes_v1';
