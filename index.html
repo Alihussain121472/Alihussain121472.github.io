@@ -64,7 +64,6 @@
       <button id="saveEditsBtn" class="btn btn-xs btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
       <button id="exportHtmlBtn" class="btn btn-xs btn-outline" title="Download updated index.html"><i class="fa-solid fa-download"></i> Export HTML</button>
       <button id="qaOwnerDockBtn" class="btn btn-xs btn-outline" title="Jump to Q&A Inbox"><i class="fa-solid fa-comments"></i> Questions (<span id="qaPendingCount">0</span>)</button>
-      <button id="viewVisitorsBtn" class="btn btn-xs btn-outline" title="See viewer emails who entered"><i class="fa-solid fa-users-viewfinder"></i> Visitors (<span id="visitorCount">0</span>)</button>
       <button id="resetEditsBtn" class="btn btn-xs btn-ghost" title="Revert to defaults"><i class="fa-solid fa-rotate-left"></i> Reset</button>
       <button id="lockOwnerBtn" class="btn btn-xs btn-danger" title="Exit owner mode"><i class="fa-solid fa-lock"></i> Lock</button>
     </div>
@@ -90,12 +89,6 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <!-- User Email / Session Badge -->
-        <button id="viewerAccessBtn" class="viewer-btn" title="Logged in session · Click to view profile or switch account">
-          <i class="fa-regular fa-circle-user text-cyan"></i>
-          <span id="viewerStatusText">Sign In</span>
-        </button>
-
         <button id="cmdPaletteBtn" class="cmd-btn" title="Open Command Palette (Ctrl+K)">
           <i class="fa-solid fa-terminal text-cyan"></i>
           <span class="cmd-hint">Ctrl + K</span>
@@ -119,8 +112,8 @@
         <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       </ul>
       <div class="mobile-drawer-footer">
-        <button id="mobileViewerBtn" class="btn btn-outline btn-full" style="margin-bottom: 0.6rem;"><i class="fa-regular fa-circle-user"></i> Sign In</button>
         <a href="#resume" class="btn btn-primary btn-full"><i class="fa-regular fa-file-lines"></i> View CV</a>
+        <a href="#contact" class="btn btn-outline btn-full" style="margin-top: 0.6rem;"><i class="fa-regular fa-paper-plane"></i> Let's Talk</a>
       </div>
     </div>
   </header>
@@ -1092,6 +1085,7 @@
         <a href="#certifications">Certificates</a>
         <a href="#resume">CV</a>
         <a href="#contact">Contact</a>
+        <a href="#" id="footerOwnerBtn" class="footer-owner-link" title="Owner Login (Syed Ali Hussain)"><i class="fa-solid fa-lock"></i> Owner</a>
       </div>
 
       <div class="footer-socials">
@@ -1205,97 +1199,7 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MANDATORY PORTFOLIO ACCESS GATEWAY -->
-  <!-- ========================================== -->
-  <!-- MODAL 2: PORTFOLIO LOGIN MODAL -->
-  <!-- ========================================== -->
-  <div id="authGateOverlay" class="auth-gate-overlay" aria-modal="true" role="dialog" style="display: none;">
-    <div class="auth-gate-card glass-card">
-      <div class="auth-gate-header">
-        <div class="auth-gate-brand">
-          <span class="brand-name">araknet<span class="text-cyan">.tech</span></span>
-        </div>
-        <div class="section-pill auth-gate-pill"><i class="fa-regular fa-circle-user"></i> Guest Login</div>
-        <h2 class="auth-gate-title">Welcome to Syed Ali's Portfolio</h2>
-        <p class="auth-gate-desc">
-          Please enter your name and email to view my projects, skills, and resume.
-        </p>
-      </div>
 
-      <form id="authGateForm" class="auth-gate-form">
-        <div class="form-group">
-          <label for="gateVisitorName">Your Name <span class="text-cyan">*</span></label>
-          <div class="input-wrapper">
-            <i class="fa-regular fa-user input-icon"></i>
-            <input type="text" id="gateVisitorName" placeholder="Enter your name" required maxlength="60" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="gateVisitorEmail">Your Email Address <span class="text-cyan">*</span></label>
-          <div class="input-wrapper">
-            <i class="fa-regular fa-envelope input-icon"></i>
-            <input type="email" id="gateVisitorEmail" placeholder="name@example.com" required maxlength="80" />
-          </div>
-        </div>
-
-        <button type="submit" id="authGateSubmitBtn" class="btn btn-primary btn-full gate-submit-btn">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i> Login to See Portfolio
-        </button>
-
-        <div class="auth-gate-footer">
-          <div class="gate-security-note">
-            <i class="fa-regular fa-circle-check text-cyan"></i>
-            <span>Your session will stay signed in on this device</span>
-          </div>
-          <button type="button" id="gateOwnerBypassBtn" class="gate-owner-link">
-            <i class="fa-solid fa-key"></i> Syed Ali Hussain? Enter Owner Passcode
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL 3: VISITOR PROFILE & SESSION MODAL -->
-  <div id="userProfileModal" class="modal-overlay" aria-hidden="true">
-    <div class="modal-container glass-card user-profile-card">
-      <button class="modal-close-btn" id="closeUserProfileBtn" aria-label="Close Profile Modal">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="user-profile-header">
-        <div class="user-profile-badge-icon"><i class="fa-solid fa-id-badge"></i></div>
-        <h3>Visitor Pass Session</h3>
-        <p class="user-profile-subtitle">Currently authenticated on araknet.tech</p>
-      </div>
-
-      <div class="user-profile-card-content">
-        <div class="user-profile-row">
-          <span class="profile-label"><i class="fa-regular fa-user"></i> Name:</span>
-          <strong id="sessionUserName" class="profile-val text-white">Visitor</strong>
-        </div>
-        <div class="user-profile-row">
-          <span class="profile-label"><i class="fa-regular fa-envelope"></i> Email:</span>
-          <strong id="sessionUserEmail" class="profile-val text-cyan">visitor@example.com</strong>
-        </div>
-        <div class="user-profile-row">
-          <span class="profile-label"><i class="fa-solid fa-briefcase"></i> Role:</span>
-          <span id="sessionUserRole" class="profile-val role-badge">Recruiter</span>
-        </div>
-        <div class="user-profile-row">
-          <span class="profile-label"><i class="fa-regular fa-clock"></i> Logged In:</span>
-          <span id="sessionUserTime" class="profile-val text-muted">Just now</span>
-        </div>
-      </div>
-
-      <div class="user-profile-actions">
-        <button type="button" id="logoutVisitorBtn" class="btn btn-outline btn-full logout-btn">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out / Switch Account
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- MODAL 4: OWNER PASSCODE GATE (ACCESSIBLE ONLY VIA SECRET SHORTCUT Ctrl+Shift+E) -->
   <div id="adminAuthModal" class="modal-overlay" aria-hidden="true">
@@ -1328,25 +1232,7 @@
     </div>
   </div>
 
-  <!-- MODAL 5: RECENT VISITORS LOG (OWNER ONLY) -->
-  <div id="visitorsLogModal" class="modal-overlay" aria-hidden="true">
-    <div class="modal-container glass-card visitors-modal-card">
-      <button class="modal-close-btn" id="closeVisitorsLogBtn" aria-label="Close Visitors Modal">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <div class="modal-header">
-        <div class="section-pill"><i class="fa-solid fa-users"></i> Analytics</div>
-        <h3>Registered Viewer Log</h3>
-        <p class="modal-subtitle">Emails of viewers and recruiters who logged in to view your portfolio.</p>
-      </div>
-      <ul id="visitorsList" class="visitors-list">
-        <!-- Injected dynamically -->
-      </ul>
-      <button id="clearVisitorsBtn" class="btn btn-xs btn-danger" style="margin-top: 1rem;">
-        <i class="fa-solid fa-trash"></i> Clear Visitor History
-      </button>
-    </div>
-  </div>
+
 
   <!-- MODAL 6: DYNAMIC ADD CERTIFICATION (OWNER ONLY) -->
   <div id="addCertModal" class="modal-overlay" aria-hidden="true">
@@ -1613,6 +1499,11 @@
           <i class="fa-brands fa-github"></i>
           <span class="cmd-title">Open GitHub Profile</span>
           <span class="cmd-badge">External</span>
+        </div>
+        <div class="cmd-item" data-action="owner-mode">
+          <i class="fa-solid fa-key"></i>
+          <span class="cmd-title">Owner Edit Mode (Syed Ali Hussain)</span>
+          <span class="cmd-badge">Ctrl+Shift+E</span>
         </div>
       </div>
     </div>

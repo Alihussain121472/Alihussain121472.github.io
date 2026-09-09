@@ -433,223 +433,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 5. MANDATORY ACCESS GATEWAY & VISITOR AUTHENTICATION
+  // 5. PUBLIC ACCESS (NO VISITOR LOGIN REQUIRED)
   // ==========================================
-  const AUTH_USER_KEY = 'araknet_auth_user_v1';
-  const VIEWER_STORAGE_KEY = 'araknet_viewer_email_v1';
-  const VISITORS_LOG_KEY = 'araknet_visitors_log_v1';
+  document.body.classList.remove('auth-locked');
+  try {
+    localStorage.removeItem('araknet_auth_user_v1');
+    localStorage.removeItem('araknet_viewer_email_v1');
+  } catch (e) {}
 
-  const authGateOverlay = document.getElementById('authGateOverlay');
-  const authGateForm = document.getElementById('authGateForm');
-  const gateVisitorName = document.getElementById('gateVisitorName');
-  const gateVisitorEmail = document.getElementById('gateVisitorEmail');
-  const gateOwnerBypassBtn = document.getElementById('gateOwnerBypassBtn');
-
-  const userProfileModal = document.getElementById('userProfileModal');
-  const closeUserProfileBtn = document.getElementById('closeUserProfileBtn');
-  const logoutVisitorBtn = document.getElementById('logoutVisitorBtn');
-  const sessionUserName = document.getElementById('sessionUserName');
-  const sessionUserEmail = document.getElementById('sessionUserEmail');
-  const sessionUserRole = document.getElementById('sessionUserRole');
-  const sessionUserTime = document.getElementById('sessionUserTime');
-
-  const viewerAccessBtn = document.getElementById('viewerAccessBtn');
-  const mobileViewerBtn = document.getElementById('mobileViewerBtn');
-  const viewerStatusText = document.getElementById('viewerStatusText');
-
-  // Role Pill Selection
-  document.querySelectorAll('.gate-role-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.gate-role-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const radio = pill.querySelector('input[type="radio"]');
-      if (radio) radio.checked = true;
-    });
-  });
-
-  function getVisitorsLog() {
-    try {
-      const stored = localStorage.getItem(VISITORS_LOG_KEY);
-      return stored ? JSON.parse(stored) : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function recordVisitorEmail(email, name = 'Visitor', purpose = 'General Inquiry') {
-    try {
-      const list = getVisitorsLog();
-      const existing = list.find(v => v.email.toLowerCase() === email.toLowerCase());
-      if (!existing) {
-        list.unshift({ email, name, purpose, timestamp: new Date().toLocaleString() });
-        localStorage.setItem(VISITORS_LOG_KEY, JSON.stringify(list));
-      }
-      updateVisitorCountBadge();
-    } catch (e) {
-      console.warn('Could not record visitor email:', e);
-    }
-  }
-
-  function updateVisitorCountBadge() {
-    const countEl = document.getElementById('visitorCount');
-    if (countEl) {
-      const list = getVisitorsLog();
-      countEl.textContent = list.length;
-    }
-  }
-
-  function getAuthenticatedUser() {
-    try {
-      const stored = localStorage.getItem(AUTH_USER_KEY);
-      if (stored) return JSON.parse(stored);
-      const email = localStorage.getItem(VIEWER_STORAGE_KEY);
-      if (email) {
-        return {
-          name: email.split('@')[0],
-          email: email,
-          purpose: 'Recruiter / Talent Partner',
-          timestamp: new Date().toLocaleDateString()
-        };
-      }
-    } catch (e) {
-      console.warn('Could not read auth user:', e);
-    }
-    return null;
-  }
-
-  function updateViewerDisplay() {
-    const user = getAuthenticatedUser();
-    if (user && user.email) {
-      if (viewerStatusText) {
-        // Display ONLY the clean email without the word "Viewer:"
-        viewerStatusText.textContent = user.email;
-        viewerStatusText.title = `Logged in: ${user.email}`;
-      }
-      if (viewerAccessBtn) {
-        viewerAccessBtn.classList.add('active');
-      }
-      if (mobileViewerBtn) {
-        mobileViewerBtn.innerHTML = `<i class="fa-regular fa-circle-user"></i> ${user.email}`;
-      }
-      unlockAccessGate(false);
-    } else {
-      if (viewerStatusText) {
-        viewerStatusText.textContent = 'Sign In';
-      }
-      if (viewerAccessBtn) {
-        viewerAccessBtn.classList.remove('active');
-      }
-      if (mobileViewerBtn) {
-        mobileViewerBtn.innerHTML = `<i class="fa-regular fa-envelope"></i> Sign In as Viewer`;
-      }
-      lockAccessGate();
-    }
-  }
-
-  function lockAccessGate() {
-    document.body.classList.add('auth-locked');
-    if (authGateOverlay) {
-      authGateOverlay.style.display = 'flex';
-      authGateOverlay.classList.remove('unlocking');
-      setTimeout(() => {
-        if (gateVisitorName) gateVisitorName.focus();
-      }, 80);
-    }
-  }
-
-  function unlockAccessGate(animate = true) {
-    if (!authGateOverlay) {
-      document.body.classList.remove('auth-locked');
-      return;
-    }
-    if (animate) {
-      authGateOverlay.classList.add('unlocking');
-      setTimeout(() => {
-        authGateOverlay.style.display = 'none';
-        authGateOverlay.classList.remove('unlocking');
-        document.body.classList.remove('auth-locked');
-      }, 500);
-    } else {
-      authGateOverlay.style.display = 'none';
-      document.body.classList.remove('auth-locked');
-    }
-  }
-
-  function openUserProfileModal() {
-    const user = getAuthenticatedUser();
-    if (!user) {
-      lockAccessGate();
-      return;
-    }
-    if (sessionUserName) sessionUserName.textContent = user.name || 'Visitor';
-    if (sessionUserEmail) sessionUserEmail.textContent = user.email || 'visitor@example.com';
-    if (sessionUserRole) sessionUserRole.textContent = user.purpose || 'Recruiter';
-    if (sessionUserTime) sessionUserTime.textContent = user.timestamp || 'Active';
-
-    if (userProfileModal) userProfileModal.classList.add('active');
-  }
-
-  function closeUserProfileModal() {
-    if (userProfileModal) userProfileModal.classList.remove('active');
-  }
-
-  if (viewerAccessBtn) viewerAccessBtn.addEventListener('click', openUserProfileModal);
-  if (mobileViewerBtn) mobileViewerBtn.addEventListener('click', openUserProfileModal);
-  if (closeUserProfileBtn) closeUserProfileBtn.addEventListener('click', closeUserProfileModal);
-  if (userProfileModal) {
-    userProfileModal.addEventListener('click', (e) => {
-      if (e.target === userProfileModal) closeUserProfileModal();
-    });
-  }
-
-  if (logoutVisitorBtn) {
-    logoutVisitorBtn.addEventListener('click', () => {
-      localStorage.removeItem(AUTH_USER_KEY);
-      localStorage.removeItem(VIEWER_STORAGE_KEY);
-      closeUserProfileModal();
-      updateViewerDisplay();
-      showToast('Signed out successfully.');
-    });
-  }
-
-  if (authGateForm) {
-    authGateForm.addEventListener('submit', (e) => {
+  // Footer Owner Mode Link Trigger
+  const footerOwnerBtn = document.getElementById('footerOwnerBtn');
+  if (footerOwnerBtn) {
+    footerOwnerBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const name = gateVisitorName ? gateVisitorName.value.trim() : 'Visitor';
-      const email = gateVisitorEmail ? gateVisitorEmail.value.trim() : '';
-      if (!email || !email.includes('@')) {
-        alert('Please enter a valid email address.');
-        return;
-      }
-
-      const selectedRole = authGateForm.querySelector('input[name="visitorPurpose"]:checked');
-      const purpose = selectedRole ? selectedRole.value : 'Portfolio Visitor';
-
-      const userObj = {
-        name: name,
-        email: email,
-        purpose: purpose,
-        timestamp: new Date().toLocaleString()
-      };
-
-      localStorage.setItem(AUTH_USER_KEY, JSON.stringify(userObj));
-      localStorage.setItem(VIEWER_STORAGE_KEY, email);
-      recordVisitorEmail(email, name, purpose);
-
-      unlockAccessGate(true);
-      updateViewerDisplay();
-      showToast(`Welcome, ${name}! Enjoy exploring my portfolio.`);
-    });
-  }
-
-  if (gateOwnerBypassBtn) {
-    gateOwnerBypassBtn.addEventListener('click', () => {
       openOwnerLoginModal();
     });
   }
-
-  updateViewerDisplay();
-  updateVisitorCountBadge();
 
   // ==========================================
   // 6. DYNAMIC CERTIFICATION MANAGEMENT SYSTEM
@@ -1066,13 +865,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const exportHtmlBtn = document.getElementById('exportHtmlBtn');
   const resetEditsBtn = document.getElementById('resetEditsBtn');
   const lockOwnerBtn = document.getElementById('lockOwnerBtn');
-  const viewVisitorsBtn = document.getElementById('viewVisitorsBtn');
-
-  // Visitors Log Modal
-  const visitorsLogModal = document.getElementById('visitorsLogModal');
-  const closeVisitorsLogBtn = document.getElementById('closeVisitorsLogBtn');
-  const visitorsList = document.getElementById('visitorsList');
-  const clearVisitorsBtn = document.getElementById('clearVisitorsBtn');
 
   function openOwnerLoginModal() {
     if (adminAuthModal) {
@@ -1125,7 +917,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     renderCertificates();
-    updateVisitorCountBadge();
     renderQAQuestions();
     updateQACounters();
     showToast('🔑 Owner Mode Unlocked! Click any text to edit.');
@@ -1159,17 +950,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entered === DEFAULT_PASSCODE) {
         closeOwnerLoginModal();
         enableOwnerMode();
-        // Also unlock visitor access gate for owner
-        const ownerUser = {
-          name: 'Syed Ali Hussain',
-          email: 'syedali6160@gmail.com',
-          purpose: 'Portfolio Owner / AI Systems Builder',
-          timestamp: new Date().toLocaleString()
-        };
-        localStorage.setItem(AUTH_USER_KEY, JSON.stringify(ownerUser));
-        localStorage.setItem(VIEWER_STORAGE_KEY, ownerUser.email);
-        updateViewerDisplay();
-        unlockAccessGate(true);
       } else {
         alert('Incorrect owner passcode.');
       }
@@ -1241,43 +1021,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // View Visitors Modal (Owner Only)
-  if (viewVisitorsBtn && visitorsLogModal) {
-    viewVisitorsBtn.addEventListener('click', () => {
-      const list = getVisitorsLog();
-      if (visitorsList) {
-        if (list.length === 0) {
-          visitorsList.innerHTML = '<li style="color: var(--text-muted); text-align: center; padding: 1rem;">No registered viewer emails yet.</li>';
-        } else {
-          visitorsList.innerHTML = list.map(v => `
-            <li class="visitor-item">
-              <span class="visitor-email"><i class="fa-regular fa-envelope"></i> ${escapeHtml(v.email)}</span>
-              <span class="visitor-time">${escapeHtml(v.timestamp)}</span>
-            </li>
-          `).join('');
-        }
-      }
-      visitorsLogModal.classList.add('active');
-    });
-  }
 
-  if (closeVisitorsLogBtn && visitorsLogModal) {
-    closeVisitorsLogBtn.addEventListener('click', () => visitorsLogModal.classList.remove('active'));
-    visitorsLogModal.addEventListener('click', (e) => {
-      if (e.target === visitorsLogModal) visitorsLogModal.classList.remove('active');
-    });
-  }
-
-  if (clearVisitorsBtn) {
-    clearVisitorsBtn.addEventListener('click', () => {
-      if (confirm('Clear registered visitors list?')) {
-        localStorage.removeItem(VISITORS_LOG_KEY);
-        updateVisitorCountBadge();
-        if (visitorsList) visitorsList.innerHTML = '<li style="color: var(--text-muted); text-align: center; padding: 1rem;">No registered viewer emails yet.</li>';
-        showToast('Visitor history cleared.');
-      }
-    });
-  }
 
   // ==========================================
   // 8. RESUME MODAL VIEWER
@@ -1372,6 +1116,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = item.getAttribute('data-url');
         window.open(url, '_blank');
         closeCmdPalette();
+      } else if (action === 'owner-mode') {
+        closeCmdPalette();
+        openOwnerLoginModal();
       }
     });
   }
