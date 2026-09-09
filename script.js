@@ -1761,9 +1761,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Question Form Submission (Public Visitor)
+  // Question Form Submission (Public Visitor with Automatic Email Notification to syedali6160@gmail.com)
   if (qaAskForm) {
-    qaAskForm.addEventListener('submit', (e) => {
+    qaAskForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const name = document.getElementById('qaAskerName').value.trim();
@@ -1777,59 +1777,78 @@ document.addEventListener('DOMContentLoaded', () => {
       qaSubmitSpinner.style.display = 'inline-block';
       qaSubmitBtn.disabled = true;
 
+      const newId = 'qa_' + Date.now();
+      const newQuestion = {
+        id: newId,
+        asker: name,
+        email: email,
+        category: category,
+        question: question,
+        timestamp: new Date().toISOString(),
+        status: 'pending',
+        upvotes: 1,
+        answer: null
+      };
+
+      // Save locally to Q&A stream immediately
+      const questions = getQAQuestions();
+      questions.unshift(newQuestion);
+      saveQAQuestions(questions);
+      addMySubmission(newId);
+      renderQAQuestions();
+
+      // Automatically send email notification to syedali6160@gmail.com
+      try {
+        await fetch('https://formsubmit.co/ajax/syedali6160@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            _subject: `New Portfolio Question from ${name}`,
+            Name: name,
+            Email: email,
+            Category: category,
+            Question: question,
+            _template: 'box'
+          })
+        });
+      } catch (err) {
+        console.warn('Email notification dispatch notice:', err);
+      }
+
+      qaSubmitSpinner.style.display = 'none';
+      qaSubmitText.style.display = 'inline-block';
+      qaSubmitBtn.disabled = false;
+
+      qaFormFeedback.className = 'qa-feedback success';
+      qaFormFeedback.innerHTML = `
+        <strong><i class="fa-solid fa-circle-check"></i> Thanks! Syed will get back to you soon.</strong><br />
+        Your question has been automatically emailed to <strong>syedali6160@gmail.com</strong>.
+      `;
+      qaFormFeedback.style.display = 'block';
+
+      showToast('Thanks! Syed will get back to you soon.');
+      qaAskForm.reset();
+      if (qaCharCounter) qaCharCounter.textContent = '0 / 400';
+
       setTimeout(() => {
-        qaSubmitSpinner.style.display = 'none';
-        qaSubmitText.style.display = 'inline-block';
-        qaSubmitBtn.disabled = false;
+        const newCard = qaQuestionsList.querySelector(`[data-id="${newId}"]`);
+        if (newCard) {
+          newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          newCard.style.boxShadow = '0 0 25px rgba(0, 245, 212, 0.5)';
+          newCard.style.borderColor = 'var(--accent-cyan)';
+          setTimeout(() => { 
+            newCard.style.boxShadow = '';
+            newCard.style.borderColor = '';
+          }, 3000);
+        }
+      }, 120);
 
-        const newId = 'qa_' + Date.now();
-        const newQuestion = {
-          id: newId,
-          asker: name,
-          email: email,
-          category: category,
-          question: question,
-          timestamp: new Date().toISOString(),
-          status: 'pending',
-          upvotes: 1,
-          answer: null
-        };
-
-        const questions = getQAQuestions();
-        questions.unshift(newQuestion);
-        saveQAQuestions(questions);
-        addMySubmission(newId);
-
-        qaFormFeedback.className = 'qa-feedback success';
-        qaFormFeedback.innerHTML = `
-          <strong><i class="fa-solid fa-circle-check"></i> Question Transmitted!</strong><br />
-          Thank you ${escapeHtml(name)}. Your question is in Syed Ali Hussain's queue and will appear with an answer shortly.
-        `;
-        qaFormFeedback.style.display = 'block';
-
-        showToast('🚀 Question sent to Syed Ali Hussain! In queue for review.');
-        qaAskForm.reset();
-        if (qaCharCounter) qaCharCounter.textContent = '0 / 400';
-
-        renderQAQuestions();
-
-        setTimeout(() => {
-          const newCard = qaQuestionsList.querySelector(`[data-id="${newId}"]`);
-          if (newCard) {
-            newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            newCard.style.boxShadow = '0 0 25px rgba(0, 245, 212, 0.5)';
-            newCard.style.borderColor = 'var(--accent-cyan)';
-            setTimeout(() => { 
-              newCard.style.boxShadow = '';
-              newCard.style.borderColor = '';
-            }, 3000);
-          }
-        }, 120);
-
-        setTimeout(() => {
-          if (qaFormFeedback) qaFormFeedback.style.display = 'none';
-        }, 8000);
-      }, 700);
+      setTimeout(() => {
+        if (qaFormFeedback) qaFormFeedback.style.display = 'none';
+      }, 8000);
     });
   }
 
