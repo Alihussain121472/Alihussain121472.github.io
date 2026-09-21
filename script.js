@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'AI SAAS PLATFORM · LIVE IN PRODUCTION',
       title: 'NovaBrief Tech',
       subtitle: 'AI Student Intelligence, Opportunity Hunter & Daily Tech Digests',
-      pitch: 'An automated platform that hunts elite student programs (Google Student Facilitator, Google Arcade, Microsoft Fabric, NASA Open Science, fellowships) and generates instant 60-second AI summaries of global breakthroughs.',
+      pitch: 'A platform that tracks student opportunities and fellowships. It scrapes the web and uses language models to generate short daily summaries. This helps students find programs without manually reading through hundreds of links.',
       skills: [
         'Autonomous Program Hunter Agent (Scrapes Scholarships & Grants)',
         'Ultra-Fast AI Summaries (<1 sec response via Groq)',
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'AUTONOMOUS SCOUT · B2B SAAS',
       title: 'Araknet Business Discovery Agent',
       subtitle: 'Autonomous Business Scouting, Digital Presence Audit & Lead Generation',
-      pitch: 'An autonomous AI scout that scans local and international businesses across any city, audits their websites and mobile presence, and scores high-value client opportunities.',
+      pitch: 'A Python tool that finds businesses in specific cities. It scans their websites and mobile presence. Then it scores each business to identify good client opportunities for agencies.',
       skills: [
         'Autonomous Business Directory Scouting',
         'Website & Mobile App Presence Auditing',
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'CIVIC TECH · PUBLIC ASSISTANCE APP',
       title: 'Khidmat AI — Civic & Daily Life Assistance',
       subtitle: 'AI-Powered Public Service Guidance & Everyday Problem Solving (Android & Web)',
-      pitch: 'A bilingual civic assistance application that helps citizens effortlessly understand government procedures, draft public service requests, and resolve utility disputes in everyday language.',
+      pitch: 'A bilingual web app for civic assistance. It explains government procedures in plain language. Users can draft public service requests and figure out how to resolve utility disputes.',
       skills: [
         'Bilingual Citizen Assistance (Urdu & English)',
         'Plain-Language Government Procedure Guidance',
