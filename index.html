@@ -1,38 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Anti-flash: run before any stylesheet to prevent light-flash on dark-mode reload -->
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syed Ali Hussain | AI Engineer & Full-Stack Developer</title>
-    <meta name="description" content="Portfolio of Syed Ali Hussain, AI Engineer & Full-Stack Developer based in Islamabad. Building autonomous AI systems that ship to real users.">
+    <title>Syed Ali Hussain | AI Engineer &amp; Full-Stack Developer</title>
+    <meta name="description" content="Portfolio of Syed Ali Hussain, AI Engineer &amp; Full-Stack Developer based in Islamabad. Building autonomous AI systems that ship to real users.">
     <meta name="author" content="Syed Ali Hussain">
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://alihussain121472.github.io/">
-    <meta property="og:title" content="Syed Ali Hussain | AI Engineer & Full-Stack Developer">
+    <meta property="og:title" content="Syed Ali Hussain | AI Engineer &amp; Full-Stack Developer">
     <meta property="og:description" content="Building autonomous AI systems that ship to real users.">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    
+
     <style>
+        /* ============================================================
+           COLOR TOKEN SYSTEM
+           Light mode is DEFAULT (no attribute needed on <html>).
+           Dark mode activates when data-theme="dark" is on <html>.
+        ============================================================ */
         :root {
-            --bg-color: #0A0A0F;
-            --surface-color: #111116;
-            --border-color: #1E1E2A;
-            --accent-color: #6366F1;
-            --accent-hover: #4F46E5;
-            --heading-color: #F8F8FF;
-            --text-color: #94A3B8;
+            /* Light mode — DEFAULT */
+            --color-bg:               #FFFFFF;
+            --color-surface:          #F5F5F7;
+            --color-surface-raised:   #EAEAEF;
+            --color-border:           #DDDDE8;
+            --color-border-strong:    #C5C5D8;
+            --color-text-primary:     #0A0A0F;
+            --color-text-muted:       #64748B;
+            --color-accent:           #6366F1;
+            --color-accent-hover:     #4F46E5;
+            --color-accent-bg:        rgba(99, 102, 241, 0.08);
+            --color-accent-border:    rgba(99, 102, 241, 0.25);
+            --color-nav-bg:           rgba(255, 255, 255, 0.92);
+            --color-shadow:           rgba(0, 0, 0, 0.08);
+            --color-pill-bg:          #EAEAEF;
+            --color-pill-text:        #4A5568;
+            --color-badge-live-bg:    rgba(99, 102, 241, 0.10);
+            --color-badge-live-text:  #4F52D0;
+            --color-stats-number:     #6366F1;
+            --color-cv-bg:            #FFFFFF;
+            --color-input-bg:         #FFFFFF;
+            --color-input-border:     #DDDDE8;
+            --color-btn-secondary-hover: #EAEAEF;
+
+            /* Typography */
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             --max-width: 1100px;
         }
 
+        [data-theme="dark"] {
+            /* Dark mode — activated by JS toggle */
+            --color-bg:               #0A0A0F;
+            --color-surface:          #111118;
+            --color-surface-raised:   #16161F;
+            --color-border:           #1E1E2E;
+            --color-border-strong:    #2A2A3E;
+            --color-text-primary:     #F8F8FF;
+            --color-text-muted:       #94A3B8;
+            --color-accent:           #6366F1;
+            --color-accent-hover:     #4F46E5;
+            --color-accent-bg:        rgba(99, 102, 241, 0.12);
+            --color-accent-border:    rgba(99, 102, 241, 0.30);
+            --color-nav-bg:           rgba(10, 10, 15, 0.92);
+            --color-shadow:           rgba(0, 0, 0, 0.40);
+            --color-pill-bg:          #111118;
+            --color-pill-text:        #94A3B8;
+            --color-badge-live-bg:    rgba(99, 102, 241, 0.15);
+            --color-badge-live-text:  #6366F1;
+            --color-stats-number:     #6366F1;
+            --color-cv-bg:            #111118;
+            --color-input-bg:         #111118;
+            --color-input-border:     #1E1E2E;
+            --color-btn-secondary-hover: #16161F;
+        }
+
+        /* Global smooth transitions on theme switch */
         * {
+            transition: background-color 250ms ease,
+                        border-color 250ms ease,
+                        color 150ms ease,
+                        box-shadow 250ms ease;
+        }
+
+        /* Prevent flash of transitions on initial page load */
+        .no-transitions * {
+            transition: none !important;
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -40,15 +115,15 @@
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--color-bg);
+            color: var(--color-text-muted);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            color: var(--heading-color);
+            color: var(--color-text-primary);
             font-weight: 600;
             line-height: 1.2;
         }
@@ -77,9 +152,12 @@
             font-size: 2.25rem;
             margin-bottom: 64px;
             font-weight: 600;
+            color: var(--color-text-primary);
         }
 
-        /* Buttons */
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -97,28 +175,30 @@
         }
 
         .btn.primary {
-            background-color: var(--accent-color);
+            background-color: var(--color-accent);
             color: #ffffff;
-            border: 1px solid var(--accent-color);
+            border: 1px solid var(--color-accent);
         }
 
         .btn.primary:hover {
-            background-color: var(--accent-hover);
-            border-color: var(--accent-hover);
+            background-color: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
         }
 
         .btn.secondary {
             background-color: transparent;
-            color: var(--heading-color);
-            border: 1px solid var(--border-color);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
         }
 
         .btn.secondary:hover {
-            background-color: var(--surface-color);
-            border-color: #333344;
+            background-color: var(--color-btn-secondary-hover);
+            border-color: var(--color-border-strong);
         }
 
-        /* Navigation */
+        /* ============================================================
+           NAVIGATION
+        ============================================================ */
         #navbar {
             position: fixed;
             top: 0;
@@ -132,22 +212,24 @@
         }
 
         #navbar.scrolled {
-            background-color: rgba(10, 10, 15, 0.95);
+            background-color: var(--color-nav-bg);
             padding: 16px 0;
             backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-color);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--color-border);
         }
 
         .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
         }
 
         .logo {
             font-weight: 700;
             font-size: 1.25rem;
-            color: var(--heading-color);
+            color: var(--color-text-primary);
         }
 
         .nav-links {
@@ -158,23 +240,59 @@
         .nav-links a {
             font-size: 0.95rem;
             font-weight: 600;
-            color: var(--text-color);
+            color: var(--color-text-muted);
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--heading-color);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-text-primary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
+            flex-shrink: 0;
+        }
+
+        #theme-toggle:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        #theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
         }
 
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: var(--heading-color);
+            color: var(--color-text-primary);
             font-size: 1.5rem;
             cursor: pointer;
         }
 
-        /* Hero Section */
+        /* ============================================================
+           HERO
+        ============================================================ */
         .hero-section {
             padding-top: 200px;
             padding-bottom: 100px;
@@ -187,12 +305,12 @@
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .hero-greeting {
             font-family: var(--font-mono);
-            color: var(--accent-color);
+            color: var(--color-accent);
             font-size: 0.9rem;
             margin-bottom: 24px;
         }
@@ -202,12 +320,14 @@
             line-height: 1.1;
             margin-bottom: 24px;
             max-width: 900px;
+            color: var(--color-text-primary);
         }
 
         .hero-tagline {
             font-size: 1.125rem;
             max-width: 600px;
             margin-bottom: 48px;
+            color: var(--color-text-muted);
         }
 
         .hero-actions {
@@ -224,18 +344,21 @@
         .social-links a {
             font-size: 0.95rem;
             font-weight: 600;
+            color: var(--color-text-muted);
         }
 
         .social-links a:hover {
-            color: var(--heading-color);
+            color: var(--color-text-primary);
         }
 
-        /* Stats Section */
+        /* ============================================================
+           STATS
+        ============================================================ */
         .stats-section {
             padding: 60px 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            background-color: var(--surface-color);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-surface);
         }
 
         .stats-grid {
@@ -253,16 +376,19 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--heading-color);
+            color: var(--color-stats-number);
             line-height: 1;
         }
 
         .stat-label {
             font-size: 0.9rem;
             font-weight: 600;
+            color: var(--color-text-muted);
         }
 
-        /* About Section */
+        /* ============================================================
+           ABOUT
+        ============================================================ */
         .about-content {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
@@ -272,11 +398,12 @@
 
         .about-text p {
             margin-bottom: 24px;
+            color: var(--color-text-muted);
         }
 
         .education-card {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
             border-radius: 8px;
             padding: 32px;
         }
@@ -284,13 +411,17 @@
         .education-card h3 {
             margin-bottom: 16px;
             font-size: 1.25rem;
+            color: var(--color-text-primary);
         }
 
         .education-card p {
             margin-bottom: 8px;
+            color: var(--color-text-muted);
         }
 
-        /* Skills Section */
+        /* ============================================================
+           SKILLS
+        ============================================================ */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -300,6 +431,7 @@
         .skill-group h3 {
             font-size: 1.25rem;
             margin-bottom: 20px;
+            color: var(--color-text-primary);
         }
 
         .tech-pills {
@@ -310,15 +442,17 @@
 
         .tech-pill {
             font-family: var(--font-mono);
-            font-size: 0.8125rem; /* 13px */
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
+            font-size: 0.8125rem;
+            background-color: var(--color-pill-bg);
+            border: 1px solid var(--color-border);
             padding: 6px 12px;
             border-radius: 4px;
-            color: var(--heading-color);
+            color: var(--color-pill-text);
         }
 
-        /* Projects Section */
+        /* ============================================================
+           PROJECTS
+        ============================================================ */
         .project-card {
             display: flex;
             gap: 64px;
@@ -337,9 +471,9 @@
         .project-image {
             flex: 1;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--color-border);
             overflow: hidden;
-            background-color: var(--surface-color);
+            background-color: var(--color-surface);
         }
 
         .project-image img {
@@ -363,6 +497,7 @@
 
         .project-title {
             font-size: 1.75rem;
+            color: var(--color-text-primary);
         }
 
         .status-badge {
@@ -370,9 +505,9 @@
             font-size: 0.75rem;
             padding: 4px 8px;
             border-radius: 4px;
-            background-color: rgba(99, 102, 241, 0.1);
-            color: var(--accent-color);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background-color: var(--color-badge-live-bg);
+            color: var(--color-badge-live-text);
+            border: 1px solid var(--color-accent-border);
             font-weight: 600;
         }
 
@@ -383,7 +518,11 @@
         .detail-block h4 {
             font-size: 1rem;
             margin-bottom: 8px;
-            color: var(--heading-color);
+            color: var(--color-text-primary);
+        }
+
+        .detail-block p {
+            color: var(--color-text-muted);
         }
 
         .achievement-list {
@@ -393,6 +532,7 @@
 
         .achievement-list li {
             margin-bottom: 8px;
+            color: var(--color-text-muted);
         }
 
         .project-tech {
@@ -408,7 +548,9 @@
             gap: 16px;
         }
 
-        /* Certifications */
+        /* ============================================================
+           CERTIFICATIONS
+        ============================================================ */
         .cert-list {
             display: grid;
             grid-template-columns: 1fr;
@@ -416,8 +558,8 @@
         }
 
         .cert-item {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
             padding: 24px;
             border-radius: 8px;
             display: flex;
@@ -426,38 +568,53 @@
         }
 
         .cert-item strong {
-            color: var(--heading-color);
+            color: var(--color-text-primary);
             display: block;
             margin-bottom: 4px;
         }
 
         .cert-meta {
             font-size: 0.9rem;
+            color: var(--color-text-muted);
         }
 
-        /* Resume Preview */
+        .cert-date {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+        }
+
+        /* ============================================================
+           RESUME
+        ============================================================ */
         .resume-container {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
+            background-color: var(--color-cv-bg);
+            border: 1px solid var(--color-border);
             border-radius: 8px;
             padding: 48px;
         }
 
         .resume-header {
             margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--color-border);
             padding-bottom: 24px;
         }
 
         .resume-header h3 {
             font-size: 2rem;
             margin-bottom: 8px;
+            color: var(--color-text-primary);
+        }
+
+        .resume-header p {
+            color: var(--color-text-muted);
         }
 
         .resume-section {
             margin-bottom: 40px;
         }
-        
+
         .resume-section:last-child {
             margin-bottom: 0;
         }
@@ -465,13 +622,17 @@
         .resume-section h4 {
             font-size: 1.25rem;
             margin-bottom: 24px;
-            color: var(--accent-color);
+            color: var(--color-accent);
+        }
+
+        .resume-section p {
+            color: var(--color-text-muted);
         }
 
         .resume-item {
             margin-bottom: 24px;
         }
-        
+
         .resume-item:last-child {
             margin-bottom: 0;
         }
@@ -484,23 +645,30 @@
         }
 
         .resume-item-title {
-            color: var(--heading-color);
+            color: var(--color-text-primary);
             font-weight: 600;
+        }
+
+        .resume-item p {
+            color: var(--color-text-muted);
         }
 
         .resume-actions {
             margin-top: 48px;
             padding-top: 24px;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--color-border);
             display: flex;
             justify-content: flex-start;
         }
 
-        /* Contact Section */
+        /* ============================================================
+           CONTACT
+        ============================================================ */
         .contact-desc {
             max-width: 600px;
             margin-bottom: 32px;
             font-size: 1.125rem;
+            color: var(--color-text-muted);
         }
 
         .contact-info {
@@ -508,15 +676,23 @@
             gap: 24px;
         }
 
-        /* Footer */
+        /* ============================================================
+           FOOTER
+        ============================================================ */
         footer {
             padding: 40px 0;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--color-border);
             text-align: left;
             font-size: 0.9rem;
         }
 
-        /* Responsive */
+        footer p {
+            color: var(--color-text-muted);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
         @media (max-width: 900px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -524,7 +700,8 @@
             .about-content {
                 grid-template-columns: 1fr;
             }
-            .project-card, .project-card:nth-child(even) {
+            .project-card,
+            .project-card:nth-child(even) {
                 flex-direction: column;
                 gap: 32px;
             }
@@ -550,9 +727,9 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--bg-color);
+                background-color: var(--color-bg);
                 padding: 24px;
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid var(--color-border);
             }
             .nav-links.active {
                 display: flex;
@@ -572,27 +749,57 @@
             .resume-container {
                 padding: 24px;
             }
+            .contact-info {
+                flex-direction: column;
+            }
         }
 
-        /* Print Styles */
+        /* ============================================================
+           PRINT
+        ============================================================ */
         @media print {
-            body { background: #fff !important; color: #000 !important; }
-            #navbar, .contact-section, .hero-actions, footer { display: none !important; }
-            * { color: #000 !important; background: transparent !important; box-shadow: none !important; text-shadow: none !important; }
-            .tech-pill { border: 1px solid #999 !important; }
-            .project-card { page-break-inside: avoid; flex-direction: column !important; }
-            .project-image { display: none !important; }
-            .section { padding: 40px 0 !important; }
-            .container { padding: 0 !important; }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            #navbar,
+            .hero-actions,
+            .contact-info,
+            footer {
+                display: none !important;
+            }
+            * {
+                color: #000000 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+            .tech-pill {
+                border: 1px solid #999 !important;
+            }
+            .project-card {
+                page-break-inside: avoid;
+                flex-direction: column !important;
+            }
+            .project-image {
+                display: none !important;
+            }
+            .section {
+                padding: 40px 0 !important;
+            }
+            .container {
+                padding: 0 !important;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVIGATION -->
     <nav id="navbar">
         <div class="container nav-content">
             <a href="#" class="logo">Syed Ali Hussain</a>
-            <button class="menu-toggle" aria-label="Toggle Navigation">&#9776;</button>
+
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -601,11 +808,35 @@
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+
+            <div class="nav-right">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" aria-label="Switch to dark mode">
+                    <!-- Sun icon — shown in light mode -->
+                    <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1"  x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22"  x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1"  y1="12" x2="3"  y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <!-- Moon icon — shown in dark mode -->
+                    <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+
+                <button class="menu-toggle" aria-label="Toggle Navigation">&#9776;</button>
+            </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero Section -->
+        <!-- HERO -->
         <section id="hero" class="section hero-section fade-in">
             <div class="container">
                 <p class="hero-greeting">Syed Ali Hussain &mdash; AI Engineer &amp; Full-Stack Developer</p>
@@ -624,7 +855,7 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
+        <!-- STATS -->
         <section id="stats" class="stats-section">
             <div class="container stats-grid">
                 <div class="stat-item">
@@ -646,26 +877,26 @@
             </div>
         </section>
 
-        <!-- About Section -->
+        <!-- ABOUT -->
         <section id="about" class="section">
             <div class="container">
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
                     <div class="about-text">
                         <p>I am a software engineer focused on applied Artificial Intelligence and full-stack development. I bridge the gap between experimental AI models and production-ready applications, building systems that automate complex workflows and solve tangible problems.</p>
-                        <p>Currently pursuing a BSc in Artificial Intelligence at SZABIST University (2025–2029), I combine academic rigor with practical engineering. I learn best by shipping real products—like NovaBrief Tech, a live SaaS platform serving students daily, and specialized B2B agents that drive real business value.</p>
+                        <p>Currently pursuing a BSc in Artificial Intelligence at SZABIST University (2025&ndash;2029), I combine academic rigor with practical engineering. I learn best by shipping real products&mdash;like NovaBrief Tech, a live SaaS platform serving students daily, and specialized B2B agents that drive real business value.</p>
                     </div>
                     <div class="education-card">
                         <h3>Education</h3>
-                        <p><strong>SZABIST University</strong></p>
+                        <p><strong style="color: var(--color-text-primary);">SZABIST University</strong></p>
                         <p>BSc Artificial Intelligence</p>
-                        <p style="margin-top: 8px; color: var(--text-color);">2025 &ndash; 2029 | Islamabad, Pakistan</p>
+                        <p style="margin-top: 8px;">2025 &ndash; 2029 | Islamabad, Pakistan</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- PROJECTS -->
         <section id="projects" class="section">
             <div class="container">
                 <h2 class="section-title">Case Studies</h2>
@@ -673,7 +904,7 @@
                 <!-- Project 1 -->
                 <article class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/novabrief-preview.png" alt="NovaBrief Tech Platform" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'500\' style=\'background:%23111116\'%3E%3C/svg%3E'">
+                        <img src="assets/images/novabrief-preview.png" alt="NovaBrief Tech Platform" onerror="this.style.minHeight='200px'">
                     </div>
                     <div class="project-content">
                         <div class="project-header">
@@ -715,7 +946,7 @@
                 <!-- Project 2 -->
                 <article class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/leads-agent-preview.svg" alt="Araknet Business Discovery Agent" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'500\' style=\'background:%23111116\'%3E%3C/svg%3E'">
+                        <img src="assets/images/leads-agent-preview.svg" alt="Araknet Business Discovery Agent" onerror="this.style.minHeight='200px'">
                     </div>
                     <div class="project-content">
                         <div class="project-header">
@@ -757,7 +988,7 @@
                 <!-- Project 3 -->
                 <article class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/dha-agent-preview.svg" alt="DHA Multan Real Estate AI Agent" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'500\' style=\'background:%23111116\'%3E%3C/svg%3E'">
+                        <img src="assets/images/dha-agent-preview.svg" alt="DHA Multan Real Estate AI Agent" onerror="this.style.minHeight='200px'">
                     </div>
                     <div class="project-content">
                         <div class="project-header">
@@ -797,7 +1028,7 @@
                 <!-- Project 4 -->
                 <article class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/khidmat-ai-preview.jpg" alt="Khidmat AI" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'500\' style=\'background:%23111116\'%3E%3C/svg%3E'">
+                        <img src="assets/images/khidmat-ai-preview.jpg" alt="Khidmat AI" onerror="this.style.minHeight='200px'">
                     </div>
                     <div class="project-content">
                         <div class="project-header">
@@ -837,7 +1068,7 @@
                 <!-- Project 5 -->
                 <article class="project-card">
                     <div class="project-image">
-                        <img src="assets/images/seo-agent-preview.jpg" alt="Autonomous SEO & Content Agent" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'500\' style=\'background:%23111116\'%3E%3C/svg%3E'">
+                        <img src="assets/images/seo-agent-preview.jpg" alt="Autonomous SEO &amp; Content Agent" onerror="this.style.minHeight='200px'">
                     </div>
                     <div class="project-content">
                         <div class="project-header">
@@ -877,12 +1108,12 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- SKILLS -->
         <section id="skills" class="section">
             <div class="container">
                 <h2 class="section-title">Technical Expertise</h2>
                 <div class="skills-grid">
-                    
+
                     <div class="skill-group">
                         <h3>AI &amp; LLMs</h3>
                         <div class="tech-pills">
@@ -948,81 +1179,81 @@
             </div>
         </section>
 
-        <!-- Certifications Section -->
+        <!-- CERTIFICATIONS -->
         <section id="certifications" class="section">
             <div class="container">
                 <h2 class="section-title">Certifications &amp; Publications</h2>
                 <div class="cert-list">
-                    
+
                     <div class="cert-item">
                         <div>
                             <strong>ML Research Publication: Brute-Force Login Detection</strong>
-                            <span class="cert-meta" style="color: var(--text-color); display: block; margin-top: 4px;">IJICT Journal, SZABIST</span>
+                            <span class="cert-meta">IJICT Journal, SZABIST</span>
                         </div>
-                        <span class="tech-pill" style="border:none; background: transparent; padding:0;">Apr 2026</span>
+                        <span class="cert-date">Apr 2026</span>
                     </div>
 
                     <div class="cert-item">
                         <div>
                             <strong>CS50's Intro to Programming with Python</strong>
-                            <span class="cert-meta" style="color: var(--text-color); display: block; margin-top: 4px;">Harvard University (David J. Malan)</span>
+                            <span class="cert-meta">Harvard University (David J. Malan)</span>
                         </div>
                     </div>
 
                     <div class="cert-item">
                         <div>
                             <strong>Crash Course on Python</strong>
-                            <span class="cert-meta" style="color: var(--text-color); display: block; margin-top: 4px;">Google / Coursera</span>
+                            <span class="cert-meta">Google / Coursera</span>
                         </div>
-                        <span class="tech-pill" style="border:none; background: transparent; padding:0;">Nov 2025</span>
+                        <span class="cert-date">Nov 2025</span>
                     </div>
 
                     <div class="cert-item">
                         <div>
                             <strong>Technical Support Fundamentals</strong>
-                            <span class="cert-meta" style="color: var(--text-color); display: block; margin-top: 4px;">Google / Coursera</span>
+                            <span class="cert-meta">Google / Coursera</span>
                         </div>
-                        <span class="tech-pill" style="border:none; background: transparent; padding:0;">Nov 2025</span>
+                        <span class="cert-date">Nov 2025</span>
                     </div>
 
                     <div class="cert-item">
                         <div>
                             <strong>Introduction to Modern AI</strong>
-                            <span class="cert-meta" style="color: var(--text-color); display: block; margin-top: 4px;">Cisco Networking Academy</span>
+                            <span class="cert-meta">Cisco Networking Academy</span>
                         </div>
-                        <span class="tech-pill" style="border:none; background: transparent; padding:0;">Jan 2026</span>
+                        <span class="cert-date">Jan 2026</span>
                     </div>
 
                     <div class="cert-item">
                         <div>
                             <strong>Web Developer Internship</strong>
-                            <span class="cert-meta" style="color: var(--text-color); display: block; margin-top: 4px;">AI-Explain You Science / AIEYS</span>
+                            <span class="cert-meta">AI-Explain You Science / AIEYS</span>
                         </div>
-                        <span class="tech-pill" style="border:none; background: transparent; padding:0;">Apr 2026</span>
+                        <span class="cert-date">Apr 2026</span>
                     </div>
 
                     <div class="cert-item">
                         <div>
                             <strong>AI-Enhanced Teaching Certificate</strong>
-                            <span class="cert-meta" style="color: var(--text-color); display: block; margin-top: 4px;">AIEYS</span>
+                            <span class="cert-meta">AIEYS</span>
                         </div>
-                        <span class="tech-pill" style="border:none; background: transparent; padding:0;">Apr 2026</span>
+                        <span class="cert-date">Apr 2026</span>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- Resume Section -->
+        <!-- RESUME -->
         <section id="resume" class="section">
             <div class="container">
                 <h2 class="section-title">Curriculum Vitae</h2>
                 <div class="resume-container">
-                    
+
                     <div class="resume-header">
                         <h3>Syed Ali Hussain</h3>
                         <p>AI Engineer &amp; Full-Stack Developer | Islamabad, Pakistan</p>
-                        <p style="margin-top: 8px; color: var(--text-color);">syedali6160@gmail.com | github.com/Alihussain121472</p>
+                        <p style="margin-top: 8px;">syedali6160@gmail.com | github.com/Alihussain121472</p>
                     </div>
 
                     <div class="resume-section">
@@ -1035,9 +1266,9 @@
                         <div class="resume-item">
                             <div class="resume-item-header">
                                 <span class="resume-item-title">BSc Artificial Intelligence</span>
-                                <span class="tech-pill">2025 &ndash; 2029</span>
+                                <span class="cert-date">2025 &ndash; 2029</span>
                             </div>
-                            <p style="color: var(--text-color);">SZABIST University, Islamabad</p>
+                            <p>SZABIST University, Islamabad</p>
                         </div>
                     </div>
 
@@ -1049,7 +1280,7 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- CONTACT -->
         <section id="contact" class="section">
             <div class="container">
                 <h2 class="section-title">Get in Touch</h2>
@@ -1066,41 +1297,32 @@
 
     <footer>
         <div class="container">
-            <p style="color: var(--text-color);">&copy; 2026 Syed Ali Hussain. Designed and engineered for production.</p>
+            <p>&copy; 2026 Syed Ali Hussain. Designed and engineered for production.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Mobile Menu Toggle
+
+            // ── Mobile Menu Toggle ─────────────────────────────────
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinksContainer = document.querySelector('.nav-links');
-            
+
             menuToggle.addEventListener('click', () => {
                 navLinksContainer.classList.toggle('active');
             });
 
-            // Sticky Navigation
+            // ── Sticky Navbar ──────────────────────────────────────
             const navbar = document.getElementById("navbar");
             window.addEventListener("scroll", () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add("scrolled");
-                } else {
-                    navbar.classList.remove("scrolled");
-                }
+                navbar.classList.toggle("scrolled", window.scrollY > 50);
             });
 
-            // Active Link Highlighting
+            // ── Active Link Highlighting (IntersectionObserver) ────
             const sections = document.querySelectorAll("section");
             const navLinks = document.querySelectorAll(".nav-links a");
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '-50% 0px -50% 0px',
-                threshold: 0
-            };
-
-            const observer = new IntersectionObserver((entries) => {
+            const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         navLinks.forEach(link => {
@@ -1111,33 +1333,67 @@
                         });
                     }
                 });
-            }, observerOptions);
+            }, { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 });
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Smooth Scrolling
+            sections.forEach(section => sectionObserver.observe(section));
+
+            // ── Smooth Scrolling ───────────────────────────────────
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     navLinksContainer.classList.remove('active');
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        const navHeight = navbar.offsetHeight;
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: "smooth"
-                        });
+                        const offsetPosition = targetElement.getBoundingClientRect().top
+                            + window.pageYOffset
+                            - navbar.offsetHeight;
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
                     }
                 });
             });
+
+            // ── Theme Toggle ───────────────────────────────────────
+            const toggleBtn = document.getElementById('theme-toggle');
+            const sunIcon   = document.getElementById('icon-sun');
+            const moonIcon  = document.getElementById('icon-moon');
+            const html      = document.documentElement;
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    html.setAttribute('data-theme', 'dark');
+                    sunIcon.style.display  = 'none';
+                    moonIcon.style.display = 'block';
+                    toggleBtn.setAttribute('aria-label', 'Switch to light mode');
+                } else {
+                    html.removeAttribute('data-theme');
+                    sunIcon.style.display  = 'block';
+                    moonIcon.style.display = 'none';
+                    toggleBtn.setAttribute('aria-label', 'Switch to dark mode');
+                }
+            }
+
+            // Sync icon state with whatever theme was set by the anti-flash script
+            const currentTheme = html.getAttribute('data-theme') || 'light';
+            applyTheme(currentTheme);
+
+            toggleBtn.addEventListener('click', () => {
+                // Momentarily disable transitions to prevent multi-property lag
+                html.classList.add('no-transitions');
+
+                const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                applyTheme(next);
+                localStorage.setItem('theme', next);
+
+                // Re-enable transitions after two animation frames
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        html.classList.remove('no-transitions');
+                    });
+                });
+            });
+
         });
     </script>
 </body>
