@@ -790,7 +790,20 @@ strong { color: var(--color-text-primary); }
     flex:        1;
 }
 
+.cert-preview {
+    display: block;
+    flex-shrink: 0;
+    border-radius: 6px;
+    cursor: zoom-in;
+}
+
+.cert-preview:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
 .cert-image {
+    display:          block;
     width:            80px;
     height:           56px;
     flex-shrink:      0;
@@ -799,6 +812,82 @@ strong { color: var(--color-text-primary); }
     border-radius:    6px;
     background-color: var(--color-surface-raised);
 }
+
+.certificate-viewer-open,
+.certificate-viewer-open body {
+    overflow: hidden;
+}
+
+.certificate-viewer {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 76px 20px 24px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+}
+
+.certificate-viewer[open] {
+    display: grid;
+    place-items: center;
+}
+
+.certificate-viewer::backdrop {
+    background: rgba(5, 8, 18, 0.92);
+}
+
+.certificate-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.certificate-full-image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 180px);
+    max-height: calc(100dvh - 180px);
+    object-fit: contain;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4);
+}
+
+#certificateCaption {
+    max-width: 70ch;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.certificate-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    background: #151824;
+    color: #fff;
+    font: 32px/1 var(--font-sans);
+    cursor: pointer;
+}
+
+.certificate-close:hover { background: #30364a; }
+.certificate-close:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 4px; }
 
 .cert-item strong {
     color:         var(--color-text-primary);
