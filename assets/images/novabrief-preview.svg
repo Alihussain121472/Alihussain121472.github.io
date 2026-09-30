@@ -48,6 +48,6 @@
   <rect x="178" y="252" width="80" height="16" rx="4" fill="#3B82F6" fill-opacity="0.15"/>
   <text x="218" y="264" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#60A5FA">SCHOLARSHIP</text>
   <text x="270" y="264" font-family="'Inter', sans-serif" font-size="10" fill="#64748B">2h ago · Global Deadline</text>
-  <text x="178" y="290" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" fill="#F0F4F8">Google Summer of Code & AI Student Grants 2026</text>
+  <text x="178" y="290" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" fill="#F0F4F8">Google Summer of Code &amp; AI Student Grants 2026</text>
   <text x="178" y="312" font-family="'Inter', sans-serif" font-size="11" fill="#8899AA">Curated applications now open for undergraduate students in AI/ML track...</text>
 </svg>

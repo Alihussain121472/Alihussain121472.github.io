@@ -1,24 +1,59 @@
-# Operating System Files
+# ==============================================================================
+# ARAKNET.TECH — .gitignore
+# Pure static portfolio · Deployed on Vercel
+# ==============================================================================
+
+# ── Environment & secrets ────────────────────────────────────────────────────
+# Keep .env.example (the template) in version control.
+# Keep everything else out.
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+!.env.example
+
+# ── Vercel local CLI files ───────────────────────────────────────────────────
+# The .vercel folder is created by `vercel dev` / `vercel pull` locally.
+# It contains personal project config & OIDC tokens — never commit it.
+.vercel/
+
+# ── Operating system junk ────────────────────────────────────────────────────
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Editor / IDE Files
+# ── Editor / IDE directories ─────────────────────────────────────────────────
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 *.swp
 *.swo
+*~
 
-# Temporary & Log Files
+# ── Logs ─────────────────────────────────────────────────────────────────────
 *.log
 npm-debug.log*
 yarn-debug.log*
+yarn-error.log*
 
-# Node / Build artifacts (if any future build tool added)
+# ── Node (only relevant if a build step is added later) ──────────────────────
 node_modules/
 dist/
 build/
-# Environment variables & secrets
-.env
-.env.*
-!.env.example
+.cache/
+
+# ── Python utility scripts (local tooling, not part of the deployed site) ────
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/

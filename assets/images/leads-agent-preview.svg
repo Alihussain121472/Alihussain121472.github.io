@@ -39,7 +39,7 @@
   <rect x="475" y="9" width="105" height="20" rx="4" fill="#10B981" fill-opacity="0.15"/>
   <text x="527" y="23" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981">🟢 ACTIVE AGENT</text>
 
-  <!-- Left Column: Search & Target Selector -->
+  <!-- Left Column: Search &amp; Target Selector -->
   <g transform="translate(25, 55)">
     <rect width="165" height="225" rx="8" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
     <text x="14" y="24" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" fill="#F8FAFC">TARGET AUDIENCE</text>
@@ -63,7 +63,7 @@
     <text x="82" y="208" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">SerpAPI + Google Places</text>
   </g>
 
-  <!-- Center & Right: Live Scanned Leads & Audit Pipeline -->
+  <!-- Center &amp; Right: Live Scanned Leads &amp; Audit Pipeline -->
   <g transform="translate(205, 55)">
     <rect width="370" height="225" rx="8" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
     
