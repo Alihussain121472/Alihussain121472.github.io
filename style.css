@@ -794,8 +794,11 @@ strong { color: var(--color-text-primary); }
     display: block;
     flex-shrink: 0;
     border-radius: 6px;
-    cursor: zoom-in;
+    cursor: pointer;
 }
+
+.cert-preview,
+.cert-preview img { cursor: pointer; }
 
 .cert-preview:focus-visible {
     outline: 3px solid var(--color-accent);
@@ -827,7 +830,7 @@ strong { color: var(--color-text-primary); }
     max-width: none;
     max-height: none;
     margin: 0;
-    padding: 76px 20px 24px;
+    padding: 58px 16px 16px;
     border: 0;
     background: transparent;
     color: #fff;
@@ -855,9 +858,9 @@ strong { color: var(--color-text-primary); }
     display: block;
     width: auto;
     height: auto;
-    max-width: 100%;
-    max-height: calc(100vh - 180px);
-    max-height: calc(100dvh - 180px);
+    max-width: min(96vw, 1200px);
+    max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px);
     object-fit: contain;
     background: #fff;
     border-radius: 6px;
