@@ -421,7 +421,12 @@ strong { color: var(--color-text-primary); }
 }
 
 @media (max-width: 899px) {
-    .hero-photo img { height: 260px; max-width: 100%; }
+    .hero-photo img {
+        width: min(100%, 320px);
+        height: auto;
+        max-width: 100%;
+        margin: 0 auto;
+    }
 }
 
 /* ============================================================
