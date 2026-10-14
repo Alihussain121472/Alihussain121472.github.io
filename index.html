@@ -5,32 +5,38 @@
     <!-- Anti-flash: run before any stylesheet -->
     <script>
         (function () {
-            var saved = localStorage.getItem('theme');
-            if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+            try {
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (error) {
+                // Continue with the default theme when storage is unavailable.
+            }
         })();
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Syed Ali Hussain — AI Engineer &amp; Full Stack Developer</title>
-    <meta name="description" content="Portfolio of Syed Ali Hussain. AI Engineer and Full Stack Developer based in Islamabad. Building autonomous AI systems that ship to real users.">
+    <meta name="description" content="Syed Ali Hussain is an AI and full-stack developer in Islamabad, Pakistan. Explore applied AI, product engineering, and MY Mentore, a desktop study and career-prep app.">
     <meta name="author" content="Syed Ali Hussain">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://araknet.tech/">
+    <meta property="og:url" content="https://alihussain121472.github.io/">
     <meta property="og:title" content="Syed Ali Hussain — AI Engineer &amp; Full Stack Developer">
-    <meta property="og:description" content="Building autonomous AI systems that ship to real users.">
-    <meta property="og:image" content="https://araknet.tech/assets/images/syed-ali.jpg">
+    <meta property="og:description" content="Applied AI and full-stack projects, with clear architecture, working demos, and source links where available.">
+    <meta property="og:image" content="https://alihussain121472.github.io/assets/images/syed-ali.jpg">
+    <meta property="og:image:alt" content="Syed Ali Hussain, AI and full-stack developer">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@Syedali6160">
-    <meta name="twitter:title" content="Syed Ali Hussain — AI Engineer">
-    <meta name="twitter:description" content="Building autonomous AI systems that ship to real users.">
+    <meta name="twitter:title" content="Syed Ali Hussain — AI &amp; Full-Stack Developer">
+    <meta name="twitter:description" content="Applied AI and full-stack projects, with clear architecture, working demos, and source links where available.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://araknet.tech/">
+    <link rel="canonical" href="https://alihussain121472.github.io/">
 
     <!-- Favicon inline SVG -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='6' fill='%236366F1'/><circle cx='4' cy='8' r='3' fill='%236366F1' opacity='.5'/><circle cx='28' cy='8' r='3' fill='%236366F1' opacity='.5'/><circle cx='4' cy='24' r='3' fill='%236366F1' opacity='.5'/><circle cx='28' cy='24' r='3' fill='%236366F1' opacity='.5'/><line x1='10' y1='12' x2='4' y2='8' stroke='%236366F1' stroke-width='1.5' opacity='.4'/><line x1='22' y1='12' x2='28' y2='8' stroke='%236366F1' stroke-width='1.5' opacity='.4'/><line x1='10' y1='20' x2='4' y2='24' stroke='%236366F1' stroke-width='1.5' opacity='.4'/><line x1='22' y1='20' x2='28' y2='24' stroke='%236366F1' stroke-width='1.5' opacity='.4'/></svg>">
@@ -48,7 +54,7 @@
     <!-- NAVIGATION -->
     <nav id="navbar" role="navigation" aria-label="Main navigation">
         <div class="container nav-content">
-            <a href="#" class="logo" aria-label="Back to top">Syed Ali Hussain</a>
+            <a href="#hero" class="logo" aria-label="Back to top">Syed Ali Hussain</a>
 
             <!-- Desktop nav links -->
             <ul class="nav-links desktop" role="list">
@@ -104,10 +110,10 @@
         <section id="hero" class="section hero-section fade-in" aria-labelledby="hero-heading">
             <div class="container hero-container">
                 <div class="hero-text">
-                    <p class="hero-label">AI Engineer · Full Stack Developer · Islamabad, Pakistan</p>
-                    <h1 id="hero-heading" class="hero-title">Building autonomous AI systems with real world impact.</h1>
+                    <p class="hero-label">AI &amp; Full-Stack Developer · Islamabad, Pakistan</p>
+                    <h1 id="hero-heading" class="hero-title">I build useful AI and full-stack products, from the first API to the shipped interface.</h1>
                     <p class="hero-tagline">
-                        I ship production grade AI inference pipelines with sub 650ms responses, autonomous agents that run without babysitting, and SaaS backends handling real user workloads.
+                        I’m an Artificial Intelligence student who turns practical problems into working software. My projects span AI-assisted learning, workflow automation, and web products, with the implementation and current project status made clear.
                     </p>
                     <div class="hero-actions">
                         <a href="#projects" class="btn primary">View Projects</a>
@@ -132,16 +138,16 @@
         <section class="stats-section" aria-label="At a glance">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">AI agents shipped</span>
+                    <span class="stat-number">Applied AI</span>
+                    <span class="stat-label">Model-backed features in usable products</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">&lt;650ms</span>
-                    <span class="stat-label">Groq inference latency</span>
+                    <span class="stat-number">Full stack</span>
+                    <span class="stat-label">Interfaces, APIs, data, and deployment</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">GitHub repositories</span>
+                    <span class="stat-number">BSc AI</span>
+                    <span class="stat-label">SZABIST University · 2025–2029</span>
                 </div>
             </div>
         </section>
@@ -152,8 +158,8 @@
                 <h2 id="about-heading" class="section-title">About Me</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>I'm an AI engineer and full stack developer based in Islamabad. I build production systems inference pipelines, autonomous agents, and SaaS backends that handle real workloads for real users.</p>
-                        <p>Alongside my BSc in Artificial Intelligence at SZABIST, I've shipped many products covering student intelligence, B2B lead discovery, real estate advisory, civic assistance, and autonomous SEO. Each one runs in production with zero babysitting.</p>
+                        <p>I’m an AI and full-stack developer based in Islamabad, Pakistan, and a BSc Artificial Intelligence student at SZABIST. I enjoy building complete products: shaping the workflow, designing the data and API boundaries, and making the interface usable.</p>
+                        <p>My current work includes an AI study and career-preparation desktop app, a student opportunity digest, and a local-business discovery dashboard. I document what each system does, how it is built, and whether a public demo or source repository is available.</p>
                     </div>
                     <div class="education-card">
                         <h3>Education</h3>
@@ -168,8 +174,8 @@
         <!-- PROJECTS -->
         <section id="projects" class="section" aria-labelledby="projects-heading">
             <div class="container">
-                <h2 id="projects-heading" class="section-title">Case Studies</h2>
-                <p class="section-sub">Many systems in production. Each built to solve a specific, measurable problem.</p>
+                <h2 id="projects-heading" class="section-title">Selected Projects</h2>
+                <p class="section-sub">Each project explains the problem, implementation, technical choices, and the evidence available to review.</p>
 
                 <div class="projects-list">
 
@@ -181,36 +187,36 @@
                         <div class="project-content">
                             <div class="project-header">
                                 <h3 class="project-title">NovaBrief Tech</h3>
-                                <span class="status-badge">Live</span>
+                                <span class="status-badge status-badge--live">Live</span>
                             </div>
-                            <p class="project-tagline">Automated intelligence platform for students curated opportunities, zero noise.</p>
+                            <p class="project-tagline">A scheduled morning briefing that brings AI news and student opportunities into one place.</p>
                             <div class="detail-block">
                                 <h4>Problem</h4>
-                                <p>Students miss global fellowships, NASA programs, and tech opportunities because they're buried in noise.</p>
+                                <p>AI news and student programs are published across many sources, making it hard to keep up consistently.</p>
                             </div>
                             <div class="detail-block">
                                 <h4>Solution &amp; Architecture</h4>
-                                <p>Daily intelligence platform running Llama 3.3 via Groq Cloud. APScheduler background crons scrape, filter, and deliver morning digests automatically.</p>
+                                <p>A Python and Flask service gathers news and program listings, uses a Groq-hosted model to prepare summaries, and schedules a morning email digest with APScheduler.</p>
                             </div>
                             <div class="detail-block">
                                 <h4>Key Achievements</h4>
                                 <ul class="achievement-list">
-                                    <li>Inference pipeline delivering responses in under 650ms.</li>
-                                    <li>Fully automated daily scraping no manual triggers.</li>
-                                    <li>Supabase PostgreSQL architecture serving active subscribers.</li>
+                                    <li>Scheduled digest and program-notification jobs run at configured times.</li>
+                                    <li>PostgreSQL stores the collected items and delivery records.</li>
+                                    <li>Email delivery supports configured Resend or SMTP credentials.</li>
                                 </ul>
                             </div>
                             <div class="project-tech">
                                 <span class="tech-pill">Python</span>
-                                <span class="tech-pill">FastAPI</span>
-                                <span class="tech-pill">Llama 3.3</span>
+                                <span class="tech-pill">Flask</span>
+                                <span class="tech-pill">PostgreSQL</span>
                                 <span class="tech-pill">Groq API</span>
-                                <span class="tech-pill">Supabase PostgreSQL</span>
                                 <span class="tech-pill">APScheduler</span>
+                                <span class="tech-pill">Resend / SMTP</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://novabrief.tech" target="_blank" rel="noopener noreferrer" class="btn primary">Live Site</a>
-                                <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn secondary">GitHub</a>
+                                <a href="https://github.com/Alihussain121472/News-Agent" target="_blank" rel="noopener noreferrer" class="btn secondary">Source code</a>
                             </div>
                         </div>
                     </article>
@@ -223,62 +229,66 @@
                         <div class="project-content">
                             <div class="project-header">
                                 <h3 class="project-title">Araknet Business Discovery Agent</h3>
-                                <span class="status-badge">Live</span>
+                                <span class="status-badge status-badge--live">Live</span>
                             </div>
-                            <p class="project-tagline">Autonomous B2B lead scout audits digital presence and scores automation potential, city by city.</p>
+                            <p class="project-tagline">A business-discovery dashboard for finding, reviewing, and organizing local prospects.</p>
                             <div class="detail-block">
                                 <h4>Problem</h4>
-                                <p>Agencies waste hours manually identifying which local businesses are viable clients for digital and AI upgrades.</p>
+                                <p>Local prospect research is fragmented across directories, notes, and spreadsheets, making follow-up difficult to manage.</p>
                             </div>
                             <div class="detail-block">
                                 <h4>Solution &amp; Architecture</h4>
-                                <p>Autonomous scout hitting Google Places API and SerpAPI, auditing SSL and mobile responsiveness, then scoring each business on AI automation potential.</p>
+                                <p>A Next.js dashboard collects directory listings through Google Places, SerpAPI, or OpenStreetMap. MongoDB stores prospects, pipeline status, notes, and tags; configured schedules can trigger discovery jobs.</p>
                             </div>
                             <div class="detail-block">
                                 <h4>Key Achievements</h4>
                                 <ul class="achievement-list">
-                                    <li>Custom scoring algorithm combining multiple audit signals.</li>
-                                    <li>Aggregates data from multiple external APIs in one pipeline.</li>
-                                    <li>Next.js dashboard with real-time filters and CSV export.</li>
+                                    <li>Provider fallback keeps discovery useful when a directory source is unavailable.</li>
+                                    <li>Review workflow includes status, notes, tags, and CSV or JSON export.</li>
+                                    <li>Scores and editable outreach drafts are rules-based; listings need human verification and messages are not sent automatically.</li>
                                 </ul>
                             </div>
                             <div class="project-tech">
                                 <span class="tech-pill">Next.js</span>
+                                <span class="tech-pill">React</span>
+                                <span class="tech-pill">TypeScript</span>
                                 <span class="tech-pill">MongoDB Atlas</span>
                                 <span class="tech-pill">SerpAPI</span>
                                 <span class="tech-pill">Google Places API</span>
+                                <span class="tech-pill">OpenStreetMap</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn secondary">GitHub</a>
+                                <a href="https://araknet.tech" target="_blank" rel="noopener noreferrer" class="btn primary">Open app</a>
+                                <a href="https://github.com/Alihussain121472/araknet-leads" target="_blank" rel="noopener noreferrer" class="btn secondary">Source code</a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="project-card reveal" aria-label="NovaBrief Email Reply Agent">
+                    <article class="project-card reveal" aria-label="NovaBrief Email Reply Workflow">
                         <div class="project-image project-image--placeholder">
                             <img src="assets/images/email-agent-preview.svg" alt="Email reply agent n8n workflow"
                                 loading="lazy" decoding="async" width="420">
                         </div>
                         <div class="project-content">
                             <div class="project-header">
-                                <h3 class="project-title">NovaBrief Student intellgent Agent</h3>
-                                <span class="status-badge">Live</span>
+                                <h3 class="project-title">NovaBrief Email Reply Workflow</h3>
+                                <span class="status-badge status-badge--neutral">Workflow</span>
                             </div>
-                            <p class="project-tagline">Context aware n8n automation that reads, understands, and replies to subscriber emails without human input.</p>
+                            <p class="project-tagline">An n8n workflow concept for classifying incoming messages and preparing context-aware support replies.</p>
                             <div class="detail-block">
                                 <h4>Problem</h4>
-                                <p>Subscriber support emails piled up requiring manual triage unscalable for a solo founder.</p>
+                                <p>Support requests can take time to sort and answer consistently when each message has to be triaged from scratch.</p>
                             </div>
                             <div class="detail-block">
                                 <h4>Solution &amp; Architecture</h4>
-                                <p>n8n webhook pipeline classifies inbound emails by intent, routes to LLM for context aware reply generation, and dispatches via Gmail API zero human oversight.</p>
+                                <p>A webhook-driven n8n flow classifies the request, selects a matching prompt, and prepares a response with the configured language model and email integration.</p>
                             </div>
                             <div class="detail-block">
                                 <h4>Key Achievements</h4>
                                 <ul class="achievement-list">
-                                    <li>Handles subscription queries, feedback, and support tickets autonomously.</li>
-                                    <li>Intent classification routes emails to the correct prompt template.</li>
-                                    <li>Zero manual replies required since deployment.</li>
+                                    <li>Intent categories direct messages to a relevant response path.</li>
+                                    <li>Prompt templates keep common support replies consistent.</li>
+                                    <li>Gmail integration connects the workflow to the support inbox.</li>
                                 </ul>
                             </div>
                             <div class="project-tech">
@@ -288,53 +298,57 @@
                                 <span class="tech-pill">Webhook</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn secondary">GitHub</a>
+                                <a href="https://github.com/Alihussain121472/News-Agent" target="_blank" rel="noopener noreferrer" class="btn secondary">Source code</a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="project-card reveal" aria-label="DHA Multan Real Estate AI Agent">
-                        <div class="project-image project-image--placeholder">
-                            <img src="assets/images/dha-agent-preview.svg" alt="DHA Multan real estate AI agent chat interface"
-                                loading="lazy" decoding="async" width="420">
+                    <article class="project-card reveal" aria-label="MY Mentore desktop app">
+                        <div class="project-image">
+                            <img src="assets/images/my-mentore-preview.svg" alt="Illustration of MY Mentore's study roadmap, lessons, quizzes, and portfolio projects"
+                                loading="lazy" decoding="async" width="420" height="300">
                         </div>
                         <div class="project-content">
                             <div class="project-header">
-                                <h3 class="project-title">DHA Multan Real Estate AI Agent</h3>
-                                <span class="status-badge">Live</span>
+                                <h3 class="project-title">MY Mentore</h3>
+                                <span class="status-badge status-badge--desktop">Desktop app</span>
                             </div>
-                            <p class="project-tagline">Vertical SaaS property advisor for DHA Multan investors and dealers instant answers, no broker needed.</p>
+                            <p class="project-tagline">A personalized study and career-preparation workspace with guided learning paths and practical projects.</p>
                             <div class="detail-block">
                                 <h4>Problem</h4>
-                                <p>DHA Multan investors waste time calling brokers for pricing and sector availability data that changes constantly.</p>
+                                <p>Study planning, practice, and career preparation often live in separate tools, leaving learners without a clear path from a goal to hands-on work.</p>
                             </div>
                             <div class="detail-block">
                                 <h4>Solution &amp; Architecture</h4>
-                                <p>RAG pipeline over a curated DHA Multan property database, delivering sector specific pricing, plot comparisons, and investment advice via a conversational interface.</p>
+                                <p>MY Mentore brings personalized roadmaps, bite-sized lessons, quizzes, and portfolio project guidance into one desktop app. Its Electron shell packages a React/Vite interface with bundled Express/SQLite services and Firebase/Gemini integrations.</p>
                             </div>
                             <div class="detail-block">
-                                <h4>Key Achievements</h4>
+                                <h4>Key Highlights</h4>
                                 <ul class="achievement-list">
-                                    <li>Covers 6 DHA Multan sectors with live property intelligence.</li>
-                                    <li>RAG retrieval keeps answers grounded in verified data.</li>
-                                    <li>Used by investors and dealers for daily advisory queries.</li>
+                                    <li>Connects roadmap steps to lessons, quizzes, and portfolio tasks.</li>
+                                    <li>Groups the Mentor Workspace and Study Hub in one installable Windows application.</li>
+                                    <li>Delivered as a desktop build; no public web demo or source repository is available yet.</li>
                                 </ul>
                             </div>
                             <div class="project-tech">
-                                <span class="tech-pill">Python</span>
-                                <span class="tech-pill">RAG</span>
-                                <span class="tech-pill">Groq API</span>
-                                <span class="tech-pill">Supabase</span>
+                                <span class="tech-pill">Electron</span>
+                                <span class="tech-pill">React</span>
+                                <span class="tech-pill">Vite</span>
+                                <span class="tech-pill">Express</span>
+                                <span class="tech-pill">SQLite</span>
+                                <span class="tech-pill">Firebase</span>
+                                <span class="tech-pill">Gemini API</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer" class="btn secondary">GitHub</a>
+                                <a href="mailto:syedali6160@gmail.com?subject=MY%20Mentore%20desktop%20demo" class="btn primary">Request a desktop demo</a>
                             </div>
+                            <p class="project-availability">Windows build available on request · Public source repository not available yet</p>
                         </div>
                     </article>
 
                 </div>
 
-                <p class="more-projects">More agent architectures and experiments on
+                <p class="more-projects">Browse more public work on
                     <a href="https://github.com/Alihussain121472" target="_blank" rel="noopener noreferrer">GitHub</a>.
                 </p>
             </div>
@@ -344,12 +358,12 @@
         <section id="skills" class="section" aria-labelledby="skills-heading">
             <div class="container">
                 <h2 id="skills-heading" class="section-title">Technical Expertise</h2>
-                <p class="section-sub">Five areas of active, production tested work.</p>
+                <p class="section-sub">Tools and methods used across the projects above.</p>
 
                 <div class="skills-grid">
                     <div class="skill-group reveal">
                         <h3>AI &amp; LLMs</h3>
-                        <p class="skill-desc">Building inference pipelines, RAG systems, and agentic workflows on top of frontier models.</p>
+                        <p class="skill-desc">Applying language models and retrieval patterns to focused product workflows.</p>
                         <div class="tech-pills">
                             <span class="tech-pill">Llama 3.3</span>
                             <span class="tech-pill">Claude API</span>
@@ -361,7 +375,7 @@
                     </div>
                     <div class="skill-group reveal">
                         <h3>Automation &amp; Agents</h3>
-                        <p class="skill-desc">Designing autonomous agents that run scheduled jobs, route webhooks, and operate without human oversight.</p>
+                        <p class="skill-desc">Connecting scheduled jobs, APIs, and webhooks into maintainable workflows.</p>
                         <div class="tech-pills">
                             <span class="tech-pill">n8n</span>
                             <span class="tech-pill">Web Scraping</span>
@@ -373,7 +387,7 @@
                     </div>
                     <div class="skill-group reveal">
                         <h3>Full Stack &amp; Backend</h3>
-                        <p class="skill-desc">End-to-end product engineering REST APIs, server-side rendering, and production deployments.</p>
+                        <p class="skill-desc">Building product interfaces and HTTP services, from request handling through deployment.</p>
                         <div class="tech-pills">
                             <span class="tech-pill">Python</span>
                             <span class="tech-pill">Flask</span>
@@ -385,7 +399,7 @@
                     </div>
                     <div class="skill-group reveal">
                         <h3>Databases &amp; Cloud</h3>
-                        <p class="skill-desc">Database architecture, cloud hosting, automated deployments, and server management.</p>
+                        <p class="skill-desc">Persisting application data and deploying projects on managed cloud platforms.</p>
                         <div class="tech-pills">
                             <span class="tech-pill">PostgreSQL</span>
                             <span class="tech-pill">MySQL</span>
@@ -397,7 +411,7 @@
                     </div>
                     <div class="skill-group skill-group--wide reveal">
                         <h3>Product &amp; Tooling</h3>
-                        <p class="skill-desc">Scoping, prototyping, and shipping full products from idea to live application solo.</p>
+                        <p class="skill-desc">Breaking product goals into practical features, implementation steps, and reviewable releases.</p>
                         <div class="tech-pills">
                             <span class="tech-pill">Product Architecture</span>
                             <span class="tech-pill">Rapid Prototyping</span>
@@ -538,7 +552,7 @@
 
                     <div class="resume-section">
                         <h4>Professional Summary</h4>
-                        <p>AI engineer and full stack developer with five shipped products in production. I build autonomous agents, inference pipelines, and SaaS Applications using Python, Next.js, Flask, Groq, and Claude. Pursuing BSc AI at SZABIST while operating NovaBrief Tech and independent systems under araknet.tech. Open to developer roles and AI consulting engagements.</p>
+                        <p>AI and full-stack developer based in Islamabad, Pakistan, pursuing a BSc in Artificial Intelligence at SZABIST. Builds product interfaces, Python services, data workflows, and AI-assisted features. Selected projects include NovaBrief, Araknet Business Discovery, and MY Mentore.</p>
                     </div>
 
                     <div class="resume-section">
@@ -556,17 +570,24 @@
                         <h4>Key Projects</h4>
                         <div class="resume-item">
                             <div class="resume-item-header">
+                                <span class="resume-item-title">MY Mentore</span>
+                                <span class="cert-date">Desktop app</span>
+                            </div>
+                            <p>Personalized study and career-preparation app with roadmaps, lessons, quizzes, and portfolio project guidance. Electron, React, Vite, Express, SQLite, Firebase, and Gemini integrations.</p>
+                        </div>
+                        <div class="resume-item">
+                            <div class="resume-item-header">
                                 <span class="resume-item-title">NovaBrief Tech</span>
                                 <span class="cert-date">2024&ndash;present</span>
                             </div>
-                            <p>AI-powered daily intelligence briefing platform for students. Llama 3.3 via Groq Cloud, Supabase PostgreSQL, APScheduler automation.</p>
+                            <p>Scheduled AI news and student-program digest built with Python, Flask, PostgreSQL, APScheduler, and the Groq API.</p>
                         </div>
                         <div class="resume-item">
                             <div class="resume-item-header">
                                 <span class="resume-item-title">Araknet Business Discovery Agent</span>
                                 <span class="cert-date">2025</span>
                             </div>
-                            <p>Autonomous B2B lead scoring system using Google Places API, SerpAPI, and a Next.js dashboard with real time filters.</p>
+                            <p>Local-business discovery and lead-review dashboard using Next.js, TypeScript, MongoDB Atlas, and directory-provider fallbacks.</p>
                         </div>
                     </div>
 
