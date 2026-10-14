@@ -42,7 +42,7 @@ portfolio/
     │   ├── novabrief-preview.png       # NovaBrief project preview
     │   ├── leads-agent-preview.svg     # Araknet Business Discovery Agent preview
     │   ├── email-agent-preview.svg     # Email reply agent preview
-    │   ├── dha-agent-preview.svg       # DHA Multan real estate agent preview
+    │   ├── my-mentore-preview.svg      # MY Mentore study app preview
     │   └── certificates/
     │       ├── szabist-ijict-ml-research-publication.jpg
     │       ├── harvard-cs50-python.svg

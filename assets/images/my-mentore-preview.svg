@@ -21,7 +21,7 @@
   <text x="47" y="91" fill="#b8bfdc" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="2">STUDY · PRACTICE · CAREER</text>
   <rect x="558" y="40" width="155" height="34" rx="17" fill="#ffffff" fill-opacity=".10" stroke="#ffffff" stroke-opacity=".12"/>
   <circle cx="578" cy="57" r="5" fill="#62d9ca"/>
-  <text x="592" y="62" fill="#dce2f7" font-family="Inter, Arial, sans-serif" font-size="12">Personalized path</text>
+  <text x="592" y="62" fill="#dce2f7" font-family="Inter, Arial, sans-serif" font-size="12">Your study plan</text>
   <g filter="url(#shadow)">
     <rect x="42" y="122" width="214" height="326" rx="16" fill="#fbfcff"/>
     <text x="64" y="158" fill="#1b2140" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Your roadmap</text>
@@ -36,7 +36,7 @@
     <text x="96" y="279" fill="#202644" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">Check understanding</text>
     <text x="96" y="297" fill="#777f9a" font-family="Inter, Arial, sans-serif" font-size="10">Short quizzes</text>
     <text x="96" y="336" fill="#202644" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">Make a project</text>
-    <text x="96" y="354" fill="#777f9a" font-family="Inter, Arial, sans-serif" font-size="10">Portfolio-ready practice</text>
+    <text x="96" y="354" fill="#777f9a" font-family="Inter, Arial, sans-serif" font-size="10">Practice through projects</text>
     <text x="96" y="393" fill="#202644" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">Prepare for next steps</text>
     <text x="96" y="411" fill="#777f9a" font-family="Inter, Arial, sans-serif" font-size="10">Career preparation</text>
   </g>
@@ -46,7 +46,7 @@
     <rect x="304" y="181" width="388" height="72" rx="11" fill="#f1f2ff"/>
     <rect x="320" y="197" width="40" height="40" rx="10" fill="url(#accent)"/>
     <path d="M337 207v20m-7-7 7 7 7-7" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="375" y="209" fill="#202644" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">Bite-sized lesson</text>
+    <text x="375" y="209" fill="#202644" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">Short lesson</text>
     <text x="375" y="229" fill="#777f9a" font-family="Inter, Arial, sans-serif" font-size="10">Learn a concept, then apply it</text>
     <rect x="304" y="270" width="388" height="22" rx="11" fill="#e7e8f3"/>
     <rect x="304" y="270" width="206" height="22" rx="11" fill="url(#accent)"/>

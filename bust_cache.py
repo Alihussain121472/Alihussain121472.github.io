@@ -27,7 +27,7 @@ TRACKED_ASSETS = [
     "assets/images/novabrief-preview.png",
     "assets/images/leads-agent-preview.svg",
     "assets/images/email-agent-preview.svg",
-    "assets/images/dha-agent-preview.svg",
+    "assets/images/my-mentore-preview.svg",
 
     # Certificates
     "assets/images/certificates/szabist-ijict-ml-research-publication.jpg",
