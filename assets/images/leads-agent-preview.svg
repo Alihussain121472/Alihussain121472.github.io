@@ -35,18 +35,18 @@
   <circle cx="24" cy="19" r="5" fill="#EF4444"/>
   <circle cx="42" cy="19" r="5" fill="#F59E0B"/>
   <circle cx="60" cy="19" r="5" fill="#10B981"/>
-  <text x="80" y="24" font-family="'JetBrains Mono', monospace" font-size="11" fill="#00C2FF">araknet.tech · Business Lead Discovery Agent v2.1</text>
+  <text x="80" y="24" font-family="'JetBrains Mono', monospace" font-size="11" fill="#00C2FF">araknet.tech · Business Discovery</text>
   <rect x="475" y="9" width="105" height="20" rx="4" fill="#10B981" fill-opacity="0.15"/>
-  <text x="527" y="23" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981">🟢 ACTIVE AGENT</text>
+  <text x="527" y="23" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981">WORKSPACE</text>
 
   <!-- Left Column: Search &amp; Target Selector -->
   <g transform="translate(25, 55)">
     <rect width="165" height="225" rx="8" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-    <text x="14" y="24" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" fill="#F8FAFC">TARGET AUDIENCE</text>
+    <text x="14" y="24" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" fill="#F8FAFC">SEARCH FILTERS</text>
     
     <!-- Target Country -->
     <rect x="14" y="38" width="137" height="28" rx="5" fill="#090E17" stroke="rgba(0,194,255,0.3)"/>
-    <text x="24" y="56" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Country: Pakistan / Global</text>
+    <text x="24" y="56" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8">Location: Islamabad</text>
     
     <!-- Target City -->
     <rect x="14" y="74" width="137" height="28" rx="5" fill="#090E17" stroke="rgba(0,194,255,0.3)"/>
@@ -58,9 +58,9 @@
 
     <!-- Run Agent Button -->
     <rect x="14" y="152" width="137" height="34" rx="6" fill="url(#cyanGrad)" filter="url(#glowCyan)"/>
-    <text x="82" y="173" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">RUN SCOUT AGENT</text>
+    <text x="82" y="173" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">SEARCH BUSINESSES</text>
     
-    <text x="82" y="208" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">SerpAPI + Google Places</text>
+    <text x="82" y="208" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">Places · SerpAPI · OSM</text>
   </g>
 
   <!-- Center &amp; Right: Live Scanned Leads &amp; Audit Pipeline -->
@@ -70,50 +70,50 @@
     <!-- Table Header -->
     <rect x="10" y="10" width="350" height="26" rx="4" fill="#090E17"/>
     <text x="20" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">BUSINESS</text>
-    <text x="135" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">WEBSITE AUDIT</text>
-    <text x="240" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">APP</text>
-    <text x="290" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">OPPORTUNITY</text>
+    <text x="135" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">WEBSITE</text>
+    <text x="240" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">STATUS</text>
+    <text x="290" y="27" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">REVIEW</text>
 
     <!-- Row 1 -->
     <g transform="translate(10, 44)">
       <rect width="350" height="48" rx="5" fill="#0F172A" stroke="rgba(239,68,68,0.2)"/>
-      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Horizon Healthcare</text>
-      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Medical Clinic · Islamabad</text>
+      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Sample Health Clinic</text>
+      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Example listing · Islamabad</text>
       <rect x="125" y="14" width="85" height="20" rx="3" fill="#EF4444" fill-opacity="0.15"/>
-      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#EF4444">NO WEBSITE</text>
-      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#EF4444">None</text>
+      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#EF4444">NOT LISTED</text>
+      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#EF4444">New</text>
       <rect x="280" y="14" width="60" height="20" rx="3" fill="#10B981" fill-opacity="0.15"/>
-      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#10B981">94% HIGH</text>
+      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#10B981">CHECK</text>
     </g>
 
     <!-- Row 2 -->
     <g transform="translate(10, 100)">
       <rect width="350" height="48" rx="5" fill="#0F172A" stroke="rgba(245,158,11,0.2)"/>
-      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Apex Logistics Ltd</text>
-      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Supply Chain · Karachi</text>
+      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Sample Retail Shop</text>
+      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Example listing · Karachi</text>
       <rect x="125" y="14" width="85" height="20" rx="3" fill="#F59E0B" fill-opacity="0.15"/>
-      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F59E0B">OUTDATED / HTTP</text>
-      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#EF4444">None</text>
+      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F59E0B">URL FOUND</text>
+      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#EF4444">New</text>
       <rect x="280" y="14" width="60" height="20" rx="3" fill="#00C2FF" fill-opacity="0.15"/>
-      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#00C2FF">88% MED</text>
+      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#00C2FF">CHECK</text>
     </g>
 
     <!-- Row 3 -->
     <g transform="translate(10, 156)">
       <rect width="350" height="48" rx="5" fill="#0F172A" stroke="rgba(16,185,129,0.2)"/>
-      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Greenleaf Retailers</text>
-      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Consumer Goods · Rawalpindi</text>
+      <text x="10" y="22" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#F8FAFC">Sample Service Studio</text>
+      <text x="10" y="38" font-family="'Inter', sans-serif" font-size="9" fill="#64748B">Example listing · Rawalpindi</text>
       <rect x="125" y="14" width="85" height="20" rx="3" fill="#10B981" fill-opacity="0.15"/>
-      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#10B981">LIVE SSL</text>
-      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F59E0B">No App</text>
+      <text x="167" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#10B981">URL FOUND</text>
+      <text x="245" y="28" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F59E0B">Review</text>
       <rect x="280" y="14" width="60" height="20" rx="3" fill="#3B82F6" fill-opacity="0.15"/>
-      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#60A5FA">76% AI APP</text>
+      <text x="310" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#60A5FA">CHECK</text>
     </g>
   </g>
 
   <!-- Bottom Metric Bar -->
   <rect x="25" y="295" width="550" height="45" rx="8" fill="#050B14" stroke="rgba(255,255,255,0.06)"/>
-  <text x="45" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38BDF8">🎯 100+ Opportunities Scanned</text>
-  <text x="240" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981">⚡ Automated Website &amp; App Audit</text>
-  <text x="460" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F59E0B">🚀 Deployed on Vercel</text>
+  <text x="45" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38BDF8">SAMPLE WORKSPACE</text>
+  <text x="240" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981">Review lead details</text>
+  <text x="460" y="322" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F59E0B">Export CSV or JSON</text>
 </svg>

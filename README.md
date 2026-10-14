@@ -40,8 +40,7 @@ portfolio/
     ├── images/
     │   ├── syed-ali.jpg                # Profile photo
     │   ├── novabrief-preview.png       # NovaBrief project preview
-    │   ├── leads-agent-preview.svg     # Araknet Business Discovery Agent preview
-    │   ├── email-agent-preview.svg     # Email reply agent preview
+    │   ├── leads-agent-preview.svg     # Araknet.tech business agent preview
     │   ├── my-mentore-preview.svg      # MY Mentore study app preview
     │   └── certificates/
     │       ├── szabist-ijict-ml-research-publication.jpg

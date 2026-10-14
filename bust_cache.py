@@ -26,7 +26,6 @@ TRACKED_ASSETS = [
     # Project preview images
     "assets/images/novabrief-preview.png",
     "assets/images/leads-agent-preview.svg",
-    "assets/images/email-agent-preview.svg",
     "assets/images/my-mentore-preview.svg",
 
     # Certificates
