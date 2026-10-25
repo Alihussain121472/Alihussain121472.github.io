@@ -443,8 +443,8 @@
 
                     <div class="cert-item reveal">
                         <div class="cert-main">
-                            <a class="cert-preview" href="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=2" aria-label="Enlarge SZABIST IJICT ML research publication" aria-haspopup="dialog" aria-controls="certificateViewer">
-                                <img class="cert-image" src="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=2"
+                            <a class="cert-preview" href="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=3" aria-label="Enlarge SZABIST IJICT ML research publication" aria-haspopup="dialog" aria-controls="certificateViewer">
+                                <img class="cert-image" src="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=3"
                                     alt="SZABIST IJICT ML research publication" loading="lazy" decoding="async" width="96" height="64">
                             </a>
                             <div>
@@ -574,8 +574,8 @@
 
                         <div class="paper-card-inner">
                             <div class="paper-cover-wrapper">
-                                <a class="cert-preview paper-thumbnail-link" href="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=2" aria-label="Enlarge published paper first page preview" aria-haspopup="dialog" aria-controls="certificateViewer">
-                                    <img src="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=2" alt="Detection of Brute-force Login Attempts Using Machine Learning preview" class="paper-thumbnail-img" loading="lazy" decoding="async" width="105" height="148">
+                                <a class="cert-preview paper-thumbnail-link" href="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=3" aria-label="Enlarge published paper first page preview" aria-haspopup="dialog" aria-controls="certificateViewer">
+                                    <img src="assets/images/certificates/szabist-ijict-ml-research-publication.jpg?v=3" alt="Detection of Brute-force Login Attempts Using Machine Learning preview" class="paper-thumbnail-img" loading="lazy" decoding="async" width="105" height="148">
                                     <span class="paper-thumb-badge">Preview</span>
                                 </a>
                             </div>
@@ -833,7 +833,8 @@
                     certificateScrollPosition = window.scrollY;
                     certificateImage.src = link.href;
                     certificateImage.alt = link.querySelector('img').alt;
-                    certificateCaption.textContent = link.closest('.cert-item').querySelector('strong').textContent;
+                    const titleElem = link.closest('.cert-item')?.querySelector('strong') || link.closest('.paper-card-inner')?.querySelector('.paper-title') || link.closest('article')?.querySelector('h3');
+                    certificateCaption.textContent = titleElem ? titleElem.textContent : 'Preview';
                     certificateViewer.showModal();
                     document.documentElement.classList.add('certificate-viewer-open');
                 });
