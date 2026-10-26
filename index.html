@@ -2,16 +2,54 @@
 <html lang="en">
 
 <head>
-    <!-- Anti-flash: run before any stylesheet -->
+    <!-- Anti-flash & Defensive A11y Guard: run before stylesheets and content scripts -->
     <script>
         (function () {
             try {
                 if (localStorage.getItem('theme') === 'dark') {
                     document.documentElement.setAttribute('data-theme', 'dark');
                 }
-            } catch (error) {
-                // Continue with the default theme when storage is unavailable.
-            }
+            } catch (error) {}
+
+            // Intercept Shadow DOM attachments from third-party extensions to ensure accessible tree remediation
+            const interceptedRoots = new Set();
+            const sanitizeScope = (scope) => {
+                if (!scope || !scope.querySelectorAll) return;
+                try {
+                    // 1. Buttons must have discernible text (WCAG 4.1.2) - target chatgpt-sidebar .size-10
+                    scope.querySelectorAll('button.size-10, chatgpt-sidebar button, button:not([aria-label]):not([aria-labelledby]):not([title])').forEach((btn) => {
+                        if (!btn.getAttribute('aria-label') && !btn.getAttribute('title') && !(btn.textContent || '').trim()) {
+                            btn.setAttribute('aria-label', 'AI Assistant');
+                            btn.setAttribute('title', 'AI Assistant');
+                        }
+                    });
+                    // 2. Prevent tabindex > 0 (WCAG 2.4.3) - target .chat-gpt-query-model-wrapper
+                    scope.querySelectorAll('.chat-gpt-query-model-wrapper, [tabindex]').forEach((el) => {
+                        const val = parseInt(el.getAttribute('tabindex'), 10);
+                        if (val > 0) el.setAttribute('tabindex', '0');
+                    });
+                } catch (e) {}
+            };
+
+            window.__sanitizeExtensionA11y = () => {
+                sanitizeScope(document);
+                interceptedRoots.forEach(sanitizeScope);
+            };
+
+            try {
+                const origAttach = Element.prototype.attachShadow;
+                if (origAttach) {
+                    Element.prototype.attachShadow = function (init) {
+                        const shadow = origAttach.call(this, { ...init, mode: 'open' });
+                        interceptedRoots.add(shadow);
+                        if ('MutationObserver' in window) {
+                            new MutationObserver(() => sanitizeScope(shadow)).observe(shadow, { childList: true, subtree: true });
+                        }
+                        sanitizeScope(shadow);
+                        return shadow;
+                    };
+                }
+            } catch (e) {}
         })();
     </script>
 
@@ -1251,31 +1289,11 @@
             }
 
             /* ── Defensive A11y Guard for Third-Party Browser Extensions ── */
-            const sanitizeExtensionA11y = () => {
-                try {
-                    const extensionHosts = document.querySelectorAll('chatgpt-sidebar, [id*="chatgpt-sidebar"], [class*="chatgpt-sidebar"]');
-                    extensionHosts.forEach((host) => {
-                        const root = host.shadowRoot || host;
-                        // 1. Ensure discernible button names (WCAG 4.1.2)
-                        root.querySelectorAll('button:not([aria-label]):not([aria-labelledby]):not([title])').forEach((btn) => {
-                            btn.setAttribute('aria-label', (btn.textContent || '').trim() || 'AI Assistant');
-                        });
-                        // 2. Prevent tabindex > 0 (WCAG 2.4.3)
-                        root.querySelectorAll('[tabindex]').forEach((el) => {
-                            const val = parseInt(el.getAttribute('tabindex'), 10);
-                            if (val > 0) el.setAttribute('tabindex', '0');
-                        });
-                    });
-                } catch (e) {
-                    /* Ignore shadow DOM / security boundary errors */
-                }
-            };
-            sanitizeExtensionA11y();
+            if (window.__sanitizeExtensionA11y) window.__sanitizeExtensionA11y();
             if ('MutationObserver' in window) {
-                new MutationObserver(sanitizeExtensionA11y).observe(document.documentElement, {
-                    childList: true,
-                    subtree: true
-                });
+                new MutationObserver(() => {
+                    if (window.__sanitizeExtensionA11y) window.__sanitizeExtensionA11y();
+                }).observe(document.documentElement, { childList: true, subtree: true });
             }
 
             /* ── Scroll-reveal ── */
