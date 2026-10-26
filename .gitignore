@@ -57,3 +57,7 @@ __pycache__/
 *.py[cod]
 *.pyo
 .pytest_cache/
+
+# ── Local staging / raw image folders ─────────────────────────────────────────
+Images/
+
