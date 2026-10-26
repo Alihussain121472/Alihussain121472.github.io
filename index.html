@@ -1250,6 +1250,34 @@
                 document.body.removeChild(ta);
             }
 
+            /* ── Defensive A11y Guard for Third-Party Browser Extensions ── */
+            const sanitizeExtensionA11y = () => {
+                try {
+                    const extensionHosts = document.querySelectorAll('chatgpt-sidebar, [id*="chatgpt-sidebar"], [class*="chatgpt-sidebar"]');
+                    extensionHosts.forEach((host) => {
+                        const root = host.shadowRoot || host;
+                        // 1. Ensure discernible button names (WCAG 4.1.2)
+                        root.querySelectorAll('button:not([aria-label]):not([aria-labelledby]):not([title])').forEach((btn) => {
+                            btn.setAttribute('aria-label', (btn.textContent || '').trim() || 'AI Assistant');
+                        });
+                        // 2. Prevent tabindex > 0 (WCAG 2.4.3)
+                        root.querySelectorAll('[tabindex]').forEach((el) => {
+                            const val = parseInt(el.getAttribute('tabindex'), 10);
+                            if (val > 0) el.setAttribute('tabindex', '0');
+                        });
+                    });
+                } catch (e) {
+                    /* Ignore shadow DOM / security boundary errors */
+                }
+            };
+            sanitizeExtensionA11y();
+            if ('MutationObserver' in window) {
+                new MutationObserver(sanitizeExtensionA11y).observe(document.documentElement, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+
             /* ── Scroll-reveal ── */
             if ('IntersectionObserver' in window) {
                 const revealObs = new IntersectionObserver((entries) => {
