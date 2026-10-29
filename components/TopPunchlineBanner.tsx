@@ -30,7 +30,7 @@ export const TopPunchlineBanner: React.FC = () => {
         }}
       >
         <span>
-          <strong>SYED ALI HUSSAIN</strong> · Shipping Autonomous AI Agents, Geospatial Lead Engines, and Production Web Systems — From Research Math to Live Code.
+          <strong>SYED ALI HUSSAIN</strong> · Engineering Autonomous AI Agents, Geospatial Engines, and Resilient Full-Stack Systems — From Research Math to Production Code.
         </span>
         <a
           href="#projects"
@@ -42,7 +42,7 @@ export const TopPunchlineBanner: React.FC = () => {
             whiteSpace: 'nowrap',
           }}
         >
-          Inspect Live Systems ↓
+          Explore Live Systems ↓
         </a>
       </div>
     </aside>

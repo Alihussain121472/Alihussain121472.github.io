@@ -27,23 +27,24 @@
   --radius-lg: 16px;
   --radius-full: 9999px;
 
-  /* High-Contrast Light Theme Tokens */
-  --color-bg: #FAFAFA;
-  --color-surface: #FFFFFF;
-  --color-surface-subtle: #F4F4F5;
-  --color-surface-hover: #EDEDF0;
-  --color-border: #E4E4E7;
-  --color-border-hover: #D4D4D8;
-  --color-border-active: #A1A1AA;
-  --color-text-primary: #09090B;
-  --color-text-secondary: #3F3F46;
-  --color-text-muted: #52525B;
-  --color-accent: #1D4ED8; /* High-contrast Cobalt Blue */
-  --color-accent-hover: #1E40AF;
+  /* Calming, Neutral Light Theme Tokens (WCAG AA & AAA) */
+  --color-bg: #F8FAFC;              /* Soft slate canvas, reduces eye fatigue */
+  --color-surface: #FFFFFF;         /* Pure white elevation */
+  --color-surface-subtle: #F1F5F9;  /* Soft slate surface */
+  --color-surface-hover: #E2E8F0;
+  --color-border: #E2E8F0;          /* Crisp, subtle 1px divider */
+  --color-border-hover: #CBD5E1;
+  --color-border-active: #94A3B8;
+  --color-text-primary: #0F172A;    /* Deep slate, 17.06:1 contrast */
+  --color-text-secondary: #475569;  /* Refined slate, 7.24:1 contrast */
+  --color-text-muted: #64748B;      /* Calming slate, 4.55:1 contrast */
+  --color-accent: #2563EB;          /* Royal sapphire cobalt, 4.94:1 contrast */
+  --color-accent-hover: #1D4ED8;
   --color-accent-contrast: #FFFFFF;
-  --color-ring: #1D4ED8;
-  --color-badge-bg: #F4F4F5;
-  --color-badge-text: #09090B;
+  --color-ring: #2563EB;
+  --color-badge-bg: #F1F5F9;
+  --color-badge-text: #0F172A;
+  --color-nav-bg: rgba(248, 250, 252, 0.85);
 
   /* Line Heights & Layout */
   --lh-tight: 1.15;
@@ -56,23 +57,24 @@
 
 [data-theme="dark"],
 .dark {
-  /* High-Contrast Dark Theme Tokens — WCAG AAA / AA Compliant */
-  --color-bg: #09090B;
-  --color-surface: #121215;
-  --color-surface-subtle: #18181B;
-  --color-surface-hover: #222226;
-  --color-border: #27272A;
-  --color-border-hover: #3F3F46;
-  --color-border-active: #A1A1AA;
-  --color-text-primary: #FAFAFA;
-  --color-text-secondary: #D4D4D8;
-  --color-text-muted: #A1A1AA;
-  --color-accent: #3B82F6; /* High contrast blue for dark canvas (5.2:1) */
-  --color-accent-hover: #60A5FA;
-  --color-accent-contrast: #09090B;
-  --color-ring: #3B82F6;
-  --color-badge-bg: #18181B;
-  --color-badge-text: #FAFAFA;
+  /* Calming, Neutral Dark Theme Tokens — Obsidian Slate (WCAG AAA / AA) */
+  --color-bg: #0B0F19;              /* Deep obsidian slate, gentle dark canvas */
+  --color-surface: #111827;         /* Elegant slate card surface */
+  --color-surface-subtle: #1E293B;  /* Muted slate interior */
+  --color-surface-hover: #283548;
+  --color-border: #1E293B;          /* Subtle midnight divider */
+  --color-border-hover: #334155;
+  --color-border-active: #64748B;
+  --color-text-primary: #F8FAFC;    /* Crisp soft white, 18.30:1 contrast */
+  --color-text-secondary: #CBD5E1;  /* Soft silver slate, 12.90:1 contrast */
+  --color-text-muted: #94A3B8;      /* Neutral zinc slate, 7.47:1 contrast */
+  --color-accent: #38BDF8;          /* Calming sky sapphire, 8.94:1 contrast */
+  --color-accent-hover: #7DD3FC;
+  --color-accent-contrast: #0B0F19;
+  --color-ring: #38BDF8;
+  --color-badge-bg: #1E293B;
+  --color-badge-text: #F8FAFC;
+  --color-nav-bg: rgba(11, 15, 25, 0.85);
 }
 
 /* Base Reset & Smooth Scroll */
@@ -110,7 +112,43 @@ body {
   color: var(--color-text-primary);
   line-height: var(--lh-body);
   font-size: var(--text-base);
-  /* Deterministic solid canvas — no gradients */
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Glassmorphic Sticky Header */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 45;
+  background-color: var(--color-nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Status Indicator Pulse Animation */
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.55;
+  }
+}
+
+.pulse-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  animation: pulseDot 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
 }
 
 /* Accessibility Focus Ring */
