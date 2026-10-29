@@ -104,7 +104,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 fontSize: 'var(--text-xs)',
                 color: 'var(--color-accent)',
                 fontWeight: 600,
-                textTransform: 'uppercase',
                 marginBottom: '0.25rem',
               }}
             >
@@ -129,7 +128,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
             type="button"
             onClick={onClose}
             aria-label="Close case study dialog"
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-sm"
             style={{
               padding: '0.4rem 0.75rem',
               fontSize: 'var(--text-sm)',
@@ -151,7 +150,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 fontWeight: 700,
                 color: 'var(--color-text-primary)',
                 marginBottom: '0.4rem',
-                textTransform: 'uppercase',
                 letterSpacing: '0.04em',
                 fontFamily: 'var(--font-mono)',
               }}
@@ -171,7 +169,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 fontWeight: 700,
                 color: 'var(--color-text-primary)',
                 marginBottom: '0.4rem',
-                textTransform: 'uppercase',
                 letterSpacing: '0.04em',
                 fontFamily: 'var(--font-mono)',
               }}
@@ -191,7 +188,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 fontWeight: 700,
                 color: 'var(--color-text-primary)',
                 marginBottom: '0.6rem',
-                textTransform: 'uppercase',
                 letterSpacing: '0.04em',
                 fontFamily: 'var(--font-mono)',
               }}
@@ -242,7 +238,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 fontWeight: 700,
                 color: 'var(--color-text-primary)',
                 marginBottom: '0.4rem',
-                textTransform: 'uppercase',
                 letterSpacing: '0.04em',
                 fontFamily: 'var(--font-mono)',
               }}
@@ -273,7 +268,6 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 fontWeight: 700,
                 color: 'var(--color-text-primary)',
                 marginBottom: '0.5rem',
-                textTransform: 'uppercase',
                 letterSpacing: '0.04em',
                 fontFamily: 'var(--font-mono)',
               }}

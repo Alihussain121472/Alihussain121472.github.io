@@ -51,7 +51,6 @@ export const ExperienceEducationSection: React.FC = () => {
                 fontSize: 'var(--text-xs)',
                 fontWeight: 700,
                 color: 'var(--color-accent)',
-                textTransform: 'uppercase',
                 letterSpacing: '0.05em',
                 marginBottom: '1.25rem',
               }}
@@ -103,7 +102,6 @@ export const ExperienceEducationSection: React.FC = () => {
                 fontSize: 'var(--text-xs)',
                 fontWeight: 700,
                 color: 'var(--color-accent)',
-                textTransform: 'uppercase',
                 letterSpacing: '0.05em',
                 marginBottom: '1.25rem',
               }}

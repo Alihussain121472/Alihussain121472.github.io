@@ -79,14 +79,7 @@ export const ThemeSwitcher: React.FC = () => {
           type="button"
           disabled
           aria-label="Light theme"
-          style={{
-            padding: '4px 8px',
-            fontSize: 'var(--text-xs)',
-            fontFamily: 'var(--font-mono)',
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-text-secondary)',
-          }}
+          className="btn-tab"
         >
           Light
         </button>
@@ -94,14 +87,7 @@ export const ThemeSwitcher: React.FC = () => {
           type="button"
           disabled
           aria-label="Dark theme"
-          style={{
-            padding: '4px 8px',
-            fontSize: 'var(--text-xs)',
-            fontFamily: 'var(--font-mono)',
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-text-secondary)',
-          }}
+          className="btn-tab"
         >
           Dark
         </button>
@@ -109,14 +95,7 @@ export const ThemeSwitcher: React.FC = () => {
           type="button"
           disabled
           aria-label="System theme"
-          style={{
-            padding: '4px 8px',
-            fontSize: 'var(--text-xs)',
-            fontFamily: 'var(--font-mono)',
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-text-secondary)',
-          }}
+          className="btn-tab"
         >
           System
         </button>
@@ -137,10 +116,7 @@ export const ThemeSwitcher: React.FC = () => {
       aria-label="Theme mode switcher"
       style={{
         display: 'inline-flex',
-        border: '1px solid var(--color-border)',
-        borderRadius: 'var(--radius-sm)',
-        padding: '2px',
-        backgroundColor: 'var(--color-surface)',
+        gap: '2px',
       }}
     >
       {modes.map(({ mode, label }) => {
@@ -151,18 +127,7 @@ export const ThemeSwitcher: React.FC = () => {
             type="button"
             onClick={() => handleSelectMode(mode)}
             aria-pressed={isActive}
-            style={{
-              padding: '4px 10px',
-              fontSize: 'var(--text-xs)',
-              fontFamily: 'var(--font-mono)',
-              fontWeight: isActive ? 600 : 400,
-              borderRadius: 'var(--radius-xs)',
-              border: 'none',
-              cursor: 'pointer',
-              backgroundColor: isActive ? 'var(--color-accent)' : 'transparent',
-              color: isActive ? 'var(--color-accent-contrast)' : 'var(--color-text-secondary)',
-              transition: 'all 0.15s ease',
-            }}
+            className={`btn-tab ${isActive ? 'active' : ''}`}
           >
             {label}
           </button>

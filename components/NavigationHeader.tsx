@@ -113,20 +113,12 @@ export const NavigationHeader: React.FC = () => {
           {/* Mobile menu toggle */}
           <button
             type="button"
-            className="mobile-toggle-btn"
+            className="mobile-toggle-btn btn-tab"
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle navigation menu"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             style={{
               display: 'none',
-              padding: '0.4rem 0.6rem',
-              backgroundColor: 'var(--color-surface)',
-              border: '1px solid var(--color-border)',
-              borderRadius: 'var(--radius-sm)',
-              color: 'var(--color-text-primary)',
-              cursor: 'pointer',
-              fontSize: 'var(--text-xs)',
-              fontFamily: 'var(--font-mono)',
             }}
           >
             {mobileMenuOpen ? 'Close' : 'Menu'}

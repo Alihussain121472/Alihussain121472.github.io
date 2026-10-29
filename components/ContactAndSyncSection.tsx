@@ -396,7 +396,6 @@ export const ContactAndSyncSection: React.FC<ContactAndSyncSectionProps> = ({
                   fontWeight: 700,
                   color: 'var(--color-text-primary)',
                   marginBottom: '1rem',
-                  textTransform: 'uppercase',
                   fontFamily: 'var(--font-mono)',
                   letterSpacing: '0.04em',
                 }}
@@ -475,7 +474,6 @@ export const ContactAndSyncSection: React.FC<ContactAndSyncSectionProps> = ({
                     fontSize: 'var(--text-base)',
                     fontWeight: 700,
                     color: 'var(--color-text-primary)',
-                    textTransform: 'uppercase',
                     fontFamily: 'var(--font-mono)',
                     letterSpacing: '0.04em',
                   }}

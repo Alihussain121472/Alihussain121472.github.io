@@ -97,19 +97,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   type="button"
                   aria-selected={isSelected}
                   onClick={() => setSelectedCategory(id)}
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: 'var(--text-xs)',
-                    fontWeight: isSelected ? 600 : 400,
-                    padding: '0.4rem 0.85rem',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid',
-                    borderColor: isSelected ? 'var(--color-accent)' : 'var(--color-border)',
-                    backgroundColor: isSelected ? 'var(--color-accent)' : 'var(--color-surface)',
-                    color: isSelected ? 'var(--color-accent-contrast)' : 'var(--color-text-primary)',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease',
-                  }}
+                  className={`btn-tab ${isSelected ? 'active' : ''}`}
                 >
                   {label} ({count})
                 </button>
@@ -208,7 +196,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                             fontSize: 'var(--text-xs)',
                             fontWeight: 700,
                             color: 'var(--color-accent)',
-                            textTransform: 'uppercase',
                           }}
                         >
                           Data Pipeline #{project.spotlightIndex}
@@ -217,15 +204,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                           type="button"
                           onClick={() => onToggleBookmark(project.id)}
                           aria-label={isBookmarked ? `Remove ${project.title} from bookmarks` : `Bookmark ${project.title}`}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            fontSize: 'var(--text-xs)',
-                            fontFamily: 'var(--font-mono)',
-                            color: isBookmarked ? 'var(--color-accent)' : 'var(--color-text-muted)',
-                            padding: '2px',
-                          }}
+                          className={`btn-tab ${isBookmarked ? 'active' : ''}`}
                         >
                           {isBookmarked ? '★ Bookmarked' : '☆ Bookmark'}
                         </button>

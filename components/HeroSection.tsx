@@ -36,7 +36,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
                 fontWeight: 600,
                 color: 'var(--color-accent)',
                 letterSpacing: '0.05em',
-                textTransform: 'uppercase',
                 marginBottom: '1rem',
               }}
             >
@@ -171,7 +170,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: 'var(--text-xs)',
-                  textTransform: 'uppercase',
                   fontWeight: 600,
                   color: 'var(--color-text-muted)',
                 }}
@@ -194,19 +192,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
                       type="button"
                       aria-selected={isSelected}
                       onClick={() => setActiveSpotlightIndex(idx)}
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: 'var(--text-xs)',
-                        fontWeight: isSelected ? 700 : 500,
-                        padding: '3px 8px',
-                        borderRadius: 'var(--radius-xs)',
-                        border: '1px solid',
-                        borderColor: isSelected ? 'var(--color-accent)' : 'var(--color-border)',
-                        backgroundColor: isSelected ? 'var(--color-accent)' : 'transparent',
-                        color: isSelected ? 'var(--color-accent-contrast)' : 'var(--color-text-secondary)',
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease',
-                      }}
+                      className={`btn-tab ${isSelected ? 'active' : ''}`}
                     >
                       {idx}
                     </button>
@@ -265,7 +251,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
                     fontWeight: 600,
                     color: 'var(--color-text-muted)',
                     marginBottom: '0.6rem',
-                    textTransform: 'uppercase',
                   }}
                 >
                   System Topology Pipeline

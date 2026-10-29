@@ -70,7 +70,6 @@ export const ResearchSection: React.FC = () => {
                         paper.status === 'Published'
                           ? 'var(--color-accent)'
                           : 'var(--color-text-secondary)',
-                      textTransform: 'uppercase',
                     }}
                   >
                     ● {paper.status === 'Published' ? 'Published Paper' : 'Upcoming Paper'}
@@ -160,7 +159,6 @@ export const ResearchSection: React.FC = () => {
                       fontSize: 'var(--text-xs)',
                       fontWeight: 600,
                       color: 'var(--color-text-muted)',
-                      textTransform: 'uppercase',
                       marginBottom: '0.5rem',
                     }}
                   >
@@ -259,21 +257,9 @@ export const ResearchSection: React.FC = () => {
                               type="button"
                               aria-selected={isActive}
                               onClick={() => setCitationFormat(fmt)}
-                              style={{
-                                fontFamily: 'var(--font-mono)',
-                                fontSize: 'var(--text-xs)',
-                                fontWeight: isActive ? 700 : 500,
-                                textTransform: 'uppercase',
-                                padding: '3px 10px',
-                                borderRadius: 'var(--radius-xs)',
-                                border: '1px solid',
-                                borderColor: isActive ? 'var(--color-accent)' : 'var(--color-border)',
-                                backgroundColor: isActive ? 'var(--color-accent)' : 'var(--color-surface)',
-                                color: isActive ? 'var(--color-accent-contrast)' : 'var(--color-text-primary)',
-                                cursor: 'pointer',
-                              }}
+                              className={`btn-tab ${isActive ? 'active' : ''}`}
                             >
-                              {fmt}
+                              {fmt.toUpperCase()}
                             </button>
                           );
                         })}
