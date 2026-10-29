@@ -210,50 +210,131 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                         </button>
                       </div>
 
-                      {/* Vector Pipeline SVG visualization */}
-                      <svg
-                        viewBox="0 0 320 60"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={{ width: '100%', height: 'auto', display: 'block' }}
+                      {/* Vector Pipeline Steps Preview — High-Contrast Semantic Grid */}
+                      <div
+                        className="pipeline-preview"
                         role="img"
                         aria-label={`Architecture pipeline flow for ${project.title}: 01 ${project.pipelineSteps[0]?.label || 'Ingest'}, 02 ${project.pipelineSteps[1]?.label || 'Process'}, 03 ${project.pipelineSteps[2]?.label || 'Deliver'}`}
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: '1fr auto 1fr auto 1fr',
+                          alignItems: 'center',
+                          gap: '0.35rem',
+                          marginBottom: '1rem',
+                        }}
                       >
-                        <g aria-hidden="true">
-                          {/* Node 1 */}
-                          <rect x="2" y="10" width="85" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" strokeWidth="1.5" />
-                          <text x="44" y="27" textAnchor="middle" fill="var(--color-text-primary)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
+                        {/* Node 1 */}
+                        <div
+                          style={{
+                            backgroundColor: 'var(--color-surface)',
+                            border: '1px solid var(--color-border)',
+                            borderRadius: 'var(--radius-xs)',
+                            padding: '0.45rem 0.35rem',
+                            textAlign: 'center',
+                          }}
+                        >
+                          <div
+                            style={{
+                              fontSize: 'var(--text-xs)',
+                              fontWeight: 600,
+                              fontFamily: 'var(--font-mono)',
+                              color: 'var(--color-text-primary)',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
                             {project.pipelineSteps[0]?.label.slice(0, 12)}
-                          </text>
-                          <text x="44" y="40" textAnchor="middle" fill="var(--color-text-secondary)" fontSize="7" fontFamily="var(--font-mono)">
+                          </div>
+                          <div
+                            style={{
+                              fontSize: '10px',
+                              fontFamily: 'var(--font-mono)',
+                              color: 'var(--color-text-secondary)',
+                            }}
+                          >
                             01·Ingest
-                          </text>
+                          </div>
+                        </div>
 
-                          {/* Arrow 1 */}
-                          <path d="M92 30 H112 M108 26 L113 30 L108 34" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        {/* Arrow 1 */}
+                        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+                          <path d="M0 6 H11 M8 2.5 L11.5 6 L8 9.5" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
 
-                          {/* Node 2 */}
-                          <rect x="117" y="10" width="86" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-accent)" strokeWidth="1.5" />
-                          <text x="160" y="27" textAnchor="middle" fill="var(--color-accent)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
+                        {/* Node 2 */}
+                        <div
+                          style={{
+                            backgroundColor: 'var(--color-surface)',
+                            border: '1px solid var(--color-accent)',
+                            borderRadius: 'var(--radius-xs)',
+                            padding: '0.45rem 0.35rem',
+                            textAlign: 'center',
+                          }}
+                        >
+                          <div
+                            style={{
+                              fontSize: 'var(--text-xs)',
+                              fontWeight: 600,
+                              fontFamily: 'var(--font-mono)',
+                              color: 'var(--color-accent)',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
                             {project.pipelineSteps[1]?.label.slice(0, 12)}
-                          </text>
-                          <text x="160" y="40" textAnchor="middle" fill="var(--color-text-secondary)" fontSize="7" fontFamily="var(--font-mono)">
+                          </div>
+                          <div
+                            style={{
+                              fontSize: '10px',
+                              fontFamily: 'var(--font-mono)',
+                              color: 'var(--color-text-secondary)',
+                            }}
+                          >
                             02·Process
-                          </text>
+                          </div>
+                        </div>
 
-                          {/* Arrow 2 */}
-                          <path d="M208 30 H228 M224 26 L229 30 L224 34" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        {/* Arrow 2 */}
+                        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+                          <path d="M0 6 H11 M8 2.5 L11.5 6 L8 9.5" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
 
-                          {/* Node 3 */}
-                          <rect x="233" y="10" width="85" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" strokeWidth="1.5" />
-                          <text x="275" y="27" textAnchor="middle" fill="var(--color-text-primary)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
+                        {/* Node 3 */}
+                        <div
+                          style={{
+                            backgroundColor: 'var(--color-surface)',
+                            border: '1px solid var(--color-border)',
+                            borderRadius: 'var(--radius-xs)',
+                            padding: '0.45rem 0.35rem',
+                            textAlign: 'center',
+                          }}
+                        >
+                          <div
+                            style={{
+                              fontSize: 'var(--text-xs)',
+                              fontWeight: 600,
+                              fontFamily: 'var(--font-mono)',
+                              color: 'var(--color-text-primary)',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
                             {project.pipelineSteps[2]?.label.slice(0, 12)}
-                          </text>
-                          <text x="275" y="40" textAnchor="middle" fill="var(--color-text-secondary)" fontSize="7" fontFamily="var(--font-mono)">
+                          </div>
+                          <div
+                            style={{
+                              fontSize: '10px',
+                              fontFamily: 'var(--font-mono)',
+                              color: 'var(--color-text-secondary)',
+                            }}
+                          >
                             03·Deliver
-                          </text>
-                        </g>
-                      </svg>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Card Title & Content */}

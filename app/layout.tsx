@@ -108,30 +108,62 @@ export default function RootLayout({
                   }
                 } catch (e) {}
 
-                // Proactive DOM guard for third-party browser extensions (e.g. ChatGPT Sidebar)
-                function sanitizeInjectedExtensions() {
+                // Proactive Shadow DOM & light DOM guard for injected browser extensions (e.g. ChatGPT Sidebar)
+                function sanitizeRoot(root) {
+                  if (!root) return;
                   try {
-                    var buttons = document.querySelectorAll('chatgpt-sidebar button, .chatgpt-sidebar button, [class*="chatgpt"] button, button.size-10');
+                    var buttons = root.querySelectorAll('button, .size-10, [class*="size-10"]');
                     for (var i = 0; i < buttons.length; i++) {
                       var btn = buttons[i];
                       if (!btn.getAttribute('aria-label') && !btn.innerText.trim()) {
                         btn.setAttribute('aria-label', 'ChatGPT Sidebar Action');
                       }
                     }
-                    var positiveTabs = document.querySelectorAll('[tabindex="1"], [tabindex="2"], [tabindex="3"], [tabindex="4"], [tabindex="5"]');
+                    var positiveTabs = root.querySelectorAll('[tabindex="1"], [tabindex="2"], [tabindex="3"], [tabindex="4"], [tabindex="5"]');
                     for (var j = 0; j < positiveTabs.length; j++) {
                       positiveTabs[j].setAttribute('tabindex', '0');
                     }
                   } catch (err) {}
                 }
+
+                function crawlDeep(node) {
+                  if (!node) return;
+                  sanitizeRoot(node);
+                  if (node.shadowRoot) {
+                    sanitizeRoot(node.shadowRoot);
+                    crawlDeep(node.shadowRoot);
+                  }
+                  var children = node.children || [];
+                  for (var k = 0; k < children.length; k++) {
+                    crawlDeep(children[k]);
+                  }
+                }
+
+                // Intercept shadow root creation by extensions
+                if (typeof Element !== 'undefined' && Element.prototype.attachShadow) {
+                  var origAttach = Element.prototype.attachShadow;
+                  Element.prototype.attachShadow = function(init) {
+                    var shadow = origAttach.call(this, init);
+                    try {
+                      var sObs = new MutationObserver(function() {
+                        sanitizeRoot(shadow);
+                      });
+                      sObs.observe(shadow, { childList: true, subtree: true, attributes: true });
+                      sanitizeRoot(shadow);
+                    } catch (e) {}
+                    return shadow;
+                  };
+                }
+
                 if (typeof MutationObserver !== 'undefined') {
                   var observer = new MutationObserver(function() {
-                    sanitizeInjectedExtensions();
+                    crawlDeep(document.documentElement);
                   });
                   observer.observe(document.documentElement, { childList: true, subtree: true });
                 }
                 if (typeof window !== 'undefined') {
-                  window.addEventListener('DOMContentLoaded', sanitizeInjectedExtensions);
+                  window.addEventListener('DOMContentLoaded', function() { crawlDeep(document.documentElement); });
+                  window.addEventListener('load', function() { crawlDeep(document.documentElement); });
                 }
               })();
             `,
