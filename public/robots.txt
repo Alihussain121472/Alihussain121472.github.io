@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alihussain121472.github.io/sitemap.xml
+Sitemap: https://alihussain121472-github-io.vercel.app/sitemap.xml
