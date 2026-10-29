@@ -170,7 +170,7 @@ export const ContactAndSyncSection: React.FC<ContactAndSyncSectionProps> = ({
             Initiate Contact &amp; Portfolio State Vault
           </h2>
           <p className="section-sub">
-            Available for production AI systems engineering, agent architecture, and ML research consultations.
+            Open for full-time roles and projects in AI systems, autonomous agents, and web apps.
           </p>
         </div>
 
@@ -486,7 +486,7 @@ export const ContactAndSyncSection: React.FC<ContactAndSyncSectionProps> = ({
               </div>
 
               <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', marginBottom: '1.25rem' }}>
-                All bookmarks, theme selections, and validated messages are maintained in an exportable state vault with full JSON schema validation.
+                Save and export your bookmarks, theme choice, and form messages in a single JSON file.
               </p>
 
               {syncStatus && (

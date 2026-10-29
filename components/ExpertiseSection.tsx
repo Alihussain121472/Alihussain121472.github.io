@@ -12,7 +12,7 @@ export const ExpertiseSection: React.FC = () => {
             Technical Architecture &amp; Engineering Stack
           </h2>
           <p className="section-sub">
-            Core tools, models, and engineering practices used across my projects and research.
+            Core tools, models, and skills I use across my projects and research.
           </p>
         </div>
 

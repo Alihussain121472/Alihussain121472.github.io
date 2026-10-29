@@ -477,6 +477,6 @@ export const EXPERIENCE = [
     period: 'Jan 2026 – Apr 2026',
     location: 'Islamabad, Pakistan',
     description:
-      'Engineered accessible responsive components, streamlined web communication assets, and integrated scientific publication catalogs for research dissemination.',
+      'Built fast web pages, updated the lab website, and published research papers online.',
   },
 ] as const;
