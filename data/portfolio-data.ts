@@ -45,7 +45,7 @@ export const PROJECTS: readonly Project[] = [
     title: 'NovaBrief Tech',
     kicker: 'Autonomous Morning Digest & AI Synthesis Engine',
     description:
-      'An automated intelligence engine that ingests breaking AI discoveries and student grant programs, runs structured Llama 3.3 summarization via Groq, and dispatches a responsive morning digest directly to subscribers.',
+      'A daily digest that gathers top AI news and student programs. It uses Llama 3.3 on Groq to write quick summaries and sends a morning email to readers.',
     categories: ['Live Web Platforms', 'AI & Agent Workflows'],
     stack: [
       'Python',
@@ -112,7 +112,7 @@ export const PROJECTS: readonly Project[] = [
     title: 'Araknet.tech Business Agent',
     kicker: 'Autonomous Multi-Provider Lead Routing & CRM Studio',
     description:
-      'A full-stack intelligence platform that discovers regional businesses across three map APIs with graceful failover, validates web presence, stores enriched leads in MongoDB Atlas, and provides an editable proposal drafting studio.',
+      'Find local businesses, check their web presence, and draft outreach emails. It queries three map APIs with automatic failover and saves leads in MongoDB.',
     categories: ['Live Web Platforms', 'AI & Agent Workflows'],
     stack: [
       'Next.js',
@@ -179,7 +179,7 @@ export const PROJECTS: readonly Project[] = [
     title: 'MY Mentore',
     kicker: 'Desktop Personal Study Ecosystem & Contextual AI Tutor',
     description:
-      'A cross-platform Windows desktop application that combines curriculum roadmaps, interactive quizzes, and coding exercises into a unified workspace, backed by a local SQLite engine and a contextual Gemini mentor.',
+      'A Windows desktop app that organizes daily study goals, quizzes, and coding labs in one place. It runs on a local SQLite core with an inline Gemini tutor.',
     categories: ['Desktop Apps', 'AI & Agent Workflows'],
     stack: [
       'Electron',
@@ -255,7 +255,7 @@ export const RESEARCH_PAPERS: readonly ResearchPaper[] = [
     pdfUrl:
       '/assets/papers/Detection-of-Brute-Force-Login-Attempts-Using-Machine-Learning.pdf',
     abstract:
-      'This study evaluates supervised machine learning classifiers (Support Vector Machines and Gaussian Naïve Bayes) for identifying unauthorized brute-force and dictionary login attempts in authentication log telemetry. Experiments evaluate classifier behavior with and without Principal Component Analysis (PCA) dimensionality reduction. SVM achieved an optimal 97.24% classification accuracy without PCA and 96.55% with PCA, while GNB performance increased from 87.93% to 91.03% under PCA feature reduction.',
+      'We tested SVM and Naive Bayes models to detect brute-force login attacks in system logs. SVM achieved 97.24% accuracy on raw data and 96.55% with PCA. PCA also helped Naive Bayes improve from 87.93% to 91.03% accuracy.',
     keyFindings: [
       'SVM achieved 97.24% detection accuracy on raw authentication telemetry.',
       'Principal Component Analysis reduced feature dimensionality while preserving 96.55% SVM precision.',
@@ -290,9 +290,9 @@ export const RESEARCH_PAPERS: readonly ResearchPaper[] = [
     pdfUrl:
       '/assets/papers/Swarm-Intelligence-tuning-of-PID-Position-Controllers-for-a-dual-axis-Solar-tracker.pdf',
     abstract:
-      'Investigates nature-inspired metaheuristic swarm intelligence algorithms (PSO, Firefly Algorithm, and Cuckoo Search) for the optimal tuning of PID position controllers driving a dual-axis solar photovoltaic tracking platform. Evaluates convergence speed, integral time absolute error (ITAE), overshoot, and energy capture efficiency under simulated dynamic irradiance fluctuations.',
+      'We test three swarm methods (PSO, Firefly, and Cuckoo Search) to tune solar panel motors. The paper measures tracking speed and power output during daylight shifts.',
     keyFindings: [
-      'Rigorous mathematical comparison of PSO, FA, and CS metaheuristics on non-linear tracker dynamics.',
+      'Compared three swarm methods to improve motor tracking on solar panels.',
       'Significant reduction in PID steady-state tracking error and settling overshoot.',
       'Complete pre-print manuscript prepared and submitted to international peer-reviewed journal.',
     ],
@@ -459,7 +459,7 @@ export const EDUCATION = {
   period: '2025 – 2029 (Expected)',
   status: 'In Progress',
   focus:
-    'Core coursework in Machine Learning, Deep Neural Networks, Data Structures & Algorithms, Numerical Computing, and Discrete Mathematics.',
+    'Coursework covers AI, neural networks, data structures, and math.',
 } as const;
 
 export const EXPERIENCE = [
@@ -469,7 +469,7 @@ export const EXPERIENCE = [
     period: 'Oct 2026 – Present (1 Year Fellowship)',
     location: 'Remote / Hybrid',
     description:
-      'Collaborating under Founder Prof. Dr. Inam Ullah Khan on machine learning research methodologies, scientific literature synthesis, and AI education initiatives.',
+      'Working with Founder Prof. Dr. Inam Ullah Khan on machine learning research, paper reviews, and AI training programs.',
   },
   {
     role: 'Web Developer Intern',

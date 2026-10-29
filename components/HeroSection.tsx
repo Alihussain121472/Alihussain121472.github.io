@@ -67,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
                 maxWidth: '42rem',
               }}
             >
-              I design and deploy end-to-end software in Islamabad, Pakistan—combining LLM orchestration (Llama 3.3, Gemini, Claude), resilient Python &amp; Next.js backends, and peer-reviewed machine learning research into live products.
+              I design and deploy AI software in Islamabad, Pakistan. I build LLM workflows (Llama 3.3, Gemini, Claude), fast Python backends, and published ML research into working products.
             </p>
 
             {/* CTAs */}

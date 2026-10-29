@@ -65,7 +65,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             Featured Systems &amp; Autonomous Workflows
           </h2>
           <p className="section-sub">
-            Production systems built with resilient architectures, transparent system pipelines, and verifiable outcomes.
+            Explore real-world apps with clear system pipelines, modern code stacks, and live links to try them out.
           </p>
         </div>
 
