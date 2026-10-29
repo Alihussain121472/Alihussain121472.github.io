@@ -30,7 +30,7 @@ export const TopPunchlineBanner: React.FC = () => {
         }}
       >
         <span>
-          <strong>SYED ALI HUSSAIN</strong> · Engineering Autonomous AI Agents, Geospatial Engines, and Resilient Full-Stack Systems — From Research Math to Production Code.
+          <strong>SYED ALI HUSSAIN</strong> · Building AI agents, map tools, and reliable web apps from research to code.
         </span>
         <a
           href="#projects"

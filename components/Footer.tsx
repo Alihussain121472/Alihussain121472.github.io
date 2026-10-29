@@ -54,8 +54,7 @@ export const Footer: React.FC = () => {
                 marginBottom: '1rem',
               }}
             >
-              AI Systems Engineer &amp; Full-Stack Architect based in Islamabad, Pakistan.
-              Designing autonomous agent pipelines, resilient backends, and published machine learning research.
+              AI engineer based in Islamabad, Pakistan. I create smart agents, fast web backends, and practical machine learning tools.
             </p>
 
             {/* Live Status Pill */}
