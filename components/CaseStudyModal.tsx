@@ -274,7 +274,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
             >
               Technology Stack
             </h3>
-            <div className="metadata-list" aria-label="Technology stack list">
+            <div className="metadata-list">
               {project.stack.map((tech, i) => (
                 <React.Fragment key={tech}>
                   <span className="metadata-item">{tech}</span>

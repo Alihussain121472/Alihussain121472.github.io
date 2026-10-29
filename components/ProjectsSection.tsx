@@ -216,40 +216,43 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         style={{ width: '100%', height: 'auto', display: 'block' }}
-                        aria-label={`Architecture pipeline flow for ${project.title}`}
+                        role="img"
+                        aria-label={`Architecture pipeline flow for ${project.title}: 01 ${project.pipelineSteps[0]?.label || 'Ingest'}, 02 ${project.pipelineSteps[1]?.label || 'Process'}, 03 ${project.pipelineSteps[2]?.label || 'Deliver'}`}
                       >
-                        {/* Node 1 */}
-                        <rect x="2" y="10" width="85" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" strokeWidth="1.5" />
-                        <text x="44" y="27" textAnchor="middle" fill="var(--color-text-primary)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
-                          {project.pipelineSteps[0]?.label.slice(0, 12)}
-                        </text>
-                        <text x="44" y="40" textAnchor="middle" fill="var(--color-text-muted)" fontSize="7" fontFamily="var(--font-mono)">
-                          01·Ingest
-                        </text>
+                        <g aria-hidden="true">
+                          {/* Node 1 */}
+                          <rect x="2" y="10" width="85" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" strokeWidth="1.5" />
+                          <text x="44" y="27" textAnchor="middle" fill="var(--color-text-primary)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
+                            {project.pipelineSteps[0]?.label.slice(0, 12)}
+                          </text>
+                          <text x="44" y="40" textAnchor="middle" fill="var(--color-text-secondary)" fontSize="7" fontFamily="var(--font-mono)">
+                            01·Ingest
+                          </text>
 
-                        {/* Arrow 1 */}
-                        <path d="M92 30 H112 M108 26 L113 30 L108 34" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          {/* Arrow 1 */}
+                          <path d="M92 30 H112 M108 26 L113 30 L108 34" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 
-                        {/* Node 2 */}
-                        <rect x="117" y="10" width="86" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-accent)" strokeWidth="1.5" />
-                        <text x="160" y="27" textAnchor="middle" fill="var(--color-accent)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
-                          {project.pipelineSteps[1]?.label.slice(0, 12)}
-                        </text>
-                        <text x="160" y="40" textAnchor="middle" fill="var(--color-text-muted)" fontSize="7" fontFamily="var(--font-mono)">
-                          02·Process
-                        </text>
+                          {/* Node 2 */}
+                          <rect x="117" y="10" width="86" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-accent)" strokeWidth="1.5" />
+                          <text x="160" y="27" textAnchor="middle" fill="var(--color-accent)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
+                            {project.pipelineSteps[1]?.label.slice(0, 12)}
+                          </text>
+                          <text x="160" y="40" textAnchor="middle" fill="var(--color-text-secondary)" fontSize="7" fontFamily="var(--font-mono)">
+                            02·Process
+                          </text>
 
-                        {/* Arrow 2 */}
-                        <path d="M208 30 H228 M224 26 L229 30 L224 34" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          {/* Arrow 2 */}
+                          <path d="M208 30 H228 M224 26 L229 30 L224 34" stroke="var(--color-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 
-                        {/* Node 3 */}
-                        <rect x="233" y="10" width="85" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" strokeWidth="1.5" />
-                        <text x="275" y="27" textAnchor="middle" fill="var(--color-text-primary)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
-                          {project.pipelineSteps[2]?.label.slice(0, 12)}
-                        </text>
-                        <text x="275" y="40" textAnchor="middle" fill="var(--color-text-muted)" fontSize="7" fontFamily="var(--font-mono)">
-                          03·Deliver
-                        </text>
+                          {/* Node 3 */}
+                          <rect x="233" y="10" width="85" height="40" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" strokeWidth="1.5" />
+                          <text x="275" y="27" textAnchor="middle" fill="var(--color-text-primary)" fontSize="9" fontWeight="600" fontFamily="var(--font-mono)">
+                            {project.pipelineSteps[2]?.label.slice(0, 12)}
+                          </text>
+                          <text x="275" y="40" textAnchor="middle" fill="var(--color-text-secondary)" fontSize="7" fontFamily="var(--font-mono)">
+                            03·Deliver
+                          </text>
+                        </g>
                       </svg>
                     </div>
 
@@ -296,7 +299,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                         paddingTop: '0.75rem',
                         borderTop: '1px solid var(--color-border)',
                       }}
-                      aria-label="Technologies used"
                     >
                       {project.stack.map((item, i) => (
                         <React.Fragment key={item}>

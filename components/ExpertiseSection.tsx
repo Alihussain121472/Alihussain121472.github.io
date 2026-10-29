@@ -59,7 +59,6 @@ export const ExpertiseSection: React.FC = () => {
               {/* Zero-Pill Typography Metadata */}
               <div
                 className="metadata-list"
-                aria-label={`${domain.category} tools`}
                 style={{
                   fontSize: 'var(--text-xs)',
                   lineHeight: '1.8',

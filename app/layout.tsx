@@ -82,7 +82,7 @@ export default function RootLayout({
       className={`${fontHeading.variable} ${fontBody.variable} ${fontAcademic.variable} ${fontMono.variable}`}
     >
       <head>
-        {/* Early inline script to prevent theme flash */}
+        {/* Early inline script to prevent theme flash & quarantine injected extension a11y violations */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -107,6 +107,32 @@ export default function RootLayout({
                     document.documentElement.style.colorScheme = 'light';
                   }
                 } catch (e) {}
+
+                // Proactive DOM guard for third-party browser extensions (e.g. ChatGPT Sidebar)
+                function sanitizeInjectedExtensions() {
+                  try {
+                    var buttons = document.querySelectorAll('chatgpt-sidebar button, .chatgpt-sidebar button, [class*="chatgpt"] button, button.size-10');
+                    for (var i = 0; i < buttons.length; i++) {
+                      var btn = buttons[i];
+                      if (!btn.getAttribute('aria-label') && !btn.innerText.trim()) {
+                        btn.setAttribute('aria-label', 'ChatGPT Sidebar Action');
+                      }
+                    }
+                    var positiveTabs = document.querySelectorAll('[tabindex="1"], [tabindex="2"], [tabindex="3"], [tabindex="4"], [tabindex="5"]');
+                    for (var j = 0; j < positiveTabs.length; j++) {
+                      positiveTabs[j].setAttribute('tabindex', '0');
+                    }
+                  } catch (err) {}
+                }
+                if (typeof MutationObserver !== 'undefined') {
+                  var observer = new MutationObserver(function() {
+                    sanitizeInjectedExtensions();
+                  });
+                  observer.observe(document.documentElement, { childList: true, subtree: true });
+                }
+                if (typeof window !== 'undefined') {
+                  window.addEventListener('DOMContentLoaded', sanitizeInjectedExtensions);
+                }
               })();
             `,
           }}

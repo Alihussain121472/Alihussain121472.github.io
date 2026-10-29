@@ -94,7 +94,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
             </div>
 
             {/* Clean Unboxed Text Links */}
-            <div
+            <nav
               className="hero-social-links"
               aria-label="Direct contact links"
               style={{
@@ -140,7 +140,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
               >
                 X (@Syedali6160)
               </a>
-            </div>
+            </nav>
           </div>
 
           {/* Right Column: Interactive Architecture Spotlight Deck */}
@@ -288,7 +288,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
               <div
                 className="metadata-list"
                 style={{ marginBottom: '1.25rem' }}
-                aria-label="Core technologies"
               >
                 {activeProject.stack.map((item, i) => (
                   <React.Fragment key={item}>
@@ -328,7 +327,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCaseStudy }) => 
         {/* Full-Width 4-Column Verifiable Metrics Strip Below Hero */}
         <div
           className="hero-metrics-strip"
-          aria-label="Key verifiable metrics"
           style={{
             marginTop: '3.5rem',
             paddingTop: '2rem',

@@ -152,7 +152,6 @@ export const CertificationsSection: React.FC = () => {
                     paddingTop: '0.5rem',
                     borderTop: '1px solid var(--color-border)',
                   }}
-                  aria-label="Skills covered"
                 >
                   {cert.skills.map((skill, sIdx) => (
                     <React.Fragment key={skill}>

@@ -36,12 +36,12 @@
   --color-border-hover: #D4D4D8;
   --color-border-active: #A1A1AA;
   --color-text-primary: #09090B;
-  --color-text-secondary: #52525B;
-  --color-text-muted: #71717A;
-  --color-accent: #2563EB; /* Cobalt Blue */
-  --color-accent-hover: #1D4ED8;
+  --color-text-secondary: #3F3F46;
+  --color-text-muted: #52525B;
+  --color-accent: #1D4ED8; /* High-contrast Cobalt Blue */
+  --color-accent-hover: #1E40AF;
   --color-accent-contrast: #FFFFFF;
-  --color-ring: #2563EB;
+  --color-ring: #1D4ED8;
   --color-badge-bg: #F4F4F5;
   --color-badge-text: #09090B;
 
@@ -56,18 +56,18 @@
 
 [data-theme="dark"],
 .dark {
-  /* High-Contrast Dark Theme Tokens */
+  /* High-Contrast Dark Theme Tokens — WCAG AAA / AA Compliant */
   --color-bg: #09090B;
   --color-surface: #121215;
   --color-surface-subtle: #18181B;
   --color-surface-hover: #222226;
   --color-border: #27272A;
   --color-border-hover: #3F3F46;
-  --color-border-active: #71717A;
+  --color-border-active: #A1A1AA;
   --color-text-primary: #FAFAFA;
-  --color-text-secondary: #A1A1AA;
-  --color-text-muted: #71717A;
-  --color-accent: #3B82F6; /* High contrast blue for dark canvas */
+  --color-text-secondary: #D4D4D8;
+  --color-text-muted: #A1A1AA;
+  --color-accent: #3B82F6; /* High contrast blue for dark canvas (5.2:1) */
   --color-accent-hover: #60A5FA;
   --color-accent-contrast: #09090B;
   --color-ring: #3B82F6;
