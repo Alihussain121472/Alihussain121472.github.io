@@ -23,10 +23,10 @@ export default function ContactPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
       <Reveal>
-        <p className="font-mono text-xs font-semibold tracking-widest text-accent uppercase">
+        <p className="font-mono text-xs font-semibold tracking-wide text-accent">
           Say Hello
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg">
           Contact
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-fg-secondary">
@@ -46,7 +46,7 @@ export default function ContactPage() {
         <aside className="space-y-6 md:col-span-5">
           <Reveal delay={0.12}>
             <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
-              <h2 className="font-mono text-xs font-bold tracking-widest text-accent uppercase">
+              <h2 className="font-mono text-xs font-bold tracking-wide text-accent">
                 Direct Links &amp; Socials
               </h2>
               <dl className="mt-4 space-y-3 text-sm">
@@ -58,7 +58,7 @@ export default function ContactPage() {
                     <dt className="font-mono text-xs font-medium text-fg-muted">
                       {row.label}
                     </dt>
-                    <dd className="truncate max-w-[200px]">
+                    <dd className="max-w-[200px] truncate">
                       {isTodo(row.value) ? (
                         <TodoBadge value={row.value} label={row.label} />
                       ) : (

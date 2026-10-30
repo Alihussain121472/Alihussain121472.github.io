@@ -14,10 +14,10 @@ export default function UsesPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
       <Reveal>
-        <p className="font-mono text-xs font-semibold tracking-widest text-accent uppercase">
+        <p className="font-mono text-xs font-semibold tracking-wide text-accent">
           Environment &amp; Stack
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg">
           Uses
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-fg-secondary">
@@ -32,7 +32,7 @@ export default function UsesPage() {
             <section aria-labelledby={`uses-${idx}`}>
               <h2
                 id={`uses-${idx}`}
-                className="font-mono text-xs font-bold tracking-widest text-accent uppercase"
+                className="font-mono text-xs font-bold tracking-wide text-accent"
               >
                 {group.category}
               </h2>

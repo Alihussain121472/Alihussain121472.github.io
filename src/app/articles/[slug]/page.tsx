@@ -58,11 +58,11 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
           <span>{article.frontmatter.readTime}</span>
         </div>
 
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-fg">
           {article.frontmatter.title}
         </h1>
 
-        <p className="mt-4 text-lg leading-relaxed text-fg-secondary">
+        <p className="mt-4 text-base leading-relaxed text-fg-secondary">
           {article.frontmatter.description}
         </p>
 
@@ -78,7 +78,7 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
         </div>
       </header>
 
-      <div className="mt-10 space-y-6 leading-relaxed text-fg-secondary [&_a]:text-accent [&_a]:underline [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-decimal [&_p]:text-base [&_strong]:text-fg">
+      <div className="mt-10 space-y-6 leading-relaxed text-fg-secondary [&_a]:text-accent [&_a]:underline [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-decimal [&_p]:text-base [&_strong]:text-fg">
         <MDXRemote source={article.content} />
       </div>
     </article>

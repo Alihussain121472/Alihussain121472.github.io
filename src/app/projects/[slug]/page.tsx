@@ -63,11 +63,11 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           )}
         </div>
 
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-fg">
           {project.title}
         </h1>
 
-        <p className="mt-4 text-lg leading-relaxed text-fg-secondary">
+        <p className="mt-4 text-base leading-relaxed text-fg-secondary">
           {project.description}
         </p>
 
@@ -95,7 +95,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 font-mono text-xs font-bold text-accent-fg transition-opacity hover:opacity-90"
+              className="btn-primary ml-auto"
             >
               <span>Visit live link</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -104,7 +104,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
       </header>
 
-      <div className="mt-10 space-y-6 leading-relaxed text-fg-secondary [&_a]:text-accent [&_a]:underline [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_p]:text-base [&_strong]:text-fg">
+      <div className="mt-10 space-y-6 leading-relaxed text-fg-secondary [&_a]:text-accent [&_a]:underline [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_p]:text-base [&_strong]:text-fg">
         {mdxEntry ? (
           <MDXRemote source={mdxEntry.content} />
         ) : (

@@ -23,7 +23,7 @@ export function DetailsSection() {
           <Reveal>
             <h2
               id="details-heading"
-              className="text-3xl font-bold tracking-tight text-fg sm:text-4xl"
+              className="text-3xl font-bold tracking-tight text-fg"
             >
               Hi there <span aria-hidden="true">👋🏼</span>
             </h2>
@@ -60,7 +60,7 @@ export function DetailsSection() {
           <Reveal delay={0.08}>
             <div className="grid gap-6 pt-4 sm:grid-cols-2">
               <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
-                <h3 className="font-mono text-xs font-bold tracking-wider text-accent uppercase">
+                <h3 className="font-mono text-xs font-bold tracking-wide text-accent">
                   Experience &amp; Education
                 </h3>
                 <ul className="mt-3 space-y-2.5 text-sm text-fg-secondary">
@@ -81,7 +81,7 @@ export function DetailsSection() {
               </div>
 
               <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
-                <h3 className="font-mono text-xs font-bold tracking-wider text-accent uppercase">
+                <h3 className="font-mono text-xs font-bold tracking-wide text-accent">
                   Services &amp; Focus
                 </h3>
                 <div className="mt-3 space-y-3 text-sm text-fg-secondary">
@@ -110,10 +110,7 @@ export function DetailsSection() {
 
           <Reveal delay={0.14}>
             <div className="pt-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 rounded-lg bg-accent px-5 py-3 font-mono text-xs font-bold tracking-wider text-accent-fg uppercase shadow-sm transition-opacity hover:opacity-90"
-              >
+              <Link href="/contact" className="btn-primary">
                 <MessageSquare className="h-4 w-4" />
                 <span>Send me a message</span>
               </Link>
@@ -133,7 +130,7 @@ export function DetailsSection() {
                   className="object-cover"
                 />
               </div>
-              <figcaption className="mt-3 flex items-center justify-between px-1 font-mono text-xs font-medium tracking-widest text-fg-muted uppercase">
+              <figcaption className="mt-3 flex items-center justify-between px-1 font-mono text-xs font-medium tracking-wide text-fg-muted">
                 <span>About Me</span>
                 <span className="text-fg-secondary">{profile.name}</span>
               </figcaption>

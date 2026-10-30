@@ -10,16 +10,16 @@ export function Hero() {
     <section
       id="intro"
       aria-labelledby="hero-heading"
-      className="mx-auto flex min-h-[80vh] max-w-5xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-24"
+      className="mx-auto flex min-h-[78vh] max-w-5xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <p className="mb-4 font-mono text-xs font-semibold tracking-widest text-fg-muted uppercase">
+        <p className="mb-4 font-mono text-xs font-semibold tracking-wide text-fg-muted">
           {profile.headline}
         </p>
 
         <h1
           id="hero-heading"
-          className="text-4xl font-bold tracking-tight text-fg sm:text-6xl md:text-7xl"
+          className="text-5xl font-bold tracking-tight text-fg"
         >
           {profile.name}
         </h1>
@@ -31,10 +31,7 @@ export function Hero() {
         <div className="mt-10 h-0.5 w-24 bg-accent" aria-hidden="true" />
 
         <div className="mt-12">
-          <a
-            href="#projects"
-            className="inline-flex items-center gap-2.5 rounded-lg border border-border bg-surface px-5 py-3 font-mono text-xs font-semibold tracking-wider text-fg uppercase shadow-sm transition-all hover:border-accent hover:text-accent"
-          >
+          <a href="#projects" className="btn-secondary">
             <span>Scroll to projects</span>
             <ArrowDown className="h-4 w-4 text-accent" />
           </a>

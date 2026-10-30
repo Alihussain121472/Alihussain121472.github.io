@@ -23,7 +23,7 @@ export function RotatingRole({ roles }: RotatingRoleProps) {
   const currentRole = roles[index] ?? roles[0] ?? "";
 
   return (
-    <div className="inline-flex items-center gap-3 text-2xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+    <div className="inline-flex items-center gap-3 text-3xl font-semibold tracking-tight">
       <span className="text-fg-muted">+</span>
       <span className="relative inline-flex min-w-[12ch] items-center">
         {shouldReduceMotion ? (

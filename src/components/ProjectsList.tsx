@@ -1,4 +1,4 @@
-// Numbered projects list (01, 02, 03...) matching kingshuk.me layout with high-contrast tokens.
+// Numbered projects list (01, 02, 03...) matching kingshuk.me layout with unified type scale and buttons.
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
@@ -17,7 +17,7 @@ export function ProjectsList() {
         <div className="mb-14 flex items-baseline justify-between">
           <h2
             id="projects-heading"
-            className="font-mono text-xs font-semibold tracking-widest text-accent uppercase"
+            className="font-mono text-xs font-semibold tracking-wide text-accent"
           >
             Selected Projects
           </h2>
@@ -42,7 +42,7 @@ export function ProjectsList() {
 
                   <div className="space-y-4 md:col-span-7">
                     <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-2xl font-bold tracking-tight text-fg sm:text-3xl">
+                      <h3 className="text-xl font-bold tracking-tight text-fg">
                         <Link
                           href={`/projects/${project.slug}`}
                           className="transition-colors hover:text-accent"
@@ -84,7 +84,7 @@ export function ProjectsList() {
                   <div className="flex items-center gap-3 md:col-span-3 md:justify-end">
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5 font-mono text-xs font-semibold text-fg shadow-sm transition-colors hover:border-accent hover:text-accent"
+                      className="btn-secondary"
                     >
                       <span>View project</span>
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -96,7 +96,7 @@ export function ProjectsList() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Open ${project.title} external link`}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface text-fg-secondary transition-colors hover:border-accent hover:text-accent"
+                        className="btn-icon"
                       >
                         <ArrowUpRight className="h-4 w-4" />
                       </a>

@@ -36,7 +36,7 @@ export function Navbar() {
         <Link
           href="/#intro"
           aria-label={`${profile.name} — Back to intro`}
-          className="group inline-flex shrink-0 items-center gap-2.5 font-mono text-sm font-bold tracking-wider text-fg uppercase transition-colors hover:text-accent"
+          className="group inline-flex shrink-0 items-center gap-2.5 font-mono text-sm font-bold tracking-wide text-fg transition-colors hover:text-accent"
         >
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface font-mono text-xs font-bold text-accent transition-colors group-hover:border-accent">
             SAH
@@ -65,7 +65,7 @@ export function Navbar() {
                   key={key}
                   title={`${key}: TODO (update in src/data/portfolio.ts)`}
                   aria-label={`${key} link placeholder (TODO)`}
-                  className="inline-flex h-8 w-8 cursor-not-allowed items-center justify-center rounded-md text-fg-muted opacity-60"
+                  className="btn-icon cursor-not-allowed opacity-60"
                 >
                   <Icon className="h-4 w-4" />
                 </span>
@@ -76,7 +76,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={key}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-md text-fg-secondary transition-colors hover:bg-subtle hover:text-accent"
+                  className="btn-icon"
                 >
                   <Icon className="h-4 w-4" />
                 </a>

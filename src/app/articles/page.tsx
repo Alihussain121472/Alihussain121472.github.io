@@ -18,10 +18,10 @@ export default function ArticlesPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
       <Reveal>
-        <p className="font-mono text-xs font-semibold tracking-widest text-accent uppercase">
+        <p className="font-mono text-xs font-semibold tracking-wide text-accent">
           Writing &amp; Notes
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg">
           Articles
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-fg-secondary">
@@ -48,7 +48,7 @@ export default function ArticlesPage() {
                       <span>{article.frontmatter.readTime}</span>
                     </div>
 
-                    <h2 className="text-2xl font-bold tracking-tight text-fg">
+                    <h2 className="text-xl font-bold tracking-tight text-fg">
                       <Link
                         href={`/articles/${article.slug}`}
                         className="transition-colors group-hover:text-accent"
@@ -64,7 +64,7 @@ export default function ArticlesPage() {
 
                   <Link
                     href={`/articles/${article.slug}`}
-                    className="inline-flex shrink-0 items-center gap-1.5 font-mono text-xs font-semibold text-accent"
+                    className="btn-secondary shrink-0"
                   >
                     <span>Read article</span>
                     <ArrowRight className="h-3.5 w-3.5" />

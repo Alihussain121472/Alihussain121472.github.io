@@ -40,7 +40,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="name"
-          className="block font-mono text-xs font-semibold tracking-wider text-fg-secondary uppercase"
+          className="block font-mono text-xs font-semibold tracking-wide text-fg-secondary"
         >
           Your Name
         </label>
@@ -63,7 +63,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="block font-mono text-xs font-semibold tracking-wider text-fg-secondary uppercase"
+          className="block font-mono text-xs font-semibold tracking-wide text-fg-secondary"
         >
           Your Email
         </label>
@@ -86,7 +86,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block font-mono text-xs font-semibold tracking-wider text-fg-secondary uppercase"
+          className="block font-mono text-xs font-semibold tracking-wide text-fg-secondary"
         >
           Message
         </label>
@@ -119,11 +119,7 @@ export function ContactForm() {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-mono text-xs font-bold tracking-wider text-accent-fg uppercase transition-opacity hover:opacity-90 disabled:opacity-50"
-      >
+      <button type="submit" disabled={isSubmitting} className="btn-primary">
         <Send className="h-3.5 w-3.5" />
         <span>{isSubmitting ? "Sending..." : "Send message"}</span>
       </button>
