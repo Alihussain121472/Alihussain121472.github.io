@@ -1,4 +1,4 @@
-// Client toggle button for switching between dark (#111111) and light themes.
+// Client toggle button for switching between dark and light themes with high contrast.
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -29,9 +29,13 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900/60 text-neutral-300 transition-colors hover:border-accent hover:text-accent dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-300"
+      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-surface text-fg-secondary transition-colors hover:border-accent hover:text-accent"
     >
-      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {theme === "dark" ? (
+        <Sun className="h-4 w-4" />
+      ) : (
+        <Moon className="h-4 w-4" />
+      )}
     </button>
   );
 }

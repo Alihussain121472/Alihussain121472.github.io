@@ -24,7 +24,7 @@ export function RotatingRole({ roles }: RotatingRoleProps) {
 
   return (
     <div className="inline-flex items-center gap-3 text-2xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-      <span className="text-neutral-500 dark:text-neutral-400">+</span>
+      <span className="text-fg-muted">+</span>
       <span className="relative inline-flex min-w-[12ch] items-center">
         {shouldReduceMotion ? (
           <span className="text-accent">{roles.join(" / ")}</span>

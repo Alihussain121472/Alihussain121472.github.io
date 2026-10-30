@@ -44,36 +44,38 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const num = String(index + 1).padStart(2, "0");
 
   return (
-    <article className="mx-auto max-w-3xl px-6 py-20">
+    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
       <Link
         href="/#projects"
-        className="inline-flex items-center gap-2 font-mono text-xs text-neutral-400 transition-colors hover:text-accent"
+        className="inline-flex items-center gap-2 font-mono text-xs font-medium text-fg-secondary transition-colors hover:text-accent"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
         <span>Back to projects</span>
       </Link>
 
-      <header className="mt-8 border-b border-neutral-800 pb-8">
-        <div className="flex items-center gap-3 font-mono text-sm text-accent">
+      <header className="mt-8 border-b border-border pb-8">
+        <div className="flex items-center gap-3 font-mono text-sm font-semibold text-accent">
           <span>Project {num}</span>
           {project.status && (
-            <span className="rounded-full border border-accent/40 bg-accent/10 px-2.5 py-0.5 text-xs">
+            <span className="rounded-full border border-accent/40 bg-accent-soft px-2.5 py-0.5 text-xs">
               {project.status}
             </span>
           )}
         </div>
 
-        <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
           {project.title}
         </h1>
 
-        <p className="mt-4 text-lg text-neutral-300">{project.description}</p>
+        <p className="mt-4 text-lg leading-relaxed text-fg-secondary">
+          {project.description}
+        </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded border border-neutral-800 bg-neutral-900/70 px-2.5 py-1 font-mono text-xs text-neutral-300"
+              className="rounded-md border border-border bg-subtle px-2.5 py-1 font-mono text-xs font-medium text-fg-secondary"
             >
               {tag}
             </span>
@@ -83,7 +85,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             (isTodo(project.metrics) ? (
               <TodoBadge value={project.metrics} label="Project Metrics" />
             ) : (
-              <span className="font-mono text-xs text-accent">
+              <span className="font-mono text-xs font-medium text-accent">
                 {project.metrics}
               </span>
             ))}
@@ -93,7 +95,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-auto inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2 font-mono text-xs font-bold text-[#111111] transition-opacity hover:opacity-90"
+              className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 font-mono text-xs font-bold text-accent-fg transition-opacity hover:opacity-90"
             >
               <span>Visit live link</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -102,7 +104,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
       </header>
 
-      <div className="mt-10 space-y-6 leading-relaxed text-neutral-300 [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-neutral-100 [&_li]:ml-5 [&_li]:list-disc [&_p]:text-base [&_strong]:text-neutral-100">
+      <div className="mt-10 space-y-6 leading-relaxed text-fg-secondary [&_a]:text-accent [&_a]:underline [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_p]:text-base [&_strong]:text-fg">
         {mdxEntry ? (
           <MDXRemote source={mdxEntry.content} />
         ) : (

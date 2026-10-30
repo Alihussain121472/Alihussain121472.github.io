@@ -35,12 +35,12 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="space-y-6 rounded-lg border border-neutral-800/80 bg-neutral-900/40 p-6 sm:p-8"
+      className="space-y-6 rounded-xl border border-border bg-surface p-6 shadow-sm sm:p-8"
     >
       <div>
         <label
           htmlFor="name"
-          className="block font-mono text-xs tracking-wider text-neutral-300 uppercase"
+          className="block font-mono text-xs font-semibold tracking-wider text-fg-secondary uppercase"
         >
           Your Name
         </label>
@@ -50,11 +50,11 @@ export function ContactForm() {
           autoComplete="name"
           {...register("name")}
           aria-invalid={Boolean(errors.name)}
-          className="mt-2 w-full rounded-md border border-neutral-800 bg-[#111111] px-4 py-3 text-sm text-neutral-100 placeholder-neutral-500 focus:border-accent focus:outline-none"
+          className="mt-2 w-full rounded-lg border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent focus:outline-none"
           placeholder="Syed Ali Hussain"
         />
         {errors.name && (
-          <p role="alert" className="mt-1.5 text-xs text-red-400">
+          <p role="alert" className="mt-1.5 text-xs font-medium text-red-500">
             {errors.name.message}
           </p>
         )}
@@ -63,7 +63,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="block font-mono text-xs tracking-wider text-neutral-300 uppercase"
+          className="block font-mono text-xs font-semibold tracking-wider text-fg-secondary uppercase"
         >
           Your Email
         </label>
@@ -73,11 +73,11 @@ export function ContactForm() {
           autoComplete="email"
           {...register("email")}
           aria-invalid={Boolean(errors.email)}
-          className="mt-2 w-full rounded-md border border-neutral-800 bg-[#111111] px-4 py-3 text-sm text-neutral-100 placeholder-neutral-500 focus:border-accent focus:outline-none"
+          className="mt-2 w-full rounded-lg border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent focus:outline-none"
           placeholder="you@example.com"
         />
         {errors.email && (
-          <p role="alert" className="mt-1.5 text-xs text-red-400">
+          <p role="alert" className="mt-1.5 text-xs font-medium text-red-500">
             {errors.email.message}
           </p>
         )}
@@ -86,7 +86,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block font-mono text-xs tracking-wider text-neutral-300 uppercase"
+          className="block font-mono text-xs font-semibold tracking-wider text-fg-secondary uppercase"
         >
           Message
         </label>
@@ -95,11 +95,11 @@ export function ContactForm() {
           rows={5}
           {...register("message")}
           aria-invalid={Boolean(errors.message)}
-          className="mt-2 w-full rounded-md border border-neutral-800 bg-[#111111] px-4 py-3 text-sm text-neutral-100 placeholder-neutral-500 focus:border-accent focus:outline-none"
+          className="mt-2 w-full rounded-lg border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent focus:outline-none"
           placeholder="Tell me about your project, research collaboration, or automation workflow..."
         />
         {errors.message && (
-          <p role="alert" className="mt-1.5 text-xs text-red-400">
+          <p role="alert" className="mt-1.5 text-xs font-medium text-red-500">
             {errors.message.message}
           </p>
         )}
@@ -109,10 +109,10 @@ export function ContactForm() {
         <div
           role="status"
           aria-live="polite"
-          className={`rounded-md border px-4 py-3 text-sm ${
+          className={`rounded-lg border px-4 py-3 text-sm font-medium ${
             status.success
-              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
-              : "border-red-500/40 bg-red-500/10 text-red-300"
+              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+              : "border-red-500/40 bg-red-500/10 text-red-600 dark:text-red-300"
           }`}
         >
           {status.message}
@@ -122,7 +122,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 font-mono text-xs font-bold tracking-wider text-[#111111] uppercase transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 font-mono text-xs font-bold tracking-wider text-accent-fg uppercase transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         <Send className="h-3.5 w-3.5" />
         <span>{isSubmitting ? "Sending..." : "Send message"}</span>

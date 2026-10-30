@@ -31,21 +31,21 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-neutral-800/80 bg-[#111111]/85 backdrop-blur-md transition-colors dark:border-neutral-800/80 dark:bg-[#111111]/85">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <header className="glass-nav sticky top-0 z-40 border-b border-border transition-colors">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4">
         <Link
           href="/#intro"
           aria-label={`${profile.name} — Back to intro`}
-          className="group inline-flex items-center gap-2 font-mono text-sm font-bold tracking-wider uppercase transition-colors hover:text-accent"
+          className="group inline-flex shrink-0 items-center gap-2.5 font-mono text-sm font-bold tracking-wider text-fg uppercase transition-colors hover:text-accent"
         >
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded border border-neutral-700 bg-neutral-900 font-mono text-xs text-accent transition-colors group-hover:border-accent">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface font-mono text-xs font-bold text-accent transition-colors group-hover:border-accent">
             SAH
           </span>
-          <span className="hidden sm:inline">{profile.name}</span>
+          <span className="hidden md:inline">{profile.name}</span>
         </Link>
 
-        <nav aria-label="Primary navigation" className="flex items-center gap-5">
-          <ul className="flex flex-wrap items-center gap-4 text-sm font-medium text-neutral-300 sm:gap-6">
+        <nav aria-label="Primary navigation" className="flex items-center gap-3 sm:gap-5">
+          <ul className="flex flex-wrap items-center gap-3 text-xs font-medium text-fg-secondary sm:gap-5 sm:text-sm">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
@@ -58,14 +58,14 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden items-center gap-2 border-l border-neutral-800 pl-4 md:flex">
+          <div className="hidden items-center gap-1.5 border-l border-border pl-4 lg:flex">
             {socialEntries.map(({ key, url, Icon }) =>
               isTodo(url) ? (
                 <span
                   key={key}
                   title={`${key}: TODO (update in src/data/portfolio.ts)`}
                   aria-label={`${key} link placeholder (TODO)`}
-                  className="inline-flex h-8 w-8 cursor-not-allowed items-center justify-center rounded text-neutral-500 opacity-60"
+                  className="inline-flex h-8 w-8 cursor-not-allowed items-center justify-center rounded-md text-fg-muted opacity-60"
                 >
                   <Icon className="h-4 w-4" />
                 </span>
@@ -76,7 +76,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={key}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded text-neutral-400 transition-colors hover:text-accent"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-md text-fg-secondary transition-colors hover:bg-subtle hover:text-accent"
                 >
                   <Icon className="h-4 w-4" />
                 </a>

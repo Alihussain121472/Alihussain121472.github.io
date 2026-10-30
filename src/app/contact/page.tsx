@@ -1,4 +1,4 @@
-// Contact page (/contact) with validated React Hook Form + Resend Server Action and social placeholders.
+// Contact page (/contact) with validated React Hook Form + Resend Server Action and social links.
 import React from "react";
 import type { Metadata } from "next";
 import { profile, services } from "@/data/portfolio";
@@ -21,20 +21,18 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-20">
+    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
       <Reveal>
-        <p className="font-mono text-xs tracking-widest text-accent uppercase">
+        <p className="font-mono text-xs font-semibold tracking-widest text-accent uppercase">
           Say Hello
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
           Contact
         </h1>
-        <p className="mt-4 max-w-2xl text-base text-neutral-300">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-fg-secondary">
           Available for{" "}
-          <strong className="text-neutral-100">
-            {services.join(" & ")}
-          </strong>{" "}
-          as well as machine learning research collaborations.
+          <strong className="text-fg">{services.join(" & ")}</strong> as well as
+          machine learning research collaborations.
         </p>
       </Reveal>
 
@@ -47,20 +45,20 @@ export default function ContactPage() {
 
         <aside className="space-y-6 md:col-span-5">
           <Reveal delay={0.12}>
-            <div className="rounded-lg border border-neutral-800/80 bg-neutral-900/40 p-6">
-              <h2 className="font-mono text-xs tracking-widest text-accent uppercase">
+            <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
+              <h2 className="font-mono text-xs font-bold tracking-widest text-accent uppercase">
                 Direct Links &amp; Socials
               </h2>
               <dl className="mt-4 space-y-3 text-sm">
                 {socialRows.map((row) => (
                   <div
                     key={row.label}
-                    className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-800/60 pb-2.5 last:border-b-0 last:pb-0"
+                    className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-2.5 last:border-b-0 last:pb-0"
                   >
-                    <dt className="font-mono text-xs text-neutral-400">
+                    <dt className="font-mono text-xs font-medium text-fg-muted">
                       {row.label}
                     </dt>
-                    <dd>
+                    <dd className="truncate max-w-[200px]">
                       {isTodo(row.value) ? (
                         <TodoBadge value={row.value} label={row.label} />
                       ) : (
@@ -72,9 +70,11 @@ export default function ContactPage() {
                           }
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-accent underline underline-offset-4"
+                          className="font-medium text-accent underline underline-offset-4"
                         >
-                          {row.value}
+                          {row.label === "Email"
+                            ? row.value
+                            : row.value.replace(/^https?:\/\/(www\.)?/, "")}
                         </a>
                       )}
                     </dd>

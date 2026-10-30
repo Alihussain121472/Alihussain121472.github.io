@@ -1,4 +1,4 @@
-// Configures Tailwind CSS theme tokens, fonts, and class-based dark mode.
+// Configures Tailwind CSS semantic theme tokens, fonts, and class-based dark/light mode.
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -7,17 +7,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: {
-          DEFAULT: "#111111",
-          light: "#fafafa",
+        canvas: "var(--bg-canvas)",
+        surface: "var(--bg-surface)",
+        subtle: "var(--bg-subtle)",
+        stage: "var(--bg-stage)",
+        border: {
+          DEFAULT: "var(--border-subtle)",
+          strong: "var(--border-strong)",
         },
-        surface: {
-          DEFAULT: "#181818",
-          light: "#ffffff",
+        fg: {
+          DEFAULT: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          muted: "var(--text-muted)",
         },
         accent: {
-          DEFAULT: "#00e5ff",
-          muted: "#0891b2",
+          DEFAULT: "var(--accent)",
+          fg: "var(--accent-fg)",
+          soft: "var(--accent-soft)",
         },
       },
       fontFamily: {

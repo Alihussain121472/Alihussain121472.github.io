@@ -16,21 +16,21 @@ export default function ArticlesPage() {
   const articles = getAllArticles();
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-20">
+    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
       <Reveal>
-        <p className="font-mono text-xs tracking-widest text-accent uppercase">
+        <p className="font-mono text-xs font-semibold tracking-widest text-accent uppercase">
           Writing &amp; Notes
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg sm:text-5xl">
           Articles
         </h1>
-        <p className="mt-4 max-w-2xl text-base text-neutral-300">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-fg-secondary">
           Notes on building AI automation workflows with n8n, NovaBrief Tech,
           and machine learning research.
         </p>
       </Reveal>
 
-      <ol className="mt-14 divide-y divide-neutral-800/80">
+      <ol className="mt-14 divide-y divide-border">
         {articles.map((article, idx) => {
           const num = String(idx + 1).padStart(2, "0");
           return (
@@ -38,8 +38,8 @@ export default function ArticlesPage() {
               <Reveal delay={idx * 0.06}>
                 <article className="group flex flex-col justify-between gap-4 sm:flex-row sm:items-baseline">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-3 font-mono text-xs text-neutral-400">
-                      <span className="text-accent">{num}</span>
+                    <div className="flex items-center gap-3 font-mono text-xs font-medium text-fg-muted">
+                      <span className="font-bold text-accent">{num}</span>
                       <span>·</span>
                       <time dateTime={article.frontmatter.date}>
                         {article.frontmatter.date}
@@ -48,7 +48,7 @@ export default function ArticlesPage() {
                       <span>{article.frontmatter.readTime}</span>
                     </div>
 
-                    <h2 className="text-2xl font-semibold tracking-tight">
+                    <h2 className="text-2xl font-bold tracking-tight text-fg">
                       <Link
                         href={`/articles/${article.slug}`}
                         className="transition-colors group-hover:text-accent"
@@ -57,14 +57,14 @@ export default function ArticlesPage() {
                       </Link>
                     </h2>
 
-                    <p className="max-w-2xl text-sm text-neutral-300">
+                    <p className="max-w-2xl text-sm leading-relaxed text-fg-secondary">
                       {article.frontmatter.description}
                     </p>
                   </div>
 
                   <Link
                     href={`/articles/${article.slug}`}
-                    className="inline-flex shrink-0 items-center gap-1.5 font-mono text-xs text-accent"
+                    className="inline-flex shrink-0 items-center gap-1.5 font-mono text-xs font-semibold text-accent"
                   >
                     <span>Read article</span>
                     <ArrowRight className="h-3.5 w-3.5" />
