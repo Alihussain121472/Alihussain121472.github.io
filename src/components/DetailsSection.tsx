@@ -25,15 +25,18 @@ export function DetailsSection() {
         <div className="grid gap-10 md:grid-cols-12 md:items-start">
           <div className="space-y-6 md:col-span-7">
             <div>
-              <p className="font-mono text-xs font-semibold tracking-wide text-accent">
+              <p className="w-fit rounded bg-canvas px-1 font-mono text-xs font-semibold tracking-wide text-accent">
                 About
               </p>
-              <h2 id="about-heading" className="type-h2 mt-2 text-fg">
+              <h2
+                id="about-heading"
+                className="type-h2 mt-2 w-fit rounded bg-canvas px-1 text-fg"
+              >
                 Hi there <span aria-hidden="true">👋🏼</span>
               </h2>
             </div>
 
-            <p className="type-body text-fg-secondary">
+            <p className="type-body rounded bg-canvas px-1 text-fg-secondary">
               I am a <strong className="text-fg">{education.degree}</strong>{" "}
               student at{" "}
               <strong className="text-fg">{education.school}</strong>. I founded{" "}

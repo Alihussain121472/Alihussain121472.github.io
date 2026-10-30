@@ -44,18 +44,21 @@ export function ResearchSection() {
       <Reveal>
         <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
           <div>
-            <p className="font-mono text-xs font-semibold tracking-wide text-accent">
+            <p className="w-fit rounded bg-canvas px-1 font-mono text-xs font-semibold tracking-wide text-accent">
               Publications &amp; Internship
             </p>
-            <h2 id="research-heading" className="type-h2 mt-2 text-fg">
+            <h2
+              id="research-heading"
+              className="type-h2 mt-2 w-fit rounded bg-canvas px-1 text-fg"
+            >
               Research
             </h2>
-            <p className="type-body mt-2 text-fg-secondary">
+            <p className="type-body mt-2 w-fit rounded bg-canvas px-1 text-fg-secondary">
               My published papers, AIEYS research role, and new studies in
               progress.
             </p>
           </div>
-          <span className="font-mono text-xs font-medium text-fg-muted">
+          <span className="w-fit rounded bg-canvas px-1 font-mono text-xs font-medium text-fg-muted">
             Published · Internship · Preprint
           </span>
         </div>

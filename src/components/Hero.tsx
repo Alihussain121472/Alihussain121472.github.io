@@ -13,15 +13,18 @@ export function Hero() {
       className="mx-auto flex max-w-5xl flex-col justify-center px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <p className="font-mono text-xs font-semibold tracking-wide text-accent">
+        <p className="w-fit rounded bg-canvas px-1 font-mono text-xs font-semibold tracking-wide text-accent">
           {profile.roleLine}
         </p>
 
-        <h1 id="hero-heading" className="type-display mt-4 text-fg">
+        <h1
+          id="hero-heading"
+          className="type-display mt-4 w-fit rounded bg-canvas px-1 text-fg"
+        >
           {profile.name}
         </h1>
 
-        <p className="type-body mt-6 text-fg-secondary">
+        <p className="type-body mt-6 w-fit rounded bg-canvas px-1 text-fg-secondary">
           {profile.valueStatement}
         </p>
 
