@@ -8,6 +8,7 @@ import { isTodo } from "@/components/TodoBadge";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { A11yExtensionGuard } from "@/components/A11yExtensionGuard";
+import { ConstellationBackground } from "@/components/ConstellationBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -124,7 +125,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="flex min-h-screen flex-col font-sans selection:bg-accent selection:text-accent-fg">
+      <body className="relative flex min-h-screen flex-col font-sans selection:bg-accent selection:text-accent-fg">
+        <ConstellationBackground />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-bold focus:text-accent-fg"
@@ -132,7 +134,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Navbar />
-        <main id="main-content" className="flex-1">
+        <main id="main-content" className="relative z-10 flex-1">
           {children}
         </main>
         <Footer />

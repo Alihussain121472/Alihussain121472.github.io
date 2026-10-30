@@ -18,6 +18,14 @@ html.dark {
   --accent: #38bdf8;
   --accent-fg: #090d14;
   --accent-soft: #112233;
+  --constellation-glow-1: #112840;
+  --constellation-glow-2: #0e1f33;
+  --constellation-node-1: #38bdf8;
+  --constellation-node-2: #0ea5e9;
+  --constellation-node-3: #0369a1;
+  --constellation-edge-1: #1e4263;
+  --constellation-edge-2: #17324d;
+  --constellation-edge-3: #12263a;
 }
 
 html.light {
@@ -34,6 +42,14 @@ html.light {
   --accent: #0369a1;
   --accent-fg: #ffffff;
   --accent-soft: #e0f2fe;
+  --constellation-glow-1: #dff0fb;
+  --constellation-glow-2: #eaf5fc;
+  --constellation-node-1: #1d75ad;
+  --constellation-node-2: #68aad0;
+  --constellation-node-3: #95c5e0;
+  --constellation-edge-1: #cbe3f2;
+  --constellation-edge-2: #daebf7;
+  --constellation-edge-3: #e7f2fa;
 }
 
 @layer base {
@@ -76,6 +92,62 @@ html.light {
 
 .glass-nav {
   background-color: var(--bg-canvas);
+}
+
+/* Constellation network background elements (opaque CSS variables for deterministic WCAG 2.2 AA contrast) */
+.constellation-glow-primary {
+  background-color: var(--constellation-glow-1);
+}
+
+.constellation-glow-secondary {
+  background-color: var(--constellation-glow-2);
+}
+
+.constellation-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+.constellation-node-primary {
+  width: 7px;
+  height: 7px;
+  background-color: var(--constellation-node-1);
+}
+
+.constellation-node-secondary {
+  width: 5px;
+  height: 5px;
+  background-color: var(--constellation-node-2);
+}
+
+.constellation-node-micro {
+  width: 3.5px;
+  height: 3.5px;
+  background-color: var(--constellation-node-3);
+}
+
+.constellation-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  transform-origin: 0 50%;
+  will-change: transform, width;
+}
+
+.constellation-edge-strong {
+  background-color: var(--constellation-edge-1);
+}
+
+.constellation-edge-mid {
+  background-color: var(--constellation-edge-2);
+}
+
+.constellation-edge-faint {
+  background-color: var(--constellation-edge-3);
 }
 
 /* Prevent injected browser extension widgets from violating WCAG 4.1.2 / positive tabindex or obscuring sticky nav links */

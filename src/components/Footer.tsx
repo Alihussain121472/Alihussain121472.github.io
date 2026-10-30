@@ -7,7 +7,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-surface py-10">
+    <footer className="relative z-10 border-t border-border bg-surface py-10">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 font-mono text-xs text-fg-muted sm:flex-row sm:px-6">
         <p>
           &copy; {currentYear} {profile.name}. Built with Next.js &amp;
