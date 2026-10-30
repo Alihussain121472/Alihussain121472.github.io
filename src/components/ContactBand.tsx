@@ -1,8 +1,9 @@
-// Contact band (#contact-band) at the bottom of the home page with availability, location, and direct CTAs.
+// Contact band (#contact-band) at the bottom of the home page with direct email app launcher and contact form link.
 import React from "react";
 import Link from "next/link";
 import { Mail, MessageSquare } from "lucide-react";
 import { profile } from "@/data/portfolio";
+import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { TodoBadge } from "@/components/TodoBadge";
 import { Reveal } from "@/components/Reveal";
 
@@ -30,19 +31,16 @@ export function ContactBand() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 shrink-0">
-            <Link href="/contact" className="btn-primary">
-              <MessageSquare className="h-4 w-4" />
-              <span>Contact me</span>
-            </Link>
+          <div className="flex shrink-0 flex-wrap items-center gap-4">
+            <DirectEmailLink className="btn-primary">
+              <Mail className="h-4 w-4" />
+              <span>Send me an email</span>
+            </DirectEmailLink>
 
-            <a
-              href={`mailto:${profile.socials.email}`}
-              className="btn-secondary"
-            >
-              <Mail className="h-4 w-4 text-accent" />
-              <span>Send an email</span>
-            </a>
+            <Link href="/contact" className="btn-secondary">
+              <MessageSquare className="h-4 w-4 text-accent" />
+              <span>Use contact form</span>
+            </Link>
           </div>
         </div>
       </Reveal>

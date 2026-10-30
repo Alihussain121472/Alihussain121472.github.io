@@ -1,8 +1,8 @@
-// Hero section (#intro) with role line, value statement, and "Contact me" + "Download CV" CTAs.
+// Hero section (#intro) with role line, value statement, direct email launcher, and Download CV button.
 import React from "react";
-import Link from "next/link";
 import { Download, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
+import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { Reveal } from "@/components/Reveal";
 
 export function Hero() {
@@ -26,10 +26,10 @@ export function Hero() {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <Link href="/contact" className="btn-primary">
+          <DirectEmailLink className="btn-primary">
             <Mail className="h-4 w-4" />
             <span>Contact me</span>
-          </Link>
+          </DirectEmailLink>
 
           <a
             href={profile.cvUrl}

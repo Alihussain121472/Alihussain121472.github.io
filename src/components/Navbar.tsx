@@ -1,8 +1,9 @@
-// Sticky top navigation with 44px tap targets, accessible icon labels, and theme toggle.
+// Sticky top navigation with 44px tap targets, direct email app launcher, social links, and theme toggle.
 import React from "react";
 import Link from "next/link";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
+import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
@@ -15,15 +16,10 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const socialEntries = [
+  const externalSocials = [
     { label: "GitHub profile", url: profile.socials.github, Icon: Github },
     { label: "LinkedIn profile", url: profile.socials.linkedin, Icon: Linkedin },
     { label: "X (Twitter) profile", url: profile.socials.x, Icon: Twitter },
-    {
-      label: "Send email",
-      url: `mailto:${profile.socials.email}`,
-      Icon: Mail,
-    },
   ];
 
   return (
@@ -57,21 +53,26 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden items-center gap-2 border-l border-border pl-4 lg:flex">
-            {socialEntries.map(({ label, url, Icon }) => (
+          <div className="flex items-center gap-1.5 border-l border-border pl-2 sm:gap-2 sm:pl-4">
+            {externalSocials.map(({ label, url, Icon }) => (
               <a
                 key={label}
                 href={url}
-                target={url.startsWith("mailto:") ? undefined : "_blank"}
-                rel={
-                  url.startsWith("mailto:") ? undefined : "noopener noreferrer"
-                }
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={label}
-                className="btn-icon"
+                className="btn-icon hidden sm:inline-flex"
               >
                 <Icon className="h-4 w-4" />
               </a>
             ))}
+
+            <DirectEmailLink
+              ariaLabel="Open email app to message Syed Ali Hussain"
+              className="btn-icon"
+            >
+              <Mail className="h-4 w-4" />
+            </DirectEmailLink>
           </div>
 
           <ThemeToggle />

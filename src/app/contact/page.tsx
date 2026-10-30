@@ -1,8 +1,10 @@
-// Contact page (/contact) with separate Meta/OG/Twitter tags, canonical URL, clear social labels, and Resend form.
+// Contact page (/contact) with direct email app launcher, clear social labels, and Resend form.
 import React from "react";
 import type { Metadata } from "next";
+import { Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
 import { ContactForm } from "@/components/ContactForm";
+import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
 import { Reveal } from "@/components/Reveal";
 
@@ -32,7 +34,7 @@ export default function ContactPage() {
     {
       label: "Email",
       value: profile.socials.email,
-      displayLabel: "Send Email",
+      displayLabel: "Send Email (Open App)",
     },
     {
       label: "GitHub",
@@ -72,6 +74,13 @@ export default function ContactPage() {
           {profile.availability}
         </p>
 
+        <div className="mt-6">
+          <DirectEmailLink className="btn-primary">
+            <Mail className="h-4 w-4" />
+            <span>Open Email App ({profile.socials.email})</span>
+          </DirectEmailLink>
+        </div>
+
         <div className="mt-10 grid gap-8 md:grid-cols-12">
           <div className="md:col-span-7">
             <ContactForm />
@@ -92,19 +101,15 @@ export default function ContactPage() {
                     <dd>
                       {isTodo(row.value) ? (
                         <TodoBadge value={row.value} label={row.label} />
+                      ) : row.label === "Email" ? (
+                        <DirectEmailLink className="inline-flex min-h-[44px] items-center font-medium text-accent underline underline-offset-4">
+                          {row.displayLabel}
+                        </DirectEmailLink>
                       ) : (
                         <a
-                          href={
-                            row.label === "Email"
-                              ? `mailto:${row.value}`
-                              : row.value
-                          }
-                          target={row.label === "Email" ? undefined : "_blank"}
-                          rel={
-                            row.label === "Email"
-                              ? undefined
-                              : "noopener noreferrer"
-                          }
+                          href={row.value}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="inline-flex min-h-[44px] items-center font-medium text-accent underline underline-offset-4"
                         >
                           {row.displayLabel}

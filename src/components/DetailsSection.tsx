@@ -1,14 +1,15 @@
-// About section (#about) with first-person intro, dated experience & education, services, availability, and optimized profile image.
+// About section (#about) with first-person intro, dated experience & education, services, direct email button, and profile photo.
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Sparkles } from "lucide-react";
+import { Mail, MapPin, Sparkles } from "lucide-react";
 import {
   education,
   experience,
   profile,
   services,
 } from "@/data/portfolio";
+import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
 import { Reveal } from "@/components/Reveal";
 
@@ -114,6 +115,13 @@ export function DetailsSection() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="pt-2">
+              <DirectEmailLink className="btn-primary">
+                <Mail className="h-4 w-4" />
+                <span>Send me an email</span>
+              </DirectEmailLink>
             </div>
           </div>
 
