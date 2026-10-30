@@ -1,4 +1,4 @@
-// Interactive Certifications & Credentials showcase (#certifications) with category filtering and preview modal.
+// Interactive Certifications & Honors showcase (#certifications) — strictly course, conference, and technical credentials.
 "use client";
 
 import React, { useState } from "react";
@@ -10,8 +10,8 @@ import { Reveal } from "@/components/Reveal";
 const categories = [
   "All",
   "AI & Computer Science",
-  "Research & Conferences",
   "Systems & Web",
+  "Conferences & Honors",
 ] as const;
 
 export function CertificationsSection() {

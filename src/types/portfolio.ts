@@ -33,11 +33,25 @@ export interface PublishedPaper {
   venue: string;
   doi: string;
   url: string;
+  pdfUrl: string;
+  certificateUrl: string;
+}
+
+export interface ResearchOfferLetter {
+  title: string;
+  org: string;
+  start: string;
+  term: string;
+  referenceId: string;
+  previewUrl: string;
+  summary: string;
 }
 
 export interface ResearchData {
   published: PublishedPaper;
+  offerLetter: ResearchOfferLetter;
   ongoing: string;
+  ongoingPdfUrl?: string;
 }
 
 export interface ExperienceItem {
@@ -57,7 +71,7 @@ export interface CertificateItem {
   title: string;
   issuer: string;
   issueDate: string;
-  category: "AI & Computer Science" | "Research & Conferences" | "Systems & Web";
+  category: "AI & Computer Science" | "Conferences & Honors" | "Systems & Web";
   previewUrl: string;
   credentialId?: string;
   skills: string[];

@@ -66,9 +66,25 @@ export const research: ResearchData = {
     venue: "IJICT, Vol. 9, Issue 1, April 2026",
     doi: "10.31987/ijict.9.1.371",
     url: "https://www.ijict.edu.iq/index.php/ijict/article/view/371",
+    pdfUrl:
+      "/assets/papers/Detection-of-Brute-Force-Login-Attempts-Using-Machine-Learning.pdf",
+    certificateUrl:
+      "/assets/images/certificates/szabist-ijict-ml-research-publication.jpg",
+  },
+  offerLetter: {
+    title: "Research Intern Offer Letter",
+    org: "AI-Explain You Science (AIEYS)",
+    start: "15 Oct 2026",
+    term: "One year",
+    referenceId: "Ref: AIEYS-ADMIN-1001",
+    previewUrl: "/assets/images/certificates/aieys-research-intern-offer-letter.jpg",
+    summary:
+      "Official one-year Research Intern appointment at AI-Explain You Science (AIEYS), conducting applied machine learning research and scientific publications.",
   },
   ongoing:
     "More papers in progress with Azerbaijan University of Architecture and Construction",
+  ongoingPdfUrl:
+    "/assets/papers/Swarm-Intelligence-tuning-of-PID-Position-Controllers-for-a-dual-axis-Solar-tracker.pdf",
 };
 
 export const experience: ExperienceItem[] = [
@@ -85,48 +101,10 @@ export const education: EducationData = {
   school: "SZABIST Islamabad",
 };
 
+// Certifications strictly contains course, conference, and technical certificates (Research paper & Research offer letter live in `research`).
 export const certifications: CertificateItem[] = [
   {
     id: "cert-1",
-    title: "Research Intern Offer Letter",
-    issuer: "AI-Explain You Science (AIEYS)",
-    issueDate: "15 Oct 2026",
-    category: "Research & Conferences",
-    previewUrl: "/assets/images/certificates/aieys-research-intern-offer-letter.jpg",
-    credentialId: "Ref: AIEYS-ADMIN-1001",
-    skills: ["Applied ML Research", "Scientific Communication", "Peer Review"],
-  },
-  {
-    id: "cert-2",
-    title: "SZABIST — IJICT ML Research Publication",
-    issuer: "Iraqi Journal of ICT & SZABIST",
-    issueDate: "Apr 2026",
-    category: "Research & Conferences",
-    previewUrl: "/assets/images/certificates/szabist-ijict-ml-research-publication.jpg",
-    credentialId: "DOI: 10.31987/ijict.9.1.371",
-    skills: ["Supervised Learning", "SVM", "PCA", "Cybersecurity"],
-  },
-  {
-    id: "cert-3",
-    title: "AI Conference in Germany — Certificate",
-    issuer: "AIEYS & European Scientific Forum",
-    issueDate: "Sep 2026",
-    category: "Research & Conferences",
-    previewUrl: "/assets/images/certificates/Certificate of AI Confrence in Germany .jpeg",
-    skills: ["International Research", "Generative AI", "Scientific Presentation"],
-  },
-  {
-    id: "cert-4",
-    title: "AI Conference in Germany — Participation",
-    issuer: "AIEYS & European Scientific Forum",
-    issueDate: "Sep 2026",
-    category: "Research & Conferences",
-    previewUrl:
-      "/assets/images/certificates/Certificate of participation in AI Confrence in Germany.jpeg",
-    skills: ["AI Symposium", "Academic Networking", "Research Exchange"],
-  },
-  {
-    id: "cert-5",
     title: "Harvard CS50P: Intro to Programming with Python",
     issuer: "Harvard University (David J. Malan)",
     issueDate: "Aug 2026",
@@ -135,7 +113,7 @@ export const certifications: CertificateItem[] = [
     skills: ["Object-Oriented Python", "Unit Testing", "Algorithms", "File I/O"],
   },
   {
-    id: "cert-6",
+    id: "cert-2",
     title: "Google / Coursera Crash Course on Python",
     issuer: "Google",
     issueDate: "Nov 2025",
@@ -144,7 +122,7 @@ export const certifications: CertificateItem[] = [
     skills: ["Python Data Structures", "Automation Scripting", "Modularity"],
   },
   {
-    id: "cert-7",
+    id: "cert-3",
     title: "Cisco Introduction to Modern AI",
     issuer: "Cisco Networking Academy",
     issueDate: "Jan 2026",
@@ -153,7 +131,7 @@ export const certifications: CertificateItem[] = [
     skills: ["Neural Networks", "Machine Learning Foundations", "AI Ethics"],
   },
   {
-    id: "cert-8",
+    id: "cert-4",
     title: "AIEYS AI-Enhanced Teaching Certificate",
     issuer: "AI-Explain You Science (AIEYS)",
     issueDate: "Apr 2026",
@@ -162,7 +140,7 @@ export const certifications: CertificateItem[] = [
     skills: ["AI Curriculum", "Interactive Instruction", "Mentoring"],
   },
   {
-    id: "cert-9",
+    id: "cert-5",
     title: "Google Technical Support Fundamentals",
     issuer: "Google / Coursera",
     issueDate: "Nov 2025",
@@ -171,7 +149,7 @@ export const certifications: CertificateItem[] = [
     skills: ["TCP/IP Networking", "Linux CLI", "System Troubleshooting"],
   },
   {
-    id: "cert-10",
+    id: "cert-6",
     title: "AIEYS Web Developer Internship Certificate",
     issuer: "AI-Explain You Science (AIEYS)",
     issueDate: "Apr 2026",
@@ -180,11 +158,30 @@ export const certifications: CertificateItem[] = [
     skills: ["Frontend Architecture", "Responsive UI", "API Integration"],
   },
   {
-    id: "cert-11",
+    id: "cert-7",
+    title: "AI Conference in Germany — Certificate",
+    issuer: "AIEYS & European Scientific Forum",
+    issueDate: "Sep 2026",
+    category: "Conferences & Honors",
+    previewUrl: "/assets/images/certificates/Certificate of AI Confrence in Germany .jpeg",
+    skills: ["International Conference", "Generative AI", "Scientific Presentation"],
+  },
+  {
+    id: "cert-8",
+    title: "AI Conference in Germany — Participation",
+    issuer: "AIEYS & European Scientific Forum",
+    issueDate: "Sep 2026",
+    category: "Conferences & Honors",
+    previewUrl:
+      "/assets/images/certificates/Certificate of participation in AI Confrence in Germany.jpeg",
+    skills: ["AI Symposium", "Academic Networking", "Research Exchange"],
+  },
+  {
+    id: "cert-9",
     title: "City Science College Achievement Certificate",
     issuer: "City Science College",
     issueDate: "2024",
-    category: "Research & Conferences",
+    category: "Conferences & Honors",
     previewUrl: "/assets/images/certificates/city-science-college-achievement.jpg",
     skills: ["Academic Excellence", "STEM Foundations"],
   },
