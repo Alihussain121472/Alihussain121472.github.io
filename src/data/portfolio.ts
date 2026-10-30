@@ -14,9 +14,9 @@ export const profile: Profile = {
   roles: ["AI Developer", "Researcher", "Founder"],
   roleLine: "AI Developer · Researcher · Founder",
   valueStatement:
-    "I build AI agents, n8n automations, and machine learning models for security.",
+    "I build AI agents and n8n workflows. I also train machine learning models for cyber safety.",
   intro:
-    "I'm a BS Artificial Intelligence student at SZABIST Islamabad and the founder of NovaBrief Tech, a daily AI briefing for students. I'm also a Research Intern at AIEYS, working on machine learning models and papers, and I build AI agents with n8n.",
+    "I am a BS in AI student at SZABIST Islamabad. I founded NovaBrief Tech, a daily AI briefing for students. I also work as a Research Intern at AIEYS on machine learning models and papers. I build AI agents with n8n.",
   metaDescription:
     "Syed Ali Hussain — AI Developer, Researcher at AIEYS, and Founder of NovaBrief Tech. Building AI agents with n8n and published ML security research.",
   ogDescription:
@@ -25,7 +25,7 @@ export const profile: Profile = {
     "AI Developer, Researcher, and Founder of NovaBrief Tech. Building AI agents with n8n and publishing machine learning research for security.",
   location: "Islamabad, Pakistan · Remote (TODO: confirm relocation preference)",
   availability:
-    "Open to website development, AI agent and n8n automation projects, and machine learning research collaborations.",
+    "I am open to new work. I build websites, AI agents with n8n, and joint machine learning studies.",
   cvUrl: "/cv.pdf",
   site: "https://alihussain121472-github-io.vercel.app",
   avatar: "/assets/images/syed-ali.jpg",
@@ -52,7 +52,7 @@ export const projects: Project[] = [
       "NovaBrief Tech case study — automated daily AI briefing for students using Next.js, Llama 3.3, and Resend.",
     problem:
       "Students struggle to track fast-moving AI developments, tech updates, and academic opportunities across dozens of scattered sources.",
-    role: "Founder & Full-Stack Developer — designed the ingestion pipeline, summarization prompts, database schema, and web delivery.",
+    role: "Founder and Lead Builder. I built the news feed, AI prompts, database, and email system.",
     stack: ["Next.js", "TypeScript", "PostgreSQL", "Llama 3.3", "Resend"],
     howItWorks: [
       "Scheduled collectors fetch daily tech news, AI updates, and student opportunities from curated feeds.",
@@ -85,7 +85,7 @@ export const projects: Project[] = [
       "Building AI agents with n8n for automated daily LinkedIn publishing and email reply workflows.",
     problem:
       "Publishing daily social updates and answering repetitive reader emails manually took hours away from core product and research work.",
-    role: "AI Automation Engineer — designed, tested, and maintained the n8n workflows, LLM prompts, and webhook integrations.",
+    role: "AI Builder. I built and tested the n8n workflows, AI prompts, and app links.",
     stack: ["n8n", "LLMs", "REST APIs", "Webhooks", "JSON Schema"],
     howItWorks: [
       "A scheduled trigger reads the latest NovaBrief Tech edition and extracts key student takeaways.",
@@ -115,7 +115,7 @@ export const projects: Project[] = [
       "Published ML security research in IJICT: detecting brute-force login attempts with 97.24% SVM classification accuracy.",
     problem:
       "Automated brute-force login attacks evade static threshold rules, requiring accurate classification of network authentication traffic.",
-    role: "Co-Author & ML Researcher — performed feature selection, trained and evaluated classifiers, and co-wrote the manuscript.",
+    role: "Co-Author and ML Researcher. I picked the data features, trained the models, and co-wrote the paper.",
     stack: ["Python", "Scikit-Learn", "SVM", "Gaussian Naive Bayes", "PCA"],
     howItWorks: [
       "Network authentication logs are preprocessed, normalized, and reduced using Principal Component Analysis (PCA).",
@@ -149,7 +149,7 @@ export const projects: Project[] = [
       "DHA Multan Real Estate AI Agent — conversational assistant in progress for property investors and dealers.",
     problem:
       "Real estate investors and dealers in DHA Multan need quick, accurate answers on sector pricing, plot inventory, and buyer inquiries.",
-    role: "AI Developer — building the sector knowledge base, conversational agent workflow, and dealer lead routing.",
+    role: "AI Builder. I am building the sector data base, chat agent flow, and dealer lead routing.",
     stack: ["AI Agents", "n8n", "LLMs", "Vector Search", "Next.js"],
     howItWorks: [
       "User inquiries from chat channels are parsed to identify plot sector, budget, and transaction intent.",
@@ -221,9 +221,9 @@ export const experience: ExperienceItem[] = [
 ];
 
 export const education: EducationData = {
-  degree: "BS Artificial Intelligence",
+  degree: "BS in AI",
   school: "SZABIST Islamabad",
-  period: "TODO: add enrollment – expected graduation years",
+  period: "TODO: add start and end years",
 };
 
 // Sorted newest first: 6 most relevant featured cards + 2 quieter "other" cards.

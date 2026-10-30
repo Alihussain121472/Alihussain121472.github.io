@@ -34,10 +34,9 @@ export function DetailsSection() {
             </div>
 
             <p className="type-body text-fg-secondary">
-              I&apos;m a{" "}
-              <strong className="text-fg">{education.degree}</strong> student at{" "}
-              <strong className="text-fg">{education.school}</strong> and the
-              founder of{" "}
+              I am a <strong className="text-fg">{education.degree}</strong>{" "}
+              student at{" "}
+              <strong className="text-fg">{education.school}</strong>. I founded{" "}
               <a
                 href="https://novabrief.tech"
                 target="_blank"
@@ -46,15 +45,14 @@ export function DetailsSection() {
               >
                 NovaBrief Tech
               </a>
-              , a daily AI briefing for students. I&apos;m also a{" "}
+              , a daily AI briefing for students. I also work as a{" "}
               <Link
                 href="/#research"
                 className="font-medium text-accent underline decoration-accent/60 underline-offset-4 transition-colors hover:decoration-accent"
               >
                 Research Intern at AIEYS
-              </Link>
-              , working on machine learning models and papers, and I build AI
-              agents with n8n.
+              </Link>{" "}
+              on machine learning models and papers. I build AI agents with n8n.
             </p>
 
             <div className="grid gap-6 pt-2 sm:grid-cols-2">
@@ -76,7 +74,7 @@ export function DetailsSection() {
                   ))}
                   <li className="border-t border-border pt-3">
                     <div className="font-semibold text-fg">
-                      {education.degree} · {education.school}
+                      {education.degree} at {education.school}.
                     </div>
                     <div className="mt-1">
                       {isTodo(education.period) ? (
