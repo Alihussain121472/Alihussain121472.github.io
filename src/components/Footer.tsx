@@ -1,8 +1,7 @@
-// Sticky auto-hiding footer component that hides while scrolling on mobile, tablet, and desktop devices.
+// Sticky auto-hiding footer component with dynamic year and direct social/email links.
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import { profile } from "@/data/portfolio";
 import { DirectEmailLink } from "@/components/DirectEmailLink";
@@ -94,21 +93,6 @@ export function Footer() {
             >
               <Mail className="h-4 w-4" />
             </DirectEmailLink>
-          </div>
-
-          <div className="site-footer__meta-links">
-            <Link
-              href="/uses"
-              className="inline-flex min-h-[44px] items-center px-2 font-medium text-fg-secondary transition-colors hover:text-accent"
-            >
-              Uses
-            </Link>
-            <Link
-              href="/humans.txt"
-              className="inline-flex min-h-[44px] items-center px-2 font-medium text-fg-secondary transition-colors hover:text-accent"
-            >
-              Humans.txt
-            </Link>
           </div>
         </div>
       </div>
