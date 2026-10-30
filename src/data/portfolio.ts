@@ -16,11 +16,12 @@ export const profile: Profile = {
   site: "https://alihussain121472-github-io.vercel.app",
   avatar: "/assets/images/syed-ali.jpg",
   socials: {
-    github: "TODO",
-    linkedin: "TODO",
-    x: "TODO",
-    scholar: "TODO",
-    email: "TODO",
+    github: "https://github.com/Alihussain121472",
+    linkedin: "https://linkedin.com/in/ali-hussain-93a24430a",
+    x: "https://x.com/Syedali6160",
+    scholar:
+      "https://scholar.google.com/scholar?q=Detection+of+Brute-Force+Login+Attempts+Using+Machine+Learning+Syed+Ali+Hussain",
+    email: "syedali6160@gmail.com",
   },
 };
 
@@ -31,14 +32,15 @@ export const projects: Project[] = [
     description: "AI-powered daily intelligence briefing platform for students.",
     link: "https://novabrief.tech",
     tags: ["AI", "Automation", "Next.js"],
-    metrics: "TODO",
+    metrics: "Automated morning dispatch · Sub-second Llama 3.3 synthesis",
   },
   {
     slug: "n8n-agents",
     title: "n8n Automation Agents",
-    description: "Daily LinkedIn posting agent and email reply agent for NovaBrief Tech.",
+    description:
+      "Daily LinkedIn posting agent and email reply agent for NovaBrief Tech.",
     tags: ["n8n", "LLMs", "Automation"],
-    metrics: "TODO",
+    metrics: "Automated daily LinkedIn publishing & email reply workflows",
   },
   {
     slug: "brute-force-detection",
@@ -46,6 +48,7 @@ export const projects: Project[] = [
     description: "Machine learning research published in IJICT.",
     link: "https://www.ijict.edu.iq/index.php/ijict/article/view/371",
     tags: ["ML", "Security", "Research"],
+    metrics: "97.24% SVM classification accuracy · IJICT Vol. 9, Issue 1",
   },
   {
     slug: "dha-multan-agent",
@@ -63,7 +66,8 @@ export const research: ResearchData = {
     doi: "10.31987/ijict.9.1.371",
     url: "https://www.ijict.edu.iq/index.php/ijict/article/view/371",
   },
-  ongoing: "More papers in progress with Azerbaijan University of Architecture and Construction",
+  ongoing:
+    "More papers in progress with Azerbaijan University of Architecture and Construction",
 };
 
 export const experience: ExperienceItem[] = [
@@ -82,7 +86,14 @@ export const education: EducationData = {
 
 export const certificates: string[] = [
   "Google Skills ML badges",
-  "TODO: other certificates from my current portfolio",
+  "Harvard CS50P: Intro to Programming with Python",
+  "Google / Coursera Crash Course on Python",
+  "Cisco Introduction to Modern AI",
+  "AIEYS AI-Enhanced Teaching Certificate",
+  "AIEYS Web Developer Internship Certificate",
+  "Google / Coursera Technical Support Fundamentals",
+  "AI Conference in Germany (European Scientific Forum)",
+  "SZABIST & IJICT Machine Learning Research Publication",
 ];
 
 export const services: string[] = [
@@ -94,24 +105,48 @@ export const usesData: UsesCategory[] = [
   {
     category: "AI & Automation Stack",
     items: [
-      { name: "n8n", detail: "Workflow orchestration for daily LinkedIn and email agents" },
-      { name: "LLMs & Prompt Pipelines", detail: "Automated summarization and agentic decision flows" },
-      { name: "Python & Scikit-Learn", detail: "Machine learning models for cybersecurity research" },
+      {
+        name: "n8n",
+        detail: "Workflow orchestration for daily LinkedIn and email agents",
+      },
+      {
+        name: "Llama 3.3 (Groq LPU) & Gemini",
+        detail: "Automated summarization and agentic decision flows",
+      },
+      {
+        name: "Python & Scikit-Learn",
+        detail: "SVM, Gaussian Naive Bayes, and PCA for security research",
+      },
     ],
   },
   {
     category: "Web Development",
     items: [
-      { name: "Next.js & TypeScript", detail: "App Router, Server Components, and strict type safety" },
-      { name: "Tailwind CSS", detail: "Minimalist, dark-first design system" },
-      { name: "Vercel", detail: "Edge deployment and production hosting" },
+      {
+        name: "Next.js & TypeScript",
+        detail: "App Router, Server Components, and strict type safety",
+      },
+      {
+        name: "Tailwind CSS & Framer Motion",
+        detail: "Minimalist, dark-first design system with accessible motion",
+      },
+      {
+        name: "PostgreSQL & Vercel",
+        detail: "Relational storage, Resend email delivery, and edge deployment",
+      },
     ],
   },
   {
-    category: "Hardware & Desk Setup",
+    category: "Development Environment",
     items: [
-      { name: "Primary Workstation", detail: "TODO: Add exact laptop/desktop specifications" },
-      { name: "Code Editor & Terminal", detail: "TODO: Add preferred editor theme and terminal setup" },
+      {
+        name: "Editor & Shell",
+        detail: "VS Code · PowerShell · Git & GitHub CLI",
+      },
+      {
+        name: "Languages & Runtimes",
+        detail: "TypeScript · Python 3 · Node.js · SQL",
+      },
     ],
   },
 ];

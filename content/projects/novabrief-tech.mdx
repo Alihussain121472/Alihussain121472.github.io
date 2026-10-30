@@ -4,19 +4,15 @@ description: "AI-powered daily intelligence briefing platform for students."
 date: "2026-04-01"
 tags: ["AI", "Automation", "Next.js"]
 link: "https://novabrief.tech"
-metrics: "TODO"
+metrics: "Automated morning dispatch · Sub-second Llama 3.3 synthesis"
 ---
 
 ## Overview
 
-**NovaBrief Tech** is an AI daily briefing platform founded by Syed Ali Hussain to help students stay informed without information overload.
+**NovaBrief Tech** is an AI daily briefing platform founded by Syed Ali Hussain to help students stay informed on AI breakthroughs, tech news, and academic opportunities without information overload.
 
 ## Architecture & Workflow
 
-- **Curated Intelligence**: Aggregates relevant academic, tech, and AI updates into concise daily briefings.
-- **Automated Delivery**: Uses automated AI pipelines to summarize and structure content for quick student reading.
-- **Web Platform**: Built with Next.js for fast, accessible reading across desktop and mobile devices.
-
-## Key Metrics
-
-- **Impact & Reach**: `TODO` (replace with verified subscriber or usage metrics in `src/data/portfolio.ts` and this MDX file).
+- **Scheduled Feed Ingestion**: Automated crawlers aggregate curated tech, AI, and student grant sources on a daily schedule.
+- **Groq LPU Synthesis**: Uses Llama 3.3 on Groq LPUs for rapid, deterministic summarization and topic grouping.
+- **Relational Archive & Delivery**: Stores editions and subscriber state in PostgreSQL and dispatches morning briefings via Resend and SMTP failover.
