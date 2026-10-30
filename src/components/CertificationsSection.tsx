@@ -1,4 +1,4 @@
-// Compact Certifications section (#certifications) showing the 6 newest relevant cards with "View all" toggle for the quiet "Other" group.
+// Compact Certifications section (#certifications) scaled to ~85% card footprint with 6 newest cards and "View all" toggle.
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -57,25 +57,25 @@ export function CertificationsSection() {
           </span>
         </div>
 
-        {/* 6 Most Relevant Certifications (compact 3-column grid so Projects & Research remain the stars) */}
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* ~85% scaled compact certification cards */}
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((cert) => (
             <article
               key={cert.id}
-              className="card-base flex flex-col justify-between overflow-hidden"
+              className="card-base mx-auto flex w-full max-w-[310px] flex-col justify-between overflow-hidden sm:max-w-none"
             >
               <div>
-                <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border bg-stage">
+                <div className="relative h-36 w-full overflow-hidden border-b border-border bg-stage">
                   <Image
                     src={cert.previewUrl}
                     alt={`${cert.title} issued by ${cert.issuer}`}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
-                    className="object-contain p-2.5"
+                    sizes="(max-width: 640px) 310px, (max-width: 1024px) 45vw, 280px"
+                    className="object-contain p-2"
                   />
                 </div>
 
-                <div className="p-4">
+                <div className="p-3.5">
                   <div className="flex items-center justify-between gap-2 font-mono text-xs text-fg-muted">
                     <span className="truncate font-medium text-accent">
                       {cert.issuer}
@@ -83,9 +83,11 @@ export function CertificationsSection() {
                     <span className="shrink-0">{cert.issueDate}</span>
                   </div>
 
-                  <h3 className="type-h3 mt-2 text-fg">{cert.title}</h3>
+                  <h3 className="mt-1.5 text-base font-semibold leading-snug text-fg">
+                    {cert.title}
+                  </h3>
 
-                  <div className="mt-3 flex flex-wrap gap-1.5">
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
                     {cert.skills.map((skill) => (
                       <span key={skill} className="chip">
                         {skill}
@@ -93,7 +95,7 @@ export function CertificationsSection() {
                     ))}
                   </div>
 
-                  <div className="mt-3">
+                  <div className="mt-2.5">
                     {isTodo(cert.verificationUrl) ? (
                       <TodoBadge
                         value={cert.verificationUrl}
@@ -114,7 +116,7 @@ export function CertificationsSection() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-2 border-t border-border bg-subtle px-4 py-3">
+              <div className="flex items-center justify-between gap-2 border-t border-border bg-subtle px-3.5 py-2.5">
                 <button
                   type="button"
                   onClick={() => setSelectedCert(cert)}
@@ -130,7 +132,7 @@ export function CertificationsSection() {
 
         {/* View All toggle for quiet "Other" group */}
         {other.length > 0 && (
-          <div className="mt-8">
+          <div className="mt-7">
             <button
               type="button"
               aria-expanded={showAll}
@@ -150,18 +152,18 @@ export function CertificationsSection() {
             </button>
 
             {showAll && (
-              <div className="mt-6 rounded-xl border border-border bg-surface p-5">
+              <div className="mt-5 rounded-xl border border-border bg-surface p-4">
                 <h3 className="font-mono text-xs font-bold tracking-wide text-fg-muted">
                   Other (School &amp; Participation Certificates)
                 </h3>
-                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="mt-3.5 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                   {other.map((cert) => (
                     <div
                       key={cert.id}
-                      className="flex items-center justify-between gap-4 rounded-lg border border-border bg-subtle p-4"
+                      className="flex items-center justify-between gap-3 rounded-lg border border-border bg-subtle p-3.5"
                     >
                       <div className="space-y-1">
-                        <div className="font-semibold text-fg">
+                        <div className="text-sm font-semibold text-fg">
                           {cert.title}
                         </div>
                         <div className="font-mono text-xs text-fg-muted">
