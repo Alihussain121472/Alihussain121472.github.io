@@ -29,9 +29,8 @@ export function DetailsSection() {
             </h2>
 
             <p className="mt-6 text-base leading-relaxed text-fg-secondary">
-              I&apos;m <strong className="text-fg">{profile.name}</strong>, a{" "}
-              <span className="font-medium text-fg">{education.degree}</span>{" "}
-              student at{" "}
+              I&apos;m <strong className="text-fg">{profile.name}</strong>, an
+              AI student at{" "}
               <span className="font-medium text-fg">{education.school}</span>. I
               founded{" "}
               <a
@@ -41,12 +40,12 @@ export function DetailsSection() {
                 className="font-medium text-accent underline decoration-accent/50 underline-offset-4 transition-colors hover:decoration-accent"
               >
                 NovaBrief Tech
-              </a>
-              , an AI daily briefing platform for students, and I&apos;m a{" "}
+              </a>{" "}
+              to send daily news briefs to students. I also work as a{" "}
               <span className="font-medium text-fg">
-                {experience[0]?.role} at {experience[0]?.org}
+                {experience[0]?.role} at AIEYS
               </span>
-              . I build AI agents and automations with n8n and{" "}
+              . I build smart agents with n8n and{" "}
               <Link
                 href="/#research"
                 className="font-medium text-accent underline decoration-accent/50 underline-offset-4 transition-colors hover:decoration-accent"

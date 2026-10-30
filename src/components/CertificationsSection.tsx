@@ -53,8 +53,8 @@ export function CertificationsSection() {
               Certifications &amp; Honors
             </h2>
             <p className="mt-2 max-w-2xl text-base leading-relaxed text-fg-secondary">
-              Verified certifications in Python programming, artificial
-              intelligence, technical support, and international conferences.
+              Course badges and honors in Python code, modern AI, web apps, and
+              global tech events.
             </p>
           </div>
 

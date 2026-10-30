@@ -13,7 +13,7 @@ export const profile: Profile = {
   name: "Syed Ali Hussain",
   roles: ["AI Developer", "Researcher", "Founder"],
   headline: "BS(AI) student, researcher, and founder of NovaBrief Tech",
-  bio: "I'm Syed Ali, a BS Artificial Intelligence student at SZABIST Islamabad. I founded NovaBrief Tech, an AI daily briefing platform for students, and I'm a Research Intern at AI-Explain You Science (AIEYS). I build AI agents and automations with n8n and publish research on machine learning for security.",
+  bio: "I'm Syed Ali Hussain, an AI student at SZABIST Islamabad. I founded NovaBrief Tech to send daily news briefs to students. I also work as a Research Intern at AIEYS. I build smart agents with n8n and publish research on machine learning for security.",
   site: "https://alihussain121472-github-io.vercel.app",
   avatar: "/assets/images/syed-ali.jpg",
   socials: {
@@ -79,7 +79,7 @@ export const research: ResearchData = {
     referenceId: "Ref: AIEYS-ADMIN-1001",
     previewUrl: "/assets/images/certificates/aieys-research-intern-offer-letter.jpg",
     summary:
-      "Official one-year Research Intern appointment at AI-Explain You Science (AIEYS), conducting applied machine learning research and scientific publications.",
+      "I work as a Research Intern at AIEYS for one year. My focus is on machine learning models and writing new papers.",
   },
   ongoing:
     "More papers in progress with Azerbaijan University of Architecture and Construction",

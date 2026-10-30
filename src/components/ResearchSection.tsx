@@ -54,8 +54,8 @@ export function ResearchSection() {
               Research
             </h2>
             <p className="mt-2 max-w-2xl text-base leading-relaxed text-fg-secondary">
-              Peer-reviewed machine learning research, official AIEYS research
-              appointment, and ongoing international collaborations.
+              My published papers, AIEYS research role, and new studies in
+              progress.
             </p>
           </div>
           <span className="font-mono text-xs font-medium text-fg-muted">
