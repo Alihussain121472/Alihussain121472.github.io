@@ -1,4 +1,4 @@
-// Dynamically generates sitemap.xml for all pages, projects, and MDX articles.
+// Dynamically generates sitemap.xml for all pages, projects, certifications, and MDX articles.
 import type { MetadataRoute } from "next";
 import { profile, projects } from "@/data/portfolio";
 import { getAllArticles } from "@/lib/mdx";
@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const staticPaths = [
     "",
+    "/certifications",
     "/research",
     "/articles",
     "/contact",

@@ -52,6 +52,17 @@ export interface EducationData {
   school: string;
 }
 
+export interface CertificateItem {
+  id: string;
+  title: string;
+  issuer: string;
+  issueDate: string;
+  category: "AI & Computer Science" | "Research & Conferences" | "Systems & Web";
+  previewUrl: string;
+  credentialId?: string;
+  skills: string[];
+}
+
 export interface UsesCategory {
   category: string;
   items: { name: string; detail: string }[];
