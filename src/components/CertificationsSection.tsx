@@ -158,7 +158,7 @@ export function CertificationsSection() {
                 </div>
 
                 {/* Card Footer Action Bar */}
-                <div className="flex items-center justify-between gap-4 border-t border-border bg-subtle/40 px-5 py-3.5 sm:px-6">
+                <div className="flex items-center justify-between gap-4 border-t border-border bg-subtle px-5 py-3.5 sm:px-6">
                   <button
                     type="button"
                     onClick={() => setSelectedCert(cert)}

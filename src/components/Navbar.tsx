@@ -31,7 +31,7 @@ export function Navbar() {
   ];
 
   return (
-    <header className="glass-nav sticky top-0 z-40 border-b border-border transition-colors">
+    <header className="glass-nav sticky top-0 z-50 border-b border-border bg-canvas transition-colors">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4">
         <Link
           href="/#intro"
@@ -50,7 +50,7 @@ export function Navbar() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="transition-colors hover:text-accent focus-visible:text-accent"
+                  className="rounded bg-canvas px-1.5 py-0.5 text-fg-secondary transition-colors hover:text-accent focus-visible:text-accent"
                 >
                   {item.label}
                 </Link>

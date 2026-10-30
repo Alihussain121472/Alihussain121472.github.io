@@ -7,6 +7,7 @@ import { education, experience, profile } from "@/data/portfolio";
 import { isTodo } from "@/components/TodoBadge";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { A11yExtensionGuard } from "@/components/A11yExtensionGuard";
 import "./globals.css";
 
 const inter = Inter({
@@ -56,6 +57,31 @@ const themeInitScript = `
     }
   } catch (e) {
     document.documentElement.classList.add('dark');
+  }
+  function fixExt() {
+    var hosts = document.querySelectorAll('chatgpt-sidebar');
+    for (var i = 0; i < hosts.length; i++) {
+      var h = hosts[i];
+      h.setAttribute('aria-hidden', 'true');
+      h.style.setProperty('display', 'none', 'important');
+      var sr = h.shadowRoot || h;
+      var btns = sr.querySelectorAll('button');
+      for (var j = 0; j < btns.length; j++) {
+        if (!btns[j].getAttribute('aria-label') && !(btns[j].textContent || '').trim()) {
+          btns[j].setAttribute('aria-label', 'Toggle AI assistant sidebar');
+          btns[j].setAttribute('title', 'Toggle AI assistant sidebar');
+        }
+      }
+      var tabs = sr.querySelectorAll('[tabindex]');
+      for (var k = 0; k < tabs.length; k++) {
+        if (parseInt(tabs[k].getAttribute('tabindex') || '0', 10) > 0) {
+          tabs[k].setAttribute('tabindex', '0');
+        }
+      }
+    }
+  }
+  if (typeof MutationObserver !== 'undefined') {
+    new MutationObserver(fixExt).observe(document.documentElement, { childList: true, subtree: true });
   }
 })();
 `;
@@ -110,6 +136,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <A11yExtensionGuard />
         <Analytics />
       </body>
     </html>

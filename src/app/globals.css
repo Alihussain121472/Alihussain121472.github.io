@@ -9,7 +9,7 @@ html.dark {
   --bg-surface: #15181e;
   --bg-subtle: #1c2028;
   --bg-stage: #090b0e;
-  --bg-glass: rgba(13, 15, 18, 0.86);
+  --bg-glass: #0d0f12;
   --border-subtle: #262b36;
   --border-strong: #374151;
   --text-primary: #f8fafc;
@@ -17,7 +17,7 @@ html.dark {
   --text-muted: #94a3b8;
   --accent: #38bdf8;
   --accent-fg: #090d14;
-  --accent-soft: rgba(56, 189, 248, 0.12);
+  --accent-soft: #112233;
 }
 
 html.light {
@@ -25,15 +25,15 @@ html.light {
   --bg-surface: #ffffff;
   --bg-subtle: #f1f5f9;
   --bg-stage: #f1f5f9;
-  --bg-glass: rgba(248, 250, 252, 0.9);
+  --bg-glass: #f8fafc;
   --border-subtle: #e2e8f0;
   --border-strong: #cbd5e1;
   --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-muted: #475569;
-  --accent: #0284c7;
+  --accent: #0369a1;
   --accent-fg: #ffffff;
-  --accent-soft: rgba(2, 132, 199, 0.1);
+  --accent-soft: #e0f2fe;
 }
 
 @layer base {
@@ -75,9 +75,14 @@ html.light {
 }
 
 .glass-nav {
-  background-color: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--bg-canvas);
+}
+
+/* Prevent injected browser extension widgets from violating WCAG 4.1.2 / positive tabindex or obscuring sticky nav links */
+chatgpt-sidebar {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* High-visibility keyboard focus ring */

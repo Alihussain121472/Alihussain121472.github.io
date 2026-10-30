@@ -70,7 +70,7 @@ export function ResearchSection() {
           <Reveal delay={0.05}>
             <div className="flex h-full flex-col justify-between overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
               <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-subtle/40 px-5 py-3.5 font-mono text-xs sm:px-6">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-subtle px-5 py-3.5 font-mono text-xs sm:px-6">
                   <span className="inline-flex items-center gap-2 font-bold text-accent">
                     <BookOpen className="h-4 w-4" />
                     <span>01 · Published Paper</span>
@@ -109,7 +109,7 @@ export function ResearchSection() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 border-t border-border bg-subtle/40 px-5 py-4 sm:px-6">
+              <div className="flex flex-wrap items-center gap-3 border-t border-border bg-subtle px-5 py-4 sm:px-6">
                 <a
                   href={published.url}
                   target="_blank"
@@ -172,7 +172,7 @@ export function ResearchSection() {
           <Reveal delay={0.1}>
             <div className="flex h-full flex-col justify-between overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
               <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-subtle/40 px-5 py-3.5 font-mono text-xs sm:px-6">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-subtle px-5 py-3.5 font-mono text-xs sm:px-6">
                   <span className="inline-flex items-center gap-2 font-bold text-accent">
                     <FileCheck2 className="h-4 w-4" />
                     <span>02 · Research Appointment</span>
@@ -208,7 +208,7 @@ export function ResearchSection() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-subtle/40 px-5 py-4 sm:px-6">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-subtle px-5 py-4 sm:px-6">
                 <button
                   type="button"
                   onClick={() =>
