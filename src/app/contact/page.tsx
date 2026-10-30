@@ -1,64 +1,95 @@
-// Contact page (/contact) with validated React Hook Form + Resend Server Action and social links.
+// Contact page (/contact) with separate Meta/OG/Twitter tags, canonical URL, clear social labels, and Resend form.
 import React from "react";
 import type { Metadata } from "next";
-import { profile, services } from "@/data/portfolio";
+import { profile } from "@/data/portfolio";
 import { ContactForm } from "@/components/ContactForm";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Get in touch with ${profile.name} for ${services.join(" and ")}.`,
+  description:
+    "Contact Syed Ali Hussain for website development, AI agent and n8n automation projects, and machine learning research collaborations.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: `Contact | ${profile.name}`,
+    description:
+      "Start a conversation with Syed Ali Hussain about website development, n8n AI agents, or ML security research.",
+    url: "/contact",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contact | ${profile.name}`,
+    description:
+      "Get in touch with Syed Ali Hussain for website development, AI agents with n8n, and research collaborations.",
+  },
 };
 
 export default function ContactPage() {
   const socialRows = [
-    { label: "Email", value: profile.socials.email },
-    { label: "GitHub", value: profile.socials.github },
-    { label: "LinkedIn", value: profile.socials.linkedin },
-    { label: "X (Twitter)", value: profile.socials.x },
-    { label: "Google Scholar", value: profile.socials.scholar },
+    {
+      label: "Email",
+      value: profile.socials.email,
+      displayLabel: "Send Email",
+    },
+    {
+      label: "GitHub",
+      value: profile.socials.github,
+      displayLabel: "GitHub (@Alihussain121472)",
+    },
+    {
+      label: "LinkedIn",
+      value: profile.socials.linkedin,
+      displayLabel: "LinkedIn Profile",
+    },
+    {
+      label: "X (Twitter)",
+      value: profile.socials.x,
+      displayLabel: "X (@Syedali6160)",
+    },
+    {
+      label: "Google Scholar",
+      value: profile.socials.scholar,
+      displayLabel: "Google Scholar Profile",
+    },
+    {
+      label: "ORCID",
+      value: profile.socials.orcid,
+      displayLabel: "ORCID Profile",
+    },
   ];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
+    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
       <Reveal>
         <p className="font-mono text-xs font-semibold tracking-wide text-accent">
           Say Hello
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-fg">
-          Contact
-        </h1>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-fg-secondary">
-          Available for{" "}
-          <strong className="text-fg">{services.join(" & ")}</strong> as well as
-          machine learning research collaborations.
+        <h1 className="type-h1 mt-2 text-fg">Contact</h1>
+        <p className="type-body mt-4 text-fg-secondary">
+          {profile.availability}
         </p>
-      </Reveal>
 
-      <div className="mt-12 grid gap-10 md:grid-cols-12">
-        <div className="md:col-span-7">
-          <Reveal delay={0.06}>
+        <div className="mt-10 grid gap-8 md:grid-cols-12">
+          <div className="md:col-span-7">
             <ContactForm />
-          </Reveal>
-        </div>
+          </div>
 
-        <aside className="space-y-6 md:col-span-5">
-          <Reveal delay={0.12}>
-            <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
-              <h2 className="font-mono text-xs font-bold tracking-wide text-accent">
-                Direct Links &amp; Socials
-              </h2>
+          <aside className="space-y-6 md:col-span-5">
+            <div className="card-base p-6">
+              <h2 className="type-h3 text-fg">Profiles &amp; Direct Links</h2>
               <dl className="mt-4 space-y-3 text-sm">
                 {socialRows.map((row) => (
                   <div
                     key={row.label}
-                    className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-2.5 last:border-b-0 last:pb-0"
+                    className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3 last:border-b-0 last:pb-0"
                   >
                     <dt className="font-mono text-xs font-medium text-fg-muted">
                       {row.label}
                     </dt>
-                    <dd className="max-w-[200px] truncate">
+                    <dd>
                       {isTodo(row.value) ? (
                         <TodoBadge value={row.value} label={row.label} />
                       ) : (
@@ -68,13 +99,15 @@ export default function ContactPage() {
                               ? `mailto:${row.value}`
                               : row.value
                           }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-medium text-accent underline underline-offset-4"
+                          target={row.label === "Email" ? undefined : "_blank"}
+                          rel={
+                            row.label === "Email"
+                              ? undefined
+                              : "noopener noreferrer"
+                          }
+                          className="inline-flex min-h-[44px] items-center font-medium text-accent underline underline-offset-4"
                         >
-                          {row.label === "Email"
-                            ? row.value
-                            : row.value.replace(/^https?:\/\/(www\.)?/, "")}
+                          {row.displayLabel}
                         </a>
                       )}
                     </dd>
@@ -82,9 +115,9 @@ export default function ContactPage() {
                 ))}
               </dl>
             </div>
-          </Reveal>
-        </aside>
-      </div>
+          </aside>
+        </div>
+      </Reveal>
     </div>
   );
 }

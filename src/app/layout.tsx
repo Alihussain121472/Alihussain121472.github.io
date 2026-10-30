@@ -1,9 +1,9 @@
-// Root layout configuring fonts, Metadata API, JSON-LD Person schema, no-flash theme script, and Vercel Analytics.
+// Root layout configuring fonts, separate Meta/OG/Twitter tags, canonical URL, JSON-LD Person + ScholarlyArticle schemas, and KnowledgeNetwork background.
 import React from "react";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import { education, experience, profile } from "@/data/portfolio";
+import { education, experience, profile, research } from "@/data/portfolio";
 import { isTodo } from "@/components/TodoBadge";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -26,13 +26,16 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(profile.site),
   title: {
-    default: `${profile.name} — ${profile.roles.join(" · ")}`,
+    default: `${profile.name} — ${profile.roleLine}`,
     template: `%s | ${profile.name}`,
   },
-  description: profile.bio,
+  description: profile.metaDescription,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: `${profile.name} — ${profile.headline}`,
-    description: profile.bio,
+    title: `${profile.name} — ${profile.roleLine}`,
+    description: profile.ogDescription,
     url: profile.site,
     siteName: profile.name,
     locale: "en_US",
@@ -40,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — ${profile.headline}`,
-    description: profile.bio,
+    title: `${profile.name} — ${profile.roleLine}`,
+    description: profile.twitterDescription,
   },
 };
 
@@ -92,24 +95,46 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const sameAs = Object.values(profile.socials).filter((val) => !isTodo(val));
+  const sameAs = Object.values(profile.socials).filter(
+    (val) => !isTodo(val) && val.startsWith("http")
+  );
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: profile.name,
-    jobTitle: profile.headline,
-    description: profile.bio,
-    url: profile.site,
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: education.school,
-    },
-    worksFor: experience.map((item) => ({
-      "@type": "Organization",
-      name: item.org,
-    })),
-    sameAs,
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${profile.site}/#person`,
+        name: profile.name,
+        jobTitle: profile.roleLine,
+        description: profile.metaDescription,
+        url: profile.site,
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: education.school,
+        },
+        worksFor: experience.map((item) => ({
+          "@type": "Organization",
+          name: item.org,
+        })),
+        sameAs,
+      },
+      {
+        "@type": "ScholarlyArticle",
+        headline: research.published.title,
+        author: research.published.authors.map((name) => ({
+          "@type": "Person",
+          name,
+        })),
+        datePublished: research.published.datePublished,
+        publisher: {
+          "@type": "Organization",
+          name: research.published.venue,
+        },
+        identifier: `https://doi.org/${research.published.doi}`,
+        url: research.published.url,
+      },
+    ],
   };
 
   return (
@@ -129,7 +154,7 @@ export default function RootLayout({
         <ConstellationBackground />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-bold focus:text-accent-fg"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-xl focus:bg-accent focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:font-bold focus:text-accent-fg"
         >
           Skip to main content
         </a>

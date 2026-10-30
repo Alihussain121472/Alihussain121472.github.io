@@ -1,21 +1,16 @@
-// Interactive Certifications & Honors showcase (#certifications) with unified type scale and buttons.
+// Compact Certifications section (#certifications) showing the 6 newest relevant cards with "View all" toggle for the quiet "Other" group.
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Award, CheckCircle2, ExternalLink, X } from "lucide-react";
+import Image from "next/image";
+import { Award, ChevronDown, ChevronUp, ExternalLink, X } from "lucide-react";
 import { certifications } from "@/data/portfolio";
 import type { CertificateItem } from "@/types/portfolio";
+import { isTodo, TodoBadge } from "@/components/TodoBadge";
 import { Reveal } from "@/components/Reveal";
 
-const categories = [
-  "All",
-  "AI & Computer Science",
-  "Systems & Web",
-  "Conferences & Honors",
-] as const;
-
 export function CertificationsSection() {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [showAll, setShowAll] = useState(false);
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(
     null
   );
@@ -29,172 +24,181 @@ export function CertificationsSection() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedCert]);
 
-  const filtered =
-    activeCategory === "All"
-      ? certifications
-      : certifications.filter((c) => c.category === activeCategory);
+  const sorted = [...certifications].sort((a, b) =>
+    b.sortDate.localeCompare(a.sortDate)
+  );
+  const featured = sorted
+    .filter((c) => c.group === "featured")
+    .slice(0, 6);
+  const other = sorted.filter((c) => c.group === "other");
 
   return (
     <section
       id="certifications"
       aria-labelledby="certifications-heading"
-      className="mx-auto max-w-5xl border-t border-border px-4 py-20 sm:px-6 sm:py-24"
+      className="mx-auto max-w-5xl border-t border-border px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
           <div>
             <p className="font-mono text-xs font-semibold tracking-wide text-accent">
-              Verified Credentials
+              Coursework &amp; Conferences
             </p>
-            <h2
-              id="certifications-heading"
-              className="mt-2 text-3xl font-bold tracking-tight text-fg"
-            >
-              Certifications &amp; Honors
+            <h2 id="certifications-heading" className="type-h2 mt-2 text-fg">
+              Certifications
             </h2>
-            <p className="mt-2 max-w-2xl text-base leading-relaxed text-fg-secondary">
+            <p className="type-body mt-2 text-fg-secondary">
               Course badges and honors in Python code, modern AI, web apps, and
               global tech events.
             </p>
           </div>
-
           <span className="font-mono text-xs font-medium text-fg-muted">
-            Showing 01 — {String(filtered.length).padStart(2, "0")}
+            Showing {featured.length} of {sorted.length} (newest first)
           </span>
         </div>
 
-        {/* Category Filter Tabs using shared button system */}
-        <div
-          role="tablist"
-          aria-label="Filter certifications by category"
-          className="mt-8 flex flex-wrap gap-2"
-        >
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            const count =
-              cat === "All"
-                ? certifications.length
-                : certifications.filter((c) => c.category === cat).length;
+        {/* 6 Most Relevant Certifications (compact 3-column grid so Projects & Research remain the stars) */}
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((cert) => (
+            <article
+              key={cert.id}
+              className="card-base flex flex-col justify-between overflow-hidden"
+            >
+              <div>
+                <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border bg-stage">
+                  <Image
+                    src={cert.previewUrl}
+                    alt={`${cert.title} issued by ${cert.issuer}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+                    className="object-contain p-2.5"
+                  />
+                </div>
 
-            return (
-              <button
-                key={cat}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveCategory(cat)}
-                className={isActive ? "btn-primary" : "btn-secondary"}
-              >
-                <span>
-                  {cat} ({count})
-                </span>
-              </button>
-            );
-          })}
+                <div className="p-4">
+                  <div className="flex items-center justify-between gap-2 font-mono text-xs text-fg-muted">
+                    <span className="truncate font-medium text-accent">
+                      {cert.issuer}
+                    </span>
+                    <span className="shrink-0">{cert.issueDate}</span>
+                  </div>
+
+                  <h3 className="type-h3 mt-2 text-fg">{cert.title}</h3>
+
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {cert.skills.map((skill) => (
+                      <span key={skill} className="chip">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-3">
+                    {isTodo(cert.verificationUrl) ? (
+                      <TodoBadge
+                        value={cert.verificationUrl}
+                        label="Verification URL"
+                      />
+                    ) : (
+                      <a
+                        href={cert.verificationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[44px] items-center gap-1 font-mono text-xs font-semibold text-accent underline underline-offset-4"
+                      >
+                        <span>Verify credential</span>
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between gap-2 border-t border-border bg-subtle px-4 py-3">
+                <button
+                  type="button"
+                  onClick={() => setSelectedCert(cert)}
+                  className="btn-secondary flex-1"
+                >
+                  <Award className="h-4 w-4 text-accent" />
+                  <span>Preview</span>
+                </button>
+              </div>
+            </article>
+          ))}
         </div>
+
+        {/* View All toggle for quiet "Other" group */}
+        {other.length > 0 && (
+          <div className="mt-8">
+            <button
+              type="button"
+              aria-expanded={showAll}
+              onClick={() => setShowAll((prev) => !prev)}
+              className="btn-secondary"
+            >
+              <span>
+                {showAll
+                  ? "Hide other certificates"
+                  : `View all (${other.length} more in Other)`}
+              </span>
+              {showAll ? (
+                <ChevronUp className="h-4 w-4 text-accent" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-accent" />
+              )}
+            </button>
+
+            {showAll && (
+              <div className="mt-6 rounded-xl border border-border bg-surface p-5">
+                <h3 className="font-mono text-xs font-bold tracking-wide text-fg-muted">
+                  Other (School &amp; Participation Certificates)
+                </h3>
+                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {other.map((cert) => (
+                    <div
+                      key={cert.id}
+                      className="flex items-center justify-between gap-4 rounded-lg border border-border bg-subtle p-4"
+                    >
+                      <div className="space-y-1">
+                        <div className="font-semibold text-fg">
+                          {cert.title}
+                        </div>
+                        <div className="font-mono text-xs text-fg-muted">
+                          {cert.issuer} · {cert.issueDate}
+                        </div>
+                        <TodoBadge
+                          value={cert.verificationUrl}
+                          label="Verification URL"
+                        />
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedCert(cert)}
+                        className="btn-secondary shrink-0"
+                      >
+                        <span>Preview</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </Reveal>
 
-      {/* Responsive 2-Column Editorial Card Grid */}
-      <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-        {filtered.map((cert, idx) => {
-          const num = String(idx + 1).padStart(2, "0");
-          return (
-            <Reveal key={cert.id} delay={idx * 0.04}>
-              <article className="group flex h-full flex-col justify-between overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/70 hover:shadow-md">
-                <div>
-                  {/* Card Top Metadata Bar (minimum 12px text-xs) */}
-                  <div className="flex items-center justify-between gap-2 px-5 py-3.5">
-                    <div className="flex items-center gap-2.5">
-                      <span className="inline-flex h-6 min-w-[2rem] items-center justify-center rounded-md border border-border bg-subtle px-2 font-mono text-xs font-bold text-accent">
-                        {num}
-                      </span>
-                      <span className="rounded-md bg-subtle px-2.5 py-1 font-mono text-xs font-medium text-fg-secondary">
-                        {cert.category}
-                      </span>
-                    </div>
-                    <span className="font-mono text-xs font-medium text-fg-muted">
-                      {cert.issueDate}
-                    </span>
-                  </div>
-
-                  {/* Uncropped Matted Document Stage */}
-                  <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden border-y border-border bg-stage p-3 sm:p-4">
-                    <img
-                      src={cert.previewUrl}
-                      alt={`${cert.title} issued by ${cert.issuer}`}
-                      loading="lazy"
-                      className="max-h-full max-w-full rounded object-contain shadow-sm transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                  </div>
-
-                  {/* Card Body: Issuer, Title, Skills */}
-                  <div className="p-5 sm:p-6">
-                    <div className="flex items-center gap-1.5 text-xs font-medium text-accent">
-                      <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
-                      <span>{cert.issuer}</span>
-                    </div>
-
-                    <h3 className="mt-2 text-xl font-bold tracking-tight text-fg">
-                      {cert.title}
-                    </h3>
-
-                    {cert.credentialId && (
-                      <p className="mt-1 font-mono text-xs text-fg-muted">
-                        {cert.credentialId}
-                      </p>
-                    )}
-
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {cert.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-md border border-border bg-subtle px-2.5 py-1 font-mono text-xs font-medium text-fg-secondary"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Footer Action Bar */}
-                <div className="flex items-center justify-between gap-4 border-t border-border bg-subtle px-5 py-3.5 sm:px-6">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCert(cert)}
-                    className="btn-secondary"
-                  >
-                    <Award className="h-4 w-4 text-accent" />
-                    <span>Preview Certificate</span>
-                  </button>
-
-                  <a
-                    href={cert.previewUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open ${cert.title} original file in new tab`}
-                    className="btn-icon"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </div>
-              </article>
-            </Reveal>
-          );
-        })}
-      </div>
-
-      {/* Accessible Full-Screen Certificate Lightbox Modal */}
       {selectedCert && (
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="cert-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
           onClick={() => setSelectedCert(null)}
         >
           <div
-            className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-border bg-surface p-5 shadow-2xl sm:p-6"
+            className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-border bg-surface p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4 border-b border-border pb-4">
@@ -202,10 +206,7 @@ export function CertificationsSection() {
                 <p className="font-mono text-xs font-semibold text-accent">
                   {selectedCert.issuer} · {selectedCert.issueDate}
                 </p>
-                <h3
-                  id="cert-modal-title"
-                  className="mt-1 text-xl font-bold text-fg"
-                >
+                <h3 id="cert-modal-title" className="type-h3 mt-1 text-fg">
                   {selectedCert.title}
                 </h3>
               </div>
@@ -220,35 +221,28 @@ export function CertificationsSection() {
               </button>
             </div>
 
-            <div className="mt-5 flex items-center justify-center overflow-hidden rounded-lg border border-border bg-stage p-3 sm:p-4">
-              <img
-                src={selectedCert.previewUrl}
-                alt={selectedCert.title}
-                className="max-h-[65vh] w-full object-contain"
-              />
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex flex-wrap gap-2">
-                {selectedCert.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-md border border-border bg-subtle px-2.5 py-1 font-mono text-xs font-medium text-fg-secondary"
-                  >
-                    {skill}
-                  </span>
-                ))}
+            <div className="mt-5 grid gap-4">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-border bg-stage">
+                <Image
+                  src={selectedCert.previewUrl}
+                  alt={selectedCert.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 720px"
+                  className="object-contain p-3"
+                />
               </div>
 
-              <a
-                href={selectedCert.previewUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                <span>Open Original File</span>
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
+              {selectedCert.secondaryPreviewUrl && (
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-border bg-stage">
+                  <Image
+                    src={selectedCert.secondaryPreviewUrl}
+                    alt={`${selectedCert.title} — Participation`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 720px"
+                    className="object-contain p-3"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

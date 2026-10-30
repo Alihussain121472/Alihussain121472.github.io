@@ -1,8 +1,8 @@
-// Minimalist Hero section (#intro) with large name, animated rotating role, and scroll button.
+// Hero section (#intro) with role line, value statement, and "Contact me" + "Download CV" CTAs.
 import React from "react";
-import { ArrowDown } from "lucide-react";
+import Link from "next/link";
+import { Download, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
-import { RotatingRole } from "@/components/RotatingRole";
 import { Reveal } from "@/components/Reveal";
 
 export function Hero() {
@@ -10,30 +10,35 @@ export function Hero() {
     <section
       id="intro"
       aria-labelledby="hero-heading"
-      className="mx-auto flex min-h-[78vh] max-w-5xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-24"
+      className="mx-auto flex max-w-5xl flex-col justify-center px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <p className="mb-4 font-mono text-xs font-semibold tracking-wide text-fg-muted">
-          {profile.headline}
+        <p className="font-mono text-xs font-semibold tracking-wide text-accent">
+          {profile.roleLine}
         </p>
 
-        <h1
-          id="hero-heading"
-          className="text-5xl font-bold tracking-tight text-fg"
-        >
+        <h1 id="hero-heading" className="type-display mt-4 text-fg">
           {profile.name}
         </h1>
 
-        <div className="mt-5">
-          <RotatingRole roles={profile.roles} />
-        </div>
+        <p className="type-body mt-6 text-fg-secondary">
+          {profile.valueStatement}
+        </p>
 
-        <div className="mt-10 h-0.5 w-24 bg-accent" aria-hidden="true" />
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <Link href="/contact" className="btn-primary">
+            <Mail className="h-4 w-4" />
+            <span>Contact me</span>
+          </Link>
 
-        <div className="mt-12">
-          <a href="#projects" className="btn-secondary">
-            <span>Scroll to projects</span>
-            <ArrowDown className="h-4 w-4 text-accent" />
+          <a
+            href={profile.cvUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+          >
+            <Download className="h-4 w-4 text-accent" />
+            <span>Download CV</span>
           </a>
         </div>
       </Reveal>

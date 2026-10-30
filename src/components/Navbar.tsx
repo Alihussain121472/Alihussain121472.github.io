@@ -1,56 +1,55 @@
-// Sticky top navigation bar with logo (#intro), primary links, social icons, and theme toggle.
+// Sticky top navigation with 44px tap targets, accessible icon labels, and theme toggle.
 import React from "react";
 import Link from "next/link";
-import { Github, Linkedin, Twitter, GraduationCap, Mail } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
-import { isTodo } from "@/components/TodoBadge";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
   { label: "Projects", href: "/#projects" },
+  { label: "About", href: "/#about" },
   { label: "Research", href: "/#research" },
   { label: "Certifications", href: "/#certifications" },
-  { label: "Details", href: "/#details" },
   { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
   const socialEntries = [
-    { key: "GitHub", url: profile.socials.github, Icon: Github },
-    { key: "LinkedIn", url: profile.socials.linkedin, Icon: Linkedin },
-    { key: "X", url: profile.socials.x, Icon: Twitter },
-    { key: "Google Scholar", url: profile.socials.scholar, Icon: GraduationCap },
+    { label: "GitHub profile", url: profile.socials.github, Icon: Github },
+    { label: "LinkedIn profile", url: profile.socials.linkedin, Icon: Linkedin },
+    { label: "X (Twitter) profile", url: profile.socials.x, Icon: Twitter },
     {
-      key: "Email",
-      url: isTodo(profile.socials.email)
-        ? "TODO"
-        : `mailto:${profile.socials.email}`,
+      label: "Send email",
+      url: `mailto:${profile.socials.email}`,
       Icon: Mail,
     },
   ];
 
   return (
     <header className="glass-nav sticky top-0 z-50 border-b border-border bg-canvas transition-colors">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link
           href="/#intro"
-          aria-label={`${profile.name} — Back to intro`}
-          className="group inline-flex shrink-0 items-center gap-2.5 font-mono text-sm font-bold tracking-wide text-fg transition-colors hover:text-accent"
+          aria-label={`${profile.name} — Home`}
+          className="group inline-flex min-h-[44px] shrink-0 items-center gap-2.5 font-mono text-sm font-bold tracking-wide text-fg transition-colors hover:text-accent"
         >
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface font-mono text-xs font-bold text-accent transition-colors group-hover:border-accent">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-surface font-mono text-xs font-bold text-accent transition-colors group-hover:border-accent">
             SAH
           </span>
           <span className="hidden md:inline">{profile.name}</span>
         </Link>
 
-        <nav aria-label="Primary navigation" className="flex items-center gap-3 sm:gap-5">
-          <ul className="flex flex-wrap items-center gap-3 text-xs font-medium text-fg-secondary sm:gap-5 sm:text-sm">
+        <nav
+          aria-label="Primary navigation"
+          className="flex items-center gap-2 sm:gap-4"
+        >
+          <ul className="flex flex-wrap items-center gap-1 text-xs font-medium text-fg-secondary sm:gap-2 sm:text-sm">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="rounded bg-canvas px-1.5 py-0.5 text-fg-secondary transition-colors hover:text-accent focus-visible:text-accent"
+                  className="inline-flex min-h-[44px] items-center rounded-lg bg-canvas px-2.5 py-2 text-fg-secondary transition-colors hover:text-accent focus-visible:text-accent"
                 >
                   {item.label}
                 </Link>
@@ -58,30 +57,21 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden items-center gap-1.5 border-l border-border pl-4 lg:flex">
-            {socialEntries.map(({ key, url, Icon }) =>
-              isTodo(url) ? (
-                <span
-                  key={key}
-                  title={`${key}: TODO (update in src/data/portfolio.ts)`}
-                  aria-label={`${key} link placeholder (TODO)`}
-                  className="btn-icon cursor-not-allowed opacity-60"
-                >
-                  <Icon className="h-4 w-4" />
-                </span>
-              ) : (
-                <a
-                  key={key}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={key}
-                  className="btn-icon"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              )
-            )}
+          <div className="hidden items-center gap-2 border-l border-border pl-4 lg:flex">
+            {socialEntries.map(({ label, url, Icon }) => (
+              <a
+                key={label}
+                href={url}
+                target={url.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  url.startsWith("mailto:") ? undefined : "noopener noreferrer"
+                }
+                aria-label={label}
+                className="btn-icon"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
           </div>
 
           <ThemeToggle />

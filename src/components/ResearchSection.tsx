@@ -1,13 +1,13 @@
-// Research section (#research) showcasing the published IJICT paper, publication certificate, AIEYS Research Offer Letter, and ongoing papers.
+// Research section (#research) featuring published IJICT paper, AIEYS Research Intern role card, and labeled preprint.
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   ArrowUpRight,
   BookOpen,
-  Clock,
+  Briefcase,
   Eye,
-  FileCheck2,
   FileText,
   X,
 } from "lucide-react";
@@ -15,62 +15,51 @@ import { profile, research } from "@/data/portfolio";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
 import { Reveal } from "@/components/Reveal";
 
-interface PreviewDoc {
-  title: string;
-  subtitle: string;
-  imageUrl: string;
-}
-
 export function ResearchSection() {
-  const [previewDoc, setPreviewDoc] = useState<PreviewDoc | null>(null);
-  const { published, offerLetter, ongoing, ongoingPdfUrl } = research;
+  const [showCertModal, setShowCertModal] = useState(false);
+  const { published, internship, preprint } = research;
   const doiUrl = `https://doi.org/${published.doi}`;
 
   useEffect(() => {
-    if (!previewDoc) return;
+    if (!showCertModal) return;
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setPreviewDoc(null);
+      if (e.key === "Escape") setShowCertModal(false);
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [previewDoc]);
+  }, [showCertModal]);
 
   return (
     <section
       id="research"
       aria-labelledby="research-heading"
-      className="mx-auto max-w-5xl border-t border-border px-4 py-20 sm:px-6 sm:py-24"
+      className="mx-auto max-w-5xl border-t border-border px-4 py-16 sm:px-6 sm:py-24"
     >
       <Reveal>
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
           <div>
             <p className="font-mono text-xs font-semibold tracking-wide text-accent">
-              Academic Publications &amp; Appointment
+              Publications &amp; Internship
             </p>
-            <h2
-              id="research-heading"
-              className="mt-2 text-3xl font-bold tracking-tight text-fg"
-            >
+            <h2 id="research-heading" className="type-h2 mt-2 text-fg">
               Research
             </h2>
-            <p className="mt-2 max-w-2xl text-base leading-relaxed text-fg-secondary">
+            <p className="type-body mt-2 text-fg-secondary">
               My published papers, AIEYS research role, and new studies in
               progress.
             </p>
           </div>
           <span className="font-mono text-xs font-medium text-fg-muted">
-            Published · Fellowship · Ongoing
+            Published · Internship · Preprint
           </span>
         </div>
-      </Reveal>
 
-      <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-        {/* 01. Published Paper + IJICT Publication Certificate */}
-        <div className="lg:col-span-7">
-          <Reveal delay={0.05}>
-            <div className="flex h-full flex-col justify-between overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
+        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* 01. Published Peer-Reviewed Paper */}
+          <div className="lg:col-span-7">
+            <article className="card-base flex h-full flex-col justify-between overflow-hidden">
               <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-subtle px-5 py-3.5 font-mono text-xs sm:px-6">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-subtle px-6 py-3.5 font-mono text-xs">
                   <span className="inline-flex items-center gap-2 font-bold text-accent">
                     <BookOpen className="h-4 w-4" />
                     <span>01 · Published Paper</span>
@@ -80,61 +69,47 @@ export function ResearchSection() {
                   </span>
                 </div>
 
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-xl font-bold tracking-tight text-fg">
-                    {published.title}
-                  </h3>
+                <div className="p-6">
+                  <h3 className="type-h3 text-fg">{published.title}</h3>
 
-                  <p className="mt-2 font-mono text-xs text-fg-muted">
-                    DOI:{" "}
+                  <div className="mt-3 flex flex-wrap items-center gap-3 text-xs">
                     <a
                       href={doiUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium text-fg-secondary underline decoration-accent/60 underline-offset-4 hover:text-accent"
+                      className="font-mono font-semibold text-accent underline decoration-accent/60 underline-offset-4 hover:decoration-accent"
                     >
-                      {published.doi}
+                      DOI: {published.doi}
                     </a>
-                  </p>
+                    <span className="text-fg-muted">·</span>
+                    <span className="font-mono text-fg-secondary">
+                      SVM Accuracy: 97.24%
+                    </span>
+                  </div>
 
-                  {/* Matted Publication Certificate Stage */}
-                  <div className="mt-5 flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-lg border border-border bg-stage p-3 sm:p-4">
-                    <img
+                  {/* Fixed-aspect next/image container prevents layout shift */}
+                  <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden rounded-lg border border-border bg-stage">
+                    <Image
                       src={published.certificateUrl}
-                      alt="SZABIST — IJICT ML Research Publication Certificate"
-                      loading="lazy"
-                      className="max-h-full max-w-full rounded object-contain shadow-sm"
+                      alt="IJICT publication certificate for Detection of Brute-Force Login Attempts Using Machine Learning"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 560px"
+                      className="object-contain p-3"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 border-t border-border bg-subtle px-5 py-4 sm:px-6">
+              <div className="flex flex-wrap items-center gap-3 border-t border-border bg-subtle px-6 py-4">
                 <a
                   href={published.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary"
                 >
-                  <span>Read on IJICT</span>
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  <span>Read paper on IJICT</span>
+                  <ArrowUpRight className="h-4 w-4" />
                 </a>
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    setPreviewDoc({
-                      title:
-                        "SZABIST — IJICT ML Research Publication Certificate",
-                      subtitle: `${published.venue} · DOI: ${published.doi}`,
-                      imageUrl: published.certificateUrl,
-                    })
-                  }
-                  className="btn-secondary"
-                >
-                  <Eye className="h-3.5 w-3.5 text-accent" />
-                  <span>Preview Certificate</span>
-                </button>
 
                 <a
                   href={published.pdfUrl}
@@ -142,192 +117,161 @@ export function ResearchSection() {
                   rel="noopener noreferrer"
                   className="btn-secondary"
                 >
-                  <FileText className="h-3.5 w-3.5 text-accent" />
-                  <span>Full Paper (PDF)</span>
+                  <FileText className="h-4 w-4 text-accent" />
+                  <span>Download PDF</span>
                 </a>
 
-                {isTodo(profile.socials.scholar) ? (
-                  <TodoBadge
-                    value={profile.socials.scholar}
-                    label="Google Scholar"
-                  />
-                ) : (
-                  <a
-                    href={profile.socials.scholar}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary"
-                  >
-                    <span>Google Scholar</span>
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
-                )}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* 02. Research Intern Offer Letter (AIEYS) */}
-        <div className="lg:col-span-5">
-          <Reveal delay={0.1}>
-            <div className="flex h-full flex-col justify-between overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-subtle px-5 py-3.5 font-mono text-xs sm:px-6">
-                  <span className="inline-flex items-center gap-2 font-bold text-accent">
-                    <FileCheck2 className="h-4 w-4" />
-                    <span>02 · Research Appointment</span>
-                  </span>
-                  <span className="font-medium text-fg-muted">
-                    {offerLetter.referenceId}
-                  </span>
-                </div>
-
-                <div className="p-5 sm:p-6">
-                  <h3 className="text-xl font-bold tracking-tight text-fg">
-                    {offerLetter.title}
-                  </h3>
-
-                  <p className="mt-1 font-mono text-xs font-medium text-accent">
-                    {offerLetter.org} · Start: {offerLetter.start} (
-                    {offerLetter.term})
-                  </p>
-
-                  <p className="mt-3 text-sm leading-relaxed text-fg-secondary">
-                    {offerLetter.summary}
-                  </p>
-
-                  {/* Matted Offer Letter Stage */}
-                  <div className="mt-5 flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-lg border border-border bg-stage p-3 sm:p-4">
-                    <img
-                      src={offerLetter.previewUrl}
-                      alt={`${offerLetter.title} — ${offerLetter.org}`}
-                      loading="lazy"
-                      className="max-h-full max-w-full rounded object-contain shadow-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-subtle px-5 py-4 sm:px-6">
                 <button
                   type="button"
-                  onClick={() =>
-                    setPreviewDoc({
-                      title: offerLetter.title,
-                      subtitle: `${offerLetter.org} · ${offerLetter.referenceId}`,
-                      imageUrl: offerLetter.previewUrl,
-                    })
-                  }
+                  onClick={() => setShowCertModal(true)}
                   className="btn-secondary"
                 >
-                  <Eye className="h-3.5 w-3.5 text-accent" />
-                  <span>Inspect Offer Letter</span>
+                  <Eye className="h-4 w-4 text-accent" />
+                  <span>Preview Certificate</span>
                 </button>
+              </div>
+            </article>
+          </div>
 
+          {/* 02. Research Intern Role Card (replaces offer-letter image & reference ID) + 03. Preprint */}
+          <div className="flex flex-col gap-6 lg:col-span-5">
+            <article className="card-base flex flex-col justify-between p-6">
+              <div>
+                <div className="flex items-center justify-between gap-2 font-mono text-xs">
+                  <span className="inline-flex items-center gap-2 font-bold text-accent">
+                    <Briefcase className="h-4 w-4" />
+                    <span>02 · Research Internship</span>
+                  </span>
+                  <span className="chip">{internship.period}</span>
+                </div>
+
+                <h3 className="type-h3 mt-4 text-fg">
+                  {internship.role} · {internship.org}
+                </h3>
+
+                <p className="mt-3 text-sm leading-relaxed text-fg-secondary">
+                  {internship.summary}
+                </p>
+              </div>
+
+              <div className="mt-6 border-t border-border pt-4">
+                <div className="text-xs font-medium text-fg-muted">
+                  Academic Profiles
+                </div>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {isTodo(profile.socials.scholar) ? (
+                    <TodoBadge
+                      value={profile.socials.scholar}
+                      label="Google Scholar"
+                    />
+                  ) : (
+                    <a
+                      href={profile.socials.scholar}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary"
+                    >
+                      <span>Google Scholar Profile</span>
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  )}
+                  {isTodo(profile.socials.orcid) && (
+                    <TodoBadge value={profile.socials.orcid} label="ORCID" />
+                  )}
+                </div>
+              </div>
+            </article>
+
+            {/* 03. Preprint Manuscript */}
+            <article className="card-base flex flex-col justify-between p-6">
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="font-mono text-xs font-bold text-accent">
+                    03 · Preprint
+                  </span>
+                  <span className="chip text-accent">{preprint.label}</span>
+                </div>
+
+                <h3 className="type-h3 mt-4 text-fg">{preprint.title}</h3>
+
+                <dl className="mt-3 space-y-2 text-xs text-fg-secondary">
+                  <div>
+                    <dt className="inline font-mono font-semibold text-fg-muted">
+                      Status:{" "}
+                    </dt>
+                    <dd className="inline">{preprint.status}</dd>
+                  </div>
+                  <div>
+                    <dt className="inline font-mono font-semibold text-fg-muted">
+                      Co-authors:{" "}
+                    </dt>
+                    <dd className="inline">
+                      <TodoBadge
+                        value={preprint.coAuthors}
+                        label="Co-authors"
+                      />
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="mt-6 border-t border-border pt-4">
                 <a
-                  href={offerLetter.previewUrl}
+                  href={preprint.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Open original offer letter file"
-                  className="btn-icon"
+                  className="btn-secondary w-full"
                 >
+                  <FileText className="h-4 w-4 text-accent" />
+                  <span>Read Preprint PDF</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-
-      {/* 03. Ongoing Research */}
-      <Reveal delay={0.14}>
-        <div className="mt-8 rounded-xl border border-border bg-surface p-6 shadow-sm sm:p-8">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-wide text-accent">
-              <Clock className="h-4 w-4" />
-              <span>03 · In Progress</span>
-            </div>
-            <span className="rounded-full border border-accent/40 bg-accent-soft px-3 py-0.5 font-mono text-xs font-medium text-accent">
-              Ongoing Collaboration
-            </span>
+            </article>
           </div>
-
-          <p className="mt-3 text-base font-medium text-fg">{ongoing}</p>
-
-          {ongoingPdfUrl && (
-            <div className="mt-4">
-              <a
-                href={ongoingPdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-xs font-semibold text-accent underline decoration-accent/50 underline-offset-4 hover:decoration-accent"
-              >
-                <FileText className="h-3.5 w-3.5" />
-                <span>
-                  View Pre-Print Manuscript: Swarm Intelligence Tuning of PID
-                  Position Controllers (PDF)
-                </span>
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            </div>
-          )}
         </div>
       </Reveal>
 
-      {/* Lightbox Modal for Research Documents */}
-      {previewDoc && (
+      {showCertModal && (
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="research-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          onClick={() => setPreviewDoc(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setShowCertModal(false)}
         >
           <div
-            className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-border bg-surface p-5 shadow-2xl sm:p-6"
+            className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-border bg-surface p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4 border-b border-border pb-4">
               <div>
                 <p className="font-mono text-xs font-semibold text-accent">
-                  {previewDoc.subtitle}
+                  {published.venue} · DOI: {published.doi}
                 </p>
-                <h3
-                  id="research-modal-title"
-                  className="mt-1 text-xl font-bold text-fg"
-                >
-                  {previewDoc.title}
+                <h3 id="research-modal-title" className="type-h3 mt-1 text-fg">
+                  IJICT Publication Certificate
                 </h3>
               </div>
 
               <button
                 type="button"
-                onClick={() => setPreviewDoc(null)}
-                aria-label="Close document preview"
+                onClick={() => setShowCertModal(false)}
+                aria-label="Close certificate preview"
                 className="btn-icon"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            <div className="mt-5 flex items-center justify-center overflow-hidden rounded-lg border border-border bg-stage p-3 sm:p-4">
-              <img
-                src={previewDoc.imageUrl}
-                alt={previewDoc.title}
-                className="max-h-[68vh] w-full object-contain"
+            <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden rounded-lg border border-border bg-stage">
+              <Image
+                src={published.certificateUrl}
+                alt="IJICT Publication Certificate"
+                fill
+                sizes="(max-width: 768px) 100vw, 720px"
+                className="object-contain p-3"
               />
-            </div>
-
-            <div className="mt-5 flex justify-end">
-              <a
-                href={previewDoc.imageUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                <span>Open Original File</span>
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
             </div>
           </div>
         </div>

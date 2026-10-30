@@ -1,18 +1,26 @@
-// Shared strict TypeScript interfaces for portfolio data, MDX content, and contact forms.
+// Strict TypeScript interfaces for portfolio data, case-study projects, research, and certifications.
 
 export interface SocialLinks {
   github: string;
   linkedin: string;
   x: string;
   scholar: string;
+  orcid: string;
   email: string;
 }
 
 export interface Profile {
   name: string;
   roles: string[];
-  headline: string;
-  bio: string;
+  roleLine: string;
+  valueStatement: string;
+  intro: string;
+  metaDescription: string;
+  ogDescription: string;
+  twitterDescription: string;
+  location: string;
+  availability: string;
+  cvUrl: string;
   site: string;
   avatar: string;
   socials: SocialLinks;
@@ -22,7 +30,19 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
+  metaDescription: string;
+  ogDescription: string;
+  twitterDescription: string;
+  problem: string;
+  role: string;
+  stack: string[];
+  howItWorks: [string, string, string];
+  results: string;
+  previewImage: string;
+  previewAlt: string;
+  architectureNodes: [string, string, string];
   link?: string;
+  linkLabel?: string;
   status?: string;
   tags: string[];
   metrics?: string;
@@ -30,40 +50,47 @@ export interface Project {
 
 export interface PublishedPaper {
   title: string;
+  authors: string[];
   venue: string;
+  datePublished: string;
   doi: string;
   url: string;
   pdfUrl: string;
   certificateUrl: string;
 }
 
-export interface ResearchOfferLetter {
-  title: string;
+export interface ResearchInternship {
+  role: string;
   org: string;
-  start: string;
-  term: string;
-  referenceId: string;
-  previewUrl: string;
+  period: string;
   summary: string;
+}
+
+export interface PreprintManuscript {
+  title: string;
+  label: string;
+  status: string;
+  coAuthors: string;
+  pdfUrl: string;
 }
 
 export interface ResearchData {
   published: PublishedPaper;
-  offerLetter: ResearchOfferLetter;
-  ongoing: string;
-  ongoingPdfUrl?: string;
+  internship: ResearchInternship;
+  preprint: PreprintManuscript;
 }
 
 export interface ExperienceItem {
   role: string;
   org: string;
-  start: string;
-  term: string;
+  period: string;
+  summary: string;
 }
 
 export interface EducationData {
   degree: string;
   school: string;
+  period: string;
 }
 
 export interface CertificateItem {
@@ -71,9 +98,11 @@ export interface CertificateItem {
   title: string;
   issuer: string;
   issueDate: string;
-  category: "AI & Computer Science" | "Conferences & Honors" | "Systems & Web";
+  sortDate: string;
+  group: "featured" | "other";
   previewUrl: string;
-  credentialId?: string;
+  secondaryPreviewUrl?: string;
+  verificationUrl: string;
   skills: string[];
 }
 

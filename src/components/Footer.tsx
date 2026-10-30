@@ -1,4 +1,4 @@
-// Site footer displaying dynamic copyright year and link to /humans.txt.
+// Site footer with dynamic year and clear readable labels for Uses and Humans.txt.
 import React from "react";
 import Link from "next/link";
 import { profile } from "@/data/portfolio";
@@ -13,18 +13,18 @@ export function Footer() {
           &copy; {currentYear} {profile.name}. Built with Next.js &amp;
           TypeScript.
         </p>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <Link
             href="/uses"
-            className="font-medium text-fg-secondary transition-colors hover:text-accent"
+            className="inline-flex min-h-[44px] items-center px-2 font-medium text-fg-secondary transition-colors hover:text-accent"
           >
-            /uses
+            Uses
           </Link>
           <Link
             href="/humans.txt"
-            className="font-medium text-fg-secondary transition-colors hover:text-accent"
+            className="inline-flex min-h-[44px] items-center px-2 font-medium text-fg-secondary transition-colors hover:text-accent"
           >
-            /humans.txt
+            Humans.txt
           </Link>
         </div>
       </div>

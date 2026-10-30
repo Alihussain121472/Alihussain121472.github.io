@@ -1,23 +1,30 @@
-/* Global stylesheet with WCAG 2.2 AA/AAA verified semantic tokens and unified button system. */
+/* Design tokens, fluid clamp() type scale, 44px tap targets, unified cards/chips, and KnowledgeNetwork background styles. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root,
 html.dark {
-  --bg-canvas: #0d0f12;
-  --bg-surface: #15181e;
+  --background: #0d0f12;
+  --surface: #15181e;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --border: #333b4a;
+
+  --bg-canvas: var(--background);
+  --bg-surface: var(--surface);
   --bg-subtle: #1c2028;
   --bg-stage: #090b0e;
-  --bg-glass: #0d0f12;
-  --border-subtle: #262b36;
-  --border-strong: #374151;
-  --text-primary: #f8fafc;
+  --bg-glass: var(--background);
+  --border-subtle: var(--border);
+  --border-strong: #64748b;
+  --text-primary: var(--text);
   --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --accent: #38bdf8;
+  --text-muted: var(--muted);
   --accent-fg: #090d14;
   --accent-soft: #112233;
+
   --constellation-glow-1: #112840;
   --constellation-glow-2: #0e1f33;
   --constellation-node-1: #38bdf8;
@@ -26,25 +33,38 @@ html.dark {
   --constellation-edge-1: #1e4263;
   --constellation-edge-2: #17324d;
   --constellation-edge-3: #12263a;
+
+  --text-display: clamp(2.25rem, 4vw + 1rem, 3.5rem);
+  --text-h1: clamp(1.875rem, 3vw + 0.75rem, 2.5rem);
+  --text-h2: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  --text-h3: clamp(1.125rem, 1vw + 0.5rem, 1.375rem);
+  --text-body: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
 }
 
 html.light {
-  --bg-canvas: #f8fafc;
-  --bg-surface: #ffffff;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #0369a1;
+  --border: #cbd5e1;
+
+  --bg-canvas: var(--background);
+  --bg-surface: var(--surface);
   --bg-subtle: #f1f5f9;
   --bg-stage: #f1f5f9;
-  --bg-glass: #f8fafc;
-  --border-subtle: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --text-primary: #0f172a;
+  --bg-glass: var(--background);
+  --border-subtle: var(--border);
+  --border-strong: #64748b;
+  --text-primary: var(--text);
   --text-secondary: #334155;
-  --text-muted: #475569;
-  --accent: #0369a1;
+  --text-muted: var(--muted);
   --accent-fg: #ffffff;
   --accent-soft: #e0f2fe;
+
   --constellation-glow-1: #dff0fb;
   --constellation-glow-2: #eaf5fc;
-  --constellation-node-1: #1d75ad;
+  --constellation-node-1: #3b9dd2;
   --constellation-node-2: #68aad0;
   --constellation-node-3: #95c5e0;
   --constellation-edge-1: #cbe3f2;
@@ -55,8 +75,8 @@ html.light {
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--bg-canvas);
-    color: var(--text-primary);
+    background-color: var(--background);
+    color: var(--text);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -67,34 +87,82 @@ html.light {
 
   body {
     min-height: 100vh;
-    background-color: var(--bg-canvas);
-    color: var(--text-primary);
+    background-color: var(--background);
+    color: var(--text);
+    font-size: var(--text-body);
+    line-height: 1.6;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
+
+  p,
+  li {
+    max-width: 65ch;
+    line-height: 1.6;
+  }
 }
 
-/* Unified 3-variant button design system (keeps total distinct button styles <= 3) */
 @layer components {
+  .type-display {
+    font-size: var(--text-display);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+
+  .type-h1 {
+    font-size: var(--text-h1);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .type-h2 {
+    font-size: var(--text-h2);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+  }
+
+  .type-h3 {
+    font-size: var(--text-h3);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+
+  .type-body {
+    font-size: var(--text-body);
+    line-height: 1.6;
+    max-width: 65ch;
+  }
+
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-transparent bg-accent px-4 py-2.5 font-mono text-xs font-bold text-accent-fg shadow-sm transition-opacity hover:opacity-90 disabled:opacity-50;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-transparent bg-accent px-5 py-2.5 font-mono text-xs font-bold text-accent-fg shadow-sm transition-opacity hover:opacity-90 disabled:opacity-50;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5 font-mono text-xs font-semibold text-fg shadow-sm transition-colors hover:border-accent hover:text-accent;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 font-mono text-xs font-semibold text-fg shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent;
   }
 
   .btn-icon {
-    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-surface text-fg-secondary transition-colors hover:border-accent hover:text-accent;
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-surface text-fg-secondary transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-accent;
+  }
+
+  .card-base {
+    @apply rounded-xl border border-border bg-surface transition-all duration-200 hover:-translate-y-0.5 hover:border-accent;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-lg border border-border bg-subtle px-2.5 py-1 font-mono text-xs font-medium text-fg-secondary;
   }
 }
 
 .glass-nav {
-  background-color: var(--bg-canvas);
+  background-color: var(--background);
 }
 
-/* Constellation network background elements (opaque CSS variables for deterministic WCAG 2.2 AA contrast) */
 .constellation-glow-primary {
   background-color: var(--constellation-glow-1);
 }
@@ -150,14 +218,12 @@ html.light {
   background-color: var(--constellation-edge-3);
 }
 
-/* Prevent injected browser extension widgets from violating WCAG 4.1.2 / positive tabindex or obscuring sticky nav links */
 chatgpt-sidebar {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
 }
 
-/* High-visibility keyboard focus ring */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;

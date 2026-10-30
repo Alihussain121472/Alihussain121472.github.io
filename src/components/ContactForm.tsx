@@ -1,4 +1,4 @@
-// Validated contact form using React Hook Form, Zod, and the Resend Server Action.
+// Validated contact form with visible keyboard focus rings, 44px tap targets, and Resend Server Action.
 "use client";
 
 import React, { useState } from "react";
@@ -35,7 +35,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="space-y-6 rounded-xl border border-border bg-surface p-6 shadow-sm sm:p-8"
+      className="card-base space-y-6 p-6 sm:p-8"
     >
       <div>
         <label
@@ -50,11 +50,11 @@ export function ContactForm() {
           autoComplete="name"
           {...register("name")}
           aria-invalid={Boolean(errors.name)}
-          className="mt-2 w-full rounded-lg border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent focus:outline-none"
+          className="mt-2 min-h-[44px] w-full rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent"
           placeholder="Syed Ali Hussain"
         />
         {errors.name && (
-          <p role="alert" className="mt-1.5 text-xs font-medium text-red-500">
+          <p role="alert" className="mt-1.5 text-xs font-medium text-accent">
             {errors.name.message}
           </p>
         )}
@@ -73,11 +73,11 @@ export function ContactForm() {
           autoComplete="email"
           {...register("email")}
           aria-invalid={Boolean(errors.email)}
-          className="mt-2 w-full rounded-lg border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent focus:outline-none"
+          className="mt-2 min-h-[44px] w-full rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent"
           placeholder="you@example.com"
         />
         {errors.email && (
-          <p role="alert" className="mt-1.5 text-xs font-medium text-red-500">
+          <p role="alert" className="mt-1.5 text-xs font-medium text-accent">
             {errors.email.message}
           </p>
         )}
@@ -95,11 +95,11 @@ export function ContactForm() {
           rows={5}
           {...register("message")}
           aria-invalid={Boolean(errors.message)}
-          className="mt-2 w-full rounded-lg border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent focus:outline-none"
-          placeholder="Tell me about your project, research collaboration, or automation workflow..."
+          className="mt-2 w-full rounded-xl border border-border bg-canvas p-4 text-sm text-fg placeholder-fg-muted focus:border-accent"
+          placeholder="Tell me about your website, AI agent, or machine learning research project..."
         />
         {errors.message && (
-          <p role="alert" className="mt-1.5 text-xs font-medium text-red-500">
+          <p role="alert" className="mt-1.5 text-xs font-medium text-accent">
             {errors.message.message}
           </p>
         )}
@@ -109,18 +109,14 @@ export function ContactForm() {
         <div
           role="status"
           aria-live="polite"
-          className={`rounded-lg border px-4 py-3 text-sm font-medium ${
-            status.success
-              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
-              : "border-red-500/40 bg-red-500/10 text-red-600 dark:text-red-300"
-          }`}
+          className="rounded-xl border border-border bg-subtle px-4 py-3 text-sm font-medium text-fg"
         >
           {status.message}
         </div>
       )}
 
       <button type="submit" disabled={isSubmitting} className="btn-primary">
-        <Send className="h-3.5 w-3.5" />
+        <Send className="h-4 w-4" />
         <span>{isSubmitting ? "Sending..." : "Send message"}</span>
       </button>
     </form>
