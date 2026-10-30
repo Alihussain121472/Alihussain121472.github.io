@@ -1,4 +1,4 @@
-// Research section (#research) featuring published IJICT paper, AIEYS Research Intern role card, and labeled preprint.
+// Research section (#research) featuring published IJICT paper, AIEYS Research Intern card with View Certificate modal, and labeled preprint.
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -15,19 +15,25 @@ import { profile, research } from "@/data/portfolio";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
 import { Reveal } from "@/components/Reveal";
 
+interface PreviewModalDoc {
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+}
+
 export function ResearchSection() {
-  const [showCertModal, setShowCertModal] = useState(false);
+  const [previewDoc, setPreviewDoc] = useState<PreviewModalDoc | null>(null);
   const { published, internship, preprint } = research;
   const doiUrl = `https://doi.org/${published.doi}`;
 
   useEffect(() => {
-    if (!showCertModal) return;
+    if (!previewDoc) return;
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setShowCertModal(false);
+      if (e.key === "Escape") setPreviewDoc(null);
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [showCertModal]);
+  }, [previewDoc]);
 
   return (
     <section
@@ -123,7 +129,13 @@ export function ResearchSection() {
 
                 <button
                   type="button"
-                  onClick={() => setShowCertModal(true)}
+                  onClick={() =>
+                    setPreviewDoc({
+                      title: "IJICT Publication Certificate",
+                      subtitle: `${published.venue} · DOI: ${published.doi}`,
+                      imageUrl: published.certificateUrl,
+                    })
+                  }
                   className="btn-secondary"
                 >
                   <Eye className="h-4 w-4 text-accent" />
@@ -133,7 +145,7 @@ export function ResearchSection() {
             </article>
           </div>
 
-          {/* 02. Research Intern Role Card (replaces offer-letter image & reference ID) + 03. Preprint */}
+          {/* 02. Research Intern Role Card + View Certificate Button & 03. Preprint */}
           <div className="flex flex-col gap-6 lg:col-span-5">
             <article className="card-base flex flex-col justify-between p-6">
               <div>
@@ -152,6 +164,23 @@ export function ResearchSection() {
                 <p className="mt-3 text-sm leading-relaxed text-fg-secondary">
                   {internship.summary}
                 </p>
+
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPreviewDoc({
+                        title: "AIEYS Research Intern Offer Letter",
+                        subtitle: `${internship.role} · ${internship.org} (${internship.period})`,
+                        imageUrl: internship.previewUrl,
+                      })
+                    }
+                    className="btn-secondary w-full"
+                  >
+                    <Eye className="h-4 w-4 text-accent" />
+                    <span>View Certificate</span>
+                  </button>
+                </div>
               </div>
 
               <div className="mt-6 border-t border-border pt-4">
@@ -232,13 +261,13 @@ export function ResearchSection() {
         </div>
       </Reveal>
 
-      {showCertModal && (
+      {previewDoc && (
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="research-modal-title"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setShowCertModal(false)}
+          onClick={() => setPreviewDoc(null)}
         >
           <div
             className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-border bg-surface p-6 shadow-2xl"
@@ -247,17 +276,17 @@ export function ResearchSection() {
             <div className="flex items-start justify-between gap-4 border-b border-border pb-4">
               <div>
                 <p className="font-mono text-xs font-semibold text-accent">
-                  {published.venue} · DOI: {published.doi}
+                  {previewDoc.subtitle}
                 </p>
                 <h3 id="research-modal-title" className="type-h3 mt-1 text-fg">
-                  IJICT Publication Certificate
+                  {previewDoc.title}
                 </h3>
               </div>
 
               <button
                 type="button"
-                onClick={() => setShowCertModal(false)}
-                aria-label="Close certificate preview"
+                onClick={() => setPreviewDoc(null)}
+                aria-label="Close document preview"
                 className="btn-icon"
               >
                 <X className="h-4 w-4" />
@@ -266,12 +295,24 @@ export function ResearchSection() {
 
             <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden rounded-lg border border-border bg-stage">
               <Image
-                src={published.certificateUrl}
-                alt="IJICT Publication Certificate"
+                src={previewDoc.imageUrl}
+                alt={previewDoc.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 720px"
                 className="object-contain p-3"
               />
+            </div>
+
+            <div className="mt-5 flex justify-end">
+              <a
+                href={previewDoc.imageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                <span>Open Original Image</span>
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>

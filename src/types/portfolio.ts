@@ -64,6 +64,7 @@ export interface ResearchInternship {
   org: string;
   period: string;
   summary: string;
+  previewUrl: string;
 }
 
 export interface PreprintManuscript {

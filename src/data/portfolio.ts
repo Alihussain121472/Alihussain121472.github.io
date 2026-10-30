@@ -188,6 +188,8 @@ export const research: ResearchData = {
     period: "Oct 2026 – Oct 2027",
     summary:
       "Research Intern at AIEYS (Oct 2026 – Oct 2027), working on machine learning models and new papers.",
+    previewUrl:
+      "/assets/images/certificates/aieys-research-intern-offer-letter.jpg",
   },
   preprint: {
     title:
