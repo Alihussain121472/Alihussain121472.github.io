@@ -404,11 +404,37 @@ html.light {
   }
 }
 
-.constellation-glow-primary {
+.constellation-glow-primary,
+.constellation-glow-secondary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+}
+
+.constellation-glow-primary::before {
+  content: "";
+  position: absolute;
+  left: -6rem;
+  top: -7rem;
+  width: 760px;
+  height: 480px;
+  border-radius: 9999px;
+  filter: blur(110px);
   background-color: var(--constellation-glow-1);
 }
 
-.constellation-glow-secondary {
+.constellation-glow-secondary::before {
+  content: "";
+  position: absolute;
+  left: calc(100vw - 620px + 6rem);
+  top: calc(100vh - 420px + 8rem);
+  width: 620px;
+  height: 420px;
+  border-radius: 9999px;
+  filter: blur(120px);
   background-color: var(--constellation-glow-2);
 }
 
@@ -416,23 +442,33 @@ html.light {
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 9999px;
+  width: 0;
+  height: 0;
+  overflow: visible;
   will-change: transform;
 }
 
-.constellation-node-primary {
+.constellation-node::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+}
+
+.constellation-node-primary::before {
   width: 7px;
   height: 7px;
   background-color: var(--constellation-node-1);
 }
 
-.constellation-node-secondary {
+.constellation-node-secondary::before {
   width: 5px;
   height: 5px;
   background-color: var(--constellation-node-2);
 }
 
-.constellation-node-micro {
+.constellation-node-micro::before {
   width: 3.5px;
   height: 3.5px;
   background-color: var(--constellation-node-3);
@@ -442,20 +478,31 @@ html.light {
   position: absolute;
   top: 0;
   left: 0;
-  height: 1px;
-  transform-origin: 0 50%;
-  will-change: transform, width;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  transform-origin: 0 0;
+  will-change: transform;
 }
 
-.constellation-edge-strong {
+.constellation-edge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--edge-w, 0px);
+  height: 1px;
+}
+
+.constellation-edge-strong::before {
   background-color: var(--constellation-edge-1);
 }
 
-.constellation-edge-mid {
+.constellation-edge-mid::before {
   background-color: var(--constellation-edge-2);
 }
 
-.constellation-edge-faint {
+.constellation-edge-faint::before {
   background-color: var(--constellation-edge-3);
 }
 

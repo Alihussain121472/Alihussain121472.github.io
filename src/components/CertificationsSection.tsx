@@ -41,21 +41,18 @@ export function CertificationsSection() {
       <Reveal>
         <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
           <div>
-            <p className="w-fit rounded bg-canvas px-1 font-mono text-xs font-semibold tracking-wide text-accent">
+            <p className="font-mono text-xs font-semibold tracking-wide text-accent">
               Coursework &amp; Conferences
             </p>
-            <h2
-              id="certifications-heading"
-              className="type-h2 mt-2 w-fit rounded bg-canvas px-1 text-fg"
-            >
+            <h2 id="certifications-heading" className="type-h2 mt-2 text-fg">
               Certifications
             </h2>
-            <p className="type-body mt-2 w-fit rounded bg-canvas px-1 text-fg-secondary">
+            <p className="type-body mt-2 text-fg-secondary">
               Course badges and honors in Python code, modern AI, web apps, and
               global tech events.
             </p>
           </div>
-          <span className="w-fit rounded bg-canvas px-1 font-mono text-xs font-medium text-fg-muted">
+          <span className="font-mono text-xs font-medium text-fg-muted">
             Showing {featured.length} of {sorted.length} (newest first)
           </span>
         </div>

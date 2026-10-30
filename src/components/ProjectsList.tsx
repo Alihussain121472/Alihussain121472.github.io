@@ -16,17 +16,14 @@ export function ProjectsList() {
       <Reveal>
         <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
           <div>
-            <p className="w-fit rounded bg-canvas px-1 font-mono text-xs font-semibold tracking-wide text-accent">
+            <p className="font-mono text-xs font-semibold tracking-wide text-accent">
               Case Studies
             </p>
-            <h2
-              id="projects-heading"
-              className="type-h2 mt-2 w-fit rounded bg-canvas px-1 text-fg"
-            >
+            <h2 id="projects-heading" className="type-h2 mt-2 text-fg">
               Projects
             </h2>
           </div>
-          <span className="w-fit rounded bg-canvas px-1 font-mono text-xs font-medium text-fg-muted">
+          <span className="font-mono text-xs font-medium text-fg-muted">
             01 — {String(projects.length).padStart(2, "0")}
           </span>
         </div>

@@ -204,7 +204,7 @@ export function ConstellationBackground() {
           edgeEl.style.display = "none";
         } else {
           edgeEl.style.display = "block";
-          edgeEl.style.width = `${edge.length.toFixed(1)}px`;
+          edgeEl.style.setProperty("--edge-w", `${edge.length.toFixed(1)}px`);
           edgeEl.style.transform = `translate3d(${edge.x.toFixed(
             1
           )}px, ${edge.y.toFixed(1)}px, 0) rotate(${edge.angle.toFixed(4)}rad)`;
@@ -245,13 +245,13 @@ export function ConstellationBackground() {
     <div
       ref={containerRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      className="pointer-events-none fixed left-0 top-0 z-0 h-0 w-0 overflow-visible"
     >
       {/* Upper-Left Ambient Sky-Blue Radial Glow (matches reference image) */}
-      <div className="constellation-glow-primary absolute -left-24 -top-28 h-[480px] w-[760px] rounded-full blur-[110px]" />
+      <div className="constellation-glow-primary" />
 
       {/* Lower-Right Subtle Secondary Glow */}
-      <div className="constellation-glow-secondary absolute -bottom-32 -right-24 h-[420px] w-[620px] rounded-full blur-[120px]" />
+      <div className="constellation-glow-secondary" />
 
       {/* Pre-allocated Geometric Connecting Lines Pool */}
       {Array.from({ length: MAX_EDGES }).map((_, idx) => (
