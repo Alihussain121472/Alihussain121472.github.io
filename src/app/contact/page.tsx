@@ -6,7 +6,6 @@ import { profile } from "@/data/portfolio";
 import { ContactForm } from "@/components/ContactForm";
 import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
-import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -65,8 +64,7 @@ export default function ContactPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
-      <Reveal>
-        <p className="font-mono text-xs font-semibold tracking-wide text-accent">
+      <p className="font-mono text-xs font-semibold tracking-wide text-accent">
           Say Hello
         </p>
         <h1 className="type-h1 mt-2 text-fg">Contact</h1>
@@ -122,7 +120,6 @@ export default function ContactPage() {
             </div>
           </aside>
         </div>
-      </Reveal>
     </div>
   );
 }

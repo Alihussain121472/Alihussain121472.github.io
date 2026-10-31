@@ -37,7 +37,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="site-header glass-nav sticky top-0 z-50 border-b border-border bg-canvas transition-colors">
+    <header className="site-header sticky top-0 z-50 border-b border-border bg-canvas transition-colors">
       <div className="site-header__inner mx-auto max-w-5xl">
         <Link
           href="/#intro"

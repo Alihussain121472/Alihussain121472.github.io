@@ -16,7 +16,6 @@ html.dark {
   --bg-surface: var(--surface);
   --bg-subtle: #1c2028;
   --bg-stage: #090b0e;
-  --bg-glass: var(--background);
   --border-subtle: var(--border);
   --border-strong: #64748b;
   --text-primary: var(--text);
@@ -53,7 +52,6 @@ html.light {
   --bg-surface: var(--surface);
   --bg-subtle: #f1f5f9;
   --bg-stage: #f1f5f9;
-  --bg-glass: var(--background);
   --border-subtle: var(--border);
   --border-strong: #64748b;
   --text-primary: var(--text);
@@ -159,10 +157,6 @@ html.light {
   }
 }
 
-.glass-nav {
-  background-color: var(--background);
-}
-
 /* ==========================================================================
    Base Header & Sticky Auto-Hiding Footer Layout
    ========================================================================== */
@@ -241,12 +235,6 @@ html.light {
 }
 
 .site-footer__socials {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.site-footer__meta-links {
   display: flex;
   align-items: center;
   gap: 0.5rem;

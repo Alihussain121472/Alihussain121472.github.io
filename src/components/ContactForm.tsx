@@ -1,39 +1,58 @@
-// Validated contact form with visible keyboard focus rings, 44px tap targets, and Resend Server Action.
+// Lightweight validated contact form using native React state (zero external form libraries).
 "use client";
 
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Send } from "lucide-react";
-import { contactFormSchema, type ContactFormValues } from "@/lib/validation";
 import { sendContactEmail } from "@/app/actions/contact";
 import type { ContactActionState } from "@/types/portfolio";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    message?: string;
+  }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<ContactActionState | null>(null);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: { name: "", email: "", message: "" },
-  });
-
-  async function onSubmit(values: ContactFormValues) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setStatus(null);
-    const result = await sendContactEmail(values);
+
+    const nextErrors: { name?: string; email?: string; message?: string } = {};
+    if (name.trim().length < 2) {
+      nextErrors.name = "Name must be at least 2 characters.";
+    }
+    if (!EMAIL_REGEX.test(email.trim())) {
+      nextErrors.email = "Please enter a valid email address.";
+    }
+    if (message.trim().length < 10) {
+      nextErrors.message = "Message must be at least 10 characters.";
+    }
+
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+
+    setIsSubmitting(true);
+    const result = await sendContactEmail({ name, email, message });
+    setIsSubmitting(false);
     setStatus(result);
+
     if (result.success) {
-      reset();
+      setName("");
+      setEmail("");
+      setMessage("");
     }
   }
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit}
       noValidate
       className="card-base space-y-6 p-6 sm:p-8"
     >
@@ -48,14 +67,15 @@ export function ContactForm() {
           id="name"
           type="text"
           autoComplete="name"
-          {...register("name")}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           aria-invalid={Boolean(errors.name)}
           className="mt-2 min-h-[44px] w-full rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent"
           placeholder="Syed Ali Hussain"
         />
         {errors.name && (
           <p role="alert" className="mt-1.5 text-xs font-medium text-accent">
-            {errors.name.message}
+            {errors.name}
           </p>
         )}
       </div>
@@ -71,14 +91,15 @@ export function ContactForm() {
           id="email"
           type="email"
           autoComplete="email"
-          {...register("email")}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           aria-invalid={Boolean(errors.email)}
           className="mt-2 min-h-[44px] w-full rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-fg placeholder-fg-muted focus:border-accent"
           placeholder="you@example.com"
         />
         {errors.email && (
           <p role="alert" className="mt-1.5 text-xs font-medium text-accent">
-            {errors.email.message}
+            {errors.email}
           </p>
         )}
       </div>
@@ -93,14 +114,15 @@ export function ContactForm() {
         <textarea
           id="message"
           rows={5}
-          {...register("message")}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           aria-invalid={Boolean(errors.message)}
           className="mt-2 w-full rounded-xl border border-border bg-canvas p-4 text-sm text-fg placeholder-fg-muted focus:border-accent"
           placeholder="Tell me about your website, AI agent, or machine learning research project..."
         />
         {errors.message && (
           <p role="alert" className="mt-1.5 text-xs font-medium text-accent">
-            {errors.message.message}
+            {errors.message}
           </p>
         )}
       </div>

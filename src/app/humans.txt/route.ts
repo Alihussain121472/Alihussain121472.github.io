@@ -22,7 +22,7 @@ export function GET() {
     "",
     "/* SITE */",
     "Standards: HTML5, CSS3, WCAG 2.2 AA",
-    "Stack: Next.js App Router, TypeScript (Strict), Tailwind CSS, Framer Motion, MDX, Zod, Resend",
+    "Stack: Next.js App Router, TypeScript (Strict), Tailwind CSS, Resend",
     "Hosting: Vercel",
   ].join("\n");
 

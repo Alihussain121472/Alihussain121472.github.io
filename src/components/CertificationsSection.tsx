@@ -7,7 +7,6 @@ import { Award, ChevronDown, ChevronUp, ExternalLink, X } from "lucide-react";
 import { certifications } from "@/data/portfolio";
 import type { CertificateItem } from "@/types/portfolio";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
-import { Reveal } from "@/components/Reveal";
 
 export function CertificationsSection() {
   const [showAll, setShowAll] = useState(false);
@@ -38,8 +37,7 @@ export function CertificationsSection() {
       aria-labelledby="certifications-heading"
       className="mx-auto max-w-5xl border-t border-border px-4 py-16 sm:px-6 sm:py-24"
     >
-      <Reveal>
-        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+      <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
           <div>
             <p className="font-mono text-xs font-semibold tracking-wide text-accent">
               Coursework &amp; Conferences
@@ -189,7 +187,6 @@ export function CertificationsSection() {
             )}
           </div>
         )}
-      </Reveal>
 
       {selectedCert && (
         <div

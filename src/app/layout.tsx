@@ -1,4 +1,4 @@
-// Root layout configuring fonts, separate Meta/OG/Twitter tags, canonical URL, JSON-LD Person + ScholarlyArticle schemas, and KnowledgeNetwork background.
+// Root layout configuring fonts, separate Meta/OG/Twitter tags, canonical URL, JSON-LD schemas, and ConstellationBackground.
 import React from "react";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
@@ -7,7 +7,6 @@ import { education, experience, profile, research } from "@/data/portfolio";
 import { isTodo } from "@/components/TodoBadge";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { A11yExtensionGuard } from "@/components/A11yExtensionGuard";
 import { ConstellationBackground } from "@/components/ConstellationBackground";
 import "./globals.css";
 
@@ -54,11 +53,7 @@ const themeInitScript = `
     var saved = localStorage.getItem('theme');
     var root = document.documentElement;
     root.classList.remove('dark', 'light');
-    if (saved === 'light') {
-      root.classList.add('light');
-    } else {
-      root.classList.add('dark');
-    }
+    root.classList.add(saved === 'light' ? 'light' : 'dark');
   } catch (e) {
     document.documentElement.classList.add('dark');
   }
@@ -85,7 +80,7 @@ const themeInitScript = `
     }
   }
   if (typeof MutationObserver !== 'undefined') {
-    new MutationObserver(fixExt).observe(document.documentElement, { childList: true, subtree: true });
+    new MutationObserver(fixExt).observe(document.documentElement, { childList: true });
   }
 })();
 `;
@@ -154,7 +149,7 @@ export default function RootLayout({
         <ConstellationBackground />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-xl focus:bg-accent focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:font-bold focus:text-accent-fg"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-accent focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:font-bold focus:text-accent-fg"
         >
           Skip to main content
         </a>
@@ -163,7 +158,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <A11yExtensionGuard />
         <Analytics />
       </body>
     </html>

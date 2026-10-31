@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { profile, research } from "@/data/portfolio";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
-import { Reveal } from "@/components/Reveal";
 
 interface PreviewModalDoc {
   title: string;
@@ -41,8 +40,7 @@ export function ResearchSection() {
       aria-labelledby="research-heading"
       className="mx-auto max-w-5xl border-t border-border px-4 py-16 sm:px-6 sm:py-24"
     >
-      <Reveal>
-        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+      <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
           <div>
             <p className="font-mono text-xs font-semibold tracking-wide text-accent">
               Publications &amp; Internship
@@ -259,7 +257,6 @@ export function ResearchSection() {
             </article>
           </div>
         </div>
-      </Reveal>
 
       {previewDoc && (
         <div

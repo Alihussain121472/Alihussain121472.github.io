@@ -3,7 +3,6 @@ import React from "react";
 import type { Metadata } from "next";
 import { profile, usesData } from "@/data/portfolio";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
-import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Uses",
@@ -29,8 +28,7 @@ export const metadata: Metadata = {
 export default function UsesPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
-      <Reveal>
-        <p className="font-mono text-xs font-semibold tracking-wide text-accent">
+      <p className="font-mono text-xs font-semibold tracking-wide text-accent">
           Environment &amp; Stack
         </p>
         <h1 className="type-h1 mt-2 text-fg">Uses</h1>
@@ -66,7 +64,6 @@ export default function UsesPage() {
             </section>
           ))}
         </div>
-      </Reveal>
     </div>
   );
 }

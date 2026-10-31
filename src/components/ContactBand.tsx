@@ -5,7 +5,6 @@ import { Mail, MessageSquare } from "lucide-react";
 import { profile } from "@/data/portfolio";
 import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { TodoBadge } from "@/components/TodoBadge";
-import { Reveal } from "@/components/Reveal";
 
 export function ContactBand() {
   return (
@@ -14,8 +13,7 @@ export function ContactBand() {
       aria-labelledby="contact-band-heading"
       className="mx-auto max-w-5xl border-t border-border px-4 py-16 sm:px-6 sm:py-24"
     >
-      <Reveal>
-        <div className="card-base flex flex-col justify-between gap-8 p-6 sm:p-10 md:flex-row md:items-center">
+      <div className="card-base flex flex-col justify-between gap-8 p-6 sm:p-10 md:flex-row md:items-center">
           <div className="space-y-3">
             <p className="font-mono text-xs font-semibold tracking-wide text-accent">
               Get in Touch
@@ -43,7 +41,6 @@ export function ContactBand() {
             </Link>
           </div>
         </div>
-      </Reveal>
     </section>
   );
 }

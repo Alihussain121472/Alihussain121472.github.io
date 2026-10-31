@@ -4,12 +4,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/portfolio";
-import { getProjectMdxBySlug } from "@/lib/mdx";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
-import { Reveal } from "@/components/Reveal";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -52,16 +49,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const project = projects[index];
   if (!project) notFound();
 
-  const mdxEntry = getProjectMdxBySlug(slug);
   const num = String(index + 1).padStart(2, "0");
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
-      <Reveal>
-        <Link
-          href="/#projects"
-          className="inline-flex min-h-[44px] items-center gap-2 font-mono text-xs font-medium text-fg-secondary transition-colors hover:text-accent"
-        >
+      <Link
+        href="/#projects"
+        className="inline-flex min-h-[44px] items-center gap-2 font-mono text-xs font-medium text-fg-secondary transition-colors hover:text-accent"
+      >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to projects</span>
         </Link>
@@ -233,13 +228,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             />
           </div>
         </section>
-
-        {mdxEntry && (
-          <div className="mt-10 space-y-6 leading-relaxed text-fg-secondary [&_a]:text-accent [&_a]:underline [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-fg [&_li]:ml-5 [&_li]:list-disc [&_p]:text-base [&_strong]:text-fg">
-            <MDXRemote source={mdxEntry.content} />
-          </div>
-        )}
-      </Reveal>
     </article>
   );
 }

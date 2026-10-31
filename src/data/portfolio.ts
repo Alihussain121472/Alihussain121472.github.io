@@ -1,5 +1,6 @@
 // Centralized portfolio data, case-study content, research metadata, and sorted certifications.
 import type {
+  ArticleItem,
   CertificateItem,
   EducationData,
   ExperienceItem,
@@ -362,5 +363,64 @@ export const usesData: UsesCategory[] = [
         detail: "Relational storage, transactional email, and edge hosting",
       },
     ],
+  },
+];
+
+export const articles: ArticleItem[] = [
+  {
+    slug: "building-ai-workflows-with-n8n",
+    title: "Building AI Agents with n8n for NovaBrief Tech",
+    description:
+      "How I use n8n and LLMs to automate daily LinkedIn publishing and email replies.",
+    date: "2026-04-20",
+    readTime: "3 min read",
+    tags: ["n8n", "AI Agents", "Automation"],
+    sections: [
+      {
+        heading: "Why Automate Daily Operations?",
+        paragraphs: [
+          "While building NovaBrief Tech, a daily AI briefing for students, repetitive tasks like social posting and answering common reader emails took time away from core development and research.",
+        ],
+      },
+      {
+        heading: "The Two AI Agents",
+        items: [
+          "Daily LinkedIn Posting Agent: Connects morning briefing outputs to an LLM formatting node in n8n and schedules daily updates.",
+          "Email Reply Agent: Reads incoming messages and drafts consistent, context-aware replies for review.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "machine-learning-for-brute-force-detection",
+    title: "Detection of Brute-Force Login Attempts Using Machine Learning",
+    description:
+      "Notes on our IJICT published research applying machine learning models to detect automated login attacks.",
+    date: "2026-04-15",
+    readTime: "4 min read",
+    tags: ["Machine Learning", "Security", "Research"],
+    sections: [
+      {
+        heading: "Background",
+        paragraphs: [
+          "Credential stuffing and brute-force login attempts remain a persistent threat to web applications and networked systems. Traditional threshold-based lockouts often miss distributed or low-rate attacks.",
+        ],
+      },
+      {
+        heading: "Machine Learning Approach",
+        paragraphs: [
+          "In our paper published in IJICT (Vol. 9, Issue 1, April 2026), we explored supervised machine learning models to classify authentication traffic and distinguish legitimate user logins from automated brute-force attempts.",
+        ],
+        items: [
+          "Paper Title: Detection of Brute-Force Login Attempts Using Machine Learning",
+          "DOI: 10.31987/ijict.9.1.371",
+          "SVM Classification Accuracy: 97.24%",
+        ],
+      },
+    ],
+    externalLink: {
+      label: "Read Full Paper on IJICT Archive",
+      url: "https://www.ijict.edu.iq/index.php/ijict/article/view/371",
+    },
   },
 ];

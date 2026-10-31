@@ -1,4 +1,4 @@
-// Strict TypeScript interfaces for portfolio data, case-study projects, research, and certifications.
+// Strict TypeScript interfaces for portfolio data, case-study projects, research, articles, and certifications.
 
 export interface SocialLinks {
   github: string;
@@ -112,28 +112,27 @@ export interface UsesCategory {
   items: { name: string; detail: string }[];
 }
 
-export interface ProjectFrontmatter {
-  title: string;
-  description: string;
-  date: string;
-  tags: string[];
-  link?: string;
-  status?: string;
-  metrics?: string;
+export interface ArticleSection {
+  heading: string;
+  paragraphs?: string[];
+  items?: string[];
 }
 
-export interface ArticleFrontmatter {
+export interface ArticleItem {
+  slug: string;
   title: string;
   description: string;
   date: string;
   readTime: string;
   tags: string[];
+  sections: ArticleSection[];
+  externalLink?: { label: string; url: string };
 }
 
-export interface MdxEntry<T> {
-  slug: string;
-  frontmatter: T;
-  content: string;
+export interface ContactFormValues {
+  name: string;
+  email: string;
+  message: string;
 }
 
 export interface ContactActionState {

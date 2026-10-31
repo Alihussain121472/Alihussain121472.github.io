@@ -11,7 +11,6 @@ import {
 } from "@/data/portfolio";
 import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { isTodo, TodoBadge } from "@/components/TodoBadge";
-import { Reveal } from "@/components/Reveal";
 
 export function DetailsSection() {
   return (
@@ -21,8 +20,7 @@ export function DetailsSection() {
       className="mx-auto max-w-5xl border-t border-border px-4 py-16 sm:px-6 sm:py-24"
     >
       <div id="details" className="sr-only" aria-hidden="true" />
-      <Reveal>
-        <div className="grid gap-10 md:grid-cols-12 md:items-start">
+      <div className="grid gap-10 md:grid-cols-12 md:items-start">
           <div className="space-y-6 md:col-span-7">
             <div>
               <p className="font-mono text-xs font-semibold tracking-wide text-accent">
@@ -141,7 +139,6 @@ export function DetailsSection() {
             </figure>
           </div>
         </div>
-      </Reveal>
     </section>
   );
 }
