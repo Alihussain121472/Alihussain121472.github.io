@@ -32,6 +32,9 @@ html.dark {
   --constellation-edge-1: #1e4263;
   --constellation-edge-2: #17324d;
   --constellation-edge-3: #12263a;
+  --constellation-node-lit: #e0f2fe;
+  --constellation-glow-lit: rgba(56, 189, 248, 0.9);
+  --constellation-edge-lit: rgba(56, 189, 248, 0.65);
 
   --text-display: clamp(2.25rem, 4vw + 1rem, 3.5rem);
   --text-h1: clamp(1.875rem, 3vw + 0.75rem, 2.5rem);
@@ -68,6 +71,9 @@ html.light {
   --constellation-edge-1: #cbe3f2;
   --constellation-edge-2: #daebf7;
   --constellation-edge-3: #e7f2fa;
+  --constellation-node-lit: #0284c7;
+  --constellation-glow-lit: rgba(2, 132, 199, 0.65);
+  --constellation-edge-lit: rgba(2, 132, 199, 0.45);
 }
 
 @layer base {
@@ -442,6 +448,8 @@ html.light {
   top: 0;
   left: 0;
   border-radius: 9999px;
+  transition: transform 0.22s ease-out, box-shadow 0.22s ease-out,
+    background-color 0.22s ease-out;
 }
 
 .constellation-node-primary::before {
@@ -462,6 +470,13 @@ html.light {
   background-color: var(--constellation-node-3);
 }
 
+.constellation-node.is-lit::before {
+  background-color: var(--constellation-node-lit);
+  transform: scale(1.75);
+  box-shadow: 0 0 10px 2px var(--constellation-glow-lit),
+    0 0 22px 5px var(--accent);
+}
+
 .constellation-edge {
   position: absolute;
   top: 0;
@@ -480,6 +495,8 @@ html.light {
   left: 0;
   width: var(--edge-w, 0px);
   height: 1px;
+  transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out,
+    height 0.2s ease-out;
 }
 
 .constellation-edge-strong::before {
@@ -492,6 +509,12 @@ html.light {
 
 .constellation-edge-faint::before {
   background-color: var(--constellation-edge-3);
+}
+
+.constellation-edge-lit::before {
+  height: 1.5px;
+  background-color: var(--constellation-edge-lit);
+  box-shadow: 0 0 8px 1px var(--constellation-glow-lit);
 }
 
 chatgpt-sidebar {

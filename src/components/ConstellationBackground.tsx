@@ -1,4 +1,4 @@
-// Memory-optimized constellation background with zero per-frame heap allocations, 30fps throttling, and tab-visibility pause.
+// Interactive constellation background: dots light up on mouse hover/move and every time the user scrolls.
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -9,6 +9,7 @@ interface NodePoint {
   vx: number;
   vy: number;
   tier: 0 | 1 | 2;
+  lit: boolean;
 }
 
 const INITIAL_NODES: ReadonlyArray<{ nx: number; ny: number; tier: 0 | 1 | 2 }> = [
@@ -38,11 +39,25 @@ const INITIAL_NODES: ReadonlyArray<{ nx: number; ny: number; tier: 0 | 1 | 2 }> 
   { nx: 0.85, ny: 0.72, tier: 1 },
 ];
 
-const MAX_EDGES = 28;
+const MAX_EDGES = 40;
+
+const NODE_BASE_CLASSES = [
+  "constellation-node constellation-node-primary",
+  "constellation-node constellation-node-secondary",
+  "constellation-node constellation-node-micro",
+] as const;
+
+const NODE_LIT_CLASSES = [
+  "constellation-node constellation-node-primary is-lit",
+  "constellation-node constellation-node-secondary is-lit",
+  "constellation-node constellation-node-micro is-lit",
+] as const;
+
 const EDGE_CLASSES = [
   "constellation-edge constellation-edge-strong",
   "constellation-edge constellation-edge-mid",
   "constellation-edge constellation-edge-faint",
+  "constellation-edge constellation-edge-lit",
 ] as const;
 
 export function ConstellationBackground() {
@@ -59,17 +74,21 @@ export function ConstellationBackground() {
 
     const nodes: NodePoint[] = INITIAL_NODES.map((item, idx) => {
       const angle = (idx * 137.5 * Math.PI) / 180;
-      const speed = item.tier === 0 ? 0.28 : item.tier === 1 ? 0.38 : 0.48;
+      const speed = item.tier === 0 ? 0.3 : item.tier === 1 ? 0.4 : 0.5;
       return {
         x: item.nx * width,
         y: item.ny * height,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         tier: item.tier,
+        lit: false,
       };
     });
 
     const mouse = { x: -9999, y: -9999, active: false };
+    let scrollEnergy = 0;
+    let scrollVelocityY = 0;
+    let lastScrollY = window.scrollY || 0;
 
     function applyEdge(
       slot: number,
@@ -77,7 +96,7 @@ export function ConstellationBackground() {
       y: number,
       dist: number,
       angle: number,
-      tier: 0 | 1 | 2
+      tier: 0 | 1 | 2 | 3
     ) {
       const el = edgeRefs.current[slot];
       if (!el) return;
@@ -93,24 +112,63 @@ export function ConstellationBackground() {
     function renderFrame() {
       const maxDist = Math.min(Math.max(width * 0.18, 175), 250);
       const maxDistSq = maxDist * maxDist;
+      const mouseRadiusSq = maxDistSq * 1.15;
+      const isScrolling = scrollEnergy > 0.12;
 
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         if (!n) continue;
+
         if (!prefersReducedMotion) {
-          n.x += n.vx;
-          n.y += n.vy;
-          if (n.x < 12 || n.x > width - 12) n.vx = -n.vx;
-          if (n.y < 12 || n.y > height - 12) n.vy = -n.vy;
+          n.x += n.vx * (1 + scrollEnergy * 1.4);
+          n.y += n.vy * (1 + scrollEnergy * 1.4) + scrollVelocityY;
+
+          if (n.x < 12) {
+            n.x = 12;
+            n.vx = Math.abs(n.vx);
+          } else if (n.x > width - 12) {
+            n.x = width - 12;
+            n.vx = -Math.abs(n.vx);
+          }
+
+          if (n.y < 12) {
+            n.y = height - 13;
+          } else if (n.y > height - 12) {
+            n.y = 13;
+          }
         }
+
+        let isNearMouse = false;
+        if (mouse.active) {
+          const mdx = mouse.x - n.x;
+          const mdy = mouse.y - n.y;
+          if (mdx * mdx + mdy * mdy < mouseRadiusSq) {
+            isNearMouse = true;
+          }
+        }
+
+        const shouldLightUp = isNearMouse || isScrolling;
+        n.lit = shouldLightUp;
+
         const el = nodeRefs.current[i];
         if (el) {
           const offset = n.tier === 0 ? 3.5 : n.tier === 1 ? 2.5 : 1.5;
           el.style.transform = `translate3d(${(n.x - offset).toFixed(1)}px, ${(
             n.y - offset
           ).toFixed(1)}px, 0)`;
+          const targetNodeClass = shouldLightUp
+            ? NODE_LIT_CLASSES[n.tier]
+            : NODE_BASE_CLASSES[n.tier];
+          if (el.className !== targetNodeClass) {
+            el.className = targetNodeClass;
+          }
         }
       }
+
+      scrollEnergy *= 0.88;
+      if (scrollEnergy < 0.01) scrollEnergy = 0;
+      scrollVelocityY *= 0.75;
+      if (Math.abs(scrollVelocityY) < 0.05) scrollVelocityY = 0;
 
       let edgeCount = 0;
       for (let i = 0; i < nodes.length && edgeCount < MAX_EDGES; i++) {
@@ -125,7 +183,14 @@ export function ConstellationBackground() {
           if (distSq < maxDistSq) {
             const dist = Math.sqrt(distSq);
             const ratio = dist / maxDist;
-            const tier: 0 | 1 | 2 = ratio < 0.45 ? 0 : ratio < 0.75 ? 1 : 2;
+            const tier: 0 | 1 | 2 | 3 =
+              (ni.lit && nj.lit && ratio < 0.72) || (isScrolling && ratio < 0.5)
+                ? 3
+                : ratio < 0.45
+                ? 0
+                : ratio < 0.75
+                ? 1
+                : 2;
             applyEdge(edgeCount++, ni.x, ni.y, dist, Math.atan2(dy, dx), tier);
           }
         }
@@ -138,7 +203,7 @@ export function ConstellationBackground() {
           const dx = mouse.x - ni.x;
           const dy = mouse.y - ni.y;
           const distSq = dx * dx + dy * dy;
-          if (distSq < maxDistSq * 1.1) {
+          if (distSq < mouseRadiusSq) {
             const dist = Math.sqrt(distSq);
             applyEdge(
               edgeCount++,
@@ -146,7 +211,7 @@ export function ConstellationBackground() {
               ni.y,
               dist,
               Math.atan2(dy, dx),
-              dist < maxDist * 0.5 ? 0 : 1
+              dist < maxDist * 0.75 ? 3 : 0
             );
           }
         }
@@ -168,7 +233,7 @@ export function ConstellationBackground() {
         rafId = 0;
         return;
       }
-      if (now - lastTime >= 33) {
+      if (now - lastTime >= 30) {
         lastTime = now;
         renderFrame();
       }
@@ -200,6 +265,19 @@ export function ConstellationBackground() {
       mouse.active = false;
     }
 
+    function handleScroll() {
+      const currentY = window.scrollY || 0;
+      const deltaY = currentY - lastScrollY;
+      lastScrollY = currentY;
+      scrollEnergy = 1;
+      scrollVelocityY = Math.max(Math.min(-deltaY * 0.08, 3.5), -3.5);
+    }
+
+    function handleWheel(e: WheelEvent) {
+      scrollEnergy = 1;
+      scrollVelocityY = Math.max(Math.min(-e.deltaY * 0.03, 3.5), -3.5);
+    }
+
     function handleResize() {
       const newW = window.innerWidth || 1280;
       const newH = window.innerHeight || 800;
@@ -217,6 +295,8 @@ export function ConstellationBackground() {
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("wheel", handleWheel, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
@@ -224,6 +304,8 @@ export function ConstellationBackground() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -253,13 +335,7 @@ export function ConstellationBackground() {
           ref={(el) => {
             nodeRefs.current[idx] = el;
           }}
-          className={
-            node.tier === 0
-              ? "constellation-node constellation-node-primary"
-              : node.tier === 1
-              ? "constellation-node constellation-node-secondary"
-              : "constellation-node constellation-node-micro"
-          }
+          className={NODE_BASE_CLASSES[node.tier]}
         />
       ))}
     </div>
