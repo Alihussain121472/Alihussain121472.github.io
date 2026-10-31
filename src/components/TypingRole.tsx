@@ -61,7 +61,7 @@ export function TypingRole({ roles }: TypingRoleProps) {
     : currentWord.slice(0, charIndex);
 
   return (
-    <p className="type-h2 mt-3 flex min-h-[1.4em] items-center gap-2.5 font-semibold tracking-tight">
+    <p className="mt-4 flex min-h-[1.4em] items-center gap-3 text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
       <span className="sr-only">{roles.join(", ")}</span>
       <span
         aria-hidden="true"
@@ -71,7 +71,7 @@ export function TypingRole({ roles }: TypingRoleProps) {
       </span>
       <span aria-hidden="true" className="font-mono text-accent">
         {visibleText}
-        <span className="ml-1 inline-block h-[1.05em] w-[2.5px] translate-y-[0.12em] animate-pulse bg-accent" />
+        <span className="ml-1 inline-block h-[1.05em] w-[3px] translate-y-[0.12em] animate-pulse bg-accent" />
       </span>
     </p>
   );

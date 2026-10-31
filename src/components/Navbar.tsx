@@ -37,7 +37,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="site-header sticky top-0 z-50 border-b border-border bg-canvas transition-colors">
+    <header className="site-header sticky top-0 z-50 border-b border-border/30 bg-transparent backdrop-blur-md transition-colors">
       <div className="site-header__inner mx-auto max-w-5xl">
         <Link
           href="/#intro"
@@ -45,7 +45,7 @@ export function Navbar() {
           onClick={() => setIsMobileMenuOpen(false)}
           className="group inline-flex min-h-[44px] shrink-0 items-center gap-2.5 font-mono text-sm font-bold tracking-wide text-fg transition-colors hover:text-accent"
         >
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-surface font-mono text-xs font-bold text-accent transition-colors group-hover:border-accent">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border/60 bg-transparent font-mono text-xs font-bold text-accent transition-colors group-hover:border-accent">
             SAH
           </span>
           <span className="header-brand-name">{profile.name}</span>
@@ -57,7 +57,7 @@ export function Navbar() {
               <li key={item.href}>
                 <a
                   href={`/${item.href}`}
-                  className="header-nav-link inline-flex min-h-[44px] items-center rounded-lg bg-canvas font-medium text-fg-secondary transition-colors hover:text-accent focus-visible:text-accent"
+                  className="header-nav-link inline-flex min-h-[44px] items-center rounded-lg bg-transparent font-medium text-fg-secondary transition-colors hover:text-accent focus-visible:text-accent"
                 >
                   {item.label}
                 </a>
