@@ -12,7 +12,12 @@ import type {
 
 export const profile: Profile = {
   name: "Syed Ali Hussain",
-  roles: ["AI Developer", "Researcher", "Founder of NovaBrief Tech"],
+  roles: [
+    "AI Developer",
+    "Machine Learning Researcher",
+    "Founder of NovaBrief Tech",
+    "AI Agent & n8n Specialist",
+  ],
   roleLine: "AI Developer · Researcher · Founder of NovaBrief Tech",
   valueStatement:
     "I build AI agents and n8n workflows. I also train machine learning models for cyber safety.",

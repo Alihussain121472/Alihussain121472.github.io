@@ -1,8 +1,9 @@
-// Hero section (#intro) displaying name, single positioning line, and three primary actions.
+// Hero section (#intro) displaying name, typing specialty line, positioning line, and three primary actions.
 import React from "react";
 import Link from "next/link";
 import { ArrowDown, Download, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
+import { TypingRole } from "@/components/TypingRole";
 
 export function Hero() {
   return (
@@ -18,6 +19,12 @@ export function Hero() {
       <h1 id="hero-heading" className="type-display mt-4 text-fg">
         {profile.name}
       </h1>
+
+      <TypingRole roles={profile.roles} />
+
+      <p className="type-body mt-5 text-fg-secondary">
+        {profile.valueStatement}
+      </p>
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
         <a href="#projects" className="btn-primary">
