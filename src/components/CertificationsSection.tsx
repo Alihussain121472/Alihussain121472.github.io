@@ -1,4 +1,4 @@
-// Compact Certifications section (#certifications) scaled to ~85% card footprint with 6 newest cards and "View all" toggle.
+// Certifications section (#certifications) showing 5 newest default certificates with a "Show all" toggle and conditional verifyUrl link.
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Award, ChevronDown, ChevronUp, ExternalLink, X } from "lucide-react";
 import { certifications } from "@/data/portfolio";
 import type { CertificateItem } from "@/types/portfolio";
-import { isTodo, TodoBadge } from "@/components/TodoBadge";
+import { isTodo } from "@/components/TodoBadge";
 
 export function CertificationsSection() {
   const [showAll, setShowAll] = useState(false);
@@ -23,13 +23,22 @@ export function CertificationsSection() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedCert]);
 
+  // Sort by date, newest first
   const sorted = [...certifications].sort((a, b) =>
     b.sortDate.localeCompare(a.sortDate)
   );
-  const featured = sorted
-    .filter((c) => c.group === "featured")
-    .slice(0, 6);
-  const other = sorted.filter((c) => c.group === "other");
+
+  // Show only the 5 default certificates unless "Show all" is active
+  const defaultFive = sorted.filter((c) => c.defaultVisible).slice(0, 5);
+  const visibleCerts = showAll ? sorted : defaultFive;
+
+  // Only use "Verified Credentials" if every card has a valid verifyUrl
+  const allHaveVerifyUrl = sorted.every(
+    (c) => Boolean(c.verifyUrl && !isTodo(c.verifyUrl))
+  );
+  const sectionHeading = allHaveVerifyUrl
+    ? "Verified Credentials"
+    : "Certifications";
 
   return (
     <section
@@ -38,26 +47,30 @@ export function CertificationsSection() {
       className="mx-auto max-w-5xl border-t border-border px-4 py-16 sm:px-6 sm:py-24"
     >
       <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
-          <div>
-            <p className="font-mono text-xs font-semibold tracking-wide text-accent">
-              Coursework &amp; Conferences
-            </p>
-            <h2 id="certifications-heading" className="type-h2 mt-2 text-fg">
-              Certifications
-            </h2>
-            <p className="type-body mt-2 text-fg-secondary">
-              Course badges and honors in Python code, modern AI, web apps, and
-              global tech events.
-            </p>
-          </div>
-          <span className="font-mono text-xs font-medium text-fg-muted">
-            Showing {featured.length} of {sorted.length} (newest first)
-          </span>
+        <div>
+          <p className="font-mono text-xs font-semibold tracking-wide text-accent">
+            Coursework &amp; Conferences
+          </p>
+          <h2 id="certifications-heading" className="type-h2 mt-2 text-fg">
+            {sectionHeading}
+          </h2>
+          <p className="type-body mt-2 text-fg-secondary">
+            Course badges and honors in Python code, modern AI, web apps, and
+            global tech events.
+          </p>
         </div>
+        <span className="font-mono text-xs font-medium text-fg-muted">
+          Showing {visibleCerts.length} of {sorted.length} (newest first)
+        </span>
+      </div>
 
-        {/* ~85% scaled compact certification cards */}
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((cert) => (
+      {/* ~85% scaled compact certification cards */}
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {visibleCerts.map((cert) => {
+          const hasVerifyUrl = Boolean(
+            cert.verifyUrl && !isTodo(cert.verifyUrl)
+          );
+          return (
             <article
               key={cert.id}
               className="card-base mx-auto flex w-full max-w-[310px] flex-col justify-between overflow-hidden sm:max-w-none"
@@ -68,6 +81,7 @@ export function CertificationsSection() {
                     src={cert.previewUrl}
                     alt={`${cert.title} issued by ${cert.issuer}`}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 640px) 310px, (max-width: 1024px) 45vw, 280px"
                     className="object-contain p-2"
                   />
@@ -92,25 +106,6 @@ export function CertificationsSection() {
                       </span>
                     ))}
                   </div>
-
-                  <div className="mt-2.5">
-                    {isTodo(cert.verificationUrl) ? (
-                      <TodoBadge
-                        value={cert.verificationUrl}
-                        label="Verification URL"
-                      />
-                    ) : (
-                      <a
-                        href={cert.verificationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-[44px] items-center gap-1 font-mono text-xs font-semibold text-accent underline underline-offset-4"
-                      >
-                        <span>Verify credential</span>
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                    )}
-                  </div>
                 </div>
               </div>
 
@@ -123,70 +118,44 @@ export function CertificationsSection() {
                   <Award className="h-4 w-4 text-accent" />
                   <span>Preview</span>
                 </button>
+
+                {hasVerifyUrl && (
+                  <a
+                    href={cert.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                  >
+                    <span>Verify</span>
+                    <ExternalLink className="h-3.5 w-3.5 text-accent" />
+                  </a>
+                )}
               </div>
             </article>
-          ))}
-        </div>
+          );
+        })}
+      </div>
 
-        {/* View All toggle for quiet "Other" group */}
-        {other.length > 0 && (
-          <div className="mt-7">
-            <button
-              type="button"
-              aria-expanded={showAll}
-              onClick={() => setShowAll((prev) => !prev)}
-              className="btn-secondary"
-            >
-              <span>
-                {showAll
-                  ? "Hide other certificates"
-                  : `View all (${other.length} more in Other)`}
-              </span>
-              {showAll ? (
-                <ChevronUp className="h-4 w-4 text-accent" />
-              ) : (
-                <ChevronDown className="h-4 w-4 text-accent" />
-              )}
-            </button>
-
-            {showAll && (
-              <div className="mt-5 rounded-xl border border-border bg-surface p-4">
-                <h3 className="font-mono text-xs font-bold tracking-wide text-fg-muted">
-                  Other (School &amp; Participation Certificates)
-                </h3>
-                <div className="mt-3.5 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-                  {other.map((cert) => (
-                    <div
-                      key={cert.id}
-                      className="flex items-center justify-between gap-3 rounded-lg border border-border bg-subtle p-3.5"
-                    >
-                      <div className="space-y-1">
-                        <div className="text-sm font-semibold text-fg">
-                          {cert.title}
-                        </div>
-                        <div className="font-mono text-xs text-fg-muted">
-                          {cert.issuer} · {cert.issueDate}
-                        </div>
-                        <TodoBadge
-                          value={cert.verificationUrl}
-                          label="Verification URL"
-                        />
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setSelectedCert(cert)}
-                        className="btn-secondary shrink-0"
-                      >
-                        <span>Preview</span>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      {/* Show all button */}
+      {sorted.length > defaultFive.length && (
+        <div className="mt-7">
+          <button
+            type="button"
+            aria-expanded={showAll}
+            onClick={() => setShowAll((prev) => !prev)}
+            className="btn-secondary"
+          >
+            <span>
+              {showAll ? "Show fewer" : `Show all (${sorted.length})`}
+            </span>
+            {showAll ? (
+              <ChevronUp className="h-4 w-4 text-accent" />
+            ) : (
+              <ChevronDown className="h-4 w-4 text-accent" />
             )}
-          </div>
-        )}
+          </button>
+        </div>
+      )}
 
       {selectedCert && (
         <div

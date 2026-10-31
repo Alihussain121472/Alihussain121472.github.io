@@ -1,8 +1,8 @@
-// Hero section (#intro) with role line, value statement, direct email launcher, and Download CV button.
+// Hero section (#intro) displaying name, single positioning line, and three primary actions.
 import React from "react";
-import { Download, Mail } from "lucide-react";
+import Link from "next/link";
+import { ArrowDown, Download, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
-import { DirectEmailLink } from "@/components/DirectEmailLink";
 
 export function Hero() {
   return (
@@ -19,15 +19,11 @@ export function Hero() {
         {profile.name}
       </h1>
 
-      <p className="type-body mt-6 text-fg-secondary">
-        {profile.valueStatement}
-      </p>
-
       <div className="mt-8 flex flex-wrap items-center gap-4">
-        <DirectEmailLink className="btn-primary">
-          <Mail className="h-4 w-4" />
-          <span>Contact me</span>
-        </DirectEmailLink>
+        <a href="#projects" className="btn-primary">
+          <ArrowDown className="h-4 w-4" />
+          <span>View projects</span>
+        </a>
 
         <a
           href={profile.cvUrl}
@@ -38,6 +34,11 @@ export function Hero() {
           <Download className="h-4 w-4 text-accent" />
           <span>Download CV</span>
         </a>
+
+        <Link href="/contact" className="btn-secondary">
+          <Mail className="h-4 w-4 text-accent" />
+          <span>Contact</span>
+        </Link>
       </div>
     </section>
   );

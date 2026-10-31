@@ -1,4 +1,4 @@
-// Responsive sticky header component adapting across mobile (drawer), tablet (compact bar), and desktop (full bar).
+// Responsive sticky header component using anchor links (#) for on-page sections.
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -9,12 +9,12 @@ import { DirectEmailLink } from "@/components/DirectEmailLink";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navItems = [
-  { label: "Projects", href: "/#projects" },
-  { label: "About", href: "/#about" },
-  { label: "Research", href: "/#research" },
-  { label: "Certifications", href: "/#certifications" },
-  { label: "Articles", href: "/articles" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Services", href: "#services" },
+  { label: "Research", href: "#research" },
+  { label: "Certifications", href: "#certifications" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -55,12 +55,12 @@ export function Navbar() {
           <ul className="header-desktop-nav">
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
+                <a
+                  href={`/${item.href}`}
                   className="header-nav-link inline-flex min-h-[44px] items-center rounded-lg bg-canvas font-medium text-fg-secondary transition-colors hover:text-accent focus-visible:text-accent"
                 >
                   {item.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
@@ -112,7 +112,6 @@ export function Navbar() {
         </nav>
       </div>
 
-      {/* Responsive Mobile Navigation Drawer (controlled via mobile media query + state) */}
       <div
         id="mobile-nav-drawer"
         className={`header-mobile-drawer ${
@@ -122,13 +121,13 @@ export function Navbar() {
         <ul className="header-mobile-drawer__list">
           {navItems.map((item) => (
             <li key={item.href}>
-              <Link
-                href={item.href}
+              <a
+                href={`/${item.href}`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex min-h-[44px] items-center rounded-xl px-3 py-2 text-sm font-medium text-fg-secondary transition-colors hover:bg-subtle hover:text-accent"
               >
                 {item.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>

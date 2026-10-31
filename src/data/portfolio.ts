@@ -12,30 +12,34 @@ import type {
 
 export const profile: Profile = {
   name: "Syed Ali Hussain",
-  roles: ["AI Developer", "Researcher", "Founder"],
-  roleLine: "AI Developer · Researcher · Founder",
+  roles: ["AI Developer", "Researcher", "Founder of NovaBrief Tech"],
+  roleLine: "AI Developer · Researcher · Founder of NovaBrief Tech",
   valueStatement:
     "I build AI agents and n8n workflows. I also train machine learning models for cyber safety.",
   intro:
-    "I am a BS in AI student at SZABIST Islamabad. I founded NovaBrief Tech, a daily AI briefing for students. I also work as a Research Intern at AIEYS on machine learning models and papers. I build AI agents with n8n.",
+    "I am a BS in AI student at SZABIST Islamabad and the founder of NovaBrief Tech, a daily AI briefing for students. I also work as a Research Intern at AIEYS on machine learning models and papers, and I build AI agents with n8n.",
+  introLines: [
+    "I am a BS in AI student at SZABIST Islamabad and the founder of NovaBrief Tech, a daily AI briefing for students.",
+    "I also work as a Research Intern at AIEYS on machine learning models and papers, and I build AI agents with n8n.",
+  ],
   metaDescription:
-    "Syed Ali Hussain — AI Developer, Researcher at AIEYS, and Founder of NovaBrief Tech. Building AI agents with n8n and published ML security research.",
+    "Syed Ali Hussain — AI Developer · Researcher · Founder of NovaBrief Tech. Building AI agents with n8n and published ML security research.",
   ogDescription:
-    "Portfolio of Syed Ali Hussain: founder of NovaBrief Tech (daily AI briefing for students), AIEYS Research Intern, and AI agent developer.",
+    "Syed Ali Hussain — AI Developer · Researcher · Founder of NovaBrief Tech. Portfolio of AI agents, n8n workflows, and ML research.",
   twitterDescription:
-    "AI Developer, Researcher, and Founder of NovaBrief Tech. Building AI agents with n8n and publishing machine learning research for security.",
-  location: "Islamabad, Pakistan · Remote (TODO: confirm relocation preference)",
+    "Syed Ali Hussain — AI Developer · Researcher · Founder of NovaBrief Tech.",
+  location: "Islamabad, Pakistan · Remote", // TODO: confirm relocation preference
   availability:
     "I am open to new work. I build websites, AI agents with n8n, and joint machine learning studies.",
-  cvUrl: "/cv.pdf",
+  cvUrl: "/assets/cv/Syed_Ali_Hussain_Resume.pdf", // TODO: replace with latest resume PDF if updated
   site: "https://alihussain121472-github-io.vercel.app",
   avatar: "/assets/images/syed-ali.jpg",
   socials: {
     github: "https://github.com/Alihussain121472",
     linkedin: "https://linkedin.com/in/ali-hussain-93a24430a",
     x: "https://x.com/Syedali6160",
-    scholar: "TODO: add Google Scholar profile URL",
-    orcid: "TODO: add ORCID profile URL",
+    scholar: "TODO: add Google Scholar profile URL", // TODO: supply Google Scholar profile URL
+    orcid: "TODO: add ORCID profile URL", // TODO: supply ORCID profile URL
     email: "syedali6160@gmail.com",
   },
 };
@@ -45,6 +49,7 @@ export const projects: Project[] = [
     slug: "novabrief-tech",
     title: "NovaBrief Tech",
     description: "Daily AI briefing for students.",
+    image: "/assets/images/projects/novabrief-tech.png", // TODO: replace placeholder at /assets/images/projects/novabrief-tech.png
     metaDescription:
       "Case study on NovaBrief Tech: an automated daily AI briefing for students built with Next.js, PostgreSQL, and Llama 3.3.",
     ogDescription:
@@ -60,7 +65,7 @@ export const projects: Project[] = [
       "Llama 3.3 summarizes and groups stories into a concise, consistent format tailored for students.",
       "PostgreSQL archives each edition while Resend delivers the morning email briefing to subscribers.",
     ],
-    results: "TODO: add verified subscriber count and open-rate metrics",
+    results: "TODO: add verified subscriber count and open-rate metrics", // TODO: supply verified subscriber count and open-rate metrics
     previewImage: "/assets/images/novabrief-preview.svg",
     previewAlt: "NovaBrief Tech daily AI briefing interface and workflow preview",
     architectureNodes: [
@@ -71,13 +76,14 @@ export const projects: Project[] = [
     link: "https://novabrief.tech",
     linkLabel: "Visit NovaBrief Tech",
     tags: ["AI Agents", "Next.js", "Automation"],
-    metrics: "TODO: add verified subscriber metrics",
+    metrics: "TODO: add verified subscriber metrics", // TODO: supply verified subscriber metrics
   },
   {
     slug: "n8n-agents",
     title: "n8n Automation Agents",
     description:
       "Daily LinkedIn posting agent and email reply agent for NovaBrief Tech.",
+    image: "/assets/images/projects/n8n-agents.png", // TODO: replace placeholder at /assets/images/projects/n8n-agents.png
     metaDescription:
       "Case study on automated n8n AI agents that draft daily LinkedIn posts and email replies for NovaBrief Tech.",
     ogDescription:
@@ -93,7 +99,7 @@ export const projects: Project[] = [
       "An LLM node formats a LinkedIn post and drafts context-aware replies for incoming reader emails.",
       "Validation nodes check formatting rules before publishing to LinkedIn and queuing email responses.",
     ],
-    results: "TODO: add measured weekly hours saved and post engagement metrics",
+    results: "TODO: add measured weekly hours saved and post engagement metrics", // TODO: supply measured weekly hours saved
     previewImage: "/assets/images/leads-agent-preview.svg",
     previewAlt: "n8n AI agents workflow diagram for LinkedIn and email automation",
     architectureNodes: [
@@ -102,12 +108,13 @@ export const projects: Project[] = [
       "LinkedIn API & Email Dispatch",
     ],
     tags: ["n8n", "AI Agents", "Automation"],
-    metrics: "TODO: add measured time-saved metrics",
+    metrics: "TODO: add measured time-saved metrics", // TODO: supply measured time-saved metrics
   },
   {
     slug: "brute-force-detection",
     title: "Brute-Force Login Detection",
     description: "Machine learning research published in IJICT.",
+    image: "/assets/images/projects/brute-force-detection.png", // TODO: replace placeholder at /assets/images/projects/brute-force-detection.png
     metaDescription:
       "Case study on detecting brute-force login attempts using machine learning, published in IJICT (Vol. 9, Issue 1, April 2026).",
     ogDescription:
@@ -142,6 +149,7 @@ export const projects: Project[] = [
     slug: "dha-multan-agent",
     title: "DHA Multan Real Estate AI Agent",
     description: "AI agent for investors and dealers in DHA Multan real estate.",
+    image: "/assets/images/projects/dha-multan-agent.png", // TODO: replace placeholder at /assets/images/projects/dha-multan-agent.png
     metaDescription:
       "Case study on an AI agent in progress for DHA Multan real estate investors and property dealers.",
     ogDescription:
@@ -157,7 +165,7 @@ export const projects: Project[] = [
       "The AI agent retrieves structured DHA Multan sector information and generates a clear response.",
       "Qualified investor leads are logged and routed directly to dealers for follow-up.",
     ],
-    results: "In progress — TODO: add pilot dealer testing metrics once launched",
+    results: "In progress — TODO: add pilot dealer testing metrics once launched", // TODO: supply pilot dealer testing metrics
     previewImage: "/assets/images/dha-agent-preview.svg",
     previewAlt: "DHA Multan Real Estate AI Agent architecture preview",
     architectureNodes: [
@@ -198,7 +206,7 @@ export const research: ResearchData = {
     label: "Preprint (not peer reviewed)",
     status:
       "In progress with Azerbaijan University of Architecture and Construction",
-    coAuthors: "TODO: add co-author names",
+    coAuthors: "TODO: add co-author names", // TODO: supply co-author names
     pdfUrl:
       "/assets/papers/swarm-intelligence-tuning-of-pid-position-controllers-for-a-dual-axis-solar-tracker.pdf",
   },
@@ -224,10 +232,13 @@ export const experience: ExperienceItem[] = [
 export const education: EducationData = {
   degree: "BS in AI",
   school: "SZABIST Islamabad",
-  period: "TODO: add start and end years",
+  period: "TODO: add start and end years", // TODO: supply enrollment and expected graduation years
 };
 
-// Sorted newest first: 6 most relevant featured cards + 2 quieter "other" cards.
+// Sorted by date, newest first.
+// Default 5 shown: Harvard CS50P, AIEYS Web Internship, AIEYS AI Teaching, Cisco AI, Google Python.
+// "Show all" reveals the merged Germany conference card and Google Technical Support Fundamentals.
+// City Science College card removed.
 export const certifications: CertificateItem[] = [
   {
     id: "cert-germany-ai",
@@ -235,11 +246,11 @@ export const certifications: CertificateItem[] = [
     issuer: "AIEYS & European Scientific Forum",
     issueDate: "Sep 2026",
     sortDate: "2026-09",
-    group: "featured",
+    defaultVisible: false,
     previewUrl: "/assets/images/certificates/ai-conference-germany.jpg",
     secondaryPreviewUrl:
       "/assets/images/certificates/ai-conference-germany-participation.jpg",
-    verificationUrl: "TODO: add verification URL",
+    // TODO: add verifyUrl once public credential verification link is available
     skills: ["AI Symposium", "Scientific Presentation", "Research Exchange"],
   },
   {
@@ -248,9 +259,9 @@ export const certifications: CertificateItem[] = [
     issuer: "Harvard University",
     issueDate: "Aug 2026",
     sortDate: "2026-08",
-    group: "featured",
+    defaultVisible: true,
     previewUrl: "/assets/images/certificates/harvard-cs50-python.svg",
-    verificationUrl: "TODO: add verification URL",
+    // TODO: add verifyUrl once public CS50P verification link is available
     skills: ["Python", "Unit Testing", "Object-Oriented Design"],
   },
   {
@@ -259,10 +270,21 @@ export const certifications: CertificateItem[] = [
     issuer: "AI-Explain You Science (AIEYS)",
     issueDate: "Apr 2026",
     sortDate: "2026-04",
-    group: "featured",
+    defaultVisible: true,
     previewUrl: "/assets/images/certificates/aieys-web-developer-internship.jpg",
-    verificationUrl: "TODO: add verification URL",
+    // TODO: add verifyUrl once public AIEYS verification link is available
     skills: ["Frontend Development", "Responsive UI", "API Integration"],
+  },
+  {
+    id: "cert-aieys-teaching",
+    title: "AI-Enhanced Teaching Certificate",
+    issuer: "AI-Explain You Science (AIEYS)",
+    issueDate: "Apr 2026",
+    sortDate: "2026-04",
+    defaultVisible: true,
+    previewUrl: "/assets/images/certificates/aieys-ai-teaching.jpg",
+    // TODO: add verifyUrl once public AIEYS verification link is available
+    skills: ["AI Curriculum", "Mentoring"],
   },
   {
     id: "cert-cisco-ai",
@@ -270,9 +292,9 @@ export const certifications: CertificateItem[] = [
     issuer: "Cisco Networking Academy",
     issueDate: "Jan 2026",
     sortDate: "2026-01",
-    group: "featured",
+    defaultVisible: true,
     previewUrl: "/assets/images/certificates/cisco-modern-ai.jpg",
-    verificationUrl: "TODO: add verification URL",
+    // TODO: add verifyUrl once public Credly/Cisco verification link is available
     skills: ["Machine Learning Foundations", "Neural Networks", "AI Ethics"],
   },
   {
@@ -281,9 +303,9 @@ export const certifications: CertificateItem[] = [
     issuer: "Google / Coursera",
     issueDate: "Nov 2025",
     sortDate: "2025-11",
-    group: "featured",
+    defaultVisible: true,
     previewUrl: "/assets/images/certificates/google-python-crash-course.jpg",
-    verificationUrl: "TODO: add verification URL",
+    // TODO: add verifyUrl once public Coursera verification link is available
     skills: ["Python Data Structures", "Automation Scripts"],
   },
   {
@@ -292,34 +314,11 @@ export const certifications: CertificateItem[] = [
     issuer: "Google / Coursera",
     issueDate: "Nov 2025",
     sortDate: "2025-11",
-    group: "featured",
+    defaultVisible: false,
     previewUrl:
       "/assets/images/certificates/google-technical-support-fundamentals.jpg",
-    verificationUrl: "TODO: add verification URL",
+    // TODO: add verifyUrl once public Coursera verification link is available
     skills: ["Linux CLI", "Networking", "System Troubleshooting"],
-  },
-  {
-    id: "cert-aieys-teaching",
-    title: "AI-Enhanced Teaching Certificate",
-    issuer: "AI-Explain You Science (AIEYS)",
-    issueDate: "Apr 2026",
-    sortDate: "2026-04",
-    group: "other",
-    previewUrl: "/assets/images/certificates/aieys-ai-teaching.jpg",
-    verificationUrl: "TODO: add verification URL",
-    skills: ["AI Curriculum", "Mentoring"],
-  },
-  {
-    id: "cert-city-college",
-    title: "Academic Achievement Certificate",
-    issuer: "City Science College",
-    issueDate: "2024",
-    sortDate: "2024-06",
-    group: "other",
-    previewUrl:
-      "/assets/images/certificates/city-science-college-achievement.jpg",
-    verificationUrl: "TODO: add verification URL",
-    skills: ["STEM Foundations", "Academic Honors"],
   },
 ];
 
@@ -355,8 +354,8 @@ export const usesData: UsesCategory[] = [
         detail: "App Router, Server Components, and strict type checking",
       },
       {
-        name: "Tailwind CSS & Framer Motion",
-        detail: "Accessible design tokens, fluid typography, and subtle motion",
+        name: "Tailwind CSS",
+        detail: "Accessible design tokens, fluid typography, and responsive layout",
       },
       {
         name: "PostgreSQL, Resend & Vercel",

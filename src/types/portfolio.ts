@@ -15,6 +15,7 @@ export interface Profile {
   roleLine: string;
   valueStatement: string;
   intro: string;
+  introLines: [string, string];
   metaDescription: string;
   ogDescription: string;
   twitterDescription: string;
@@ -30,6 +31,7 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
+  image: string;
   metaDescription: string;
   ogDescription: string;
   twitterDescription: string;
@@ -100,10 +102,10 @@ export interface CertificateItem {
   issuer: string;
   issueDate: string;
   sortDate: string;
-  group: "featured" | "other";
+  defaultVisible: boolean;
   previewUrl: string;
   secondaryPreviewUrl?: string;
-  verificationUrl: string;
+  verifyUrl?: string;
   skills: string[];
 }
 
